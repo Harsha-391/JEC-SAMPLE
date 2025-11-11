@@ -264,7 +264,7 @@ nav a:hover {
 }
 /* Stats Section */
 .stats {
-  padding: 100px 20px;
+  padding: 50px 20px;
   background: var(--color-background-medium);
   position: relative;
 }
