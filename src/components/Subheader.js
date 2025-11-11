@@ -9,7 +9,6 @@ function Subheader() {
         {/* 1. Add your logo here on the left */}
         <div className="subheader-logo">
           <img src="/images/logo.png" alt="Company Logo" />
-          <span>Jaipur Engineering College</span>
         </div>
 
         {/* 2. Wrap your links in a nav container on the right */}
