@@ -5,7 +5,7 @@ function Outcomes() {
   return (
     <section className="outcomes">
       <div className="outcomes-content">
-        <h2 className="outcomes-title">Student Success Stories</h2>
+        <h2 className="outcomes-title">Stories Of Excellence</h2>
         <p className="outcomes-subtitle">At JEC, we empower students to achieve their career goals through dedicated support, top-tier opportunities, and strong industry connections.</p>
         <div className="outcomes-grid">
           <div className="outcome-card" data-outcome="placement">
