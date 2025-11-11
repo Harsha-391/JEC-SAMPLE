@@ -538,7 +538,7 @@ nav a:hover {
   background: var(--color-text-primary);
 }
 
-/* Schools Section */
+/* Schools Section (Programs Offered) */
 .schools {
   padding: 100px 20px;
   background: var(--color-background-medium);
@@ -569,7 +569,7 @@ nav a:hover {
   font-size: 42px;
   font-weight: 700;
   margin-bottom: 20px;
-  color: var(--color-text-primary);
+  color: var(--logo-blue); /* CHANGED */
   text-align: center;
   position: relative;
   animation: fadeInDown 0.8s ease-out;
@@ -580,7 +580,7 @@ nav a:hover {
   display: block;
   width: 80px;
   height: 4px;
-  background: var(--logo-blue);
+  background: var(--logo-blue); /* Matches title */
   margin: 20px auto 0;
   border-radius: 2px;
 }
@@ -639,7 +639,7 @@ nav a:hover {
   left: 0;
   width: 5px;
   height: 100%;
-  background: var(--logo-blue);
+  background: var(--logo-blue); /* Brand color accent */
   transition: width 0.3s ease;
   opacity: 0.8;
 }
@@ -676,7 +676,7 @@ nav a:hover {
 }
 
 .school-item:hover .program-name {
-  color: var(--logo-blue);
+  color: var(--logo-red); /* CHANGED */
 }
 
 .seats-info {
@@ -695,7 +695,7 @@ nav a:hover {
 
 .school-item:hover .arrow {
   transform: translateX(10px);
-  color: var(--logo-blue);
+  color: var(--logo-red); /* CHANGED */
 }
 
 @keyframes fadeInDown {
@@ -752,7 +752,7 @@ nav a:hover {
   font-size: 42px;
   font-weight: 700;
   margin-bottom: 20px;
-  color: var(--logo-blue);
+  color: var(--logo-blue); /* Already set, good */
   text-align: center;
   position: relative;
   animation: fadeInDown 0.8s ease-out;
@@ -905,7 +905,7 @@ nav a:hover {
   font-size: 42px;
   font-weight: 700;
   margin-bottom: 20px;
-  color: var(--logo-blue);
+  color: var(--logo-blue); /* Already set, good */
   text-align: center;
   position: relative;
   animation: fadeInDown 0.8s ease-out;
@@ -1199,7 +1199,7 @@ footer {
   font-size: 42px;
   font-weight: 700;
   margin-bottom: 20px;
-  color: var(--logo-blue);
+  color: var(--logo-blue); /* Already set, good */
   position: relative;
   animation: fadeInDown 0.8s ease-out;
 }
@@ -1444,7 +1444,7 @@ footer {
   font-size: 36px;
   font-weight: 600;
   margin-bottom: 20px;
-  color: var(--color-text-primary);
+  color: var(--logo-blue); /* CHANGED */
   position: relative;
   display: inline-block;
   padding-bottom: 15px;
@@ -1554,7 +1554,7 @@ footer {
   font-size: 42px;
   font-weight: 700;
   margin-bottom: 20px;
-  color: var(--logo-blue);
+  color: var(--logo-blue); /* Already set, good */
   position: relative;
   animation: fadeInDown 0.8s ease-out;
 }
@@ -1692,6 +1692,7 @@ footer {
   font-weight: 700;
   margin-bottom: 20px;
   animation: fadeInDown 0.8s ease-out;
+  color: var(--logo-white); /* Stays white on dark bg */
 }
 
 .take-a-tour-subtitle {
