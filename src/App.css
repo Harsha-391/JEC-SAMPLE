@@ -36,6 +36,10 @@ body {
   line-height: 1.6;
 }
 /* Header */
+/*
+ * HEADER & SUBHEADER
+ */
+
 .sticky-header {
   position: sticky;
   top: 0;
@@ -43,45 +47,41 @@ body {
   background: var(--color-background-light);
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+
+/* --- Header (Top black bar) --- */
 header {
   background: var(--color-header-bg);
-  padding: 10px 0;
+  padding: 5px 0; /* Reduced padding from 10px */
 }
+
 .header-content {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end; /* Pushes the nav to the right */
   align-items: center;
 }
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--color-header-text);
-}
-.logo img {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-}
+
+/* (The .logo styles were removed from here) */
+
 nav {
   display: flex;
   gap: 40px;
   align-items: center;
 }
+
 nav a {
   color: var(--color-header-text);
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
 }
+
 nav a:hover {
   color: var(--color-accent);
 }
+
 .apply-btn {
   background: var(--color-button);
   color: var(--color-button-text);
@@ -91,25 +91,53 @@ nav a:hover {
   cursor: pointer;
   font-weight: 600;
 }
-/* Subheader Navigation */
+
+/* --- Subheader (Logo + Main Nav) --- */
 .subheader {
   background: var(--color-background-medium);
   padding: 15px 0;
   border-bottom: 1px solid var(--color-border);
 }
+
 .subheader-content {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
+  justify-content: space-between; /* Logo left, Nav right */
+  align-items: center;
+}
+
+/* NEW: Styles for the logo, moved from header */
+.subheader-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--color-text-primary); /* Dark text for light bg */
+}
+
+.subheader-logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+/* NEW: Container for the subheader links */
+.subheader-nav {
+  display: flex;
   gap: 40px;
 }
+
+/* This style now correctly applies to links inside .subheader-nav */
 .subheader a {
   text-decoration: none;
   color: var(--color-text-primary);
   font-weight: 500;
   font-size: 14px;
 }
+
 .subheader a:hover {
   color: var(--color-primary);
 }

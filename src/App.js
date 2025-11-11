@@ -13,6 +13,7 @@ import Programs from './components/Programs';
 import Team from './components/Team';
 import WhyJEC from './components/WhyJEC';
 import Outcomes from './components/Outcomes';
+import Research from './components/Research';
 import CampusLife from './components/CampusLife';
 import Grievance from './components/Grievance';
 import VirtualTour from './components/VirtualTour';
