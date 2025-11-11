@@ -5,13 +5,6 @@ function Header() {
   return (
     <header>
       <div className="header-content">
-        <div className="logo">
-          <div className="logo">
-            {/* Note the / at the start of the image path */}
-            <img src="/images/logo.png" alt="Company Logo" />
-            <span>Jaipur Engineering College</span>
-          </div>
-        </div>
         <nav>
           <a href="#students">Students</a>
           <a href="#alumni">Alumni</a>
