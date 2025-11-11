@@ -378,24 +378,28 @@ nav a:hover {
   }
 }
 /* Highlights Section */
+/* Highlights Section */
 .highlights {
-  padding: 200px 30px;
+  padding: 60px 30px; /* Reduced from 200px to 60px */
   background: var(--logo-white);
 }
+
 .highlights-content {
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
 }
+
 .highlight-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 50px;
-  margin-bottom: 0px;
+  gap: 30px; /* Reduced gap */
+  margin-bottom: 20px;
 }
+
 .highlight-card {
   background: var(--color-background-medium);
-  padding: 80px 60px;
+  padding: 30px 40px; /* Reduced from 80px/60px */
   border-radius: 20px;
   text-align: left;
   position: relative;
@@ -404,16 +408,19 @@ nav a:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   cursor: pointer;
 }
+
 .highlight-card:hover {
   transform: translateY(-10px) scale(1.02);
   background: var(--logo-white);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
+
 .highlight-card:hover .card-graphic-top-blue,
 .highlight-card:hover .card-graphic-top-yellow,
 .highlight-card:hover .card-graphic-top-pink {
   transform: scaleX(1.1);
 }
+
 .card-graphic-top-blue,
 .card-graphic-top-yellow,
 .card-graphic-top-pink {
@@ -425,9 +432,11 @@ nav a:hover {
   transform-origin: center;
   transition: transform 0.3s ease;
 }
+
 .card-graphic-top-blue { background: var(--logo-blue); }
 .card-graphic-top-yellow { background: var(--logo-gold); }
 .card-graphic-top-pink { background: var(--logo-red); }
+
 .highlight-card h3 {
   font-size: 24px;
   font-weight: 600;
@@ -435,19 +444,23 @@ nav a:hover {
   color: var(--color-text-primary);
   transition: color 0.3s ease;
 }
+
 .highlight-card:hover h3 {
   color: var(--logo-blue);
 }
+
 .highlight-card p {
   font-size: 16px;
   color: var(--color-text-secondary);
   line-height: 1.6;
-  margin-bottom: 40px;
+  margin-bottom: 20px; /* Reduced from 40px */
   transition: color 0.3s ease;
 }
+
 .highlight-card:hover p {
   color: var(--color-text-primary);
 }
+
 .card-arrow {
   display: inline-block;
   font-size: 20px;
@@ -455,9 +468,28 @@ nav a:hover {
   color: var(--logo-blue);
   transition: transform 0.3s ease, color 0.3s ease;
 }
+
 .highlight-card:hover .card-arrow {
   transform: translateX(5px);
   color: var(--logo-blue);
+}
+
+.carousel-nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--color-border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.nav-dot.active {
+  background: var(--color-text-primary);
 }
 .carousel-nav {
   display: flex;
