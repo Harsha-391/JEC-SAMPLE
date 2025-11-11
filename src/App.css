@@ -1,29 +1,27 @@
 :root {
   /* Logo-derived Colors */
-  --logo-red: #D62828;      /* Primary shield and red text */
-  --logo-blue: #0072C6;     /* Gear */
-  --logo-gold: #FCA311;     /* Goddess, lotus, and ribbons */
-  --logo-black: #1D1D1D;    /* "JAIPUR ENGINEERING COLLEGE" text */
-  --logo-white: #FFFFFF;    /* Shield background */
-
+  --logo-red: #D62828; /* Primary shield and red text */
+  --logo-blue: #0072C6; /* Gear */
+  --logo-gold: #FCA311; /* Goddess, lotus, and ribbons */
+  --logo-black: #1D1D1D; /* "JAIPUR ENGINEERING COLLEGE" text */
+  --logo-white: #FFFFFF; /* Shield background */
   /* Functional Palette */
   --color-primary: var(--logo-red);
   --color-secondary: var(--logo-blue);
   --color-accent: var(--logo-gold);
-  
+ 
   --color-header-bg: var(--logo-black);
   --color-header-text: var(--logo-white);
-  
+ 
   --color-button: var(--color-accent);
   --color-button-text: var(--logo-black); /* Black text for readability on gold */
-
   --color-text-primary: var(--logo-black);
   --color-text-secondary: #555555; /* A neutral grey */
-  
+ 
   --color-background-light: var(--logo-white);
   --color-background-medium: #f5f5f5; /* A very light neutral */
   --color-background-dark: #f0f0f0; /* Another neutral */
-  
+ 
   --color-border: #dddddd; /* Neutral border */
 }
 
@@ -32,13 +30,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   color: var(--color-text-primary);
   line-height: 1.6;
 }
-
 /* Header */
 .sticky-header {
   position: sticky;
@@ -47,12 +43,10 @@ body {
   background: var(--color-background-light);
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
 header {
   background: var(--color-header-bg);
   padding: 10px 0;
 }
-
 .header-content {
   max-width: 1400px;
   margin: 0 auto;
@@ -61,7 +55,6 @@ header {
   justify-content: space-between;
   align-items: center;
 }
-
 .logo {
   display: flex;
   align-items: center;
@@ -70,30 +63,25 @@ header {
   font-weight: bold;
   color: var(--color-header-text);
 }
-
 .logo img {
   width: 40px;
   height: 40px;
   border-radius: 8px;
 }
-
 nav {
   display: flex;
   gap: 40px;
   align-items: center;
 }
-
 nav a {
   color: var(--color-header-text);
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
 }
-
 nav a:hover {
   color: var(--color-accent);
 }
-
 .apply-btn {
   background: var(--color-button);
   color: var(--color-button-text);
@@ -103,14 +91,12 @@ nav a:hover {
   cursor: pointer;
   font-weight: 600;
 }
-
 /* Subheader Navigation */
 .subheader {
   background: var(--color-background-medium);
   padding: 15px 0;
   border-bottom: 1px solid var(--color-border);
 }
-
 .subheader-content {
   max-width: 1400px;
   margin: 0 auto;
@@ -118,25 +104,22 @@ nav a:hover {
   display: flex;
   gap: 40px;
 }
-
 .subheader a {
   text-decoration: none;
   color: var(--color-text-primary);
   font-weight: 500;
   font-size: 14px;
 }
-
 .subheader a:hover {
   color: var(--color-primary);
 }
-
 /* Side Icon Bar */
 .college-side-bar {
   position: fixed;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  background: rgba(29, 29, 29, 0.8); /* Dark from logo */
+  background: rgba(29, 29, 29, 0.8); /* Updated to use --logo-black equivalent */
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -145,7 +128,6 @@ nav a:hover {
   padding: 8px;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
 }
-
 .college-side-bar a {
   display: flex;
   align-items: center;
@@ -164,7 +146,6 @@ nav a:hover {
   letter-spacing: 0.5px;
   box-sizing: border-box;
 }
-
 .college-side-bar a i {
   width: 48px;
   height: 48px;
@@ -174,7 +155,6 @@ nav a:hover {
   font-size: 20px;
   flex-shrink: 0;
 }
-
 .college-side-bar a span {
   display: inline-block;
   width: 0;
@@ -185,32 +165,27 @@ nav a:hover {
   line-height: 48px; /* Aligns text vertically with icon */
   margin-left: 8px;
 }
-
 .college-side-bar a:hover {
   width: 140px; /* Expanded width to accommodate text */
   right: 8px;
   transform: scale(1.05);
   animation: pulse 0.5s ease-in-out;
 }
-
 .college-side-bar a:hover span {
   width: auto;
   opacity: 1;
   margin-left: 8px;
 }
-
 /* Apply logo colors to hovers */
 .college-side-bar a:nth-child(1):hover { background: var(--logo-blue); } /* Helpline */
 .college-side-bar a:nth-child(2):hover { background: var(--logo-gold); } /* Brochure */
 .college-side-bar a:nth-child(3):hover { background: var(--logo-red); } /* Admissions */
 .college-side-bar a:nth-child(4):hover { background: var(--logo-blue); } /* Events */
 .college-side-bar a:nth-child(5):hover { background: var(--logo-red); } /* WhatsApp */
-
 /* Ensure text is readable on gold background */
 .college-side-bar a:nth-child(2):hover span {
   color: var(--logo-black);
 }
-
 @keyframes pulse {
   0%, 100% {
       transform: scale(1.05);
@@ -219,7 +194,6 @@ nav a:hover {
       transform: scale(1.1);
   }
 }
-
 /* Hero Section */
 .hero {
   height: 900px;
@@ -236,7 +210,6 @@ nav a:hover {
   background-repeat: no-repeat;
   isolation: isolate; /* Ensures content stays above the overlay */
 }
-
 /* .hero::before {
   content: '';
   position: absolute;
@@ -247,28 +220,24 @@ nav a:hover {
   background: rgba(0, 0, 0, 0.5);
   z-index: 1;
 } */
-
 .hero-content {
   position: relative;
   z-index: 2;
   width: 100%;
   padding: 40px;
 }
-
 .hero h1 {
   font-size: 72px;
   font-weight: 800;
   margin-bottom: 30px;
   letter-spacing: 2px;
 }
-
 .hero-underline {
   width: 120px;
   height: 4px;
   background: var(--color-accent); /* Logo Gold */
   margin: 0 auto 40px;
 }
-
 .ranking-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -277,33 +246,28 @@ nav a:hover {
   width: 100%;
   padding: 0 40px;
 }
-
 .rank-card {
-  background: rgba(29, 29, 29, 0.7); /* Logo Black */
+  background: rgba(29, 29, 29, 0.7); /* Updated to use --logo-black equivalent */
   padding: 20px;
   border-radius: 8px;
   text-align: center;
   border: 2px solid var(--color-accent); /* Logo Gold */
 }
-
 .rank-card h3 {
   font-size: 28px;
   margin-bottom: 8px;
   color: var(--color-accent); /* Logo Gold */
 }
-
 .rank-card p {
   font-size: 12px;
   color: var(--color-background-medium);
 }
-
 /* Stats Section */
 .stats {
   padding: 100px 20px;
   background: var(--color-background-medium);
   position: relative;
 }
-
 .stats::before {
   content: '';
   position: absolute;
@@ -314,7 +278,6 @@ nav a:hover {
   background: linear-gradient(90deg, var(--logo-blue), var(--logo-red), var(--logo-gold));
   opacity: 0.2;
 }
-
 .stats-content {
   max-width: 1300px; /* Slightly wider for balance */
   margin: 0 auto;
@@ -323,7 +286,6 @@ nav a:hover {
   gap: 32px; /* More breathing room */
   text-align: center;
 }
-
 .stat-box {
   background: var(--logo-white);
   padding: 48px 32px;
@@ -341,13 +303,12 @@ nav a:hover {
       0 40px 60px -30px rgba(0, 0, 0, 0.1);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.stat-box:hover {  
+.stat-box:hover {
   transform: translateY(-10px);
   box-shadow:
       0 32px 64px -20px rgba(0, 0, 0, 0.2),
       0 48px 80px -30px rgba(0, 0, 0, 0.15);
 }
-
 .stat-box::after {
   content: '';
   position: absolute;
@@ -359,16 +320,13 @@ nav a:hover {
   transition: width 0.5s ease, left 0.5s ease;
   transform: translateX(-50%);
 }
-
 .stat-box:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
-
 .stat-box:hover::after {
   width: 70%;
 }
-
 .stat-number {
   font-size: 60px; /* Larger number */
   font-weight: 800;
@@ -377,12 +335,10 @@ nav a:hover {
   line-height: 1;
   font-family: 'Segoe UI', system-ui, sans-serif;
 }
-
 .stat-text {
   font-size: 38px; /* Slightly larger for text stats */
   color: var(--logo-blue);
 }
-
 .stat-label {
   font-size: 20px; /* Increased label size */
   color: var(--color-text-secondary);
@@ -390,7 +346,6 @@ nav a:hover {
   font-weight: 500;
   max-width: 90%; /* Prevents overly wide text */
 }
-
 .stats-disclaimer {
   max-width: 1300px;
   margin: 32px auto 0;
@@ -404,7 +359,6 @@ nav a:hover {
   line-height: 1.5;
   border-left: 3px solid var(--logo-blue);
 }
-
 @media (max-width: 768px) {
   .stat-number {
       font-size: 48px;
@@ -423,26 +377,22 @@ nav a:hover {
       gap: 24px;
   }
 }
-
 /* Highlights Section */
 .highlights {
   padding: 200px 30px;
   background: var(--logo-white);
 }
-
 .highlights-content {
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
 }
-
 .highlight-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 50px;
   margin-bottom: 40px;
 }
-
 .highlight-card {
   background: var(--color-background-medium);
   padding: 80px 60px;
@@ -454,19 +404,16 @@ nav a:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   cursor: pointer;
 }
-
 .highlight-card:hover {
   transform: translateY(-10px) scale(1.02);
   background: var(--logo-white);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
-
 .highlight-card:hover .card-graphic-top-blue,
 .highlight-card:hover .card-graphic-top-yellow,
 .highlight-card:hover .card-graphic-top-pink {
   transform: scaleX(1.1);
 }
-
 .card-graphic-top-blue,
 .card-graphic-top-yellow,
 .card-graphic-top-pink {
@@ -478,11 +425,9 @@ nav a:hover {
   transform-origin: center;
   transition: transform 0.3s ease;
 }
-
 .card-graphic-top-blue { background: var(--logo-blue); }
 .card-graphic-top-yellow { background: var(--logo-gold); }
 .card-graphic-top-pink { background: var(--logo-red); }
-
 .highlight-card h3 {
   font-size: 24px;
   font-weight: 600;
@@ -490,11 +435,9 @@ nav a:hover {
   color: var(--color-text-primary);
   transition: color 0.3s ease;
 }
-
 .highlight-card:hover h3 {
   color: var(--logo-blue);
 }
-
 .highlight-card p {
   font-size: 16px;
   color: var(--color-text-secondary);
@@ -502,11 +445,9 @@ nav a:hover {
   margin-bottom: 40px;
   transition: color 0.3s ease;
 }
-
 .highlight-card:hover p {
   color: var(--color-text-primary);
 }
-
 .card-arrow {
   display: inline-block;
   font-size: 20px;
@@ -514,18 +455,15 @@ nav a:hover {
   color: var(--logo-blue);
   transition: transform 0.3s ease, color 0.3s ease;
 }
-
 .highlight-card:hover .card-arrow {
   transform: translateX(5px);
   color: var(--logo-blue);
 }
-
 .carousel-nav {
   display: flex;
   justify-content: center;
   gap: 15px;
 }
-
 .nav-dot {
   width: 10px;
   height: 10px;
@@ -533,11 +471,9 @@ nav a:hover {
   border-radius: 50%;
   cursor: pointer;
 }
-
 .nav-dot.active {
   background: var(--color-text-primary);
 }
-
 /* Schools Section (Programs Offered) */
 .schools {
   padding: 100px 20px;
@@ -545,7 +481,6 @@ nav a:hover {
   position: relative;
   overflow: hidden;
 }
-
 .schools::before {
   content: '';
   position: absolute;
@@ -557,14 +492,12 @@ nav a:hover {
   pointer-events: none;
   z-index: 0;
 }
-
 .schools-content {
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
 }
-
 .schools-title {
   font-size: 42px;
   font-weight: 700;
@@ -574,7 +507,6 @@ nav a:hover {
   position: relative;
   animation: fadeInDown 0.8s ease-out;
 }
-
 .schools-title::after {
   content: '';
   display: block;
@@ -584,7 +516,6 @@ nav a:hover {
   margin: 20px auto 0;
   border-radius: 2px;
 }
-
 .schools-subtitle {
   font-size: 18px;
   color: var(--color-text-secondary);
@@ -595,13 +526,11 @@ nav a:hover {
   animation: fadeInUp 0.8s ease-out 0.2s forwards;
   opacity: 0;
 }
-
 .schools-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 40px;
 }
-
 .school-item {
   display: flex;
   justify-content: space-between;
@@ -617,7 +546,6 @@ nav a:hover {
   animation: fadeInUp 0.6s ease-out forwards;
   opacity: 0;
 }
-
 .school-item:nth-child(1) { animation-delay: 0.1s; }
 .school-item:nth-child(2) { animation-delay: 0.2s; }
 .school-item:nth-child(3) { animation-delay: 0.3s; }
@@ -626,12 +554,10 @@ nav a:hover {
 .school-item:nth-child(6) { animation-delay: 0.6s; }
 .school-item:nth-child(7) { animation-delay: 0.7s; }
 .school-item:nth-child(8) { animation-delay: 0.8s; }
-
 .school-item:hover {
   transform: translateY(-10px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
-
 .school-item::before {
   content: '';
   position: absolute;
@@ -642,16 +568,13 @@ nav a:hover {
   background: #0072C6;
   transition: width 0.3s ease, opacity 0.3s ease;
 }
-
 .school-item:hover::before {
   width: 100%;
   opacity: 0.1; /* Light Blue hover fill */
 }
-
 .school-info {
   flex: 1;
 }
-
 .program-type {
   font-size: 14px;
   font-weight: 600;
@@ -661,7 +584,6 @@ nav a:hover {
   margin-bottom: 8px;
   transition: color 0.3s ease;
 }
-
 .program-name {
   font-size: 20px;
   font-weight: 600;
@@ -671,11 +593,9 @@ nav a:hover {
   position: relative; /* To stay on top of the hover */
   z-index: 2;
 }
-
 .school-item:hover .program-name {
   color: var(--logo-red); /* Program name turns Red on hover */
 }
-
 .seats-info {
   font-size: 14px;
   color: var(--color-text-secondary);
@@ -683,7 +603,6 @@ nav a:hover {
   position: relative; /* To stay on top of the hover */
   z-index: 2;
 }
-
 .school-item .arrow {
   font-size: 32px;
   color: var(--logo-blue);
@@ -693,22 +612,18 @@ nav a:hover {
   position: relative; /* To stay on top of the hover */
   z-index: 2;
 }
-
 .school-item:hover .arrow {
   transform: translateX(10px);
   color: var(--logo-red); /* Arrow turns Red on hover */
 }
-
 @keyframes fadeInDown {
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 @media (max-width: 768px) {
   .schools-grid {
       grid-template-columns: 1fr;
@@ -721,7 +636,6 @@ nav a:hover {
       padding: 20px;
   }
 }
-
 /* Why JEC Section (Faculty) */
 .faculty {
   padding: 100px 20px;
@@ -729,7 +643,6 @@ nav a:hover {
   position: relative;
   overflow: hidden;
 }
-
 .faculty::before {
   content: '';
   position: absolute;
@@ -741,14 +654,12 @@ nav a:hover {
   pointer-events: none;
   z-index: 0;
 }
-
 .faculty-content {
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
 }
-
 .faculty-title {
   font-size: 42px;
   font-weight: 700;
@@ -758,7 +669,6 @@ nav a:hover {
   position: relative;
   animation: fadeInDown 0.8s ease-out;
 }
-
 .faculty-title::after {
   content: '';
   display: block;
@@ -768,7 +678,6 @@ nav a:hover {
   margin: 10px auto 0;
   border-radius: 2px;
 }
-
 .faculty-subtitle {
   font-size: 18px;
   color: var(--color-text-secondary);
@@ -779,13 +688,11 @@ nav a:hover {
   animation: fadeInUp 0.8s ease-out 0.2s forwards;
   opacity: 0;
 }
-
 .faculty-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
 }
-
 .faculty-card {
   text-align: center;
   background: var(--logo-white);
@@ -798,19 +705,16 @@ nav a:hover {
   animation: fadeInUp 0.6s ease-out forwards;
   opacity: 0;
 }
-
 .faculty-card:nth-child(1) { animation-delay: 0.1s; }
 .faculty-card:nth-child(2) { animation-delay: 0.2s; }
 .faculty-card:nth-child(3) { animation-delay: 0.3s; }
 .faculty-card:nth-child(4) { animation-delay: 0.4s; }
 .faculty-card:nth-child(5) { animation-delay: 0.5s; }
 .faculty-card:nth-child(6) { animation-delay: 0.6s; }
-
 .faculty-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
-
 .faculty-card::before {
   content: '';
   position: absolute;
@@ -822,23 +726,19 @@ nav a:hover {
   transition: height 0.3s ease;
   opacity: 0;
 }
-
 .faculty-card:hover::before {
   height: 100%;
   opacity: 0.1;
 }
-
 .faculty-icon {
   width: 60px;
   height: 60px;
   margin: 0 auto 20px;
   transition: transform 0.3s ease;
 }
-
 .faculty-card:hover .faculty-icon {
   transform: scale(1.1);
 }
-
 .faculty-card h3 {
   font-size: 20px;
   font-weight: 600;
@@ -846,18 +746,15 @@ nav a:hover {
   margin-bottom: 10px;
   transition: color 0.3s ease;
 }
-
 .faculty-card:hover h3 {
   color: var(--logo-red);
 }
-
 .faculty-card p {
   font-size: 14px;
   color: var(--color-text-secondary);
   line-height: 1.5;
   margin-bottom: 0;
 }
-
 @media (max-width: 768px) {
   .faculty {
       padding: 80px 20px;
@@ -873,7 +770,6 @@ nav a:hover {
       padding: 20px;
   }
 }
-
 /* Student Outcomes */
 .outcomes {
   padding: 100px 20px;
@@ -881,7 +777,6 @@ nav a:hover {
   position: relative;
   overflow: hidden;
 }
-
 .outcomes::before {
   content: '';
   position: absolute;
@@ -893,14 +788,12 @@ nav a:hover {
   pointer-events: none;
   z-index: 0;
 }
-
 .outcomes-content {
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
 }
-
 .outcomes-title {
   font-size: 42px;
   font-weight: 700;
@@ -910,7 +803,6 @@ nav a:hover {
   position: relative;
   animation: fadeInDown 0.8s ease-out;
 }
-
 .outcomes-title::after {
   content: '';
   display: block;
@@ -920,7 +812,6 @@ nav a:hover {
   margin: 10px auto 0;
   border-radius: 2px;
 }
-
 .outcomes-subtitle {
   font-size: 18px;
   color: var(--color-text-secondary);
@@ -931,13 +822,11 @@ nav a:hover {
   animation: fadeInUp 0.8s ease-out 0.2s forwards;
   opacity: 0;
 }
-
 .outcomes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
 }
-
 .outcome-card {
   background: var(--logo-white);
   padding: 30px;
@@ -949,16 +838,13 @@ nav a:hover {
   animation: fadeInUp 0.6s ease-out forwards;
   opacity: 0;
 }
-
 .outcome-card:nth-child(1) { animation-delay: 0.1s; }
 .outcome-card:nth-child(2) { animation-delay: 0.2s; }
 .outcome-card:nth-child(3) { animation-delay: 0.3s; }
-
 .outcome-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
-
 .outcome-card::before {
   content: '';
   position: absolute;
@@ -970,23 +856,19 @@ nav a:hover {
   transition: height 0.3s ease;
   opacity: 0;
 }
-
 .outcome-card:hover::before {
   height: 100%;
   opacity: 0.1;
 }
-
 .outcome-icon {
   width: 60px;
   height: 60px;
   margin: 0 auto 20px;
   transition: transform 0.3s ease;
 }
-
 .outcome-card:hover .outcome-icon {
   transform: scale(1.1);
 }
-
 .outcome-card h3 {
   font-size: 20px;
   font-weight: 600;
@@ -994,18 +876,15 @@ nav a:hover {
   margin-bottom: 10px;
   transition: color 0.3s ease;
 }
-
 .outcome-card:hover h3 {
   color: var(--logo-red);
 }
-
 .outcome-card p {
   font-size: 14px;
   color: var(--color-text-secondary);
   line-height: 1.5;
   margin-bottom: 0;
 }
-
 @media (max-width: 768px) {
   .outcomes {
       padding: 80px 20px;
@@ -1021,18 +900,15 @@ nav a:hover {
       padding: 20px;
   }
 }
-
 /* Footer */
 footer {
   color: var(--color-text-primary);
   line-height: 1.6;
 }
-
 .footer-main {
   background-color: var(--color-background-medium);
   padding: 50px 80px;
 }
-
 .footer-links-section {
   display: grid;
   grid-template-columns: 2fr 1fr 3fr;
@@ -1040,7 +916,6 @@ footer {
   padding-bottom: 40px;
   border-bottom: 1px solid var(--color-border);
 }
-
 .footer-column h4 {
   font-size: 1rem;
   font-weight: 600;
@@ -1048,38 +923,31 @@ footer {
   margin-bottom: 20px;
   color: var(--color-text-primary);
 }
-
 .footer-column ul li {
   margin-bottom: 10px;
 }
-
 .footer-column ul a {
   font-size: 0.9rem;
   color: var(--color-text-secondary);
   transition: color 0.3s;
 }
-
 .footer-column ul a:hover {
   color: var(--logo-blue);
 }
-
 .footer-column .important {
   color: var(--logo-red);
   font-weight: 500;
 }
-
 .column-group {
   display: flex;
   gap: 30px;
 }
-
 .footer-address-section {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 40px;
   padding-top: 40px;
 }
-
 .address-column h4 {
   font-size: 1rem;
   font-weight: 600;
@@ -1087,13 +955,11 @@ footer {
   margin-bottom: 15px;
   color: var(--color-text-primary);
 }
-
 .address-column p {
   font-size: 0.9rem;
   color: var(--color-text-secondary);
   margin: 0;
 }
-
 .footer-bottom {
   background-color: var(--logo-white);
   padding: 20px 80px;
@@ -1103,19 +969,16 @@ footer {
   flex-wrap: wrap;
   border-top: 1px solid var(--color-border);
 }
-
 .follow-us {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
 .follow-us span {
   font-size: 0.9rem;
   font-weight: 500;
   margin-right: 5px;
 }
-
 .follow-us a {
   display: inline-flex;
   justify-content: center;
@@ -1128,12 +991,10 @@ footer {
   color: var(--color-text-primary);
   transition: background-color 0.3s, color 0.3s;
 }
-
 .follow-us a:hover {
   background-color: var(--logo-blue);
   color: var(--logo-white);
 }
-
 @media (max-width: 1200px) {
   .footer-main {
       padding: 40px;
@@ -1151,7 +1012,6 @@ footer {
       grid-template-columns: 1fr 1fr;
   }
 }
-
 @media (max-width: 768px) {
   .footer-links-section, .footer-address-section {
       grid-template-columns: 1fr;
@@ -1166,7 +1026,6 @@ footer {
       text-align: center;
   }
 }
-
 /* Research & Innovation Section */
 .stories {
   padding: 100px 20px;
@@ -1174,7 +1033,6 @@ footer {
   position: relative;
   overflow: hidden;
 }
-
 .stories::before {
   content: '';
   position: absolute;
@@ -1186,7 +1044,6 @@ footer {
   pointer-events: none;
   z-index: 0;
 }
-
 .stories-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -1194,7 +1051,6 @@ footer {
   position: relative;
   z-index: 1;
 }
-
 .stories-title {
   font-size: 42px;
   font-weight: 700;
@@ -1203,7 +1059,6 @@ footer {
   position: relative;
   animation: fadeInDown 0.8s ease-out;
 }
-
 .stories-title::after {
   content: '';
   display: block;
@@ -1213,7 +1068,6 @@ footer {
   margin: 10px auto 0;
   border-radius: 2px;
 }
-
 .stories-subtitle {
   font-size: 18px;
   color: var(--color-text-secondary);
@@ -1223,7 +1077,6 @@ footer {
   animation: fadeInUp 0.8s ease-out 0.2s forwards;
   opacity: 0;
 }
-
 .stories-carousel {
   display: flex;
   overflow-x: auto;
@@ -1235,11 +1088,9 @@ footer {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
 }
-
 .stories-carousel::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
-
 .story-card {
   flex: 0 0 300px;
   background: var(--logo-white);
@@ -1252,17 +1103,14 @@ footer {
   animation: fadeInUp 0.6s ease-out forwards;
   opacity: 0;
 }
-
 .story-card:nth-child(1) { animation-delay: 0.1s; }
 .story-card:nth-child(2) { animation-delay: 0.2s; }
 .story-card:nth-child(3) { animation-delay: 0.3s; }
 .story-card:nth-child(4) { animation-delay: 0.4s; }
-
 .story-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
-
 .story-card::before {
   content: '';
   position: absolute;
@@ -1274,27 +1122,22 @@ footer {
   transition: height 0.3s ease;
   opacity: 0;
 }
-
 .story-card:hover::before {
   height: 100%;
   opacity: 0.1;
 }
-
 .story-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
-
 .story-card:hover .story-image {
   transform: scale(1.05);
 }
-
 .story-content {
   padding: 20px;
 }
-
 .story-card h3 {
   font-size: 20px;
   font-weight: 600;
@@ -1302,18 +1145,15 @@ footer {
   margin-bottom: 10px;
   transition: color 0.3s ease;
 }
-
 .story-card:hover h3 {
   color: var(--logo-red);
 }
-
 .story-card p {
   font-size: 14px;
   color: var(--color-text-secondary);
   line-height: 1.5;
   margin-bottom: 15px;
 }
-
 .story-arrow {
   display: block;
   font-size: 24px;
@@ -1322,19 +1162,15 @@ footer {
   text-align: right;
   transition: transform 0.3s ease, color 0.3s ease;
 }
-
 .story-card:hover .story-arrow {
   transform: translateX(10px);
   color: var(--logo-gold);
 }
-
 .carousel-wrapper {
   position: relative;
   width: 100%;
 }
-
 .stories-nav { }
-
 .nav-button {
   position: absolute;
   top: 50%;
@@ -1352,41 +1188,32 @@ footer {
   justify-content: center;
   transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
 }
-
 .nav-button svg {
   stroke: var(--color-text-primary);
   transition: stroke 0.3s ease, transform 0.3s ease;
 }
-
 .nav-button.prev {
   left: 20px;
 }
-
 .nav-button.next {
   right: 20px;
 }
-
 .nav-button:hover {
   background-color: var(--logo-blue);
   border-color: var(--logo-blue);
 }
-
 .nav-button:hover svg {
   stroke: var(--logo-white);
 }
-
 .nav-button.prev:hover svg {
   transform: translateX(-3px);
 }
-
 .nav-button.next:hover svg {
   transform: translateX(3px);
 }
-
 .nav-button:active {
   transform: translateY(-50%) scale(0.95);
 }
-
 .view-all-btn {
   display: inline-block;
   padding: 12px 30px;
@@ -1398,13 +1225,11 @@ footer {
   font-size: 16px;
   transition: all 0.3s ease;
 }
-
 .view-all-btn:hover {
   background: var(--logo-blue);
   color: var(--logo-white);
   border-color: var(--logo-blue);
 }
-
 @media (max-width: 768px) {
   .stories {
       padding: 80px 20px;
@@ -1428,18 +1253,15 @@ footer {
       font-size: 14px;
   }
 }
-
 /* Campus Life Section */
 .campus-life {
   padding: 80px 20px;
   background: var(--color-background-medium);
 }
-
 .campus-life-content {
   max-width: 1200px;
   margin: 0 auto;
 }
-
 .campus-life-title {
   font-size: 36px;
   font-weight: 600;
@@ -1449,7 +1271,6 @@ footer {
   display: inline-block;
   padding-bottom: 15px;
 }
-
 .campus-life-title::after {
   content: '';
   position: absolute;
@@ -1459,14 +1280,12 @@ footer {
   height: 4px;
   background: linear-gradient(to right, var(--logo-red), var(--logo-blue));
 }
-
 .campus-life-desc {
   font-size: 18px;
   color: var(--color-text-secondary);
   margin-bottom: 50px;
   max-width: 800px;
 }
-
 .campus-gallery {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
@@ -1476,36 +1295,30 @@ footer {
       "large small1 small2"
       "large small3 small4";
 }
-
 .gallery-item {
   position: relative;
   overflow: hidden;
   border-radius: 15px;
 }
-
 .gallery-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-
 .gallery-item.large {
   grid-area: large;
 }
-
 .gallery-overlay {
   position: absolute;
   bottom: 20px;
   left: 20px;
   color: var(--logo-white);
 }
-
 .gallery-overlay h3 {
   font-size: 32px;
   font-weight: 700;
 }
-
 .play-button {
   position: absolute;
   top: 50%;
@@ -1513,7 +1326,7 @@ footer {
   transform: translate(-50%, -50%);
   width: 60px;
   height: 60px;
-  background: rgba(29, 29, 29, 0.6); /* Logo Black */
+  background: rgba(29, 29, 29, 0.6); /* Updated to use --logo-black equivalent */
   color: var(--logo-white);
   border-radius: 50%;
   display: flex;
@@ -1521,7 +1334,6 @@ footer {
   justify-content: center;
   font-size: 24px;
 }
-
 /* Campus Buzz Section / Grievance */
 .campus-buzz {
   padding: 100px 20px;
@@ -1529,7 +1341,6 @@ footer {
   position: relative;
   overflow: hidden;
 }
-
 .campus-buzz::before {
   content: '';
   position: absolute;
@@ -1541,7 +1352,6 @@ footer {
   pointer-events: none;
   z-index: 0;
 }
-
 .campus-buzz-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -1549,7 +1359,6 @@ footer {
   position: relative;
   z-index: 1;
 }
-
 .campus-buzz-title {
   font-size: 42px;
   font-weight: 700;
@@ -1558,7 +1367,6 @@ footer {
   position: relative;
   animation: fadeInDown 0.8s ease-out;
 }
-
 .campus-buzz-title::after {
   content: '';
   display: block;
@@ -1568,7 +1376,6 @@ footer {
   margin: 10px auto 0;
   border-radius: 2px;
 }
-
 .campus-buzz-subtitle {
   font-size: 18px;
   color: var(--color-text-secondary);
@@ -1578,13 +1385,11 @@ footer {
   animation: fadeInUp 0.8s ease-out 0.2s forwards;
   opacity: 0;
 }
-
 .buzz-items {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
 }
-
 .buzz-item {
   background: var(--logo-white);
   padding: 30px;
@@ -1596,16 +1401,13 @@ footer {
   animation: fadeInUp 0.6s ease-out forwards;
   opacity: 0;
 }
-
 .buzz-item:nth-child(1) { animation-delay: 0.1s; }
 .buzz-item:nth-child(2) { animation-delay: 0.2s; }
 .buzz-item:nth-child(3) { animation-delay: 0.3s; }
-
 .buzz-item:hover {
   transform: translateY(-10px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
-
 .buzz-item::before {
   content: '';
   position: absolute;
@@ -1617,12 +1419,10 @@ footer {
   transition: height 0.3s ease;
   opacity: 0;
 }
-
 .buzz-item:hover::before {
   height: 100%;
   opacity: 0.1;
 }
-
 .buzz-icon {
   width: 60px;
   height: 60px;
@@ -1632,12 +1432,10 @@ footer {
   border: 2px solid var(--logo-blue);
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
-
 .buzz-item:hover .buzz-icon {
   transform: scale(1.1);
   border-color: var(--logo-red);
 }
-
 .buzz-item h3 {
   font-size: 20px;
   font-weight: 600;
@@ -1645,18 +1443,15 @@ footer {
   margin-bottom: 10px;
   transition: color 0.3s ease;
 }
-
 .buzz-item:hover h3 {
   color: var(--logo-red);
 }
-
 .buzz-item p {
   font-size: 14px;
   color: var(--color-text-secondary);
   line-height: 1.5;
   margin-bottom: 15px;
 }
-
 .buzz-link {
   display: block;
   font-size: 24px;
@@ -1665,12 +1460,10 @@ footer {
   text-align: right;
   transition: transform 0.3s ease, color 0.3s ease;
 }
-
 .buzz-item:hover .buzz-link {
   transform: translateX(10px);
   color: var(--logo-gold);
 }
-
 /* Take a Tour Section */
 .take-a-tour {
   padding: 100px 20px;
@@ -1679,14 +1472,12 @@ footer {
   text-align: center;
   position: relative;
 }
-
 .take-a-tour-content {
   max-width: 800px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
 }
-
 .take-a-tour-title {
   font-size: 42px;
   font-weight: 700;
@@ -1694,7 +1485,6 @@ footer {
   animation: fadeInDown 0.8s ease-out;
   color: var(--logo-white); /* Stays white on dark bg */
 }
-
 .take-a-tour-subtitle {
   font-size: 18px;
   line-height: 1.6;
@@ -1702,7 +1492,6 @@ footer {
   animation: fadeInUp 0.8s ease-out 0.2s forwards;
   opacity: 0;
 }
-
 .tour-btn {
   display: inline-block;
   padding: 15px 40px;
@@ -1715,14 +1504,12 @@ footer {
   font-size: 16px;
   transition: all 0.3s ease;
 }
-
 .tour-btn:hover {
   background: var(--logo-blue);
   color: var(--logo-white);
   border-color: var(--logo-blue);
   transform: scale(1.05);
 }
-
 @media (max-width: 768px) {
   .campus-buzz, .take-a-tour {
       padding: 80px 20px;
@@ -1742,7 +1529,6 @@ footer {
       font-size: 14px;
   }
 }
-
 /* Responsive */
 @media (max-width: 768px) {
   nav {
