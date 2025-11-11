@@ -639,7 +639,7 @@ nav a:hover {
   left: 0;
   width: 5px;
   height: 100%;
-  background: var(--logo-blue); /* Left line is Blue */
+  background: red
   transition: width 0.3s ease, opacity 0.3s ease;
 }
 
