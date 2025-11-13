@@ -17,8 +17,6 @@ function Footer() {
                 <li><a href="#">BBA</a></li>
                 <li><a href="#">BCA</a></li>
                 <li><a href="#">B.Sc.</a></li>
-
-                
                 <li><a href="#">B.Com.</a></li>
                 <li><a href="#">BA (Hons.)</a></li>
               </ul>
