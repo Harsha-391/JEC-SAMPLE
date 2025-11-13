@@ -587,7 +587,7 @@ header {
 }
 /* Schools Section (Programs Offered) */
 .schools {
-  padding: 100px 20px;
+  padding: 70px 20px;
   background: var(--color-background-medium);
   position: relative;
   overflow: hidden;
