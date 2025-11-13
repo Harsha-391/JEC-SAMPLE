@@ -46,7 +46,7 @@ function About() {
           <p>Since its inception in 2000, Jaipur Engineering College (JEC) has been a top engineering college known to enable students to carve a niche for themselves and develop a strong personality. Located on the serene outskirts of Jaipur on Delhi Highway, JEC provides students with state-of-the art infrastructure which helps them to attain comprehensive understanding of their chosen engineering discipline. Another unique aspect of JEC is its rich sporting culture which makes engineering even more fun.</p>
           <p>JEC community is driven by shared purpose: to make a better world through education, research and innovation. JEC is always a place of high ambition, entertaining and eccentric, committed to bring finest purposeful contribution, inventive and artistics, passionate about advancing ideas and humanity creating quality in teaching learning process- better to best, and welcoming to brilliant people regardless of where they come from.</p>
           <p>Our holistic approach to education, and the rigorous spirit of knowledge dissemination process to define fields and human life makes JEC unique force for transformation in society, our commitment to social values all underly everything JEC do as an institution with a rich Agrasen heritage. We are committed to help you shape your future.</p>
-          <img src="/images/campus-intro.jpg" alt="JEC Campus Overview" className="intro-image" />
+          <img src="../images/campus life.jpeg" alt="JEC Campus Overview" className="intro-image" />
         </div>
       </section>
 
