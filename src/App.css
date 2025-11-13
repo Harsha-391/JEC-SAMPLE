@@ -52,18 +52,18 @@ body {
 /*
 /* --- Top Red Bar (Header) --- */
 header {
-  background: var(--logo-black);
-  padding: 10px 0; 
+  background: var(--logo-red);
+  padding: 12px 0; /* Slightly more padding for a less cramped feel */
   color: var(--logo-white);
   transition: background-color 0.3s ease;
 }
 
 .header-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* CHANGED: This centers your content */
   align-items: center;
-  flex-wrap: wrap;
-  gap: 5px;
+  flex-wrap: wrap; /* Allows wrapping on small screens */
+  gap: 25px; /* CHANGED: Increased gap for better spacing */
 }
 
 .header-contact,
@@ -71,13 +71,13 @@ header {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 15px; 
+  gap: 25px; /* Increased gap for better spacing */
 }
 
 .header-content a {
   color: var(--logo-white); /* Default color is white */
   text-decoration: none;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -117,6 +117,7 @@ header {
   text-align: center;
 }
 
+
 /* --- White Main Nav (Subheader) --- */
 .subheader {
   background: var(--color-background-light);
@@ -153,30 +154,58 @@ header {
   line-height: 1.1;
 }
 
+/* --- Subheader Nav with Dropdowns --- */
 .subheader-nav {
   display: flex;
-  gap: 25px;
+  gap: 5px; /* Reduced gap for tightly packed items */
   align-items: center;
   flex-wrap: wrap;
 }
 
-.subheader-nav a {
+/* This is the container for ONE nav link (or dropdown) */
+.nav-item,
+.nav-link {
+  position: relative;
   text-decoration: none;
+  padding: 10px 15px; /* Added padding for a larger click area */
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+/* This is the text link itself */
+.nav-link {
   color: var(--color-text-primary);
   font-weight: 600;
   font-size: 16px;
-  transition: color 0.3s ease, transform 0.3s ease; /* ADDED transition */
-  position: relative; /* ADDED for underline */
-  padding-bottom: 4px; /* ADDED for underline */
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space for the arrow */
+  position: relative;
+  padding-bottom: 4px;
 }
 
-.subheader-nav a:hover {
-  color: var(--color-accent); /* CHANGED to yellow (logo-gold) */
+/* The arrow icon */
+.dropdown-arrow {
+  font-size: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Hover state for all nav items */
+.nav-item:hover,
+.nav-link:hover {
+  background-color: var(--color-background-medium);
+  color: var(--color-accent); /* CHANGED to yellow */
   transform: translateY(-1px); /* ADDED subtle lift */
 }
 
-/* ADDED underline animation for subheader */
-.subheader-nav a::after {
+/* Rotate arrow on hover */
+.nav-item:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Underline animation for subheader links */
+.nav-link::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -189,8 +218,118 @@ header {
   transition: transform 0.3s ease;
 }
 
-.subheader-nav a:hover::after {
+.nav-link:hover::after {
   transform: scaleX(1); /* Show underline on hover */
+}
+
+
+/* The hidden dropdown menu */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 600px; /* Width of the 3x3 grid */
+  background: var(--logo-white);
+  border-radius: 10px;
+  box-shadow: var(--shadow-medium);
+  padding: 20px;
+  border-top: 3px solid var(--logo-blue);
+  
+  /* Hide by default */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+/* Show the menu on hover */
+.nav-item:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* The 3x3 Grid */
+.dropdown-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+/* Each item in the grid */
+.dropdown-item {
+  text-decoration: none;
+  color: var(--color-text-primary);
+  padding: 12px 15px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: var(--color-background-medium);
+  color: var(--color-primary);
+  transform: translateX(3px);
+}
+/* --- End of Dropdown Styles --- */
+
+
+/* --- Max Width Container (Used in both) --- */
+.max-width-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Responsive Handling */
+@media (max-width: 992px) { /* CHANGED from 1200px */
+  .header-content {
+    flex-direction: column;
+    align-items: center; /* CHANGED to center */
+    gap: 15px;
+  }
+  .subheader-content {
+    flex-direction: column;
+    gap: 20px; /* ADDED gap */
+  }
+  .subheader-nav {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-contact,
+  .header-nav {
+    flex-direction: column;
+    align-items: center; /* CHANGED to center */
+    width: 100%;
+    gap: 10px;
+  }
+  .subheader-logo {
+    flex-direction: column;
+    text-align: center;
+  }
+  .subheader-logo .logo-text {
+    font-size: 16px;
+  }
+  .subheader-nav {
+    gap: 15px;
+  }
+  .nav-link { /* Use nav-link to target all links */
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+  .dropdown-menu {
+    min-width: 300px; /* Make dropdown smaller on mobile */
+    grid-template-columns: 1fr; /* Stack grid items on mobile */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .nav-item:hover .dropdown-menu {
+    transform: translateX(-50%) translateY(0);
+  }
 }
 /* Side Icon Bar */
 .college-side-bar {
