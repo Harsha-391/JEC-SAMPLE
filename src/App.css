@@ -1613,3 +1613,112 @@ footer {
       grid-template-columns: repeat(2, 1fr);
   }
 }
+/* --- Placements Page --- */
+.placements-page {
+  width: 100%;
+}
+
+.placements-banner {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.placements-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.placements-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--logo-blue);
+  margin-bottom: 20px;
+}
+
+.placements-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: var(--logo-blue);
+  margin: 20px auto 0;
+  border-radius: 2px;
+}
+
+.placements-subtitle {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  margin-bottom: 60px;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  text-align: left;
+}
+
+.testimonial-card {
+  background: var(--logo-white);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-image {
+  width: 100%;
+  height: 350px; /* Fixed height for uniformity */
+  object-fit: cover;
+  object-position: top; /* Focus on the top of the image */
+}
+
+.testimonial-text {
+  padding: 30px;
+}
+
+.testimonial-quote {
+  font-size: 18px;
+  font-style: italic;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 20px;
+}
+
+/* Adding quote marks */
+.testimonial-quote::before {
+  content: '“';
+  position: absolute;
+  left: 0;
+  top: -10px;
+  font-size: 48px;
+  color: var(--logo-blue);
+  opacity: 0.5;
+}
+
+.testimonial-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--logo-red);
+  margin-bottom: 5px;
+}
+
+.testimonial-company {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
