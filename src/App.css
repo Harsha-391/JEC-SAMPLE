@@ -1722,3 +1722,318 @@ footer {
   color: var(--color-text-secondary);
   font-weight: 500;
 }
+/*
+--- ABOUT US PAGE ---
+*/
+
+/* Hero Section - Adapted for About Us */
+.about-page .hero {
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--logo-white);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  /* You will need to add an 'about-hero.jpg' to your public/images folder */
+  background-image: url("/images/about-hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  isolation: isolate;
+}
+.about-page .hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.about-page .hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 40px;
+  max-width: 1200px;
+}
+.about-page .hero h1 {
+  font-size: 64px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+.about-page .hero p {
+  font-size: 20px;
+  margin-bottom: 30px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.about-page .hero-underline {
+  width: 100px;
+  height: 4px;
+  background: var(--color-accent); /* Logo Gold */
+  margin: 0 auto 40px;
+}
+
+/* Quick Facts Section */
+.about-page .quick-facts {
+  background: var(--color-background-medium);
+  padding: 40px 20px;
+  text-align: center;
+}
+.about-page .quick-facts-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.about-page .fact-item {
+  background: var(--logo-white);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  min-width: 150px;
+}
+.about-page .fact-item h3 {
+  color: var(--color-primary);
+  font-size: 18px;
+}
+.about-page .fact-item p {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--logo-blue);
+}
+
+/* Introduction Section */
+.about-page .introduction {
+  padding: 100px 20px;
+  background: var(--color-background-light);
+  text-align: center;
+}
+.about-page .introduction-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.about-page .introduction h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: var(--logo-blue); /* Changed to blue */
+}
+.about-page .introduction p {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  margin-bottom: 40px;
+  text-align: left; /* Better for reading long text */
+}
+.about-page .intro-image {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  margin: 0 auto;
+  display: block;
+}
+
+/* Re-using .stats styles for Achievements */
+/* The global .stats styles will apply, but we scope title changes */
+.about-page .stats-title {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: var(--logo-blue);
+}
+
+/* Academic Credibility Section */
+.about-page .credibility {
+  padding: 100px 20px;
+  background: var(--color-background-medium);
+}
+.about-page .credibility-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+.about-page .credibility h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: var(--logo-blue); /* Changed to blue */
+}
+.about-page .credibility p {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  margin-bottom: 40px;
+  text-align: left;
+}
+.about-page .credibility-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
+}
+.about-page .cred-item {
+  background: var(--logo-white);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: left;
+}
+.about-page .cred-item i {
+  font-size: 48px;
+  color: var(--logo-gold);
+  margin-bottom: 20px;
+}
+.about-page .cred-item h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: var(--logo-blue);
+}
+
+/* Salient Features Section */
+.about-page .features {
+  padding: 100px 20px;
+  background: var(--color-background-light);
+}
+.about-page .features-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+.about-page .features h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: var(--logo-blue); /* Changed to blue */
+}
+.about-page .features-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 60px;
+  text-align: left;
+}
+.about-page .feature-item {
+  background: var(--color-background-medium);
+  padding: 30px;
+  border-radius: 15px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.about-page .feature-item:hover {
+  transform: translateY(-5px);
+  background: var(--logo-white);
+}
+.about-page .feature-item::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 35px; /* Adjusted for padding */
+  width: 8px;
+  height: 8px;
+  background: var(--logo-gold);
+  border-radius: 50%;
+}
+.about-page .feature-item p {
+  margin-left: 20px;
+  font-size: 16px;
+  color: var(--color-text-primary);
+}
+
+/* Vision Mission Section */
+.about-page .vision-mission {
+  padding: 100px 20px;
+  background: var(--color-background-medium);
+}
+.about-page .vision-mission-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+.about-page .vision-mission h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: var(--logo-blue); /* Changed to blue */
+}
+.about-page .vm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 50px;
+  margin-top: 60px;
+}
+.about-page .vm-card {
+  background: var(--logo-white);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: left;
+}
+.about-page .vm-card h3 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: var(--logo-blue);
+}
+.about-page .vm-card ul {
+  list-style: none;
+  padding: 0;
+}
+.about-page .vm-card li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+.about-page .vm-card li::before {
+  content: '•';
+  color: var(--logo-gold);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* Re-using .highlights styles for Mission, Vision */
+/* The global .highlights styles will apply */
+.about-page .highlights {
+  padding: 60px 30px; /* Using compact padding */
+}
+.about-page .highlights h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: var(--logo-blue); /* Changed to blue */
+}
+.about-page .highlights p {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  margin-bottom: 50px;
+}
+.about-page .card-icon {
+  font-size: 48px;
+  color: var(--logo-blue);
+  margin-bottom: 20px;
+}
+
+/* Responsive fixes for .about-page */
+@media (max-width: 768px) {
+  .about-page .hero h1 {
+    font-size: 48px;
+  }
+  .about-page .highlight-cards, .about-page .vm-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .about-page .features-list, .about-page .commitments-list {
+    grid-template-columns: 1fr;
+  }
+  .about-page .quick-facts-content {
+    flex-direction: column;
+  }
+  .about-page .introduction h2,
+  .about-page .credibility h2,
+  .about-page .features h2,
+  .about-page .vision-mission h2 {
+    font-size: 36px;
+  }
+}
