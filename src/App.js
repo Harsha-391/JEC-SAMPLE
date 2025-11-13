@@ -21,8 +21,7 @@ function App() {
           <Route path="admissions" element={<Admissions />} /> 
           <Route path="placements" element={<Placements />} />
           <Route path="about" element={<About />} />
-          <Route path="Contact" element={<Contact />} /> {/* <-- 2. ADD THE ROUTE */}
-
+          <Route path="Contact" element={<Contact />} /> {/* <-- 2. ADD THE ROUTE */} 
         </Route>
       </Routes>
     </BrowserRouter>
@@ -30,3 +29,4 @@ function App() {
 }
 
 export default App;
+// Force Vercel rebuild 11-13
