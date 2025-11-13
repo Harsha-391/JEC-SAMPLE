@@ -35,171 +35,126 @@ body {
   color: var(--color-text-primary);
   line-height: 1.6;
 }
+/* Header */
 /*
---- NEW HEADER & SUBHEADER STYLES ---
-*/
+ * HEADER & SUBHEADER
+ */
 
-/* --- Top Red Bar (Header) --- */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--color-background-light);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* --- Header (Top black bar) --- */
 header {
-  background: var(--logo-red);
-  padding: 12px 0; /* Slightly more padding for a less cramped feel */
-  color: var(--logo-white);
-  transition: background-color 0.3s ease;
+  background: var(--color-header-bg);
+  padding: 5px 0; /* Reduced padding from 10px */
 }
 
 .header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end; /* Pushes the nav to the right */
   align-items: center;
-  flex-wrap: wrap; /* Allows wrapping on small screens */
-  gap: 15px; /* Adjusted gap */
 }
 
-.header-contact,
-.header-nav {
+/* (The .logo styles were removed from here) */
+
+nav {
   display: flex;
+  gap: 40px;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 25px; /* Increased gap for better spacing */
 }
 
-.header-content a {
-  color: var(--logo-white); /* Default color is white */
+nav a {
+  color: var(--color-header-text);
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition */
-  position: relative;
-  padding-bottom: 4px; /* Space for the underline */
 }
 
-.header-content a:hover {
-  color: var(--logo-gold); /* Hover color is yellow (logo-gold) */
-  transform: translateY(-1px); /* Subtle lift */
+nav a:hover {
+  color: var(--color-accent);
 }
 
-/* Add a subtle underline effect on hover */
-.header-content a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--logo-gold);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.3s ease;
+.apply-btn {
+  background: var(--color-button);
+  color: var(--color-button-text);
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-.header-content a:hover::after {
-  transform: scaleX(1); /* Show underline on hover */
-}
-
-/* Style icons slightly larger */
-.header-content a i {
-  font-size: 16px;
-  width: 20px;
-  text-align: center;
-}
-
-
-/* --- White Main Nav (Subheader) --- */
+/* --- Subheader (Logo + Main Nav) --- */
 .subheader {
-  background: var(--color-background-light);
+  background: var(--color-background-medium);
   padding: 15px 0;
   border-bottom: 1px solid var(--color-border);
 }
 
 .subheader-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.subheader-logo {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  text-decoration: none;
-}
-
-.subheader-logo img {
-  height: 60px; /* Taller logo */
-  width: auto;
-}
-
-.subheader-logo .logo-text {
-  display: flex;
-  flex-direction: column;
-  color: var(--logo-red);
-  font-weight: 800;
-  font-size: 20px;
-  line-height: 1.1;
-}
-
-.subheader-nav {
-  display: flex;
-  gap: 25px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.subheader-nav a {
-  text-decoration: none;
-  color: var(--color-text-primary);
-  font-weight: 600;
-  font-size: 16px;
-  transition: color 0.3s ease;
-}
-
-.subheader-nav a:hover {
-  color: var(--color-primary);
-}
-
-/* --- Max Width Container (Used in both) --- */
-.max-width-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
+  display: flex;
+  justify-content: space-between; /* Logo left, Nav right */
+  align-items: center;
 }
 
-/* Responsive Handling */
-@media (max-width: 1200px) {
-  .header-content,
-  .subheader-content {
-    flex-direction: column;
-    gap: 15px;
-  }
-  .subheader-nav {
-    justify-content: center;
-  }
+/* NEW: Styles for the logo, moved from header */
+.subheader-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--color-text-primary); /* Dark text for light bg */
 }
 
-@media (max-width: 768px) {
-  .header-contact,
-  .header-nav {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    gap: 10px;
-  }
-  .subheader-logo {
-    flex-direction: column;
-    text-align: center;
-  }
-  .subheader-logo .logo-text {
-    font-size: 16px;
-  }
-  .subheader-nav {
-    gap: 15px;
-  }
-  .subheader-nav a {
-    font-size: 14px;
-  }
+.subheader-logo img {
+  width: auto;
+  height: 70px;
+  border-radius: 8px;
+}
+
+/* NEW: Container for the subheader links */
+.subheader-nav {
+  display: flex;
+  gap: 40px;
+}
+
+/* This style now correctly applies to links inside .subheader-nav */
+.subheader a {
+  text-decoration: none;
+  color: var(--color-text-primary);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.subheader a:hover {
+  color: var(--color-primary);
+}
+/* Side Icon Bar */
+.college-side-bar {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: rgba(29, 29, 29, 0.8); /* Updated to use --logo-black equivalent */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1001;
+  border-radius: 12px 0 0 12px;
+  padding: 8px;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
 }
 .college-side-bar a {
   display: flex;
