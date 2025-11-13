@@ -60,10 +60,10 @@ header {
 
 .header-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* This centers your content */
   align-items: center;
   flex-wrap: wrap; 
-  gap: 5px; 
+  gap: 25px; /* Increased gap for spacing between the two nav groups */
 }
 
 .header-contact,
