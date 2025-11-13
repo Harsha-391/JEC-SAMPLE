@@ -59,12 +59,11 @@ header {
 }
 
 .header-content {
-
   display: flex;
   justify-content: space-between;
-  align-items: justify;
-  flex-wrap: wrap;
-  gap: 5px;
+  align-items: center;
+  flex-wrap: wrap; 
+  gap: 5px; 
 }
 
 .header-contact,
