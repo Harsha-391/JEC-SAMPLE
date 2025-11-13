@@ -6,7 +6,7 @@ function Placements() {
     <div className="placements-page">
       {/* 1. The Banner Image */}
       <img
-        src="/images/placement-glory.jpg"
+        src="/images/placement-Glory.jpg"
         alt="JEC Placements Glory"
         className="placements-banner"
       />
