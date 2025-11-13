@@ -21,7 +21,7 @@ function App() {
           <Route path="admissions" element={<Admissions />} /> 
           <Route path="placements" element={<Placements />} />
           <Route path="about" element={<About />} />
-          <Route path="contact" element={<Contact />} /> {/* <-- 2. ADD THE ROUTE */}
+          <Route path="Contact" element={<Contact />} /> {/* <-- 2. ADD THE ROUTE */}
 
         </Route>
       </Routes>
