@@ -8,7 +8,8 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import Admissions from './pages/Admissions';
 import Placements from './pages/Placements';
-import About from './pages/About'; // <-- 1. IMPORT YOUR NEW PAGE
+import About from './pages/About';
+import Contact from './pages/Contact'; // <-- 1. IMPORT YOUR NEW PAGE
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
           <Route index element={<Home />} /> 
           <Route path="admissions" element={<Admissions />} /> 
           <Route path="placements" element={<Placements />} />
-          <Route path="about" element={<About />} /> {/* <-- 2. ADD THE ROUTE */}
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} /> {/* <-- 2. ADD THE ROUTE */}
 
         </Route>
       </Routes>
@@ -28,4 +30,3 @@ function App() {
 }
 
 export default App;
-// Force rebuild 11-13
