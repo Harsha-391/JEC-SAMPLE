@@ -1737,7 +1737,7 @@ footer {
   position: relative;
   overflow: hidden;
   /* You will need to add an 'about-hero.jpg' to your public/images folder */
-  background-image: url("/assets/about-banner.jpeg");
+  background-image: url("src/assets/about-banner.jpeg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
