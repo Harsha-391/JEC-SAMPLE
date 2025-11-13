@@ -50,13 +50,10 @@ body {
 
 /* --- Header (Top black bar) --- */
 /*
---- NEW HEADER & SUBHEADER STYLES ---
-*/
-
 /* --- Top Red Bar (Header) --- */
 header {
-  background: var(--logo-black);
-  padding: 10px 0; /* Slightly more padding for a less cramped feel */
+  background: var(--logo-red);
+  padding: 12px 0; 
   color: var(--logo-white);
   transition: background-color 0.3s ease;
 }
@@ -65,8 +62,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* Allows wrapping on small screens */
-  gap: 15px; /* Adjusted gap */
+  flex-wrap: wrap; 
+  gap: 15px; 
 }
 
 .header-contact,
@@ -74,7 +71,7 @@ header {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 25px; /* Increased gap for better spacing */
+  gap: 25px; 
 }
 
 .header-content a {
@@ -120,7 +117,6 @@ header {
   text-align: center;
 }
 
-
 /* --- White Main Nav (Subheader) --- */
 .subheader {
   background: var(--color-background-light);
@@ -132,6 +128,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap; /* Added for better responsiveness */
+  gap: 15px;
 }
 
 .subheader-logo {
@@ -167,53 +165,32 @@ header {
   color: var(--color-text-primary);
   font-weight: 600;
   font-size: 16px;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease; /* ADDED transition */
+  position: relative; /* ADDED for underline */
+  padding-bottom: 4px; /* ADDED for underline */
 }
 
 .subheader-nav a:hover {
-  color: var(--color-primary);
+  color: var(--color-accent); /* CHANGED to yellow (logo-gold) */
+  transform: translateY(-1px); /* ADDED subtle lift */
 }
 
-/* --- Max Width Container (Used in both) --- */
-.max-width-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 20px;
+/* ADDED underline animation for subheader */
+.subheader-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-accent); /* Underline is yellow */
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
 }
 
-/* Responsive Handling */
-@media (max-width: 1200px) {
-  .header-content,
-  .subheader-content {
-    flex-direction: column;
-    gap: 15px;
-  }
-  .subheader-nav {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .header-contact,
-  .header-nav {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    gap: 10px;
-  }
-  .subheader-logo {
-    flex-direction: column;
-    text-align: center;
-  }
-  .subheader-logo .logo-text {
-    font-size: 16px;
-  }
-  .subheader-nav {
-    gap: 15px;
-  }
-  .subheader-nav a {
-    font-size: 14px;
-  }
+.subheader-nav a:hover::after {
+  transform: scaleX(1); /* Show underline on hover */
 }
 /* Side Icon Bar */
 .college-side-bar {
