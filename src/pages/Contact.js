@@ -64,12 +64,12 @@ function Contact() {
         </div>
       </div>
 
-      <section className="map-section">
+     <section className="map-section">
       <div className="max-width-container">
         <h2>Find Us on the Map</h2>
         <div className="google-map">
           <iframe 
-            src="https://www.google.com/maps/place/Jaipur+Engineering+College/@27.0279997,75.8948747,17z/data=!3m1!4b1!4m6!3m5!1s0x396daff9724b0af1:0x5c4f01d43902fe9a!8m2!3d27.0279997!4d75.8948747!16s%2Fm%2F0134w8xs?entry=ttu&g_ep=EgoyMDI1MTExMS4wIKXMDSoASAFQAw%3D%3D" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3554.068551259951!2d75.8948747!3d27.027999699999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396daff9724b0af1%3A0x5c4f01d43902fe9a!2sJaipur%20Engineering%20College!5e0!3m2!1sen!2sin!4v1763027051599!5m2!1sen!2sin" 
             width="600" 
             height="450" 
             style={{ border: 0 }} 
@@ -81,7 +81,6 @@ function Contact() {
         </div>
       </div>
     </section>
-
     </div>
   );
 }
