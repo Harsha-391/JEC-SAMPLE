@@ -70,7 +70,7 @@ function Contact() {
         <div className="google-map">
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3554.068551259951!2d75.8948747!3d27.027999699999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396daff9724b0af1%3A0x5c4f01d43902fe9a!2sJaipur%20Engineering%20College!5e0!3m2!1sen!2sin!4v1763027051599!5m2!1sen!2sin" 
-            width="1200" 
+            width="100%" 
             height="450" 
             style={{ border: 0 }} 
             allowFullScreen={true} 
