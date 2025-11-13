@@ -459,7 +459,7 @@ header {
 /* Highlights Section */
 /* Highlights Section */
 .highlights {
-  padding: 30px 30px; /* Reduced from 200px to 60px */
+  padding: 60px 30px; /* Reduced from 200px to 60px */
   background: var(--logo-white);
 }
 
@@ -1139,7 +1139,7 @@ footer {
 }
 /* Research & Innovation Section */
 .stories {
-  padding: 100px 20px;
+  padding: 50px 20px;
   background: var(--color-background-light);
   position: relative;
   overflow: hidden;
