@@ -55,8 +55,8 @@ body {
 
 /* --- Top Red Bar (Header) --- */
 header {
-  background: var(--logo-red);
-  padding: 12px 0; /* Slightly more padding for a less cramped feel */
+  background: var(--loo-black);
+  padding: 10px 0; /* Slightly more padding for a less cramped feel */
   color: var(--logo-white);
   transition: background-color 0.3s ease;
 }
