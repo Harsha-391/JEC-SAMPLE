@@ -1,46 +1,34 @@
 // src/App.js
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css'; // Your main stylesheet
 
-// Import all your new components
-import Sidebar from './components/Sidebar';
-import Header from './components/Header';
-import Subheader from './components/Subheader';
-import Hero from './components/Hero';
-import Highlights from './components/Highlights';
-import Stats from './components/Stats';
-import Programs from './components/Programs';
-import Team from './components/Team';
-import WhyJEC from './components/WhyJEC';
-import Outcomes from './components/Outcomes';
-import Research from './components/Research';
-import CampusLife from './components/CampusLife';
-import Grievance from './components/Grievance';
-import VirtualTour from './components/VirtualTour';
-import Footer from './components/Footer';
+// Import your Layout and Page components
+import Layout from './components/Layout';
+import Home from './pages/Home';
+import Admissions from './pages/Admissions';
+// Import other pages as you create them...
 
 function App() {
   return (
-    <>
-      {/* All tags must be self-closing or have a closing tag */}
-      <Sidebar />
-      <div className="sticky-header">
-        <Header />
-        <Subheader />
-      </div>
-      <Hero />
-      <Highlights />
-      <Stats />
-      <Programs />
-      <Team />
-      <WhyJEC />
-      <Outcomes />
-      <Research />
-      <CampusLife />
-      <Grievance />
-      <VirtualTour />
-      <Footer />
-    </>
+    <BrowserRouter>
+      <Routes>
+        {/* This Route uses your Layout. All other pages go inside it. */}
+        <Route path="/" element={<Layout />}>
+          
+          {/* 'index' means this is the default page for "/" */}
+          <Route index element={<Home />} /> 
+          
+          {/* This is your new Admissions page */}
+          <Route path="admissions" element={<Admissions />} /> 
+
+          {/* You can add more pages here */}
+          {/* <Route path="about" element={<About />} /> */}
+          {/* <Route path="contact" element={<Contact />} /> */}
+
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

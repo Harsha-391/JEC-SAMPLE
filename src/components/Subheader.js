@@ -1,24 +1,29 @@
 // src/components/Subheader.js
 import React from 'react';
+import { Link } from 'react-router-dom'; // 1. Import Link
 
 function Subheader() {
   return (
     <div className="subheader">
       <div className="subheader-content">
         
-        {/* 1. Add your logo here on the left */}
-        <div className="subheader-logo">
+        {/* This logo should link to the homepage */}
+        <Link to="/" className="subheader-logo"> {/* 2. Use <Link to="/"> */}
           <img src="/images/logo.png" alt="Company Logo" />
-        </div>
+          <span>Jaipur Engineering College</span>
+        </Link>
 
-        {/* 2. Wrap your links in a nav container on the right */}
         <div className="subheader-nav">
-          <a href="#academics">Academics</a>
-          <a href="#admissions">Admissions</a>
-          <a href="#outcomes">Student Outcomes</a>
-          <a href="#placements">Placements</a>
-          <a href="#campus">Campus Life</a>
-          <a href="#research">Research</a>
+          {/* These links are for sections on the Home page, so they can stay as <a> */}
+          <a href="/#academics">Academics</a> 
+          
+          {/* This is our NEW page link */}
+          <Link to="/admissions">Admissions</Link> {/* 3. Use <Link to="/admissions"> */}
+
+          <a href="/#outcomes">Student Outcomes</a>
+          <a href="/#placements">Placements</a>
+          <a href="/#campus">Campus Life</a>
+          <a href="/#research">Research</a>
         </div>
 
       </div>
