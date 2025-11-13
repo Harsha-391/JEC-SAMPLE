@@ -3,7 +3,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom'; // Import Outlet!
 
 // Import your shared components
-import SideBar from './SideBar';
+import Sidebar from './Sidebar';
 import Header from './Header';
 import Subheader from './Subheader';
 import Footer from './Footer';
@@ -11,7 +11,7 @@ import Footer from './Footer';
 function Layout() {
   return (
     <>
-      <SideBar />
+      <Sidebar />
       <div className="sticky-header">
         <Header />
         <Subheader />
