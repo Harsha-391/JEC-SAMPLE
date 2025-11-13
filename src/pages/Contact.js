@@ -4,7 +4,7 @@ import React from 'react';
 function Contact() {
   return (
     // This wrapper scopes all the new CSS
-    <div className="contact-page-v3">
+    <div className="contact-page-v4">
 
       <section className="contact-header-section">
         <div className="max-width-container">
@@ -65,22 +65,22 @@ function Contact() {
       </div>
 
       <section className="map-section">
-        <div className="max-width-container">
-          <h2>Find Us on the Map</h2>
-          <div className="google-map">
-            <iframe 
-              src="http://googleusercontent.com/maps.google.com/3" 
-              width="600" 
-              height="450" 
-              style={{ border: 0 }} 
-              allowFullScreen={true} 
-              loading="lazy" 
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Location of Jaipur Engineering College">
-            </iframe>
-          </div>
+      <div className="max-width-container">
+        <h2>Find Us on the Map</h2>
+        <div className="google-map">
+          <iframe 
+            src="https.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3554.068551259951!2d75.8948747!3d27.027999699999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396daff9724b0af1%3A0x5c4f01d43902fe9a!2sJaipur%20Engineering%20College!5e0!3m2!1sen!2sin!4v1763027051599!5m2!1sen!2sin" 
+            width="600" 
+            height="450" 
+            style={{ border: 0 }} 
+            allowFullScreen={true} 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Location of Jaipur Engineering College">
+          </iframe>
         </div>
-      </section>
+      </div>
+    </section>
 
     </div>
   );
