@@ -10,11 +10,11 @@ function Header() {
           <a href="#students">Students</a>
           <a href="#alumni">Alumni</a>
           <a href="#parents">Parents</a>
-          <a href="#contact">Contact Us</a>
 
           {/* 2. CHANGE THIS LINE: */}
-          <Link to="/about">About Us</Link>
+          <Link to="/contact">Contact Us</Link>
 
+          <Link to="/about">About Us</Link>
           <button className="apply-btn">Apply Now</button>
         </nav>
       </div>
