@@ -12,7 +12,7 @@ function Header() {
           <a href="#parents">Parents</a>
 
           {/* 2. CHANGE THIS LINE: */}
-          <Link to="/contact">Contact Us</Link>
+          <Link to="/Contact">Contact Us</Link>
 
           <Link to="/about">About Us</Link>
           <button className="apply-btn">Apply Now</button>
