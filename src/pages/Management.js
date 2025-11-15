@@ -28,7 +28,7 @@ function Management() {
                 Example: src="/images/lc-saraogi.jpg" 
               */}
               <img 
-                src="https://via.placeholder.com/300x400?text=Shri+L.C.+Saraogi" 
+                src="public/images/f1.png"
                 alt="Shri L.C. Saraogi" 
                 className="leader-img" 
               />
@@ -49,7 +49,7 @@ function Management() {
                 Example: src="/images/lalit-saraogi.png" 
               */}
               <img 
-                src="https://placehold.co/300x400/e0e0e0/bbb?text=Lalit+K.+Saraogi" 
+                src="public/images/1574843524_Lalit saraogi.png" 
                 alt="Lalit K. Saraogi" 
                 className="leader-img" 
               />
@@ -70,7 +70,7 @@ function Management() {
                 Example: src="/images/harish-saraogi.png" 
               */}
               <img 
-                src="https://placehold.co/300x400/e0e0e0/bbb?text=Shri+Harish+Saraogi" 
+                src="public/images/1574843605_Harish saraogi.png" 
                 alt="Shri Harish Saraogi" 
                 className="leader-img" 
               />
@@ -91,7 +91,7 @@ function Management() {
                 Example: src="/images/bharat-bhushan-jain.jpg" 
               */}
               <img 
-                src="https://placehold.co/300x400/e0e0e0/bbb?text=Prof.+(Dr.)+Bharat+Bhushan+Jain" 
+                src="public/images/DrBharatBhushan_.jpg" 
                 alt="Prof. Dr. Bharat Bhushan Jain" 
                 className="leader-img" 
               />
@@ -112,7 +112,7 @@ function Management() {
                 Example: src="/images/sunita-goyal.jpg" 
               */}
               <img 
-                src="https://placehold.co/300x400/e0e0e0/bbb?text=Prof.+(Dr.)+Sunita+Goyal+Rawat" 
+                src="public/images/sunitagoyal.jpg" 
                 alt="Prof. Dr. Sunita Goyal Rawat" 
                 className="leader-img" 
               />
@@ -133,7 +133,7 @@ function Management() {
                 Example: src="/images/dg-mahto.png" 
               */}
               <img 
-                src="https://placehold.co/300x400/e0e0e0/bbb?text=Prof.+(Dr.)+D.+G.+Mahto" 
+                src="public/images/1574843703_Dalgobind Mahto.png" 
                 alt="Prof. Dr. D.G. Mahto" 
                 className="leader-img" 
               />
@@ -154,7 +154,7 @@ function Management() {
                 Example: src="/images/lakshya-saraogi.jpg" 
               */}
               <img 
-                src="https://placehold.co/300x400/e0e0e0/bbb?text=Mr.+Lakshya+Saraogi" 
+                src="public/images/lakshaysaraogi.jpg" 
                 alt="Mr. Lakshya Saraogi" 
                 className="leader-img" 
               />
@@ -175,7 +175,7 @@ function Management() {
                 Example: src="/images/inesh-saraogi.jpg" 
               */}
               <img 
-                src="https://placehold.co/300x400/e0e0e0/bbb?text=Mr.+Inesh+Saraogi" 
+                src="public/images/ineshsaraogi.jpg" 
                 alt="Mr. Inesh Saraogi" 
                 className="leader-img" 
               />
