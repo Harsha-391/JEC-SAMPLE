@@ -25,11 +25,12 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="jec/faq" element={<Faq />} />
           <Route path="jec/management" element={<Management />} /> {/* <-- 2. ADD THE ROUTE */}
-          {/* Add other new routes from your dropdowns here */}
-          
+          {/* ... other routes ... */}
+
         </Route>
       </Routes>
     </BrowserRouter>
   );
 }
+
 export default App;

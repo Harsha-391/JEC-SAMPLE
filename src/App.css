@@ -2532,3 +2532,172 @@ footer {
     font-size: 36px; 
   }
 }
+/*
+--- MANAGEMENT PAGE (NEW) ---
+*/
+
+.management-page-new .max-width-container { 
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 0 20px; 
+}
+
+.management-page-new a { 
+  text-decoration: none; 
+  color: inherit; 
+}
+
+/* --- Hero Section --- */
+.management-page-new .leadership-hero {
+  /* This uses a placeholder hero. Replace "unsplash.jpg" with your own hero image */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/images/unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 100px 20px;
+  text-align: center;
+  color: var(--logo-white);
+}
+
+.management-page-new .leadership-hero h1 { 
+  font-size: 48px; 
+  margin-bottom: 15px; 
+  font-weight: 800; 
+  letter-spacing: 1px; 
+}
+.management-page-new .leadership-hero p { 
+  font-size: 20px; 
+  font-weight: 300; 
+  max-width: 900px; 
+  margin: 0 auto; 
+  color: var(--logo-gold); 
+}
+
+.management-page-new .hero-badges {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+.management-page-new .badge {
+  background: rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* --- Management Section --- */
+.management-page-new .management-section { 
+  padding: 80px 20px; 
+  background-color: var(--color-background-medium); /* Added this line */
+}
+.management-page-new .section-title { 
+  font-size: 36px; 
+  color: var(--logo-blue); 
+  margin-bottom: 50px; 
+  text-align: center; 
+  position: relative; 
+}
+.management-page-new .section-title::after { 
+  content: ''; 
+  display: block; 
+  width: 80px; 
+  height: 4px; 
+  background: var(--logo-red); 
+  margin: 15px auto 0; 
+}
+
+.management-page-new .leader-card {
+  background: var(--logo-white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: 300px 1fr; /* Image left, content right */
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.management-page-new .leader-card:hover { 
+  transform: translateY(-5px); 
+  box-shadow: var(--shadow-hover); 
+}
+
+.management-page-new .leader-img-container {
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 400px; /* Ensure container has height */
+}
+.management-page-new .leader-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.management-page-new .leader-content { 
+  padding: 40px; 
+}
+.management-page-new .leader-name { 
+  font-size: 28px; 
+  color: var(--logo-red); 
+  margin-bottom: 5px; 
+  font-weight: 700; 
+}
+.management-page-new .leader-position { 
+  font-size: 16px; 
+  color: var(--logo-blue); 
+  font-weight: 600; 
+  text-transform: uppercase; 
+  letter-spacing: 1px; 
+  margin-bottom: 20px; 
+  display: block; 
+}
+
+.management-page-new .bio-text { 
+  font-size: 15px; 
+  color: #555; 
+  line-height: 1.7; 
+  text-align: justify; 
+}
+.management-page-new .bio-text p { 
+  margin-bottom: 15px; 
+}
+
+/* Flip layout for alternate cards */
+.management-page-new .leader-card:nth-child(even) {
+  grid-template-columns: 1fr 300px;
+}
+.management-page-new .leader-card:nth-child(even) .leader-img-container { 
+  order: 2; 
+}
+.management-page-new .leader-card:nth-child(even) .leader-content { 
+  order: 1; 
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .management-page-new .leader-card, 
+  .management-page-new .leader-card:nth-child(even) { 
+    grid-template-columns: 1fr; 
+  }
+  .management-page-new .leader-img-container { 
+    height: 350px; 
+    order: 1 !important; 
+  }
+  .management-page-new .leader-content { 
+    order: 2 !important; 
+    padding: 30px; 
+  }
+}
+@media (max-width: 768px) {
+  .management-page-new .leadership-hero h1 { 
+    font-size: 36px; 
+  }
+  .management-page-new .leader-img-container { 
+    height: 300px; 
+  }
+}

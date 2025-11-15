@@ -3,7 +3,7 @@ import React from 'react';
 function Management() {
   return (
     // This wrapper class will scope all the new styles
-    <div className="management-page">
+    <div className="management-page-new">
 
       <section className="leadership-hero">
         <div className="max-width-container">
@@ -25,11 +25,10 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               {/* TODO: Replace this placeholder.
-                Original broken path was: "https://via.placeholder.com/300x400?text=Shri+L.C.+Saraogi"
-                Replace with your image: src="/images/your-image-name.jpg" 
+                Example: src="/images/lc-saraogi.jpg" 
               */}
               <img 
-                src="https://placehold.co/300x400/e0e0e0/bbb?text=Shri+L.C.+Saraogi" 
+                src="https://via.placeholder.com/300x400?text=Shri+L.C.+Saraogi" 
                 alt="Shri L.C. Saraogi" 
                 className="leader-img" 
               />
@@ -47,8 +46,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               {/* TODO: Replace this placeholder.
-                Original broken path was: "file:///C:/Users/NIPUN/Desktop/JEC%20PAGES/images/1574843524_Lalit%20saraogi.png"
-                Replace with your image: src="/images/lalit-saraogi.png" 
+                Example: src="/images/lalit-saraogi.png" 
               */}
               <img 
                 src="https://placehold.co/300x400/e0e0e0/bbb?text=Lalit+K.+Saraogi" 
@@ -69,8 +67,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               {/* TODO: Replace this placeholder.
-                Original broken path was: "file:///C:/Users/NIPUN/Desktop/JEC%20PAGES/images/1574843605_Harish%20saraogi.png"
-                Replace with your image: src="/images/harish-saraogi.png" 
+                Example: src="/images/harish-saraogi.png" 
               */}
               <img 
                 src="https://placehold.co/300x400/e0e0e0/bbb?text=Shri+Harish+Saraogi" 
@@ -91,8 +88,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               {/* TODO: Replace this placeholder.
-                Original broken path was: "file:///C:/Users/NIPUN/Desktop/JEC%20PAGES/images/DrBharatBhushan_.jpg"
-                Replace with your image: src="/images/dr-bharat-bhushan.jpg" 
+                Example: src="/images/bharat-bhushan-jain.jpg" 
               */}
               <img 
                 src="https://placehold.co/300x400/e0e0e0/bbb?text=Prof.+(Dr.)+Bharat+Bhushan+Jain" 
@@ -113,8 +109,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               {/* TODO: Replace this placeholder.
-                Original broken path was: "file:///C:/Users/NIPUN/Desktop/JEC%20PAGES/images/sunitagoyal.jpg"
-                Replace with your image: src="/images/dr-sunita-goyal.jpg" 
+                Example: src="/images/sunita-goyal.jpg" 
               */}
               <img 
                 src="https://placehold.co/300x400/e0e0e0/bbb?text=Prof.+(Dr.)+Sunita+Goyal+Rawat" 
@@ -135,8 +130,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               {/* TODO: Replace this placeholder.
-                Original broken path was: "file:///C:/Users/NIPUN/Desktop/JEC%20PAGES/images/1574843703_Dalgobind%20Mahto.png"
-                Replace with your image: src="/images/dr-dg-mahto.png" 
+                Example: src="/images/dg-mahto.png" 
               */}
               <img 
                 src="https://placehold.co/300x400/e0e0e0/bbb?text=Prof.+(Dr.)+D.+G.+Mahto" 
@@ -157,8 +151,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               {/* TODO: Replace this placeholder.
-                Original broken path was: "file:///C:/Users/NIPUN/Desktop/JEC%20PAGES/images/lakshaysaraogi.jpg"
-                Replace with your image: src="/images/lakshya-saraogi.jpg" 
+                Example: src="/images/lakshya-saraogi.jpg" 
               */}
               <img 
                 src="https://placehold.co/300x400/e0e0e0/bbb?text=Mr.+Lakshya+Saraogi" 
@@ -179,8 +172,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               {/* TODO: Replace this placeholder.
-                Original broken path was: "file:///C:/Users/NIPUN/Desktop/JEC%20PAGES/images/ineshsaraogi.jpg"
-                Replace with your image: src="/images/inesh-saraogi.jpg" 
+                Example: src="/images/inesh-saraogi.jpg" 
               */}
               <img 
                 src="https://placehold.co/300x400/e0e0e0/bbb?text=Mr.+Inesh+Saraogi" 
@@ -200,6 +192,7 @@ function Management() {
 
         </div>
       </section>
+      
     </div>
   );
 }
