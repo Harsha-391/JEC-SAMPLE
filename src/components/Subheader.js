@@ -47,7 +47,7 @@ function Subheader() {
           <Link to="/" className="nav-link">Home</Link>
           
           {/* JEC Dropdown */}
-          <NavDropdown title="JEC" items={jecMenuItems} baseLink="/about" />
+          <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" />
           
           {/* Admission Dropdown */}
           <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/admissions" />
