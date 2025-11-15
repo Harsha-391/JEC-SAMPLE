@@ -2550,7 +2550,7 @@ footer {
 /* --- Hero Section --- */
 .management-page-new .leadership-hero {
   /* This uses a placeholder hero. Replace "unsplash.jpg" with your own hero image */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("public/images/campus-intro.jpeg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../public/images/campus-intro.jpeg");
   background-size: cover;
   background-position: center;
   padding: 100px 20px;
