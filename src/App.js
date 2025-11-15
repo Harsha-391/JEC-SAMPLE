@@ -9,7 +9,8 @@ import Admissions from './pages/Admissions';
 import Placements from './pages/Placements';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import Faq from './pages/Faq'; // <-- 1. IMPORT YOUR NEW PAGE
+import Faq from './pages/Faq';
+import Management from './pages/Management'; // <-- 1. IMPORT YOUR NEW PAGE
 
 function App() {
   return (
@@ -22,10 +23,10 @@ function App() {
           <Route path="placements" element={<Placements />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="jec/faq" element={<Faq />} /> {/* <-- 2. ADD THE ROUTE */}
+          <Route path="jec/faq" element={<Faq />} />
+          <Route path="jec/management" element={<Management />} /> {/* <-- 2. ADD THE ROUTE */}
           {/* Add other new routes from your dropdowns here */}
-          {/* e.g., <Route path="admissions/courses" element={<Courses />} /> */}
-
+          
         </Route>
       </Routes>
     </BrowserRouter>

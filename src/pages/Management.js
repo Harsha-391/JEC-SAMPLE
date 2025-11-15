@@ -1,0 +1,207 @@
+import React from 'react';
+
+function Management() {
+  return (
+    // This wrapper class will scope all the new styles
+    <div className="management-page">
+
+      <section className="leadership-hero">
+        <div className="max-width-container">
+          <h1>Empowered Leadership Team</h1>
+          <p>Turning Vision into Reality through Agility, Adaptability, and Wisdom.</p>
+          <div className="hero-badges">
+            <span className="badge">Visionary</span>
+            <span className="badge">Strategic</span>
+            <span className="badge">Innovative</span>
+            <span className="badge">Student-Centric</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="management-section">
+        <div className="max-width-container">
+          <h2 className="section-title">Our Torchbearers</h2>
+
+          <div className="leader-card">
+            <div className="leader-img-container">
+              {/* TODO: Replace this placeholder.
+                Original broken path was: "https://via.placeholder.com/300x400?text=Shri+L.C.+Saraogi"
+                Replace with your image: src="/images/your-image-name.jpg" 
+              */}
+              <img 
+                src="https://placehold.co/300x400/e0e0e0/bbb?text=Shri+L.C.+Saraogi" 
+                alt="Shri L.C. Saraogi" 
+                className="leader-img" 
+              />
+            </div>
+            <div className="leader-content">
+              <div className="leader-name">Shri L.C. Saraogi</div>
+              <span className="leader-position">Chairman - AIATERF & JEC Group</span>
+              <div className="bio-text">
+                <p>Shri L. C. Saraogi is a well-known personality in the field of education for the last 4 decades in northern India. He believes in hard work and lives by the motto: "Success is measured not by what you create for yourself but by what you leave behind."</p>
+                <p>A Chartered Accountant by profession, he is a passionate leader with accurate communication skills and a long track record of successfully managing organizations. As a man of honesty and integrity, he sets an example for all and loves to stay connected with students, motivating and molding them into ideal citizens. His vision and commitment have elevated the group to international standards.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="leader-card">
+            <div className="leader-img-container">
+              {/* TODO: Replace this placeholder.
+                Original broken path was: "file:///C:/Users/NIPUN/Desktop/JEC%20PAGES/images/1574843524_Lalit%20saraogi.png"
+                Replace with your image: src="/images/lalit-saraogi.png" 
+              */}
+              <img 
+                src="https://placehold.co/300x400/e0e0e0/bbb?text=Lalit+K.+Saraogi" 
+                alt="Lalit K. Saraogi" 
+                className="leader-img" 
+              />
+            </div>
+            <div className="leader-content">
+              <div className="leader-name">Lalit K. Saraogi</div>
+              <span className="leader-position">Secretary - AIATERF & JEC Group Director</span>
+              <div className="bio-text">
+                <p>Lalit K. Saraogi plays a key role in defining the vision, mission, and strategy for the growth and development of AIATERF and JEC Group of Colleges. An engineering graduate in Electronics & Telecommunication from Bangalore University, he brings invaluable experience in managing people and executing student activities.</p>
+                <p>He is the most energetic member of the management team, actively managing educational institutions with full dedication. He believes that our nation needs not just engineers and managers but virtuous men and women who can be trendsetting professionals armed with integrity and discipline.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="leader-card">
+            <div className="leader-img-container">
+              {/* TODO: Replace this placeholder.
+                Original broken path was: "file:///C:/Users/NIPUN/Desktop/JEC%20PAGES/images/1574843605_Harish%20saraogi.png"
+                Replace with your image: src="/images/harish-saraogi.png" 
+              */}
+              <img 
+                src="https://placehold.co/300x400/e0e0e0/bbb?text=Shri+Harish+Saraogi" 
+                alt="Shri Harish Saraogi" 
+                className="leader-img" 
+              />
+            </div>
+            <div className="leader-content">
+              <div className="leader-name">Shri Harish Saraogi</div>
+              <span className="leader-position">Director (Finance) - AIATERF & JEC Group</span>
+              <div className="bio-text">
+                <p>Shri Harish Saraogi holds a degree in commerce and has honed technical and managerial skills through advanced training. The credit for the rapid and meteoric rise of the group goes to his astute skills in planning, budgeting, and managing resources.</p>
+                <p>An avid lover of global travel, he brings a wealth of information on innovations taking place worldwide. His dedication and dynamic approach have been a guiding force behind the success of the group, elevating it to international standards.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="leader-card">
+            <div className="leader-img-container">
+              {/* TODO: Replace this placeholder.
+                Original broken path was: "file:///C:/Users/NIPUN/Desktop/JEC%20PAGES/images/DrBharatBhushan_.jpg"
+                Replace with your image: src="/images/dr-bharat-bhushan.jpg" 
+              */}
+              <img 
+                src="https://placehold.co/300x400/e0e0e0/bbb?text=Prof.+(Dr.)+Bharat+Bhushan+Jain" 
+                alt="Prof. Dr. Bharat Bhushan Jain" 
+                className="leader-img" 
+              />
+            </div>
+            <div className="leader-content">
+              <div className="leader-name">Prof. (Dr.) Bharat Bhushan Jain</div>
+              <span className="leader-position">Principal</span>
+              <div className="bio-text">
+                <p>Dr. Bharat Bhushan Jain, Ph.D. in Electrical Engineering from MNIT Jaipur, is a distinguished academician with over two decades of experience. Since 2016, he has served as Principal, leading academic governance and research initiatives. He holds a B.E. (Honours) and M.Tech. in Power Systems Engineering.</p>
+                <p>A prolific researcher, Dr. Jain has published 117 papers and holds four patents. His administrative roles—Principal, Director Admissions, and NBA In-Charge—reflect his commitment to curriculum innovation, digital education, and quality assurance in engineering education.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="leader-card">
+            <div className="leader-img-container">
+              {/* TODO: Replace this placeholder.
+                Original broken path was: "file:///C:/Users/NIPUN/Desktop/JEC%20PAGES/images/sunitagoyal.jpg"
+                Replace with your image: src="/images/dr-sunita-goyal.jpg" 
+              */}
+              <img 
+                src="https://placehold.co/300x400/e0e0e0/bbb?text=Prof.+(Dr.)+Sunita+Goyal+Rawat" 
+                alt="Prof. Dr. Sunita Goyal Rawat" 
+                className="leader-img" 
+              />
+            </div>
+            <div className="leader-content">
+              <div className="leader-name">Prof. (Dr.) Sunita Goyal Rawat</div>
+              <span className="leader-position">Director</span>
+              <div className="bio-text">
+                <p>Prof. (Dr.) Sunita Goyal Rawat holds a Ph.D. in Organometallic Chemistry from the University of Rajasthan. She has published 14 papers in reputed journals and authored multiple books on chemistry and environmental engineering. She has been awarded the Young Scientist Award and Best Faculty Award.</p>
+                <p>She serves as the Controller of Examination and Convener of Academic Planning. Dr. Rawat is actively involved in building the careers of engineering students through her dedicated mentorship and academic leadership.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="leader-card">
+            <div className="leader-img-container">
+              {/* TODO: Replace this placeholder.
+                Original broken path was: "file:///C:/Users/NIPUN/Desktop/JEC%20PAGES/images/1574843703_Dalgobind%20Mahto.png"
+                Replace with your image: src="/images/dr-dg-mahto.png" 
+              */}
+              <img 
+                src="https://placehold.co/300x400/e0e0e0/bbb?text=Prof.+(Dr.)+D.+G.+Mahto" 
+                alt="Prof. Dr. D.G. Mahto" 
+                className="leader-img" 
+              />
+            </div>
+            <div className="leader-content">
+              <div className="leader-name">Prof. (Dr.) D. G. Mahto</div>
+              <span className="leader-position">Director (R & D)</span>
+              <div className="bio-text">
+                <p>Prof. Dalgobind Mahto’s career reflects 20+ years of experience in industries, teaching, research, and administration. His directorial roles have involved significant innovation in curriculum development, student-centered learning environments, and research productivity.</p>
+                <p>His accomplishments reflect strong leadership qualities in the challenging and complex environment of higher educational institutions, fostering regional economic development and collaboration with different institutions.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="leader-card">
+            <div className="leader-img-container">
+              {/* TODO: Replace this placeholder.
+                Original broken path was: "file:///C:/Users/NIPUN/Desktop/JEC%20PAGES/images/lakshaysaraogi.jpg"
+                Replace with your image: src="/images/lakshya-saraogi.jpg" 
+              */}
+              <img 
+                src="https://placehold.co/300x400/e0e0e0/bbb?text=Mr.+Lakshya+Saraogi" 
+                alt="Mr. Lakshya Saraogi" 
+                className="leader-img" 
+              />
+            </div>
+            <div className="leader-content">
+              <div className="leader-name">Mr. Lakshya Saraogi</div>
+              <span className="leader-position">Assistant Director – Branding & Marketing</span>
+              <div className="bio-text">
+                <p>Mr. Lakshya Saraogi leads the institution's strategic communication, brand development, and digital outreach. With a keen understanding of modern marketing landscapes, he plays a critical role in shaping the public image of the college through impactful campaigns and community outreach.</p>
+                <p>Under his leadership, JEC has strengthened its digital presence and brand recognition. Lakshya believes that effective storytelling and authentic branding are essential tools in building trust and inspiring action.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="leader-card">
+            <div className="leader-img-container">
+              {/* TODO: Replace this placeholder.
+                Original broken path was: "file:///C:/Users/NIPUN/Desktop/JEC%20PAGES/images/ineshsaraogi.jpg"
+                Replace with your image: src="/images/inesh-saraogi.jpg" 
+              */}
+              <img 
+                src="https://placehold.co/300x400/e0e0e0/bbb?text=Mr.+Inesh+Saraogi" 
+                alt="Mr. Inesh Saraogi" 
+                className="leader-img" 
+              />
+            </div>
+            <div className="leader-content">
+              <div className="leader-name">Mr. Inesh Saraogi</div>
+              <span className="leader-position">Assistant Director – Student Affairs</span>
+              <div className="bio-text">
+                <p>Mr. Inesh Saraogi plays a pivotal role in enhancing the overall student experience and fostering a dynamic campus environment. Holding a BSc in Finance, Inesh brings a fresh perspective to institutional operations, blending analytical thinking with empathetic leadership.</p>
+                <p>He is committed to empowering students through engagement, mental well-being initiatives, and bridging the gap between administration and the student body. Inesh is on a mission to shape JEC into a leading institution for holistic development.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export default Management;
