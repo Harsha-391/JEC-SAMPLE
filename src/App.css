@@ -3463,7 +3463,7 @@ footer {
 /* --- Hero Section --- */
 .employment-page .career-hero {
   /* Make sure 'career-hero.jpg' is in your /public/images/ folder */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/career-hero.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../public/images/hero.jpg');
   background-size: cover;
   background-position: center;
   padding: 100px 20px 140px; /* Extra padding bottom for stats overlap */
