@@ -3709,3 +3709,205 @@ footer {
     font-size: 36px; 
   }
 }
+/*
+--- ANTI-RAGGING PAGE ---
+*/
+
+.anti-ragging-page .max-width-container { 
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 0 20px; 
+}
+.anti-ragging-page a { 
+  text-decoration: none; 
+  color: inherit; 
+}
+.anti-ragging-page .section-title {
+  font-size: 36px;
+  color: var(--logo-blue);
+  margin-bottom: 30px;
+  position: relative;
+  padding-bottom: 15px;
+}
+.anti-ragging-page .section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--logo-gold);
+}
+
+/* --- Hero Section --- */
+.anti-ragging-page .anti-ragging-hero {
+  background-color: var(--logo-red);
+  padding: 80px 20px;
+  text-align: center;
+  color: var(--logo-white);
+}
+.anti-ragging-page .anti-ragging-hero h1 { 
+  font-size: 48px; 
+  margin-bottom: 15px; 
+  font-weight: 800; 
+}
+.anti-ragging-page .anti-ragging-hero p { 
+  font-size: 20px; 
+  font-weight: 300; 
+  max-width: 800px; 
+  margin: 0 auto; 
+  opacity: 0.9; 
+}
+
+/* --- Intro Section --- */
+.anti-ragging-page .intro-section { 
+  padding: 80px 20px; 
+  background: var(--color-background-light); 
+}
+.anti-ragging-page .text-block { 
+  max-width: 900px; 
+  margin: 0 auto; 
+  text-align: justify; 
+  color: #444; 
+  font-size: 16px; 
+}
+.anti-ragging-page .text-block p { 
+  margin-bottom: 20px; 
+}
+
+/* --- Action Bar --- */
+.anti-ragging-page .action-bar {
+  padding: 60px 20px;
+  background-color: var(--color-background-medium);
+}
+.anti-ragging-page .action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+.anti-ragging-page .action-item {
+  background: var(--logo-white);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: var(--shadow-subtle);
+  border-bottom: 4px solid var(--logo-blue);
+  transition: transform 0.3s ease;
+}
+.anti-ragging-page .action-item:hover { 
+  transform: translateY(-5px); 
+}
+.anti-ragging-page .action-item i { 
+  font-size: 36px; 
+  color: var(--logo-blue); 
+  margin-bottom: 15px; 
+}
+.anti-ragging-page .action-item h4 { 
+  font-size: 20px; 
+  color: var(--logo-black); 
+  margin-bottom: 10px; 
+}
+.anti-ragging-page .action-item p { 
+  font-size: 15px; 
+  color: #666; 
+  margin-bottom: 20px; 
+}
+.anti-ragging-page .action-btn {
+  display: inline-block;
+  padding: 10px 25px;
+  background: var(--logo-red);
+  color: var(--logo-white);
+  font-weight: 600;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+.anti-ragging-page .action-btn:hover { 
+  background: #A52121; 
+}
+
+/* --- Contact Section --- */
+.anti-ragging-page .contact-section { 
+  padding: 80px 20px; 
+  background: var(--logo-blue); 
+  color: var(--logo-white); 
+}
+.anti-ragging-page .contact-section .section-title { 
+  color: var(--logo-white); 
+  text-align: center; 
+}
+.anti-ragging-page .contact-section .section-title::after { 
+  background: var(--logo-gold); 
+  left: 50%; 
+  transform: translateX(-50%); 
+}
+
+.anti-ragging-page .contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+.anti-ragging-page .contact-card {
+  background: rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.anti-ragging-page .contact-card i { 
+  font-size: 36px; 
+  color: var(--logo-gold); 
+  margin-bottom: 15px; 
+}
+.anti-ragging-page .contact-card h4 { 
+  font-size: 20px; 
+  margin-bottom: 10px; 
+}
+.anti-ragging-page .contact-card p { 
+  font-size: 15px; 
+  opacity: 0.9; 
+  margin-bottom: 15px; 
+}
+.anti-ragging-page .contact-card a { 
+  font-size: 20px; 
+  font-weight: 700; 
+  color: var(--logo-gold); 
+  text-decoration: none; 
+}
+
+/* --- Committee Table Section --- */
+.anti-ragging-page .committee-section { 
+  padding: 80px 20px; 
+  background: var(--color-background-light); 
+}
+.anti-ragging-page .table-container {
+  overflow-x: auto; /* Makes table responsive on mobile */
+  background: var(--logo-white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid var(--color-border);
+}
+.anti-ragging-page table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.anti-ragging-page th, 
+.anti-ragging-page td {
+  padding: 15px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+.anti-ragging-page th {
+  background: var(--color-background-medium);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--logo-blue);
+  text-transform: uppercase;
+}
+.anti-ragging-page td {
+  font-size: 15px;
+  color: #333;
+}
+.anti-ragging-page tbody tr:hover {
+  background-color: #f9f9f9;
+}

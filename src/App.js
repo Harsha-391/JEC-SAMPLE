@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-// Force Vercel rebuild v6
+
 // Import your Layout and Page components
 import Layout from './components/Layout';
 import Home from './pages/Home';
@@ -14,7 +14,8 @@ import Management from './pages/Management';
 import HumanNetwork from './pages/HumanNetwork';
 import IIC from './pages/IIC';
 import Alumni from './pages/Alumni';
-import Employment from './pages/Employment'; // <-- 1. IMPORT YOUR NEW PAGE
+import Employment from './pages/Employment';
+import AntiRagging from './pages/AntiRagging'; // <-- 1. IMPORT YOUR NEW PAGE
 
 function App() {
   return (
@@ -32,7 +33,8 @@ function App() {
           <Route path="jec/human-network" element={<HumanNetwork />} />
           <Route path="jec/iic" element={<IIC />} />
           <Route path="jec/alumni" element={<Alumni />} />
-          <Route path="jec/employment" element={<Employment />} /> {/* <-- 2. ADD THE ROUTE */}
+          <Route path="jec/employment" element={<Employment />} />
+          <Route path="jec/anti-ragging" element={<AntiRagging />} /> {/* <-- 2. ADD THE ROUTE */}
 
         </Route>
       </Routes>
