@@ -92,12 +92,12 @@ function IIC() {
           
           <div className="cert-grid">
             <div className="cert-frame">
-              <img src="public/images/image_ef18d0.jpeg" alt="IIC Establishment Certificate 2020-21" />
+              <img src="https://drive.google.com/file/d/12oWZa87XDKo9Pv26YYrdoqxwo95mIlNc/view?usp=drive_link" alt="IIC Establishment Certificate 2020-21" />
               <div className="cert-caption">IIC Certificate 2020-21</div>
             </div>
             
             <div className="cert-frame">
-              <img src="public/images/image_ef18ee.jpeg" alt="IIC Establishment Certificate 2018-19" />
+              <img src="https://drive.google.com/file/d/12oWZa87XDKo9Pv26YYrdoqxwo95mIlNc/view?usp=drive_link" alt="IIC Establishment Certificate 2018-19" />
               <div className="cert-caption">IIC Certificate 2018-19</div>
             </div>
           </div>
