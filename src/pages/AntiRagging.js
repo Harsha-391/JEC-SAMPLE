@@ -32,7 +32,7 @@ function AntiRagging() {
 
           <div className="committee-member-card">
             {/* Make sure 'prof-sunita-rawat.jpg' is in /public/images/ */}
-            <img src="/images/prof-sunita-rawat.jpg" alt="Prof. Sunita Rawat" className="member-photo" /> 
+            <img src="https://jeckukas.org.in/managepro/uploads/Img/sunitagoyal.jpg" alt="Prof. Sunita Rawat" className="member-photo" /> 
             <h4 className="member-name">Prof. Sunita Rawat</h4>
             <p className="member-title">Head, Anti-Ragging Committee</p>
             <div className="contact-item">
