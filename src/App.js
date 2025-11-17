@@ -10,7 +10,7 @@ import Placements from './pages/Placements';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Faq from './pages/Faq';
-import Management from './pagesD/Management';
+import Management from './pages/Management';
 import HumanNetwork from './pages/HumanNetwork';
 import IIC from './pages/IIC';
 import Alumni from './pages/Alumni'; // <-- 1. IMPORT YOUR NEW PAGE
