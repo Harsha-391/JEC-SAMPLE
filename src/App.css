@@ -369,7 +369,7 @@ header {
   position: relative; /* This is crucial for the overlay */
   overflow: hidden;
   /* --- CORRECTED PATH --- */
-  background-image: url("/images/hero.png");
+  background-image: url("../public/images/hero.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
