@@ -45,11 +45,9 @@ function Management() {
 
           <div className="leader-card">
             <div className="leader-img-container">
-              {/* TODO: Replace this placeholder.
-                Example: src="/images/lalit-saraogi.png" 
-              */}
+              
               <img 
-                src="../public/images/1574843524_Lalit saraogi.png" 
+                src="/public/images/lakshaysaraogi.jpg" 
                 alt="Lalit K. Saraogi" 
                 className="leader-img" 
               />
