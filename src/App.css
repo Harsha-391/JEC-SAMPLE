@@ -2949,7 +2949,7 @@ footer {
 /* --- Hero Section --- */
 .iic-page .innovation-hero {
   /* Make sure 'iic-hero.jpg' is in your /public/images/ folder */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/iic-hero.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80');
   background-size: cover;
   background-position: center;
   padding: 100px 20px 140px; /* Extra bottom padding for stats */

@@ -24,13 +24,10 @@ function Management() {
 
           <div className="leader-card">
             <div className="leader-img-container">
-              {/* TODO: Replace this placeholder.
-                Example: src="/images/lc-saraogi.jpg" 
-              */}
-              <img 
-                src="/public/images/Lalitsaraogi.png"
-                alt="Shri L.C. Saraogi" 
-                className="leader-img" 
+              <img
+                src="/images/Lalitsaraogi.png"
+                alt="Shri L.C. Saraogi"
+                className="leader-img"
               />
             </div>
             <div className="leader-content">
@@ -45,11 +42,10 @@ function Management() {
 
           <div className="leader-card">
             <div className="leader-img-container">
-              
-              <img 
-                src="/public/images/lakshaysaraogi.jpg" 
-                alt="Lalit K. Saraogi" 
-                className="leader-img" 
+              <img
+                src="/images/lakshaysaraogi.jpg"
+                alt="Lalit K. Saraogi"
+                className="leader-img"
               />
             </div>
             <div className="leader-content">
@@ -64,13 +60,10 @@ function Management() {
 
           <div className="leader-card">
             <div className="leader-img-container">
-              {/* TODO: Replace this placeholder.
-                Example: src="/images/harish-saraogi.png" 
-              */}
-              <img 
-                src="../public/images/1574843605_Harish saraogi.png" 
-                alt="Shri Harish Saraogi" 
-                className="leader-img" 
+              <img
+                src="/images/1574843605_Harish saraogi.png"
+                alt="Shri Harish Saraogi"
+                className="leader-img"
               />
             </div>
             <div className="leader-content">
@@ -85,13 +78,10 @@ function Management() {
 
           <div className="leader-card">
             <div className="leader-img-container">
-              {/* TODO: Replace this placeholder.
-                Example: src="/images/bharat-bhushan-jain.jpg" 
-              */}
-              <img 
-                src="../public/images/DrBharatBhushan_.jpg" 
-                alt="Prof. Dr. Bharat Bhushan Jain" 
-                className="leader-img" 
+              <img
+                src="/images/DrBharatBhushan_.jpg"
+                alt="Prof. Dr. Bharat Bhushan Jain"
+                className="leader-img"
               />
             </div>
             <div className="leader-content">
@@ -106,13 +96,10 @@ function Management() {
 
           <div className="leader-card">
             <div className="leader-img-container">
-              {/* TODO: Replace this placeholder.
-                Example: src="/images/sunita-goyal.jpg" 
-              */}
-              <img 
-                src="../public/images/sunitagoyal.jpg" 
-                alt="Prof. Dr. Sunita Goyal Rawat" 
-                className="leader-img" 
+              <img
+                src="/images/sunitagoyal.jpg"
+                alt="Prof. Dr. Sunita Goyal Rawat"
+                className="leader-img"
               />
             </div>
             <div className="leader-content">
@@ -127,13 +114,10 @@ function Management() {
 
           <div className="leader-card">
             <div className="leader-img-container">
-              {/* TODO: Replace this placeholder.
-                Example: src="/images/dg-mahto.png" 
-              */}
-              <img 
-                src="public/images/1574843703_Dalgobind Mahto.png" 
-                alt="Prof. Dr. D.G. Mahto" 
-                className="leader-img" 
+              <img
+                src="/images/1574843703_Dalgobind Mahto.png"
+                alt="Prof. Dr. D.G. Mahto"
+                className="leader-img"
               />
             </div>
             <div className="leader-content">
@@ -148,13 +132,10 @@ function Management() {
 
           <div className="leader-card">
             <div className="leader-img-container">
-              {/* TODO: Replace this placeholder.
-                Example: src="/images/lakshya-saraogi.jpg" 
-              */}
-              <img 
-                src="C:\Users\Harsh\Downloads\jec react\public\images\lakshaysaraogi.jpg" 
-                alt="Mr. Lakshya Saraogi" 
-                className="leader-img" 
+              <img
+                src="/images/lakshaysaraogi.jpg"
+                alt="Mr. Lakshya Saraogi"
+                className="leader-img"
               />
             </div>
             <div className="leader-content">
@@ -169,13 +150,10 @@ function Management() {
 
           <div className="leader-card">
             <div className="leader-img-container">
-              {/* TODO: Replace this placeholder.
-                Example: src="/images/inesh-saraogi.jpg" 
-              */}
-              <img 
-                src="../public/images/ineshsaraogi.jpg" 
-                alt="Mr. Inesh Saraogi" 
-                className="leader-img" 
+              <img
+                src="/images/ineshsaraogi.jpg"
+                alt="Mr. Inesh Saraogi"
+                className="leader-img"
               />
             </div>
             <div className="leader-content">
@@ -190,7 +168,7 @@ function Management() {
 
         </div>
       </section>
-      
+
     </div>
   );
 }
