@@ -2629,7 +2629,7 @@ footer {
   align-items: center;
   justify-content: center;
   position: relative;
-  min-height: 400px; /* Ensure container has height */
+  min-height: 600px; /* Ensure container has height */
 }
 .management-page-new .leader-img {
   width: 100px;

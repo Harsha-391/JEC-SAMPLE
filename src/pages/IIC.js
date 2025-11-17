@@ -2,7 +2,6 @@ import React from 'react';
 
 function IIC() {
   return (
-    // This wrapper class will scope all the new styles
     <div className="iic-page">
 
       <section className="innovation-hero">
@@ -93,13 +92,11 @@ function IIC() {
           
           <div className="cert-grid">
             <div className="cert-frame">
-              {/* Make sure 'iic-cert-1.jpg' is in your /public/images/ folder */}
               <img src="public/images/image_ef18d0.jpeg" alt="IIC Establishment Certificate 2020-21" />
               <div className="cert-caption">IIC Certificate 2020-21</div>
             </div>
             
             <div className="cert-frame">
-              {/* Make sure 'iic-cert-2.jpg' is in your /public/images/ folder */}
               <img src="public/images/image_ef18ee.jpeg" alt="IIC Establishment Certificate 2018-19" />
               <div className="cert-caption">IIC Certificate 2018-19</div>
             </div>
