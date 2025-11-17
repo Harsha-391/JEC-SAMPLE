@@ -11,7 +11,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Faq from './pages/Faq';
 import Management from './pages/Management';
-import HumanNetwork from './pagesall/HumanNetwork';
+import HumanNetwork from './pages/HumanNetwork';
 import IIC from './pages/IIC';
 import Alumni from './pages/Alumni';
 import Employment from './pages/Employment-JEC'; // <-- 1. IMPORT YOUR NEW PAGE
