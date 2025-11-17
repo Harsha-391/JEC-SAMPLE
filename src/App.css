@@ -2701,3 +2701,234 @@ footer {
     height: 300px; 
   }
 }
+/*
+--- HUMAN NETWORK (FACULTY) PAGE ---
+*/
+
+.human-network-page .max-width-container { 
+  max-width: 1300px; 
+  margin: 0 auto; 
+  padding: 0 20px; 
+}
+.human-network-page a { 
+  text-decoration: none; 
+  color: inherit; 
+}
+
+/* --- Hero Section --- */
+.human-network-page .faculty-hero {
+  background-color: var(--logo-blue);
+  padding: 60px 20px 80px; /* Extra padding bottom for overlap */
+  text-align: center;
+  color: var(--logo-white);
+}
+.human-network-page .faculty-hero h1 { 
+  font-size: 42px; 
+  margin-bottom: 10px; 
+}
+.human-network-page .faculty-hero p { 
+  font-size: 18px; 
+  max-width: 800px; 
+  margin: 0 auto; 
+  opacity: 0.9; 
+}
+
+/* --- Stats Bar --- */
+.human-network-page .stats-bar {
+  background: var(--logo-white);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  padding: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: -50px auto 0; /* Overlap effect */
+  position: relative;
+  z-index: 2;
+  border-bottom: 4px solid var(--logo-gold);
+  max-width: 1200px; /* Added */
+}
+.human-network-page .stat-item { 
+  text-align: center; 
+  border-right: 1px solid var(--color-border); 
+}
+.human-network-page .stat-item:last-child { 
+  border-right: none; 
+}
+.human-network-page .stat-item h3 { 
+  font-size: 32px; 
+  color: var(--logo-red); 
+  margin-bottom: 5px; 
+}
+.human-network-page .stat-item p { 
+  font-size: 14px; 
+  font-weight: 600; 
+  text-transform: uppercase; 
+  color: #555; 
+}
+
+/* --- Department Filter Tabs --- */
+.human-network-page .filter-container {
+  padding: 40px 20px 20px;
+  text-align: center;
+  background: var(--logo-white);
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 139px; /* Adjust based on your header's height */
+  z-index: 900;
+  overflow-x: auto; /* Allow horizontal scroll on mobile */
+  white-space: nowrap; /* Keep buttons in one line */
+}
+.human-network-page .filter-btn {
+  padding: 10px 20px;
+  margin: 5px;
+  border: 1px solid var(--logo-blue);
+  background: transparent;
+  color: var(--logo-blue);
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+.human-network-page .filter-btn:hover, 
+.human-network-page .filter-btn.active {
+  background: var(--logo-blue);
+  color: var(--logo-white);
+}
+
+/* --- Faculty Grid --- */
+.human-network-page .faculty-section { 
+  padding: 60px 20px; 
+}
+.human-network-page .dept-title {
+  font-size: 28px;
+  color: var(--logo-black);
+  margin-bottom: 30px;
+  border-left: 5px solid var(--logo-red);
+  padding-left: 15px;
+  display: none; /* Hidden by default, shown via JS */
+}
+.human-network-page .dept-title.show { 
+  display: block; 
+}
+
+.human-network-page .faculty-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+  display: none; /* Hidden by default */
+}
+.human-network-page .faculty-grid.show { 
+  display: grid; 
+}
+
+/* Faculty Card */
+.human-network-page .faculty-card {
+  background: var(--logo-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+}
+.human-network-page .faculty-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--logo-blue);
+}
+
+.human-network-page .card-header {
+  background: #f9f9f9;
+  padding: 25px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+.human-network-page .avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #ddd;
+  margin: 0 auto 15px;
+  object-fit: cover;
+  border: 3px solid var(--logo-white);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.human-network-page .faculty-name { 
+  font-size: 18px; 
+  font-weight: 700; 
+  color: var(--logo-blue); 
+  margin-bottom: 5px; 
+  text-transform: uppercase; 
+}
+.human-network-page .faculty-role { 
+  font-size: 14px; 
+  color: var(--logo-red); 
+  font-weight: 600; 
+}
+
+.human-network-page .card-body { 
+  padding: 20px; 
+  font-size: 14px; 
+  color: #555; 
+  flex-grow: 1; 
+}
+.human-network-page .info-row { 
+  margin-bottom: 10px; 
+  display: flex; 
+  gap: 10px; 
+}
+.human-network-page .info-row i { 
+  color: var(--logo-gold); 
+  width: 20px; 
+  text-align: center; 
+  flex-shrink: 0; 
+  margin-top: 3px; 
+}
+.human-network-page .research-area { 
+  font-style: italic; 
+  color: #777; 
+  margin-top: 15px; 
+  border-top: 1px dashed #eee; 
+  padding-top: 10px; 
+}
+
+.human-network-page .card-footer { 
+  padding: 15px 20px; 
+  background: #fafafa; 
+  border-top: 1px solid #eee; 
+  text-align: center; 
+}
+.human-network-page .email-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--logo-blue);
+  font-weight: 600;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+.human-network-page .email-btn:hover { 
+  color: var(--logo-red); 
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .human-network-page .stat-item { 
+    border-right: none; 
+    border-bottom: 1px solid var(--color-border); 
+    padding-bottom: 15px; 
+  }
+  .human-network-page .stat-item:last-child { 
+    border-bottom: none; 
+  }
+  .human-network-page .faculty-hero h1 { 
+    font-size: 32px; 
+  }
+  .human-network-page .filter-container { 
+    padding-bottom: 15px; 
+    justify-content: flex-start; /* Align buttons left on mobile */
+  }
+}
