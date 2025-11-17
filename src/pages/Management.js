@@ -28,7 +28,7 @@ function Management() {
                 Example: src="/images/lc-saraogi.jpg" 
               */}
               <img 
-                src="C:\Users\Harsh\Downloads\jec react\public\images\1574843524 Lalit saraogi.png"
+                src="C:\Users\Harsh\Downloads\jec react\public\images\1574843524_Lalit saraogi.png"
                 alt="Shri L.C. Saraogi" 
                 className="leader-img" 
               />
@@ -154,7 +154,7 @@ function Management() {
                 Example: src="/images/lakshya-saraogi.jpg" 
               */}
               <img 
-                src="../public/images/lakshaysaraogi.jpg" 
+                src="C:\Users\Harsh\Downloads\jec react\public\images\lakshaysaraogi.jpg" 
                 alt="Mr. Lakshya Saraogi" 
                 className="leader-img" 
               />
