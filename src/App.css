@@ -3713,23 +3713,27 @@ footer {
 --- ANTI-RAGGING PAGE ---
 */
 
-.anti-ragging-page .max-width-container { 
+/*
+--- ANTI-RAGGING PAGE (NEW) ---
+*/
+
+.anti-ragging-page-new .max-width-container { 
   max-width: 1200px; 
   margin: 0 auto; 
   padding: 0 20px; 
 }
-.anti-ragging-page a { 
+.anti-ragging-page-new a { 
   text-decoration: none; 
   color: inherit; 
 }
-.anti-ragging-page .section-title {
+.anti-ragging-page-new .section-title {
   font-size: 36px;
   color: var(--logo-blue);
   margin-bottom: 30px;
   position: relative;
   padding-bottom: 15px;
 }
-.anti-ragging-page .section-title::after {
+.anti-ragging-page-new .section-title::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -3740,176 +3744,246 @@ footer {
 }
 
 /* --- Hero Section --- */
-.anti-ragging-page .anti-ragging-hero {
-  background-color: var(--logo-red);
+.anti-ragging-page-new .anti-ragging-hero {
+  position: relative;
+  height: 350px; /* Adjust height as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--logo-white);
+  overflow: hidden;
+}
+.anti-ragging-page-new .anti-ragging-hero img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4); /* Darken image for text readability */
+  z-index: 0;
+}
+.anti-ragging-page-new .hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+}
+.anti-ragging-page-new .hero-content h1 {
+  font-size: 58px;
+  margin-bottom: 15px;
+  font-weight: 700;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+.anti-ragging-page-new .hero-content p {
+  font-size: 22px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+}
+
+/* --- Main Content Section --- */
+.anti-ragging-page-new .main-content {
   padding: 80px 20px;
-  text-align: center;
-  color: var(--logo-white);
-}
-.anti-ragging-page .anti-ragging-hero h1 { 
-  font-size: 48px; 
-  margin-bottom: 15px; 
-  font-weight: 800; 
-}
-.anti-ragging-page .anti-ragging-hero p { 
-  font-size: 20px; 
-  font-weight: 300; 
-  max-width: 800px; 
-  margin: 0 auto; 
-  opacity: 0.9; 
-}
-
-/* --- Intro Section --- */
-.anti-ragging-page .intro-section { 
-  padding: 80px 20px; 
-  background: var(--color-background-light); 
-}
-.anti-ragging-page .text-block { 
-  max-width: 900px; 
-  margin: 0 auto; 
-  text-align: justify; 
-  color: #444; 
-  font-size: 16px; 
-}
-.anti-ragging-page .text-block p { 
-  margin-bottom: 20px; 
-}
-
-/* --- Action Bar --- */
-.anti-ragging-page .action-bar {
-  padding: 60px 20px;
-  background-color: var(--color-background-medium);
-}
-.anti-ragging-page .action-grid {
+  background: var(--color-background-light);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-}
-.anti-ragging-page .action-item {
-  background: var(--logo-white);
-  padding: 30px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: var(--shadow-subtle);
-  border-bottom: 4px solid var(--logo-blue);
-  transition: transform 0.3s ease;
-}
-.anti-ragging-page .action-item:hover { 
-  transform: translateY(-5px); 
-}
-.anti-ragging-page .action-item i { 
-  font-size: 36px; 
-  color: var(--logo-blue); 
-  margin-bottom: 15px; 
-}
-.anti-ragging-page .action-item h4 { 
-  font-size: 20px; 
-  color: var(--logo-black); 
-  margin-bottom: 10px; 
-}
-.anti-ragging-page .action-item p { 
-  font-size: 15px; 
-  color: #666; 
-  margin-bottom: 20px; 
-}
-.anti-ragging-page .action-btn {
-  display: inline-block;
-  padding: 10px 25px;
-  background: var(--logo-red);
-  color: var(--logo-white);
-  font-weight: 600;
-  border-radius: 5px;
-  transition: background 0.3s ease;
-}
-.anti-ragging-page .action-btn:hover { 
-  background: #A52121; 
+  grid-template-columns: 2fr 1fr; /* Content wider than sidebar */
+  gap: 50px;
+  align-items: flex-start;
 }
 
-/* --- Contact Section --- */
-.anti-ragging-page .contact-section { 
-  padding: 80px 20px; 
-  background: var(--logo-blue); 
-  color: var(--logo-white); 
-}
-.anti-ragging-page .contact-section .section-title { 
-  color: var(--logo-white); 
-  text-align: center; 
-}
-.anti-ragging-page .contact-section .section-title::after { 
-  background: var(--logo-gold); 
-  left: 50%; 
-  transform: translateX(-50%); 
-}
-
-.anti-ragging-page .contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
-}
-.anti-ragging-page .contact-card {
-  background: rgba(255,255,255,0.1);
-  padding: 30px;
+/* --- Objectives Card --- */
+.anti-ragging-page-new .objectives-card {
+  background: var(--color-background-medium);
+  padding: 40px;
   border-radius: 12px;
-  text-align: center;
-  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: var(--shadow-medium);
+  border-left: 6px solid var(--logo-blue);
+  margin-bottom: 40px; /* Space before the new table section */
 }
-.anti-ragging-page .contact-card i { 
-  font-size: 36px; 
-  color: var(--logo-gold); 
-  margin-bottom: 15px; 
+.anti-ragging-page-new .objectives-card h2 {
+  font-size: 32px;
+  color: var(--logo-blue);
+  margin-bottom: 25px;
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 10px;
 }
-.anti-ragging-page .contact-card h4 { 
-  font-size: 20px; 
-  margin-bottom: 10px; 
+.anti-ragging-page-new .objectives-card ul {
+  list-style: none;
+  padding-left: 0;
 }
-.anti-ragging-page .contact-card p { 
-  font-size: 15px; 
-  opacity: 0.9; 
-  margin-bottom: 15px; 
+.anti-ragging-page-new .objectives-card ul li {
+  font-size: 18px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  color: var(--color-text-main);
 }
-.anti-ragging-page .contact-card a { 
-  font-size: 20px; 
-  font-weight: 700; 
-  color: var(--logo-gold); 
-  text-decoration: none; 
+.anti-ragging-page-new .objectives-card ul li i {
+  color: var(--logo-red);
+  font-size: 24px;
+  margin-top: 3px;
+  flex-shrink: 0;
 }
 
 /* --- Committee Table Section --- */
-.anti-ragging-page .committee-section { 
-  padding: 80px 20px; 
-  background: var(--color-background-light); 
+.anti-ragging-page-new .committee-table-section {
+  padding: 60px 20px;
+  background: var(--color-background-light);
+  text-align: center;
 }
-.anti-ragging-page .table-container {
-  overflow-x: auto; /* Makes table responsive on mobile */
-  background: var(--logo-white);
-  border-radius: 12px;
+.anti-ragging-page-new .committee-table-section h2 {
+  font-size: 36px;
+  color: var(--logo-black);
+  margin-bottom: 40px;
+  position: relative;
+  padding-bottom: 15px;
+}
+.anti-ragging-page-new .committee-table-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--logo-red);
+  border-radius: 2px;
+}
+
+.anti-ragging-page-new .committee-table-container {
+  overflow-x: auto; /* Enable horizontal scrolling on small screens */
   box-shadow: var(--shadow-medium);
+  border-radius: 12px;
+  margin-bottom: 40px;
   border: 1px solid var(--color-border);
 }
-.anti-ragging-page table {
+.anti-ragging-page-new .committee-table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 700px; /* Ensure table is wide enough for content */
+  background: var(--logo-white);
 }
-.anti-ragging-page th, 
-.anti-ragging-page td {
-  padding: 15px 20px;
+.anti-ragging-page-new .committee-table th, 
+.anti-ragging-page-new .committee-table td {
+  padding: 15px;
+  border: 1px solid var(--color-border);
   text-align: left;
-  border-bottom: 1px solid var(--color-border);
-}
-.anti-ragging-page th {
-  background: var(--color-background-medium);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--logo-blue);
-  text-transform: uppercase;
-}
-.anti-ragging-page td {
   font-size: 15px;
-  color: #333;
+  color: var(--color-text-main);
 }
-.anti-ragging-page tbody tr:hover {
-  background-color: #f9f9f9;
+.anti-ragging-page-new .committee-table th {
+  background-color: var(--logo-blue);
+  color: var(--logo-white);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.anti-ragging-page-new .committee-table tbody tr:nth-child(even) {
+  background-color: var(--color-background-medium);
+}
+.anti-ragging-page-new .committee-table tbody tr:hover {
+  background-color: #e6f2ff; /* Light blue on hover */
+}
+.anti-ragging-page-new .committee-table td strong {
+  color: var(--logo-black);
+}
+
+/* --- Contact Sidebar --- */
+.anti-ragging-page-new .committee-contact-sidebar {
+  background: var(--logo-white);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-subtle);
+  border-right: 6px solid var(--logo-gold);
+  text-align: center;
+}
+.anti-ragging-page-new .committee-contact-sidebar h3 {
+  font-size: 26px;
+  color: var(--logo-gold);
+  margin-bottom: 25px;
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 10px;
+}
+.anti-ragging-page-new .committee-member-card {
+  margin-bottom: 30px;
+  padding: 25px;
+  background: #fdfdfd;
+  border-radius: 10px;
+  box-shadow: var(--shadow-subtle);
+  border: 1px solid var(--color-border);
+}
+.anti-ragging-page-new .member-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 15px;
+  border: 4px solid var(--logo-red);
+  padding: 3px;
+  background: var(--logo-white);
+}
+.anti-ragging-page-new .member-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--logo-black);
+  margin-bottom: 5px;
+}
+.anti-ragging-page-new .member-title {
+  font-size: 16px;
+  color: var(--color-text-light);
+  margin-bottom: 20px;
+}
+.anti-ragging-page-new .contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: var(--color-text-main);
+}
+.anti-ragging-page-new .contact-item i {
+  color: var(--logo-red);
+  font-size: 22px;
+}
+.anti-ragging-page-new .contact-item a {
+  font-weight: 600;
+  color: var(--logo-blue);
+  transition: color 0.3s ease;
+}
+.anti-ragging-page-new .contact-item a:hover {
+  color: var(--logo-red);
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .anti-ragging-page-new .main-content {
+    grid-template-columns: 1fr; /* Stack columns */
+  }
+  .anti-ragging-page-new .committee-contact-sidebar { 
+    order: -1; /* Move sidebar to top on mobile */
+  } 
+  .anti-ragging-page-new .hero-content h1 { font-size: 42px; }
+  .anti-ragging-page-new .hero-content p { font-size: 18px; }
+}
+@media (max-width: 768px) {
+  .anti-ragging-page-new .anti-ragging-hero { height: 250px; }
+  .anti-ragging-page-new .hero-content h1 { font-size: 32px; }
+  .anti-ragging-page-new .hero-content p { font-size: 16px; }
+  .anti-ragging-page-new .objectives-card, 
+  .anti-ragging-page-new .committee-contact-sidebar { padding: 25px; }
+  
+  .anti-ragging-page-new .objectives-card h2, 
+  .anti-ragging-page-new .committee-contact-sidebar h3 { font-size: 24px; }
+  
+  .anti-ragging-page-new .objectives-card ul li { font-size: 16px; gap: 10px; }
+  .anti-ragging-page-new .objectives-card ul li i { font-size: 20px; }
+  
+  .anti-ragging-page-new .committee-table th, 
+  .anti-ragging-page-new .committee-table td { padding: 10px; font-size: 14px; }
 }
 /*
 --- STUDENT TESTIMONIALS PAGE ---
