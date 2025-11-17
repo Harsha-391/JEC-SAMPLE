@@ -11,9 +11,10 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Faq from './pages/Faq';
 import Management from './pages/Management';
-import HumanNetwork from './pages/HumanNetwork';
+import HumanNetwork from './pagesall/HumanNetwork';
 import IIC from './pages/IIC';
-import Alumni from './pages/Alumni'; // <-- 1. IMPORT YOUR NEW PAGE
+import Alumni from './pages/Alumni';
+import Employment from './pages/Employment'; // <-- 1. IMPORT YOUR NEW PAGE
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
           <Route path="jec/management" element={<Management />} />
           <Route path="jec/human-network" element={<HumanNetwork />} />
           <Route path="jec/iic" element={<IIC />} />
-          <Route path="jec/alumni" element={<Alumni />} /> {/* <-- 2. ADD THE ROUTE */}
+          <Route path="jec/alumni" element={<Alumni />} />
+          <Route path="jec/employment" element={<Employment />} /> {/* <-- 2. ADD THE ROUTE */}
 
         </Route>
       </Routes>
