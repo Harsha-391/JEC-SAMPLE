@@ -210,7 +210,7 @@ function Placements() {
           </div>
 
         </div>
-      </div>
+      </section> {/* <-- This was the line with the error. It was </div> */}
     </div>
   );
 }
