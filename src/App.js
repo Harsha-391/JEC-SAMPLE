@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-
+// Force Vercel rebuild v6
 // Import your Layout and Page components
 import Layout from './components/Layout';
 import Home from './pages/Home';
