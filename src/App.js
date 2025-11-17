@@ -14,7 +14,7 @@ import Management from './pages/Management';
 import HumanNetwork from './pages/HumanNetwork';
 import IIC from './pages/IIC';
 import Alumni from './pages/Alumni';
-import Employment from './pages/Employment-JEC'; // <-- 1. IMPORT YOUR NEW PAGE
+import Employment from './pages/Employment'; // <-- 1. IMPORT YOUR NEW PAGE
 
 function App() {
   return (
