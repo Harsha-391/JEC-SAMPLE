@@ -3911,3 +3911,144 @@ footer {
 .anti-ragging-page tbody tr:hover {
   background-color: #f9f9f9;
 }
+/*
+--- STUDENT TESTIMONIALS PAGE ---
+*/
+
+.testimonials-page .max-width-container { 
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 0 20px; 
+}
+.testimonials-page a { 
+  text-decoration: none; 
+  color: inherit; 
+}
+
+/* --- Hero Section --- */
+.testimonials-page .testimonial-hero {
+  background: var(--logo-blue);
+  padding: 80px 20px;
+  text-align: center;
+  color: var(--logo-white);
+  border-bottom: 5px solid var(--logo-gold);
+}
+.testimonials-page .testimonial-hero h1 { 
+  font-size: 42px; 
+  margin-bottom: 10px; 
+  font-weight: 700;
+}
+.testimonials-page .testimonial-hero p { 
+  font-size: 18px; 
+  max-width: 800px; 
+  margin: 0 auto; 
+  opacity: 0.9; 
+}
+
+/* --- Testimonial Grid --- */
+.testimonials-page .testimonial-grid-section { 
+  padding: 80px 20px; 
+  background: var(--color-background-medium);
+}
+.testimonials-page .t-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 30px;
+}
+
+.testimonials-page .t-card {
+  background: var(--logo-white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 4px solid var(--logo-red);
+}
+.testimonials-page .t-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.testimonials-page .quote-icon {
+  font-size: 28px;
+  color: var(--logo-gold);
+  opacity: 0.7;
+  margin-bottom: 15px;
+}
+.testimonials-page .quote-text {
+  font-size: 16px;
+  color: var(--color-text-light);
+  margin-bottom: 25px;
+  flex-grow: 1; /* Ensures cards have same height */
+  font-style: italic;
+  line-height: 1.7;
+}
+
+.testimonials-page .student-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 20px;
+}
+.testimonials-page .student-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--color-background-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--logo-blue);
+  flex-shrink: 0;
+}
+.testimonials-page .student-avatar i {
+  opacity: 0.8;
+}
+
+.testimonials-page .student-details h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--logo-blue);
+  margin-bottom: 2px;
+}
+.testimonials-page .student-details .course {
+  font-size: 14px;
+  color: #777;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.testimonials-page .placement-badge {
+  background: var(--logo-red);
+  color: var(--logo-white);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-right: 5px;
+}
+.testimonials-page .salary-badge {
+  background: var(--color-background-dark);
+  color: var(--color-text-main);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .testimonials-page .testimonial-hero h1 { 
+    font-size: 32px; 
+  }
+}
+@media (max-width: 400px) {
+  .testimonials-page .t-grid {
+    grid-template-columns: 1fr;
+  }
+}

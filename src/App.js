@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-// Force Vercel rebuild v7
+
 // Import your Layout and Page components
 import Layout from './components/Layout';
 import Home from './pages/Home';
@@ -15,7 +15,8 @@ import HumanNetwork from './pages/HumanNetwork';
 import IIC from './pages/IIC';
 import Alumni from './pages/Alumni';
 import Employment from './pages/Employment';
-import AntiRagging from './pages/AntiRagging'; // <-- 1. IMPORT YOUR NEW PAGE
+import AntiRagging from './pages/AntiRagging';
+import Testimonials from './pages/Testimonials'; // <-- 1. IMPORT YOUR NEW PAGE
 
 function App() {
   return (
@@ -28,13 +29,18 @@ function App() {
           <Route path="placements" element={<Placements />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
+
+          {/* JEC Dropdown Routes */}
           <Route path="jec/faq" element={<Faq />} />
           <Route path="jec/management" element={<Management />} />
           <Route path="jec/human-network" element={<HumanNetwork />} />
           <Route path="jec/iic" element={<IIC />} />
           <Route path="jec/alumni" element={<Alumni />} />
           <Route path="jec/employment" element={<Employment />} />
-          <Route path="jec/anti-ragging" element={<AntiRagging />} /> {/* <-- 2. ADD THE ROUTE */}
+          <Route path="jec/anti-ragging" element={<AntiRagging />} />
+          <Route path="jec/testimonials" element={<Testimonials />} /> {/* <-- 2. ADD THE ROUTE */}
+
+          {/* ... other routes ... */}
 
         </Route>
       </Routes>

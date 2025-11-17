@@ -37,8 +37,8 @@ function Subheader() {
         <Link to="/" className="subheader-logo">
           <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
           <div className="logo-text">
-            <span>JAIPUR ENGINEERING</span>
-            <span>COLLEGE</span>
+            <span>JEC</span>
+            <span>KUKAS</span>
           </div>
         </Link>
 
