@@ -28,7 +28,7 @@ function Management() {
                 Example: src="/images/lc-saraogi.jpg" 
               */}
               <img 
-                src="../public/images/f1.png"
+                src="/public/images/1574843524_Lalit saraogi.png"
                 alt="Shri L.C. Saraogi" 
                 className="leader-img" 
               />
@@ -133,7 +133,7 @@ function Management() {
                 Example: src="/images/dg-mahto.png" 
               */}
               <img 
-                src="../public/images/1574843703_Dalgobind Mahto.png" 
+                src="public/images/1574843703_Dalgobind Mahto.png" 
                 alt="Prof. Dr. D.G. Mahto" 
                 className="leader-img" 
               />
