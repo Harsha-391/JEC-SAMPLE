@@ -7,7 +7,7 @@ function AntiRagging() {
 
       <section className="anti-ragging-hero">
         {/* Make sure 'anti-ragging-banner.png' is in /public/images/ */}
-        <img src="/images/anti-ragging-banner.png" alt="Anti-Ragging Banner" /> 
+        <img src="https://jeckukas.org.in/assets/images/AntiRaggingBanner.png" alt="Anti-Ragging Banner" /> 
         <div className="hero-content">
           <h1>Anti-Ragging Committee</h1>
           <p>Committed to a Safe and Secure Environment for All Students at JEC Jaipur.</p>
