@@ -11,7 +11,8 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Faq from './pages/Faq';
 import Management from './pages/Management';
-import HumanNetwork from './pages/HumanNetwork'; // <-- 1. IMPORT YOUR NEW PAGE
+import HumanNetwork from './pages/HumanNetwork';
+import IIC from './pages/IIC'; // <-- 1. IMPORT YOUR NEW PAGE
 
 function App() {
   return (
@@ -26,8 +27,8 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="jec/faq" element={<Faq />} />
           <Route path="jec/management" element={<Management />} />
-          <Route path="jec/human-network" element={<HumanNetwork />} /> {/* <-- 2. ADD THE ROUTE */}
-          {/* ... other routes ... */}
+          <Route path="jec/human-network" element={<HumanNetwork />} />
+          <Route path="jec/iic" element={<IIC />} /> {/* <-- 2. ADD THE ROUTE */}
 
         </Route>
       </Routes>
