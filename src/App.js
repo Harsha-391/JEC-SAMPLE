@@ -9,7 +9,7 @@ import Admissions from './pages/Admissions';
 import Placements from './pages/Placements';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import Faq from './pagesI/Faq';
+import Faq from './pages/Faq';
 import Management from './pages/Management';
 import HumanNetwork from './pages/HumanNetwork'; // <-- 1. IMPORT YOUR NEW PAGE
 
