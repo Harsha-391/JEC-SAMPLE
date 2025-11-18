@@ -6646,7 +6646,7 @@ footer {
 
 /* --- Hero Section --- */
 .fee-hero {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('file:///C:/Users/NIPUN/Desktop/JEC%20dropdown%20PAGES/Addmission%20Dropdown/Images/jec%20build%20banner.jpeg'); /* Using placeholder as local path not accessible */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../public/images/about-banner.jpeg'); /* Using placeholder as local path not accessible */
     background-size: cover;
     background-position: center;
     padding: 100px 20px 140px;
