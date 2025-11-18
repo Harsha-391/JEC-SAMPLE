@@ -20,7 +20,18 @@ import Testimonials from './pages/Testimonials';
 import JCES from './pages/JCES';
 import AgrasenCollege from './pages/AgrasenCollege';
 import KeyTeamsFunctions from './pages/KeyTeamsFunctions';
-import Foundation from './pages/Foundation'; // <-- 1. IMPORT THE NEW PAGE
+import Foundation from './pages/Foundation';
+import Reap2025 from './pages/Reap2025'; // <-- 1. IMPORT THE NEW PAGE
+
+// --- Placeholder Component for other new pages ---
+const SocietyPlaceholder = ({ title }) => (
+  <div style={{ padding: '100px 20px', textAlign: 'center', background: '#f8f9fa', minHeight: '50vh' }}>
+    <h1 style={{ color: '#0072C6', marginBottom: '20px' }}>{title}</h1>
+    <p style={{ fontSize: '18px', color: '#666' }}>
+      This page is currently under construction. Content coming soon!
+    </p>
+  </div>
+);
 
 function App() {
   return (
@@ -30,6 +41,21 @@ function App() {
           
           <Route index element={<Home />} /> 
           <Route path="admissions" element={<Admissions />} /> 
+          
+          {/* Admission Dropdown Routes */}
+          {/* 2. ADD THE ROUTE HERE */}
+          <Route path="admissions/reap" element={<Reap2025 />} />
+
+          {/* Other Admissions Placeholders */}
+          <Route path="admissions/documents" element={<SocietyPlaceholder title="Documents Required" />} />
+          <Route path="admissions/courses" element={<SocietyPlaceholder title="Courses Offered" />} />
+          <Route path="admissions/fees" element={<SocietyPlaceholder title="Fee Structure" />} />
+          <Route path="admissions/disclosure" element={<SocietyPlaceholder title="Mandatory Disclosure" />} />
+          <Route path="admissions/financial-aid" element={<SocietyPlaceholder title="Financial Aids & Bank Loans" />} />
+          <Route path="admissions/open" element={<SocietyPlaceholder title="Admission Open 2025" />} />
+          <Route path="admissions/karma" element={<SocietyPlaceholder title="Karma Courses @JEC" />} />
+          <Route path="admissions/procedure" element={<SocietyPlaceholder title="Admission Procedure" />} />
+
           <Route path="placements" element={<Placements />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
@@ -45,9 +71,7 @@ function App() {
           <Route path="jec/testimonials" element={<Testimonials />} />
 
           {/* Our Society Dropdown Routes */}
-          {/* 2. REPLACED PLACEHOLDER WITH REAL COMPONENT */}
           <Route path="society/foundation" element={<Foundation />} />
-          
           <Route path="society/agrasen-college" element={<AgrasenCollege />} />
           <Route path="society/jces" element={<JCES />} />
           <Route path="society/teams" element={<KeyTeamsFunctions />} />

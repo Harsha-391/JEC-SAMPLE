@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
 
-// --- MENU DATA ---
 const jecMenuItems = [
   { title: 'JEC FAQ', path: '/jec/faq' },
   { title: 'Employment @JEC', path: '/jec/employment' },
@@ -22,7 +21,7 @@ const admissionMenuItems = [
   { title: 'Fee Structure', path: '/admissions/fees' },
   { title: 'Mandatory Disclosure', path: '/admissions/disclosure' },
   { title: 'Financial Aids & Bank Loans', path: '/admissions/financial-aid' },
-  { title: 'REAP-2025', path: '/admissions/reap' },
+  { title: 'REAP-2025', path: '/admissions/reap' }, // This path is now handled by the new component
   { title: 'Admission Open 2025', path: '/admissions/open' },
   { title: 'Karma Courses @JEC', path: '/admissions/karma' },
   { title: 'Admission Procedure', path: '/admissions/procedure' },
@@ -40,7 +39,6 @@ function Subheader() {
     <div className="subheader">
       <div className="subheader-content max-width-container">
         
-        {/* --- LOGO SECTION (Restored) --- */}
         <Link to="/" className="subheader-logo">
           <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
           <div className="logo-text">
@@ -49,14 +47,11 @@ function Subheader() {
           </div>
         </Link>
 
-        {/* --- NAVIGATION SECTION --- */}
         <nav className="subheader-nav">
           <Link to="/" className="nav-link">Home</Link>
           
-          {/* JEC Dropdown */}
           <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" />
           
-          {/* Admission Dropdown */}
           <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/admissions" />
 
           <Link to="/placements" className="nav-link">Placement</Link>
@@ -64,7 +59,6 @@ function Subheader() {
           <a href="#!" className="nav-link">Infrastructure</a>
           <a href="#!" className="nav-link">Campus Life</a>
 
-          {/* Our Society Dropdown (Right Aligned) */}
           <NavDropdown 
             title="Our Society" 
             items={societyMenuItems} 
