@@ -34,29 +34,22 @@ const societyMenuItems = [
   { title: 'Jaipur College of Education & Science', path: '/society/jces' },
   { title: 'Key Teams & Functions', path: '/society/teams' },
 ];
+// ... imports and data arrays ...
 
 function Subheader() {
   return (
     <div className="subheader">
       <div className="subheader-content max-width-container">
         
-        {/* Logo on the Left */}
-        <Link to="/" className="subheader-logo">
-          <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
-          <div className="logo-text">
-            <span>JEC</span>
-            <span>KUKAS</span>
-          </div>
-        </Link>
+        {/* ... Logo section ... */}
 
-        {/* Navigation */}
         <nav className="subheader-nav">
           <Link to="/" className="nav-link">Home</Link>
           
-          {/* JEC Dropdown */}
+          {/* JEC stays Left aligned (Default) */}
           <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" />
           
-          {/* Admission Dropdown */}
+          {/* Admission is in the middle, usually fine as left, but you can change if needed */}
           <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/admissions" />
 
           <Link to="/placements" className="nav-link">Placement</Link>
@@ -64,8 +57,13 @@ function Subheader() {
           <a href="#!" className="nav-link">Infrastructure</a>
           <a href="#!" className="nav-link">Campus Life</a>
 
-          {/* 3. REPLACED THE STATIC LINK WITH DROPDOWN HERE */}
-          <NavDropdown title="Our Society" items={societyMenuItems} baseLink="/society" />
+          {/* 1. PASS align="right" HERE */}
+          <NavDropdown 
+            title="Our Society" 
+            items={societyMenuItems} 
+            baseLink="/society" 
+            align="right" 
+          />
 
           <Link to="/contact" className="nav-link">Contact Us</Link>
         </nav>

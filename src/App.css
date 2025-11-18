@@ -276,6 +276,40 @@ header {
   color: var(--color-primary);
   transform: translateX(3px);
 }
+/* ... existing .dropdown-menu styles ... */
+
+/* 1. ADD THIS: Style for right-aligned menus */
+.dropdown-menu.align-right {
+  left: auto;
+  right: 0;
+}
+
+/* 2. ADD THIS: Responsive adjustments for smaller screens */
+@media (max-width: 992px) {
+  .dropdown-menu {
+    min-width: 300px; /* Shrink width on tablets */
+    width: 90vw;      /* Or make it responsive to viewport */
+    left: 50%;        /* Center it relative to parent... */
+    transform: translateX(-50%) translateY(10px); /* ...and offset center */
+  }
+  
+  /* Override alignment on mobile since we center everything */
+  .dropdown-menu.align-right {
+    left: 50%;
+    right: auto;
+  }
+
+  /* Change grid to 2 columns or 1 column on small screens */
+  .dropdown-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .dropdown-grid {
+    grid-template-columns: 1fr; /* 1 column on mobile */
+  }
+}
 /* --- NEW DROPDOWN STYLES END HERE --- */
 /* Side Icon Bar */
 .college-side-bar {
@@ -1816,8 +1850,8 @@ footer {
   font-size: 4rem;
   margin-bottom: 0.5rem;
   background: linear-gradient(to right, #fff, #e2e8f0);
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
   letter-spacing: -1px;
