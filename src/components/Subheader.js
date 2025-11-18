@@ -1,4 +1,3 @@
-// src/components/Subheader.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
@@ -19,9 +18,15 @@ const admissionMenuItems = [
   { title: 'Documents Required', path: '/admissions/documents' },
   { title: 'Courses Offered', path: '/admissions/courses' },
   { title: 'Fee Structure', path: '/admissions/fees' },
+  
+  // NEW: Points to the Mandatory Disclosure page
   { title: 'Mandatory Disclosure', path: '/admissions/disclosure' },
+  
   { title: 'Financial Aids & Bank Loans', path: '/admissions/financial-aid' },
-  { title: 'REAP-2025', path: '/admissions/reap' }, // This path is now handled by the new component
+  
+  // NEW: Points to the REAP page 
+  { title: 'REAP-2025', path: '/admissions/reap' }, 
+  
   { title: 'Admission Open 2025', path: '/admissions/open' },
   { title: 'Karma Courses @JEC', path: '/admissions/karma' },
   { title: 'Admission Procedure', path: '/admissions/procedure' },
