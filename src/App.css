@@ -1753,6 +1753,9 @@ footer {
 /* =========================================
    PLACEMENT GLORY PAGE STYLES (New)
    ========================================= */
+/* =========================================
+   PLACEMENT GLORY PAGE STYLES (New)
+   ========================================= */
 
 .placement-page-wrapper {
   /* Local Design Tokens for this page */
@@ -1827,8 +1830,8 @@ footer {
   font-size: 4rem;
   margin-bottom: 0.5rem;
   background: linear-gradient(to right, #fff, #e2e8f0);
-  -webkit-background-clip: text;
   background-clip: text;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
   letter-spacing: -1px;
@@ -2062,7 +2065,7 @@ footer {
   .pg-content-grid { grid-template-columns: 1fr; }
   .pg-navbar { flex-direction: column; gap: 1rem; }
 }
---- ABOUT US PAGE ---
+/*--- ABOUT US PAGE ---
 */
 
 /* Hero Section - Adapted for About Us */
