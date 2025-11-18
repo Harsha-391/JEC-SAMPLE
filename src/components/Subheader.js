@@ -1,8 +1,9 @@
+// src/components/Subheader.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
 
-// 1. EXISTING MENUS
+// --- MENU DATA ---
 const jecMenuItems = [
   { title: 'JEC FAQ', path: '/jec/faq' },
   { title: 'Employment @JEC', path: '/jec/employment' },
@@ -27,29 +28,35 @@ const admissionMenuItems = [
   { title: 'Admission Procedure', path: '/admissions/procedure' },
 ];
 
-// 2. NEW SOCIETY MENU DATA (Based on your image)
 const societyMenuItems = [
   { title: 'Foundation for Better Tomorrow', path: '/society/foundation' },
   { title: 'Agrasen College', path: '/society/agrasen-college' },
   { title: 'Jaipur College of Education & Science', path: '/society/jces' },
   { title: 'Key Teams & Functions', path: '/society/teams' },
 ];
-// ... imports and data arrays ...
 
 function Subheader() {
   return (
     <div className="subheader">
       <div className="subheader-content max-width-container">
         
-        {/* ... Logo section ... */}
+        {/* --- LOGO SECTION (Restored) --- */}
+        <Link to="/" className="subheader-logo">
+          <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
+          <div className="logo-text">
+            <span>JEC</span>
+            <span>KUKAS</span>
+          </div>
+        </Link>
 
+        {/* --- NAVIGATION SECTION --- */}
         <nav className="subheader-nav">
           <Link to="/" className="nav-link">Home</Link>
           
-          {/* JEC stays Left aligned (Default) */}
+          {/* JEC Dropdown */}
           <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" />
           
-          {/* Admission is in the middle, usually fine as left, but you can change if needed */}
+          {/* Admission Dropdown */}
           <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/admissions" />
 
           <Link to="/placements" className="nav-link">Placement</Link>
@@ -57,11 +64,11 @@ function Subheader() {
           <a href="#!" className="nav-link">Infrastructure</a>
           <a href="#!" className="nav-link">Campus Life</a>
 
-          {/* 1. PASS align="right" HERE */}
+          {/* Our Society Dropdown (Right Aligned) */}
           <NavDropdown 
             title="Our Society" 
             items={societyMenuItems} 
-            baseLink="/society" 
+            baseLink="/society"
             align="right" 
           />
 

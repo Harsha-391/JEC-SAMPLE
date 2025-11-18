@@ -1,7 +1,8 @@
+// src/components/NavDropdown.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// 1. Add 'align' to props (default is 'left')
+// Added 'align' prop (default is 'left')
 function NavDropdown({ title, items, baseLink = "#!", align = "left" }) {
   
   const handleClick = (e) => {
@@ -17,7 +18,7 @@ function NavDropdown({ title, items, baseLink = "#!", align = "left" }) {
         <i className="fas fa-chevron-down dropdown-arrow"></i>
       </Link>
       
-      {/* 2. Apply the alignment class dynamically */}
+      {/* Apply the alignment class dynamically */}
       <div className={`dropdown-menu ${align === 'right' ? 'align-right' : ''}`}>
         <div className="dropdown-grid">
           {items.map((item, index) => (
