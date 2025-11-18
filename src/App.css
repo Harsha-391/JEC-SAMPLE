@@ -1754,23 +1754,110 @@ footer {
 --- PLACEMENT GLORY PAGE (V2) ---
 */
 
+/*
+--- PLACEMENT GLORY PAGE (V2) ---
+*/
+
+/* --- 1. DESIGN TOKENS --- */
+.placements-page-v2 {
+  --primary: #0072C6;       
+  --primary-dark: #005a9e;
+  --accent: #D62828;        
+  --gold: #FCA311;          
+  --gold-gradient: linear-gradient(135deg, #FCA311 0%, #B7791F 100%);
+  --bg-body: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --text-main: #0F172A;
+  --text-muted: #64748B;
+  --border: #E2E8F0;
+  --radius-sm: 0.25rem;
+  --radius-lg: 0.75rem;
+  --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.03);
+
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  background: var(--bg-body);
+  line-height: 1.6;
+}
+
+.placements-page-v2 h1, 
+.placements-page-v2 h2, 
+.placements-page-v2 h3, 
+.placements-page-v2 h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
 .placements-page-v2 .max-width-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
-.placements-page-v2 a {
-  text-decoration: none;
-  color: inherit;
+
+/* --- 2. LAYOUT & COMPONENTS --- */
+.placements-page-v2 .hero-banner {
+  background: var(--primary);
+  padding: 4rem 1.25rem;
+  text-align: center;
+  color: var(--bg-surface);
+}
+.placements-page-v2 .hero-banner h1 {
+  color: var(--bg-surface);
+  font-size: 2.75rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.placements-page-v2 .hero-banner p {
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--gold);
+  opacity: 0.9;
+}
+
+.placements-page-v2 .stats-banner {
+  background: var(--bg-body);
+  padding: 3rem 1.25rem;
+}
+.placements-page-v2 .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+.placements-page-v2 .stat-card {
+  background: var(--bg-surface);
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+.placements-page-v2 .stat-card h2 {
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+.placements-page-v2 .stat-card p {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.placements-page-v2 .logo-cloud-section {
+  padding: 4rem 1.25rem;
+  background: var(--bg-surface);
 }
 .placements-page-v2 .section-title {
-  font-size: 32px;
-  color: var(--logo-blue);
-  margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 3rem;
   text-align: center;
   position: relative;
-  padding-bottom: 15px;
-  font-weight: 700;
+  padding-bottom: 1rem;
 }
 .placements-page-v2 .section-title::after {
   content: '';
@@ -1780,76 +1867,20 @@ footer {
   transform: translateX(-50%);
   width: 60px;
   height: 4px;
-  background: var(--logo-gold);
-}
-
-/* --- Hero Banner --- */
-.placements-page-v2 .hero-banner {
-  background: var(--logo-red);
-  padding: 60px 20px;
-  text-align: center;
-  color: var(--logo-white);
-}
-.placements-page-v2 .hero-banner h1 {
-  font-size: 42px;
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-.placements-page-v2 .hero-banner p {
-  font-size: 18px;
-  font-weight: 300;
-  opacity: 0.9;
-}
-
-/* --- Stats Banner --- */
-.placements-page-v2 .stats-banner {
-  background: var(--color-background-medium);
-  padding: 50px 20px;
-}
-.placements-page-v2 .stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 30px;
-}
-.placements-page-v2 .stat-card {
-  background: var(--logo-white);
-  padding: 30px;
-  text-align: center;
-  border-radius: 12px;
-  box-shadow: var(--shadow-subtle);
-  border-bottom: 4px solid var(--logo-blue);
-  transition: transform 0.3s ease;
-}
-.placements-page-v2 .stat-card:hover {
-  transform: translateY(-5px);
-}
-.placements-page-v2 .stat-card h2 {
-  font-size: 40px;
-  color: var(--logo-red);
-  margin-bottom: 5px;
-  font-weight: 800;
-}
-.placements-page-v2 .stat-card p {
-  font-size: 16px;
-  color: #555;
-  font-weight: 600;
-}
-
-/* --- Logo Cloud --- */
-.placements-page-v2 .logo-cloud-section {
-  padding: 80px 20px;
+  background: var(--gold);
+  border-radius: 2px;
 }
 .placements-page-v2 .logo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 30px;
+  gap: 2.5rem;
   align-items: center;
   max-width: 1000px;
   margin: 0 auto;
 }
 .placements-page-v2 .logo-grid img {
   width: 100%;
-  height: auto;
+  max-height: 50px;
   object-fit: contain;
   filter: grayscale(100%);
   opacity: 0.7;
@@ -1860,35 +1891,34 @@ footer {
   opacity: 1;
 }
 
-/* --- Testimonials --- */
 .placements-page-v2 .testimonial-section {
-  padding: 80px 20px;
-  background: var(--color-background-medium);
+  padding: 4rem 1.25rem;
+  background: var(--bg-body);
 }
 .placements-page-v2 .testimonial-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  gap: 1.5rem;
 }
 .placements-page-v2 .t-card {
-  background: var(--logo-white);
-  border-radius: 12px;
-  box-shadow: var(--shadow-card);
-  padding: 30px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  border-top: 4px solid var(--logo-red);
+  border: 1px solid var(--border);
 }
 .placements-page-v2 .quote-icon {
-  font-size: 28px;
-  color: var(--logo-gold);
-  opacity: 0.7;
-  margin-bottom: 15px;
+  font-size: 1.75rem;
+  color: var(--gold);
+  opacity: 0.8;
+  margin-bottom: 1rem;
 }
 .placements-page-v2 .quote-text {
-  font-size: 16px;
-  color: var(--color-text-light);
-  margin-bottom: 25px;
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
   flex-grow: 1;
   font-style: italic;
   line-height: 1.7;
@@ -1896,55 +1926,55 @@ footer {
 .placements-page-v2 .student-info {
   display: flex;
   align-items: center;
-  gap: 15px;
-  border-top: 1px solid var(--color-border);
-  padding-top: 20px;
+  gap: 1rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
 }
 .placements-page-v2 .student-avatar {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background: var(--color-background-medium);
+  background: var(--bg-body);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  color: var(--logo-blue);
+  font-size: 1.5rem;
+  color: var(--primary);
   flex-shrink: 0;
 }
 .placements-page-v2 .student-avatar i {
   opacity: 0.8;
 }
 .placements-page-v2 .student-details h4 {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--logo-blue);
-  margin-bottom: 2px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.1rem;
 }
 .placements-page-v2 .student-details .course {
-  font-size: 14px;
-  color: #777;
+  font-size: 0.875rem;
+  color: var(--text-muted);
   font-weight: 500;
 }
 
-/* --- Placement Data Tabs --- */
 .placements-page-v2 .placement-data-section {
-  padding: 80px 20px;
+  padding: 4rem 1.25rem;
+  background: var(--bg-surface);
 }
 .placements-page-v2 .tab-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 40px;
-  border-bottom: 2px solid var(--color-border);
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 2px solid var(--border);
 }
 .placements-page-v2 .tab-btn {
-  padding: 12px 25px;
+  padding: 0.75rem 1.5rem;
   border: none;
   background: transparent;
-  color: var(--color-text-light);
-  font-size: 16px;
+  color: var(--text-muted);
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   border-bottom: 3px solid transparent;
@@ -1952,12 +1982,12 @@ footer {
   margin-bottom: -2px; /* Sits on top of the container border */
 }
 .placements-page-v2 .tab-btn:hover {
-  background: var(--color-background-medium);
-  color: var(--logo-blue);
+  background: var(--bg-body);
+  color: var(--primary);
 }
 .placements-page-v2 .tab-btn.active {
-  color: var(--logo-red);
-  border-bottom-color: var(--logo-red);
+  color: var(--accent);
+  border-bottom-color: var(--accent);
 }
 
 .placements-page-v2 .tab-content {
@@ -1975,9 +2005,9 @@ footer {
 
 .placements-page-v2 .table-container {
   overflow-x: auto;
-  box-shadow: var(--shadow-subtle);
-  border-radius: 8px;
-  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
 }
 .placements-page-v2 table {
   width: 100%;
@@ -1986,14 +2016,14 @@ footer {
 }
 .placements-page-v2 th, 
 .placements-page-v2 td {
-  padding: 15px;
-  border-bottom: 1px solid var(--color-border);
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
   text-align: left;
 }
 .placements-page-v2 th {
-  background: var(--color-background-medium);
-  color: var(--logo-blue);
-  font-size: 14px;
+  background: var(--bg-body);
+  color: var(--primary);
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -2001,7 +2031,7 @@ footer {
   background-color: #f0f8ff;
 }
 
-/* --- Responsive --- */
+/* --- 3. RESPONSIVE --- */
 @media (max-width: 992px) {
   .placements-page-v2 .testimonial-grid {
     grid-template-columns: 1fr;
@@ -2012,15 +2042,15 @@ footer {
     grid-template-columns: 1fr 1fr;
   }
   .placements-page-v2 .stat-card {
-    padding: 20px;
+    padding: 1.25rem;
   }
   .placements-page-v2 .logo-grid {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 20px;
+    gap: 1.5rem;
   }
   .placements-page-v2 .tab-btn {
-    padding: 10px 15px;
-    font-size: 14px;
+    padding: 0.6rem 1rem;
+    font-size: 0.875rem;
   }
 }
 /*
