@@ -1,79 +1,92 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import NavDropdown from './NavDropdown';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './App.css';
 
-const jecMenuItems = [
-  { title: 'JEC FAQ', path: '/jec/faq' },
-  { title: 'Employment @JEC', path: '/jec/employment' },
-  { title: 'About JEC', path: '/about' },
-  { title: 'Students Testimonials', path: '/jec/testimonials' },
-  { title: 'Alumni', path: '/jec/alumni' },
-  { title: 'Human Network', path: '/jec/human-network' },
-  { title: 'Anti-Ragging Committee', path: '/jec/anti-ragging' },
-  { title: 'Institution Innovation Council @JEC', path: '/jec/iic' },
-  { title: 'Management', path: '/jec/management' },
-];
+// Import your Layout and Page components
+import Layout from './components/Layout';
+import Home from './pages/Home';
+import Admissions from './pages/Admissions';
+import Placements from './pages/Placements';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Faq from './pages/Faq';
+import Management from './pages/Management';
+import HumanNetwork from './pages/HumanNetwork';
+import IIC from './pages/IIC';
+import Alumni from './pages/Alumni';
+import Employment from './pages/Employment';
+import AntiRagging from './pages/AntiRagging';
+import Testimonials from './pages/Testimonials';
+import JCES from './pages/JCES';
+import AgrasenCollege from './pages/AgrasenCollege';
+import KeyTeamsFunctions from './pages/KeyTeamsFunctions';
+import Foundation from './pages/Foundation';
+import Reap2025 from './pages/Reap2025';
+import MandatoryDisclosure from './pages/MandatoryDisclosure'; 
+import KarmaCourses from './pages/KarmaCourses';
+import FinancialAids from './pages/FinancialAids';
+import FeeStructure from './pages/FeeStructure'; 
+import DocumentsRequired from './pages/DocumentsRequired';
+import CoursesOffered from './pages/CoursesOffered';
+import AdmissionOpen from './pages/AdmissionOpen'; 
+import AdmissionProcedure from './pages/AdmissionProcedure'; // <-- 1. IMPORT THE NEW PAGE
 
-const admissionMenuItems = [
-  { title: 'Documents Required', path: '/admissions/documents' },
-  { title: 'Courses Offered', path: '/admissions/courses' },
-  { title: 'Fee Structure', path: '/admissions/fees' },
-  { title: 'Mandatory Disclosure', path: '/admissions/disclosure' },
-  { title: 'Financial Aids & Bank Loans', path: '/admissions/financial-aid' },
-  { title: 'REAP-2025', path: '/admissions/reap' }, 
-  
-  // NEW: Points to the Admission Open page
-  { title: 'Admission Open 2025', path: '/admissions/open' },
-  
-  { title: 'Karma Courses @JEC', path: '/admissions/karma' },
-  { title: 'Admission Procedure', path: '/admissions/procedure' },
-];
+// --- Placeholder Component for other new pages ---
+const SocietyPlaceholder = ({ title }) => (
+  <div style={{ padding: '100px 20px', textAlign: 'center', background: '#f8f9fa', minHeight: '50vh' }}>
+    <h1 style={{ color: '#0072C6', marginBottom: '20px' }}>{title}</h1>
+    <p style={{ fontSize: '18px', color: '#666' }}>
+      This page is currently under construction. Content coming soon!
+    </p>
+  </div>
+);
 
-const societyMenuItems = [
-  { title: 'Foundation for Better Tomorrow', path: '/society/foundation' },
-  { title: 'Agrasen College', path: '/society/agrasen-college' },
-  { title: 'Jaipur College of Education & Science', path: '/society/jces' },
-  { title: 'Key Teams & Functions', path: '/society/teams' },
-];
-
-function Subheader() {
+function App() {
   return (
-    <div className="subheader">
-      <div className="subheader-content max-width-container">
-        
-        <Link to="/" className="subheader-logo">
-          <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
-          <div className="logo-text">
-            <span>JEC</span>
-            <span>KUKAS</span>
-          </div>
-        </Link>
-
-        <nav className="subheader-nav">
-          <Link to="/" className="nav-link">Home</Link>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
           
-          <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" />
+          <Route index element={<Home />} /> 
+          <Route path="admissions" element={<Admissions />} /> 
           
-          <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/admissions" />
+          {/* Admission Dropdown Routes */}
+          <Route path="admissions/reap" element={<Reap2025 />} />
+          <Route path="admissions/disclosure" element={<MandatoryDisclosure />} />
+          <Route path="admissions/karma" element={<KarmaCourses />} />
+          <Route path="admissions/financial-aid" element={<FinancialAids />} />
+          <Route path="admissions/fees" element={<FeeStructure />} />
+          <Route path="admissions/documents" element={<DocumentsRequired />} />
+          <Route path="admissions/courses" element={<CoursesOffered />} />
+          <Route path="admissions/open" element={<AdmissionOpen />} />
+          
+          {/* 2. REPLACED PLACEHOLDER WITH REAL COMPONENT */}
+          <Route path="admissions/procedure" element={<AdmissionProcedure />} />
 
-          <Link to="/placements" className="nav-link">Placement</Link>
-          <a href="#!" className="nav-link">Departments</a>
-          <a href="#!" className="nav-link">Infrastructure</a>
-          <a href="#!" className="nav-link">Campus Life</a>
+          <Route path="placements" element={<Placements />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
 
-          <NavDropdown 
-            title="Our Society" 
-            items={societyMenuItems} 
-            baseLink="/society"
-            align="right" 
-          />
+          {/* JEC Dropdown Routes */}
+          <Route path="jec/faq" element={<Faq />} />
+          <Route path="jec/management" element={<Management />} />
+          <Route path="jec/human-network" element={<HumanNetwork />} />
+          <Route path="jec/iic" element={<IIC />} />
+          <Route path="jec/alumni" element={<Alumni />} />
+          <Route path="jec/employment" element={<Employment />} />
+          <Route path="jec/anti-ragging" element={<AntiRagging />} />
+          <Route path="jec/testimonials" element={<Testimonials />} />
 
-          <Link to="/contact" className="nav-link">Contact Us</Link>
-        </nav>
+          {/* Our Society Dropdown Routes */}
+          <Route path="society/foundation" element={<Foundation />} />
+          <Route path="society/agrasen-college" element={<AgrasenCollege />} />
+          <Route path="society/jces" element={<JCES />} />
+          <Route path="society/teams" element={<KeyTeamsFunctions />} />
 
-      </div>
-    </div>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-export default Subheader;
+export default App;
