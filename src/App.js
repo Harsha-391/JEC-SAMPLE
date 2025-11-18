@@ -19,17 +19,8 @@ import AntiRagging from './pages/AntiRagging';
 import Testimonials from './pages/Testimonials';
 import JCES from './pages/JCES';
 import AgrasenCollege from './pages/AgrasenCollege';
-import KeyTeamsFunctions from './pages/KeyTeamsFunctions'; // <-- 1. IMPORT THE NEW PAGE
-
-// --- Placeholder Component for other new pages ---
-const SocietyPlaceholder = ({ title }) => (
-  <div style={{ padding: '100px 20px', textAlign: 'center', background: '#f8f9fa', minHeight: '50vh' }}>
-    <h1 style={{ color: '#0072C6', marginBottom: '20px' }}>{title}</h1>
-    <p style={{ fontSize: '18px', color: '#666' }}>
-      This page is currently under construction. Content coming soon!
-    </p>
-  </div>
-);
+import KeyTeamsFunctions from './pages/KeyTeamsFunctions';
+import Foundation from './pages/Foundation'; // <-- 1. IMPORT THE NEW PAGE
 
 function App() {
   return (
@@ -54,11 +45,11 @@ function App() {
           <Route path="jec/testimonials" element={<Testimonials />} />
 
           {/* Our Society Dropdown Routes */}
-          <Route path="society/foundation" element={<SocietyPlaceholder title="Foundation for Better Tomorrow" />} />
+          {/* 2. REPLACED PLACEHOLDER WITH REAL COMPONENT */}
+          <Route path="society/foundation" element={<Foundation />} />
+          
           <Route path="society/agrasen-college" element={<AgrasenCollege />} />
           <Route path="society/jces" element={<JCES />} />
-          
-          {/* 2. REPLACED PLACEHOLDER WITH REAL COMPONENT */}
           <Route path="society/teams" element={<KeyTeamsFunctions />} />
 
         </Route>
