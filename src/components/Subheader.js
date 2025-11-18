@@ -16,15 +16,15 @@ const jecMenuItems = [
 
 const admissionMenuItems = [
   { title: 'Documents Required', path: '/admissions/documents' },
-  
-  // NEW: Points to the Courses Offered page
   { title: 'Courses Offered', path: '/admissions/courses' },
-  
   { title: 'Fee Structure', path: '/admissions/fees' },
   { title: 'Mandatory Disclosure', path: '/admissions/disclosure' },
   { title: 'Financial Aids & Bank Loans', path: '/admissions/financial-aid' },
   { title: 'REAP-2025', path: '/admissions/reap' }, 
+  
+  // NEW: Points to the Admission Open page
   { title: 'Admission Open 2025', path: '/admissions/open' },
+  
   { title: 'Karma Courses @JEC', path: '/admissions/karma' },
   { title: 'Admission Procedure', path: '/admissions/procedure' },
 ];
