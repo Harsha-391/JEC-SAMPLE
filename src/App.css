@@ -6612,6 +6612,10 @@ footer {
    FEE STRUCTURE PAGE STYLES
    ========================================
 */
+/* ========================================
+   FEE STRUCTURE PAGE STYLES
+   ========================================
+*/
 
 :root {
     /* Brand Palette */
@@ -6643,6 +6647,181 @@ footer {
 /* --- Hero Section --- */
 .fee-hero {
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('file:///C:/Users/NIPUN/Desktop/JEC%20dropdown%20PAGES/Addmission%20Dropdown/Images/jec%20build%20banner.jpeg'); /* Using placeholder as local path not accessible */
+    background-size: cover;
+    background-position: center;
+    padding: 100px 20px 140px;
+    text-align: center;
+    color: var(--fee-logo-white);
+}
+.fee-hero h1 { font-size: 48px; margin-bottom: 15px; font-weight: 800; letter-spacing: 1px; }
+.fee-hero p { font-size: 20px; font-weight: 300; max-width: 900px; margin: 0 auto; color: var(--fee-logo-gold); }
+
+/* --- Stats Banner --- */
+.fee-stats-bar {
+    margin-top: -60px;
+    background: var(--fee-logo-white);
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+    border-bottom: 4px solid var(--fee-logo-blue);
+}
+.fee-stat-item { text-align: center; border-right: 1px solid #eee; }
+.fee-stat-item:last-child { border-right: none; }
+.fee-stat-item h3 { font-size: 20px; color: var(--fee-logo-red); margin-bottom: 5px; font-weight: 700; }
+.fee-stat-item p { font-size: 13px; font-weight: 600; text-transform: uppercase; color: #555; }
+
+/* --- Pricing Cards Section --- */
+.fee-section { padding: 80px 20px; background: var(--fee-color-background-medium); }
+.fee-section-title { 
+    font-size: 36px; 
+    color: var(--fee-logo-blue); 
+    margin-bottom: 50px; 
+    text-align: center; 
+    position: relative; 
+    font-weight: 700;
+}
+.fee-section-title::after { content: ''; display: block; width: 80px; height: 4px; background: var(--fee-logo-gold); margin: 15px auto 0; border-radius: 2px; }
+
+.fee-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.fee-price-card {
+    background: var(--fee-logo-white);
+    border-radius: 15px;
+    box-shadow: var(--fee-shadow-card);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.fee-price-card:hover { transform: translateY(-10px); box-shadow: var(--fee-shadow-hover); }
+
+.fee-price-header { padding: 30px; text-align: center; color: white; }
+.fee-price-card.fee-academic .fee-price-header { background: var(--fee-logo-blue); }
+.fee-price-card.fee-hostel .fee-price-header { background: var(--fee-logo-red); }
+.fee-price-card.fee-transport .fee-price-header { background: var(--fee-logo-black); }
+
+.fee-price-title { font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+.fee-price-amount { font-size: 42px; font-weight: 800; margin: 10px 0; }
+.fee-price-unit { font-size: 14px; opacity: 0.8; }
+
+.fee-price-body { padding: 30px; flex-grow: 1; }
+.fee-price-list { list-style: none; padding: 0; margin: 0; }
+.fee-price-list li { 
+    margin-bottom: 15px; 
+    padding-bottom: 15px; 
+    border-bottom: 1px dashed #eee; 
+    display: flex; 
+    justify-content: space-between;
+    color: #555;
+}
+.fee-price-list li:last-child { border-bottom: none; }
+.fee-price-list span.fee-label { font-weight: 600; }
+.fee-price-list span.fee-value { font-weight: 700; color: var(--fee-logo-black); }
+
+/* --- Payment Section (QR) --- */
+.fee-payment-section { padding: 80px 20px; background: var(--fee-logo-white); }
+.fee-payment-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.fee-payment-info h3 { font-size: 28px; color: var(--fee-logo-black); margin-bottom: 20px; }
+.fee-payment-info p { font-size: 16px; color: #555; margin-bottom: 30px; }
+.fee-payment-methods { display: flex; gap: 15px; margin-bottom: 30px; }
+.fee-method-badge { background: #f0f0f0; padding: 10px 20px; border-radius: 5px; font-weight: 600; color: #333; }
+
+.fee-qr-box {
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    border: 2px dashed var(--fee-logo-blue);
+}
+.fee-qr-box img { max-width: 100%; height: auto; border-radius: 10px; }
+.fee-qr-caption { margin-top: 15px; font-weight: 700; color: var(--fee-logo-blue); font-size: 18px; }
+
+/* --- TFWS & Notes Section --- */
+.fee-info-section { padding: 60px 20px; background: #fff; }
+.fee-notes-box {
+    background: #fff8e1;
+    border-left: 5px solid var(--fee-logo-gold);
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+.fee-notes-box h4 { color: #b38600; font-size: 20px; margin-bottom: 15px; }
+.fee-notes-list { padding-left: 20px; }
+.fee-notes-list li { margin-bottom: 10px; color: #555; }
+
+.fee-tfws-box {
+    background: #e3f2fd;
+    border-left: 5px solid var(--fee-logo-blue);
+    padding: 30px;
+    border-radius: 8px;
+}
+.fee-tfws-box h4 { color: var(--fee-logo-blue); font-size: 20px; margin-bottom: 15px; }
+.fee-tfws-box p { color: #444; }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .fee-payment-container { grid-template-columns: 1fr; text-align: center; }
+    .fee-payment-methods { justify-content: center; }
+    .fee-stat-item { border-right: none; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+}
+@media (max-width: 768px) {
+    .fee-hero h1 { font-size: 36px; }
+}
+
+/* ========================================
+   FEE STRUCTURE PAGE STYLES
+   ========================================
+*/
+
+:root {
+    /* Brand Palette */
+    --fee-logo-red: #D62828; 
+    --fee-logo-blue: #0072C6; 
+    --fee-logo-gold: #FCA311; 
+    --fee-logo-black: #1D1D1D; 
+    --fee-logo-white: #FFFFFF; 
+
+    /* Functional Colors */
+    --fee-color-background-light: var(--fee-logo-white);
+    --fee-color-background-medium: #f4f7fa;
+    --fee-color-text-main: #333;
+    --fee-color-text-light: #555;
+    
+    --fee-shadow-card: 0 10px 30px rgba(0,0,0,0.08);
+    --fee-shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.fee-page {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--fee-color-text-main);
+    line-height: 1.6;
+    background-color: var(--fee-color-background-light);
+}
+
+.fee-page a { text-decoration: none; color: inherit; }
+
+/* --- Hero Section --- */
+.fee-hero {
+    /* Using existing image as placeholder */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../public/images/about-banner.jpeg'); 
     background-size: cover;
     background-position: center;
     padding: 100px 20px 140px;
