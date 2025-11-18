@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Placements.css';
 
 function Placements() {
   const [activeTab, setActiveTab] = useState('y24-25');
