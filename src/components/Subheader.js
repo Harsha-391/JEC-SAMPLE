@@ -22,6 +22,7 @@ const admissionMenuItems = [
   // NEW: Point to the Mandatory Disclosure page
   { title: 'Mandatory Disclosure', path: '/admissions/disclosure' },
   
+  // NEW: Point to the Financial Aids page
   { title: 'Financial Aids & Bank Loans', path: '/admissions/financial-aid' },
   
   // NEW: Point to the REAP page (from previous request)

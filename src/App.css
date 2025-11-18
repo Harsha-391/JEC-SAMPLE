@@ -6447,3 +6447,164 @@ footer {
     .karma-hero h1 { font-size: 36px; }
     .karma-contact-info { flex-direction: column; gap: 15px; font-size: 18px; }
 }
+/* ========================================
+   FINANCIAL AIDS PAGE STYLES
+   ========================================
+*/
+
+:root {
+    /* Brand Palette */
+    --finaid-logo-red: #D62828; 
+    --finaid-logo-blue: #0072C6; 
+    --finaid-logo-gold: #FCA311; 
+    --finaid-logo-black: #1D1D1D; 
+    --finaid-logo-white: #FFFFFF; 
+
+    /* Functional Colors */
+    --finaid-color-background-light: var(--finaid-logo-white);
+    --finaid-color-background-medium: #f7f7f7;
+    --finaid-color-text-main: #333;
+    --finaid-color-text-light: #555;
+    --finaid-color-border: #e0e0e0;
+
+    --finaid-shadow-card: 0 5px 15px rgba(0,0,0,0.08);
+    --finaid-shadow-hover: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.finaid-page {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--finaid-color-text-main);
+    line-height: 1.65;
+    background-color: var(--finaid-color-background-light);
+}
+
+.finaid-page a { text-decoration: none; color: inherit; }
+
+/* --- Hero Section --- */
+.finaid-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 20px 140px;
+    text-align: center;
+    color: var(--finaid-logo-white);
+}
+.finaid-hero h1 { font-size: 48px; margin-bottom: 15px; font-weight: 800; letter-spacing: 1px; }
+.finaid-hero p { font-size: 20px; font-weight: 300; max-width: 900px; margin: 0 auto; color: var(--finaid-logo-gold); }
+
+/* --- Quick Links Banner --- */
+.finaid-quick-links-bar {
+    margin-top: -60px;
+    background: var(--finaid-logo-white);
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+    border-bottom: 4px solid var(--finaid-logo-red);
+}
+.finaid-quick-link-item { text-align: center; border-right: 1px solid #eee; transition: transform 0.3s ease; }
+.finaid-quick-link-item:last-child { border-right: none; }
+.finaid-quick-link-item:hover { transform: translateY(-3px); }
+.finaid-quick-link-item i { font-size: 28px; color: var(--finaid-logo-blue); margin-bottom: 10px; }
+.finaid-quick-link-item h4 { font-size: 16px; color: var(--finaid-logo-black); font-weight: 600; }
+
+/* --- Intro & Objectives --- */
+.finaid-content-section { padding: 80px 20px; }
+.finaid-section-title { font-size: 32px; color: var(--finaid-logo-blue); margin-bottom: 20px; border-left: 5px solid var(--finaid-logo-gold); padding-left: 15px; }
+.finaid-intro-text { max-width: 1000px; margin: 0 auto; text-align: justify; color: #444; font-size: 16px; }
+
+/* Objective Cards Grid */
+.finaid-objectives-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+.finaid-objective-card {
+    padding: 30px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    box-shadow: var(--finaid-shadow-card);
+}
+.finaid-bg-red { background-color: #c0392b; }
+.finaid-bg-green { background-color: #7fb069; }
+.finaid-bg-purple { background-color: #8e44ad; }
+.finaid-bg-teal { background-color: #1abc9c; }
+
+/* --- Table Styles --- */
+.finaid-table-container {
+    overflow-x: auto;
+    margin-top: 40px;
+    box-shadow: var(--finaid-shadow-card);
+    border-radius: 8px;
+}
+.finaid-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+.finaid-data-table th, .finaid-data-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+.finaid-data-table th {
+    background-color: var(--finaid-logo-blue);
+    color: white;
+    font-weight: 600;
+}
+.finaid-data-table tr:nth-child(even) { background-color: #f9f9f9; }
+.finaid-data-table tr:hover { background-color: #f1f1f1; }
+.finaid-data-table a { color: var(--finaid-logo-blue); font-weight: 600; }
+.finaid-data-table a:hover { text-decoration: underline; color: var(--finaid-logo-red); }
+
+/* --- Budgeting Section --- */
+.finaid-budget-section {
+    background-color: var(--finaid-color-background-medium);
+    padding: 80px 20px;
+}
+.finaid-budget-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+.finaid-budget-card {
+    background: var(--finaid-logo-white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--finaid-shadow-card);
+    border-top: 4px solid var(--finaid-logo-gold);
+}
+.finaid-budget-card h4 { font-size: 20px; color: var(--finaid-logo-black); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+.finaid-budget-card i { color: var(--finaid-logo-gold); }
+.finaid-budget-card p, .finaid-budget-card ul { font-size: 15px; color: #555; line-height: 1.6; }
+.finaid-budget-card ul { padding-left: 20px; margin-top: 10px; }
+
+/* --- External Links Banner --- */
+.finaid-external-links {
+    background: var(--finaid-logo-blue);
+    color: var(--finaid-logo-white);
+    padding: 60px 20px;
+    text-align: center;
+}
+.finaid-external-links a { color: var(--finaid-logo-gold); font-weight: bold; text-decoration: underline; margin: 0 5px; }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .finaid-quick-link-item { border-right: none; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+}
+@media (max-width: 768px) {
+    .finaid-hero h1 { font-size: 36px; }
+}
