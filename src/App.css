@@ -6268,3 +6268,182 @@ footer {
     padding-bottom: 1rem;
   }
 }
+/* ========================================
+   KARMA COURSES PAGE STYLES
+   ========================================
+*/
+
+:root {
+    /* Brand Palette */
+    --karma-logo-red: #D62828; 
+    --karma-logo-blue: #0072C6; 
+    --karma-logo-gold: #FCA311; 
+    --karma-logo-black: #1D1D1D; 
+    --karma-logo-white: #FFFFFF; 
+
+    /* Functional Colors */
+    --karma-color-header-bg: var(--karma-logo-black);
+    --karma-color-header-text: var(--karma-logo-white);
+    --karma-color-background-light: var(--karma-logo-white);
+    --karma-color-background-medium: #f7f7f7;
+    --karma-color-text-main: #333;
+    --karma-color-text-light: #555;
+    --karma-color-border: #e0e0e0;
+
+    --karma-shadow-card: 0 5px 15px rgba(0,0,0,0.08);
+    --karma-shadow-hover: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.karma-page {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--karma-color-text-main);
+    line-height: 1.65;
+    background-color: var(--karma-color-background-light);
+}
+
+.karma-page a { text-decoration: none; color: inherit; }
+
+/* --- Hero Section --- */
+.karma-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 20px 140px; /* Extra bottom padding for stats overlap */
+    text-align: center;
+    color: var(--karma-logo-white);
+}
+.karma-hero h1 { font-size: 48px; margin-bottom: 15px; font-weight: 800; letter-spacing: 1px; }
+.karma-hero p { font-size: 20px; font-weight: 300; max-width: 900px; margin: 0 auto; color: var(--karma-logo-gold); }
+
+/* --- Stats Banner --- */
+.karma-stats-bar {
+    margin-top: -60px;
+    background: var(--karma-logo-white);
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+    border-bottom: 4px solid var(--karma-logo-blue);
+}
+.karma-stat-item { text-align: center; border-right: 1px solid #eee; }
+.karma-stat-item:last-child { border-right: none; }
+.karma-stat-item h3 { font-size: 28px; color: var(--karma-logo-red); margin-bottom: 5px; }
+.karma-stat-item p { font-size: 13px; font-weight: 600; text-transform: uppercase; color: #555; }
+
+/* --- Overview Section --- */
+.karma-overview-section { padding: 80px 20px; }
+.karma-section-title { 
+    font-size: 32px; 
+    color: var(--karma-logo-blue); 
+    margin-bottom: 20px; 
+    position: relative; 
+    display: inline-block;
+    padding-bottom: 10px;
+}
+.karma-section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--karma-logo-gold); margin-top: 5px; }
+.karma-text-block { max-width: 1000px; margin: 0 auto 40px; text-align: justify; font-size: 16px; color: #444; }
+
+/* Two-column layout for "What is Karma?" */
+.karma-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Text column slightly smaller than image column */
+    gap: 40px;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.karma-intro-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.karma-intro-image-container {
+    text-align: center;
+}
+
+.karma-roadmap-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: var(--karma-shadow-card);
+    border: 1px solid #eee;
+    margin-bottom: 10px; /* Space for caption */
+}
+.karma-roadmap-caption {
+    font-size: 14px;
+    color: var(--karma-color-text-light);
+    font-style: italic;
+}
+
+
+/* --- Guidelines Grid --- */
+.karma-guidelines-section { background-color: var(--karma-color-background-medium); padding: 80px 20px; }
+.karma-guidelines-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+.karma-guide-card {
+    background: var(--karma-logo-white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--karma-shadow-card);
+    border-top: 4px solid var(--karma-logo-blue);
+    transition: transform 0.3s;
+}
+.karma-guide-card:hover { transform: translateY(-5px); box-shadow: var(--karma-shadow-hover); }
+.karma-guide-card h4 { font-size: 20px; color: var(--karma-logo-black); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+.karma-guide-card i { color: var(--karma-logo-red); font-size: 22px; }
+.karma-guide-card ul { list-style: none; padding: 0; }
+.karma-guide-card li { margin-bottom: 10px; padding-left: 20px; position: relative; font-size: 15px; color: #555; }
+.karma-guide-card li::before { content: '•'; color: var(--karma-logo-blue); font-weight: bold; position: absolute; left: 0; font-size: 18px; line-height: 1; }
+
+/* --- Course Table Section --- */
+.karma-table-section { padding: 80px 20px; }
+.karma-table-container {
+    overflow-x: auto;
+    box-shadow: var(--karma-shadow-card);
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+.karma-course-table { width: 100%; border-collapse: collapse; min-width: 900px; }
+.karma-course-table th, .karma-course-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #eee; font-size: 14px; }
+.karma-course-table th { background: var(--karma-logo-blue); color: white; font-weight: 600; text-transform: uppercase; font-size: 13px; letter-spacing: 0.5px; }
+.karma-course-table tr:nth-child(even) { background: #f9f9f9; }
+.karma-course-table tr:hover { background: #eef6ff; }
+
+/* --- Contact Bar --- */
+.karma-contact-bar {
+    background: var(--karma-logo-black);
+    color: var(--karma-logo-white);
+    padding: 50px 20px;
+    text-align: center;
+}
+.karma-contact-bar h3 { font-size: 28px; color: var(--karma-logo-gold); margin-bottom: 15px; }
+.karma-contact-bar p { font-size: 16px; opacity: 0.9; margin-bottom: 20px; }
+.karma-contact-info { font-size: 20px; font-weight: 700; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+.karma-contact-info a { color: white; transition: color 0.3s; display: flex; align-items: center; gap: 10px; }
+.karma-contact-info a:hover { color: var(--karma-logo-gold); }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .karma-stat-item { border-right: none; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+    .karma-intro-grid {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+    .karma-intro-text { order: 2; } /* Text after image on small screens */
+    .karma-intro-image-container { order: 1; }
+}
+@media (max-width: 768px) {
+    .header-content { flex-direction: column; gap: 15px; }
+    nav { gap: 15px; flex-wrap: wrap; justify-content: center; }
+    .karma-hero h1 { font-size: 36px; }
+    .karma-contact-info { flex-direction: column; gap: 15px; font-size: 18px; }
+}
