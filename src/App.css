@@ -1751,32 +1751,18 @@ footer {
 }
 /* --- Placements Page --- */
 /* =========================================
-   PLACEMENT GLORY PAGE STYLES (New)
-   ========================================= */
-/* =========================================
-   PLACEMENT GLORY PAGE STYLES (New)
+   PLACEMENT GLORY PAGE STYLES (FIXED)
    ========================================= */
 
 .placement-page-wrapper {
-  /* Local Design Tokens for this page */
   --pg-primary: #0072C6;       
-  --pg-primary-dark: #005a9e;
-  --pg-accent: #D62828;        
   --pg-gold: #FCA311;          
-  --pg-gold-gradient: linear-gradient(135deg, #FCA311 0%, #B7791F 100%);
-  --pg-bg-body: #F8FAFC;
-  --pg-bg-surface: #FFFFFF;
   --pg-text-main: #0F172A;
   --pg-text-muted: #64748B;
   --pg-border: #E2E8F0;
-  --pg-radius-lg: 16px;
-  --pg-shadow-card: 0 4px 20px rgba(0,0,0,0.05);
-  --pg-shadow-hover: 0 10px 30px rgba(0,0,0,0.1);
-  --pg-font-head: 'Poppins', sans-serif;
-  --pg-font-body: 'Inter', sans-serif;
-
-  font-family: var(--pg-font-body);
-  background-color: var(--pg-bg-body);
+  
+  font-family: 'Inter', sans-serif;
+  background-color: #F8FAFC;
   color: var(--pg-text-main);
   line-height: 1.6;
   width: 100%;
@@ -1805,7 +1791,7 @@ footer {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-family: var(--pg-font-head);
+  font-family: 'Poppins', sans-serif;
   font-weight: 800;
   color: var(--pg-primary);
   font-size: 1.5rem;
@@ -1826,7 +1812,7 @@ footer {
 }
 
 .pg-hero h1 {
-  font-family: var(--pg-font-head);
+  font-family: 'Poppins', sans-serif;
   font-size: 4rem;
   margin-bottom: 0.5rem;
   background: linear-gradient(to right, #fff, #e2e8f0);
@@ -1836,7 +1822,6 @@ footer {
   text-transform: uppercase;
   letter-spacing: -1px;
   margin-top: 0;
-  line-height: 1.2;
 }
 
 .pg-hero p { 
@@ -1846,10 +1831,10 @@ footer {
   margin-bottom: 2rem; 
 }
 
-/* Stats Overlap */
+/* --- STATS BOXES (FIXED STYLE) --- */
 .pg-stats-container {
   max-width: 1200px;
-  margin: -5rem auto 4rem auto;
+  margin: -5rem auto 4rem auto; /* Overlaps the hero image */
   padding: 0 1.5rem;
   position: relative;
   z-index: 10;
@@ -1862,21 +1847,24 @@ footer {
 }
 
 .pg-stat-card {
-  background: var(--pg-bg-surface);
+  /* This ensures the box is visible like the old page */
+  background-color: #FFFFFF; 
   padding: 2rem;
-  border-radius: var(--pg-radius-lg);
-  box-shadow: var(--pg-shadow-card);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Strong shadow */
   text-align: center;
-  border-bottom: 4px solid var(--pg-primary);
+  border-bottom: 4px solid var(--pg-primary); /* The blue bottom border */
   transition: transform 0.3s;
 }
 
-.pg-stat-card:hover { transform: translateY(-10px); }
+.pg-stat-card:hover { 
+  transform: translateY(-10px); 
+}
 
 .pg-stat-value {
   font-size: 2.5rem;
   font-weight: 800;
-  font-family: var(--pg-font-head);
+  font-family: 'Poppins', sans-serif;
   color: var(--pg-primary);
 }
 
@@ -1904,7 +1892,7 @@ footer {
 }
 
 .pg-narrative-text h2 { 
-  font-family: var(--pg-font-head); 
+  font-family: 'Poppins', sans-serif; 
   font-size: 2rem; 
   margin-bottom: 1.5rem; 
   color: var(--pg-text-main); 
@@ -1928,7 +1916,7 @@ footer {
 
 /* Section Headers */
 .pg-section-header { text-align: center; margin: 4rem 0 3rem 0; }
-.pg-section-header h2 { font-family: var(--pg-font-head); font-size: 2.5rem; color: var(--pg-text-main); }
+.pg-section-header h2 { font-family: 'Poppins', sans-serif; font-size: 2.5rem; color: var(--pg-text-main); }
 .pg-section-header span { color: var(--pg-gold); }
 .pg-section-line { max-width: 200px; margin: 10px auto; height: 4px; background: var(--pg-gold); }
 
@@ -1944,7 +1932,7 @@ footer {
   background: #1E293B;
   color: white;
   padding: 2rem;
-  border-radius: var(--pg-radius-lg);
+  border-radius: 16px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -1956,7 +1944,7 @@ footer {
 
 .pg-gold-card::before {
   content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px;
-  background: var(--pg-gold-gradient);
+  background: linear-gradient(135deg, #FCA311 0%, #B7791F 100%);
 }
 
 .pg-student-img-lg {
@@ -1982,7 +1970,7 @@ footer {
 .pg-achiever-card {
   background: white;
   border: 1px solid var(--pg-border);
-  border-radius: var(--pg-radius-lg);
+  border-radius: 16px;
   padding: 1.5rem;
   text-align: center;
   transition: all 0.3s ease;
@@ -1991,7 +1979,7 @@ footer {
 
 .pg-achiever-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--pg-shadow-hover);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   border-color: var(--pg-primary);
 }
 
@@ -2008,7 +1996,7 @@ footer {
   border: 2px solid var(--pg-border);
 }
 
-.pg-ac-name { font-weight: 700; font-size: 1rem; color: var(--pg-text-main); margin-bottom: 5px; text-transform: uppercase; font-size: 0.9rem; }
+.pg-ac-name { font-weight: 700; font-size: 0.9rem; color: var(--pg-text-main); margin-bottom: 5px; text-transform: uppercase; }
 .pg-ac-comp { font-size: 0.85rem; color: var(--pg-text-muted); display: block; margin-bottom: 8px; height: 2.5em; display: flex; align-items: center; justify-content: center; }
 .pg-ac-pkg { 
   font-size: 1rem; color: var(--pg-primary); font-weight: 700; 
@@ -2020,9 +2008,9 @@ footer {
 
 /* Tabbed Tables */
 .pg-tabs-wrapper {
-  background: var(--pg-bg-surface);
-  border-radius: var(--pg-radius-lg);
-  box-shadow: var(--pg-shadow-card);
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
   overflow: hidden;
 }
 
@@ -2040,7 +2028,7 @@ footer {
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
-  font-family: var(--pg-font-head);
+  font-family: 'Poppins', sans-serif;
   white-space: nowrap;
   font-size: 16px;
 }
@@ -2065,12 +2053,7 @@ footer {
   .pg-content-grid { grid-template-columns: 1fr; }
   .pg-navbar { flex-direction: column; gap: 1rem; }
 }
-/*--- ABOUT US PAGE ---
-*/
-
-/* Hero Section - Adapted for About Us */
-/*
---- ABOUT US PAGE (NEW) ---
+/*--- ABOUT US PAGE (NEW) ---
 */
 .about-page-new {
   /* This ensures the page content respects the sticky header */
