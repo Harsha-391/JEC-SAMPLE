@@ -24,7 +24,8 @@ import Foundation from './pages/Foundation';
 import Reap2025 from './pages/Reap2025';
 import MandatoryDisclosure from './pages/MandatoryDisclosure'; 
 import KarmaCourses from './pages/KarmaCourses';
-import FinancialAids from './pages/FinancialAids'; // <-- 1. IMPORT THE NEW PAGE
+import FinancialAids from './pages/FinancialAids';
+import FeeStructure from './pages/FeeStructure'; // <-- 1. IMPORT THE NEW PAGE
 
 // --- Placeholder Component for other new pages ---
 const SocietyPlaceholder = ({ title }) => (
@@ -49,14 +50,14 @@ function App() {
           <Route path="admissions/reap" element={<Reap2025 />} />
           <Route path="admissions/disclosure" element={<MandatoryDisclosure />} />
           <Route path="admissions/karma" element={<KarmaCourses />} />
+          <Route path="admissions/financial-aid" element={<FinancialAids />} />
           
           {/* 2. REPLACED PLACEHOLDER WITH REAL COMPONENT */}
-          <Route path="admissions/financial-aid" element={<FinancialAids />} />
+          <Route path="admissions/fees" element={<FeeStructure />} />
 
           {/* Other Admissions Placeholders */}
           <Route path="admissions/documents" element={<SocietyPlaceholder title="Documents Required" />} />
           <Route path="admissions/courses" element={<SocietyPlaceholder title="Courses Offered" />} />
-          <Route path="admissions/fees" element={<SocietyPlaceholder title="Fee Structure" />} />
           <Route path="admissions/open" element={<SocietyPlaceholder title="Admission Open 2025" />} />
           <Route path="admissions/procedure" element={<SocietyPlaceholder title="Admission Procedure" />} />
 
