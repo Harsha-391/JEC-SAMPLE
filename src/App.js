@@ -18,7 +18,8 @@ import Employment from './pages/Employment';
 import AntiRagging from './pages/AntiRagging';
 import Testimonials from './pages/Testimonials';
 import JCES from './pages/JCES';
-import AgrasenCollege from './pages/AgrasenCollege'; // <-- 1. IMPORT THE NEW PAGE
+import AgrasenCollege from './pages/AgrasenCollege';
+import KeyTeamsFunctions from './pages/KeyTeamsFunctions'; // <-- 1. IMPORT THE NEW PAGE
 
 // --- Placeholder Component for other new pages ---
 const SocietyPlaceholder = ({ title }) => (
@@ -54,12 +55,11 @@ function App() {
 
           {/* Our Society Dropdown Routes */}
           <Route path="society/foundation" element={<SocietyPlaceholder title="Foundation for Better Tomorrow" />} />
+          <Route path="society/agrasen-college" element={<AgrasenCollege />} />
+          <Route path="society/jces" element={<JCES />} />
           
           {/* 2. REPLACED PLACEHOLDER WITH REAL COMPONENT */}
-          <Route path="society/agrasen-college" element={<AgrasenCollege />} />
-          
-          <Route path="society/jces" element={<JCES />} />
-          <Route path="society/teams" element={<SocietyPlaceholder title="Key Teams & Functions" />} />
+          <Route path="society/teams" element={<KeyTeamsFunctions />} />
 
         </Route>
       </Routes>
