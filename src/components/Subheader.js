@@ -1,9 +1,8 @@
-// src/components/Subheader.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import NavDropdown from './NavDropdown'; // 1. Import the new component
+import NavDropdown from './NavDropdown';
 
-// 2. Define the menu data
+// 1. EXISTING MENUS
 const jecMenuItems = [
   { title: 'JEC FAQ', path: '/jec/faq' },
   { title: 'Employment @JEC', path: '/jec/employment' },
@@ -28,6 +27,14 @@ const admissionMenuItems = [
   { title: 'Admission Procedure', path: '/admissions/procedure' },
 ];
 
+// 2. NEW SOCIETY MENU DATA (Based on your image)
+const societyMenuItems = [
+  { title: 'Foundation for Better Tomorrow', path: '/society/foundation' },
+  { title: 'Agrasen College', path: '/society/agrasen-college' },
+  { title: 'Jaipur College of Education & Science', path: '/society/jces' },
+  { title: 'Key Teams & Functions', path: '/society/teams' },
+];
+
 function Subheader() {
   return (
     <div className="subheader">
@@ -42,7 +49,7 @@ function Subheader() {
           </div>
         </Link>
 
-        {/* 3. Update the Navigation */}
+        {/* Navigation */}
         <nav className="subheader-nav">
           <Link to="/" className="nav-link">Home</Link>
           
@@ -52,14 +59,15 @@ function Subheader() {
           {/* Admission Dropdown */}
           <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/admissions" />
 
-          {/* Other Links */}
           <Link to="/placements" className="nav-link">Placement</Link>
           <a href="#!" className="nav-link">Departments</a>
           <a href="#!" className="nav-link">Infrastructure</a>
           <a href="#!" className="nav-link">Campus Life</a>
-          <a href="#!" className="nav-link">Our Society</a>
+
+          {/* 3. REPLACED THE STATIC LINK WITH DROPDOWN HERE */}
+          <NavDropdown title="Our Society" items={societyMenuItems} baseLink="/society" />
+
           <Link to="/contact" className="nav-link">Contact Us</Link>
-          {/* "About Us" is now inside the JEC dropdown */}
         </nav>
 
       </div>
