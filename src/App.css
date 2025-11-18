@@ -7064,3 +7064,254 @@ footer {
     .docs-session-tag { margin-left: 0; }
     .docs-contact-grid { flex-direction: column; gap: 20px; }
 }
+/* ========================================
+   DOCUMENTS REQUIRED PAGE STYLES
+   ========================================
+*/
+
+:root {
+    /* Brand Palette */
+    --docs-logo-red: #D62828; 
+    --docs-logo-blue: #0072C6; 
+    --docs-logo-dark-blue: #005a9e;
+    --docs-logo-gold: #FCA311; 
+    --docs-logo-black: #1D1D1D; 
+    --docs-logo-white: #FFFFFF; 
+
+    /* Functional Colors */
+    --docs-color-background-light: #ffffff;
+    --docs-color-background-medium: #f4f7fa;
+    --docs-color-text-main: #333;
+    --docs-color-text-light: #555;
+    
+    --docs-shadow-card: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.docs-page {
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    color: var(--docs-color-text-main);
+    line-height: 1.6;
+    background-color: var(--docs-color-background-medium);
+}
+
+.docs-page a { text-decoration: none; color: inherit; }
+
+/* --- Hero Section --- */
+.docs-hero {
+    background: linear-gradient(135deg, var(--docs-logo-blue) 0%, var(--docs-logo-dark-blue) 100%);
+    padding: 80px 20px;
+    text-align: center;
+    color: var(--docs-logo-white);
+    position: relative;
+}
+
+.docs-hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 15px; }
+.docs-hero p { font-size: 18px; max-width: 800px; margin: 0 auto; opacity: 0.9; }
+
+/* --- Content Layout --- */
+.docs-content-wrapper { padding: 60px 20px; }
+
+.docs-notice-box {
+    background: #fff3cd;
+    border-left: 5px solid var(--docs-logo-gold);
+    padding: 20px;
+    margin-bottom: 40px;
+    border-radius: 4px;
+    color: #856404;
+}
+.docs-notice-box strong { color: var(--docs-logo-black); }
+
+.docs-program-section { margin-bottom: 60px; background: var(--docs-logo-white); padding: 40px; border-radius: 12px; box-shadow: var(--docs-shadow-card); border-top: 5px solid var(--docs-logo-red); }
+.docs-program-section.docs-mtech { border-top-color: var(--docs-logo-blue); }
+
+.docs-section-header { display: flex; align-items: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+.docs-section-header i { font-size: 32px; color: var(--docs-logo-blue); margin-right: 15px; }
+.docs-section-header h2 { font-size: 28px; color: var(--docs-logo-black); margin: 0; }
+.docs-session-tag { background: var(--docs-logo-red); color: white; padding: 5px 10px; border-radius: 4px; font-size: 14px; margin-left: auto; font-weight: bold; }
+
+/* --- Tables --- */
+.docs-table-responsive { overflow-x: auto; }
+.docs-doc-table { width: 100%; border-collapse: collapse; min-width: 600px; margin-bottom: 30px; }
+.docs-doc-table th, .docs-doc-table td { padding: 12px 15px; border: 1px solid #e0e0e0; text-align: left; }
+.docs-doc-table th { background: var(--docs-logo-blue); color: white; font-weight: 600; text-transform: uppercase; font-size: 14px; }
+.docs-doc-table tr:nth-child(even) { background: #f9f9f9; }
+.docs-doc-table tr:hover { background: #f1f1f1; }
+
+.docs-original-badge { color: var(--docs-logo-red); font-weight: 700; }
+.docs-copy-badge { color: var(--docs-logo-blue); font-weight: 600; }
+
+/* --- Sub-tables (Lateral/Fee Waiver) --- */
+.docs-sub-section h3 { font-size: 20px; color: var(--docs-logo-red); margin-top: 30px; margin-bottom: 15px; font-weight: 700; display: flex; align-items: center; }
+.docs-sub-section h3::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--docs-logo-gold); border-radius: 50%; margin-right: 10px; }
+
+/* --- Contact/Counselor Section --- */
+.docs-counselor-section {
+    background: var(--docs-logo-black);
+    color: white;
+    padding: 60px 40px;
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.docs-counselor-section h2 { font-size: 32px; color: var(--docs-logo-gold); margin-bottom: 20px; }
+.docs-counselor-section p { font-size: 16px; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; opacity: 0.9; }
+.docs-contact-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px; }
+.docs-contact-item { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 600; }
+.docs-contact-item i { color: var(--docs-logo-red); font-size: 24px; }
+.docs-contact-item a { color: white; transition: color 0.3s; }
+.docs-contact-item a:hover { color: var(--docs-logo-gold); }
+
+@media (max-width: 768px) {
+    .docs-section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .docs-session-tag { margin-left: 0; }
+    .docs-contact-grid { flex-direction: column; gap: 20px; }
+}
+
+/* ========================================
+   COURSES OFFERED PAGE STYLES
+   ========================================
+*/
+
+:root {
+    /* Brand Palette */
+    --courses-logo-red: #D62828; 
+    --courses-logo-blue: #0072C6; 
+    --courses-logo-gold: #FCA311; 
+    --courses-logo-black: #1D1D1D; 
+    --courses-logo-white: #FFFFFF; 
+
+    /* Functional Colors */
+    --courses-color-background-light: var(--courses-logo-white);
+    --courses-color-background-medium: #f7f7f7;
+    --courses-color-text-main: #333;
+    --courses-color-text-light: #555;
+    --courses-color-border: #e0e0e0;
+
+    --courses-shadow-card: 0 5px 15px rgba(0,0,0,0.08);
+    --courses-shadow-hover: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.courses-page {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--courses-color-text-main);
+    line-height: 1.65;
+    background-color: var(--courses-color-background-light);
+}
+
+.courses-page a { text-decoration: none; color: inherit; }
+
+/* --- Hero Section --- */
+.courses-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 20px 140px; /* Extra bottom padding for stats overlap */
+    text-align: center;
+    color: var(--courses-logo-white);
+}
+.courses-hero h1 { font-size: 48px; margin-bottom: 15px; font-weight: 800; letter-spacing: 1px; }
+.courses-hero p { font-size: 20px; font-weight: 300; max-width: 900px; margin: 0 auto; color: var(--courses-logo-gold); }
+
+/* --- Stats Banner --- */
+.courses-stats-bar {
+    margin-top: -60px;
+    background: var(--courses-logo-white);
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+    border-bottom: 4px solid var(--courses-logo-blue);
+}
+.courses-stat-item { text-align: center; border-right: 1px solid #eee; }
+.courses-stat-item:last-child { border-right: none; }
+.courses-stat-item h3 { font-size: 28px; color: var(--courses-logo-red); margin-bottom: 5px; }
+.courses-stat-item p { font-size: 13px; font-weight: 600; text-transform: uppercase; color: #555; }
+
+/* --- Main Content Styling --- */
+.courses-content-section { padding: 80px 20px; }
+.courses-section-title { 
+    font-size: 32px; 
+    color: var(--courses-logo-blue); 
+    margin-bottom: 30px; 
+    border-left: 5px solid var(--courses-logo-gold); 
+    padding-left: 15px; 
+    font-weight: 700;
+}
+
+.courses-text-block { font-size: 16px; color: #444; text-align: justify; margin-bottom: 20px; }
+.courses-highlight-box {
+    background: #f9f9f9;
+    border-left: 4px solid var(--courses-logo-blue);
+    padding: 20px;
+    margin: 20px 0;
+    font-size: 15px;
+}
+
+/* --- Course Cards --- */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+.courses-card {
+    background: var(--courses-logo-white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--courses-shadow-card);
+    transition: transform 0.3s ease;
+    border-top: 4px solid transparent;
+}
+.courses-card:hover { transform: translateY(-5px); box-shadow: var(--courses-shadow-hover); }
+.courses-card.courses-btech { border-top-color: var(--courses-logo-red); }
+.courses-card.courses-mtech { border-top-color: var(--courses-logo-blue); }
+.courses-card.courses-bvoc { border-top-color: var(--courses-logo-gold); }
+
+.courses-card h3 { font-size: 22px; margin-bottom: 10px; color: var(--courses-logo-black); }
+.courses-card .courses-duration { font-size: 14px; color: #777; margin-bottom: 15px; display: block; font-weight: 600; }
+.courses-card p { font-size: 14px; color: #555; line-height: 1.6; }
+
+/* --- Tables Styling --- */
+.courses-table-container { overflow-x: auto; margin: 30px 0; box-shadow: var(--courses-shadow-card); border-radius: 8px; }
+.courses-data-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+.courses-data-table th, .courses-data-table td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
+.courses-data-table th { background: var(--courses-logo-blue); color: white; font-weight: 600; }
+.courses-data-table tr:nth-child(even) { background: #f9f9f9; }
+.courses-data-table tr:last-child td { border-bottom: none; font-weight: bold; color: var(--courses-logo-red); }
+
+/* --- Karma Section --- */
+.courses-karma-section {
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    padding: 60px 20px;
+    border-radius: 15px;
+    margin-top: 60px;
+    border: 1px solid #ddd;
+}
+.courses-karma-section h3 { font-size: 24px; color: var(--courses-logo-red); margin-bottom: 20px; }
+.courses-karma-list li { margin-bottom: 10px; font-size: 15px; color: #444; }
+
+/* --- Contact Bar --- */
+.courses-contact-bar {
+    background: var(--courses-logo-black);
+    color: var(--courses-logo-white);
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 60px;
+}
+.courses-contact-bar h3 { font-size: 24px; margin-bottom: 10px; color: var(--courses-logo-gold); }
+.courses-contact-bar p { font-size: 16px; opacity: 0.9; }
+.courses-contact-bar a { color: var(--courses-logo-gold); font-weight: bold; margin-left: 5px; }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .courses-stat-item { border-right: none; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+}
+@media (max-width: 768px) {
+    .courses-hero h1 { font-size: 36px; }
+}

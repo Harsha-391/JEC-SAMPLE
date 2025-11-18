@@ -15,28 +15,17 @@ const jecMenuItems = [
 ];
 
 const admissionMenuItems = [
-  // NEW: Points to the Documents Required page
   { title: 'Documents Required', path: '/admissions/documents' },
   
+  // NEW: Points to the Courses Offered page
   { title: 'Courses Offered', path: '/admissions/courses' },
   
-  // NEW: Points to the Fee Structure page
   { title: 'Fee Structure', path: '/admissions/fees' },
-  
-  // NEW: Point to the Mandatory Disclosure page
   { title: 'Mandatory Disclosure', path: '/admissions/disclosure' },
-  
-  // NEW: Point to the Financial Aids page
   { title: 'Financial Aids & Bank Loans', path: '/admissions/financial-aid' },
-  
-  // NEW: Point to the REAP page 
   { title: 'REAP-2025', path: '/admissions/reap' }, 
-  
   { title: 'Admission Open 2025', path: '/admissions/open' },
-
-  // NEW: Point to the Karma Courses page 
   { title: 'Karma Courses @JEC', path: '/admissions/karma' },
-  
   { title: 'Admission Procedure', path: '/admissions/procedure' },
 ];
 
