@@ -17,9 +17,9 @@ import Alumni from './pages/Alumni';
 import Employment from './pages/Employment';
 import AntiRagging from './pages/AntiRagging';
 import Testimonials from './pages/Testimonials';
+import JCES from './pages/JCES'; // <-- IMPORT THE NEW PAGE
 
-// --- Placeholder Component for New Society Pages ---
-// You can replace this later with real page components like import Foundation from './pages/Foundation';
+// --- Placeholder Component for other new pages ---
 const SocietyPlaceholder = ({ title }) => (
   <div style={{ padding: '100px 20px', textAlign: 'center', background: '#f8f9fa', minHeight: '50vh' }}>
     <h1 style={{ color: '#0072C6', marginBottom: '20px' }}>{title}</h1>
@@ -51,10 +51,13 @@ function App() {
           <Route path="jec/anti-ragging" element={<AntiRagging />} />
           <Route path="jec/testimonials" element={<Testimonials />} />
 
-          {/* Our Society Dropdown Routes (New) */}
+          {/* Our Society Dropdown Routes */}
           <Route path="society/foundation" element={<SocietyPlaceholder title="Foundation for Better Tomorrow" />} />
           <Route path="society/agrasen-college" element={<SocietyPlaceholder title="Agrasen College" />} />
-          <Route path="society/jces" element={<SocietyPlaceholder title="Jaipur College of Education & Science" />} />
+          
+          {/* REPLACED THE PLACEHOLDER WITH THE REAL COMPONENT HERE */}
+          <Route path="society/jces" element={<JCES />} />
+          
           <Route path="society/teams" element={<SocietyPlaceholder title="Key Teams & Functions" />} />
 
         </Route>
