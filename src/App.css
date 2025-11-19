@@ -2209,17 +2209,6 @@ footer {
   color: inherit;
 }
 
-/* Subheader Nav (Section Anchor Links) */
-.about-page-new .subheader {
-  background: var(--color-background-light);
-  padding: 10px 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  /* Make the subheader stick under the main header */
-  position: sticky;
-  top: 139px; /* Adjust this value to match your main header's height */
-  z-index: 999;
-}
-
 /* --- Hero Section --- */
 .about-page-new .hero {
   height: 450px;
@@ -2463,9 +2452,6 @@ footer {
 @media (max-width: 768px) {
   .about-page-new .hero h1 { font-size: 48px; }
   .about-page-new .hero p { font-size: 18px; }
- 
-  .about-page-new .subheader-content { justify-content: center; }
-  .about-page-new .subheader-nav { flex-wrap: wrap; justify-content: center; gap: 15px; }
  
   .about-page-new .milestone-grid, 
   .about-page-new .card-grid, 
