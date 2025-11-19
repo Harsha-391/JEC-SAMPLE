@@ -33,7 +33,8 @@ import AdmissionProcedure from './pages/AdmissionProcedure';
 
 // NEW IMPORTS
 import RefuelAndRelax from './pages/RefuelAndRelax';
-import PrepareAndPresent from './pages/PrepareAndPresent'; // <-- Added this
+import PrepareAndPresent from './pages/PrepareAndPresent';
+import LearningByDoing from './pages/LearningByDoing'; // <-- Added this
 
 function App() {
   return (
@@ -57,7 +58,8 @@ function App() {
 
           {/* Infrastructure Dropdown Routes */}
           <Route path="infrastructure/refuel" element={<RefuelAndRelax />} />
-          <Route path="infrastructure/prepare" element={<PrepareAndPresent />} /> {/* <-- Added this route */}
+          <Route path="infrastructure/prepare" element={<PrepareAndPresent />} />
+          <Route path="infrastructure/learning" element={<LearningByDoing />} /> {/* <-- Added this route */}
 
           <Route path="placements" element={<Placements />} />
           <Route path="about" element={<About />} />
