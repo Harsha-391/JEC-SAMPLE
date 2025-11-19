@@ -126,11 +126,15 @@ body {
 /* * ==============================
  * MAIN NAVIGATION (Previously Subheader)
  * ==============================
+ *//* * ==============================
+ * MAIN NAVIGATION (Updated)
+ * ==============================
  */
 .main-header-section {
   background: var(--color-background-light);
   padding: 15px 0;
   border-bottom: 1px solid var(--color-border);
+  position: relative; /* For absolute positioning of mobile menu */
 }
 
 .main-header-container {
@@ -164,6 +168,258 @@ body {
   font-weight: 800;
   font-size: 20px;
   line-height: 1.1;
+}
+
+/* Desktop Menu Styles */
+.main-nav-menu {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: auto; 
+}
+
+/* Mobile Toggle Button (Hidden by default) */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--logo-black);
+  cursor: pointer;
+  margin-left: auto; /* Pushes it to the right */
+}
+
+/* --- Navigation Items --- */
+.menu-item,
+.menu-link {
+  position: relative;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.menu-link {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  font-size: 16px;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 4px;
+  white-space: nowrap;
+}
+
+.menu-arrow-icon {
+  font-size: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Hover States */
+.menu-item:hover,
+.menu-link:hover {
+  background-color: var(--color-background-medium);
+}
+
+.menu-item:hover > .menu-link,
+.menu-link:hover {
+  color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.menu-item:hover .menu-arrow-icon {
+  transform: rotate(180deg);
+}
+
+.menu-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  right: 15px;
+  height: 2px;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.menu-item:hover > .menu-link::after,
+.menu-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* --- Dropdown Menu --- */
+.submenu-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 600px;
+  background: var(--logo-white);
+  border-radius: 10px;
+  box-shadow: var(--shadow-medium);
+  padding: 20px;
+  border-top: 3px solid var(--logo-blue);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.menu-item:hover .submenu-container {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.submenu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.submenu-link {
+  text-decoration: none;
+  color: var(--color-text-primary);
+  padding: 12px 15px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.submenu-link:hover {
+  background-color: var(--color-background-medium);
+  color: var(--color-primary);
+  transform: translateX(3px);
+}
+
+/* Alignment Helpers */
+.submenu-container.align-right {
+  left: auto !important;
+  right: 0 !important;
+}
+
+.submenu-container.align-center {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) translateY(10px);
+}
+
+.menu-item:hover .submenu-container.align-center {
+  transform: translateX(-50%) translateY(0);
+}
+
+
+/* * ==============================
+ * RESPONSIVE NAV (UPDATED)
+ * ==============================
+ */
+
+@media (max-width: 1200px) {
+  .main-header-container {
+    gap: 15px;
+  }
+  .menu-link {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+}
+
+/* Tablet and Mobile Breakpoint */
+@media (max-width: 992px) {
+  .main-header-container {
+    justify-content: space-between; /* Keep logo left, button right */
+    padding-bottom: 0;
+  }
+
+  /* Show the Toggle Button */
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  /* Hide the Nav Menu by default on mobile */
+  .main-nav-menu {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--logo-white);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+    max-height: 80vh; /* Limit height */
+    overflow-y: auto; /* Scroll if too long */
+  }
+
+  /* Show Nav Menu when active class is added */
+  .main-nav-menu.active {
+    display: flex;
+  }
+
+  /* Adjust Menu Items for Vertical Layout */
+  .menu-item, .menu-link {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .menu-link::after {
+    display: none; /* Remove underline effect on mobile */
+  }
+
+  /* Mobile Dropdown Styling */
+  .submenu-container,
+  .submenu-container.align-right,
+  .submenu-container.align-center {
+    position: static; /* Stack normally in the flow */
+    width: 100%;
+    min-width: unset;
+    max-width: none;
+    transform: none !important;
+    opacity: 1;
+    visibility: visible;
+    box-shadow: none;
+    border-top: none;
+    padding: 0 0 0 20px; /* Indent dropdown items */
+    display: none; /* Hidden by default, rely on hover or JS */
+    background-color: #f9f9f9;
+  }
+
+  /* Show submenu on hover/click in mobile (simple CSS hover for now) */
+  .menu-item:hover .submenu-container {
+    display: block;
+    transform: none !important;
+  }
+
+  .submenu-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .submenu-link {
+    padding: 12px 15px;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+  }
+}
+
+@media (max-width: 600px) {
+  .brand-logo-link img {
+    height: 45px;
+  }
+  .brand-logo-link .brand-text {
+    font-size: 16px;
+  }
 }
 
 .main-nav-menu {

@@ -1,10 +1,7 @@
 // src/components/Subheader.js
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
-
-// ... [Your existing array data: jecMenuItems, admissionMenuItems etc.] ...
-// Note: Keeping the data arrays as they were in your original file
 
 const jecMenuItems = [
   { title: 'JEC FAQ', path: '/jec/faq' },
@@ -45,27 +42,41 @@ const infraMenuItems = [
 ];
 
 function Subheader() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <div className="main-header-section">
       <div className="main-header-container max-width-container">
         
-        <Link to="/" className="brand-logo-link">
-          <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
-          <div className="brand-text">
-            <span>JEC</span>
-            <span>KUKAS</span>
-          </div>
-        </Link>
+        <div className="logo-wrapper">
+          <Link to="/" className="brand-logo-link">
+            <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
+            <div className="brand-text">
+              <span>JEC</span>
+              <span>KUKAS</span>
+            </div>
+          </Link>
+        </div>
 
-        <nav className="main-nav-menu">
-          <Link to="/" className="menu-link">Home</Link>
+        {/* Mobile Toggle Button */}
+        <button className="mobile-menu-toggle" onClick={toggleMenu} aria-label="Toggle navigation">
+          <i className={isMobileMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>
+        </button>
+
+        {/* Navigation Menu - Conditional Class for Mobile */}
+        <nav className={`main-nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
+          <Link to="/" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
           
           <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" />
           
           <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/admissions" />
 
-          <Link to="/placements" className="menu-link">Placement</Link>
-          <a href="#!" className="menu-link">Departments</a>
+          <Link to="/placements" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Placement</Link>
+          <a href="#!" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Departments</a>
 
           <NavDropdown 
             title="Infrastructure" 
@@ -74,7 +85,7 @@ function Subheader() {
             align="center" 
           />
 
-          <a href="#!" className="menu-link">Campus Life</a>
+          <a href="#!" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Campus Life</a>
 
           <NavDropdown 
             title="Our Society" 
@@ -83,7 +94,7 @@ function Subheader() {
             align="right" 
           />
 
-          <Link to="/contact" className="menu-link">Contact Us</Link>
+          <Link to="/contact" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Contact Us</Link>
         </nav>
 
       </div>
