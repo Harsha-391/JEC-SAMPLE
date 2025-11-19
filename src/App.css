@@ -2447,7 +2447,6 @@ footer {
 
 /* --- Media Queries (Responsiveness) --- */
 @media (max-width: 992px) {
-  .about-page-new .header-content { max-width: 90%; }
 }
 @media (max-width: 768px) {
   .about-page-new .hero h1 { font-size: 48px; }
@@ -6491,7 +6490,6 @@ footer {
     .karma-intro-image-container { order: 1; }
 }
 @media (max-width: 768px) {
-    .header-content { flex-direction: column; gap: 15px; }
     nav { gap: 15px; flex-wrap: wrap; justify-content: center; }
     .karma-hero h1 { font-size: 36px; }
     .karma-contact-info { flex-direction: column; gap: 15px; font-size: 18px; }
