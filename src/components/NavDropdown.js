@@ -2,7 +2,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Added 'align' prop (default is 'left')
 function NavDropdown({ title, items, baseLink = "#!", align = "left" }) {
   
   const handleClick = (e) => {
@@ -12,16 +11,16 @@ function NavDropdown({ title, items, baseLink = "#!", align = "left" }) {
   };
 
   return (
-    <div className="nav-item has-dropdown">
-      <Link to={baseLink} className="nav-link" onClick={handleClick}>
+    <div className="menu-item has-dropdown">
+      <Link to={baseLink} className="menu-link" onClick={handleClick}>
         {title}
-        <i className="fas fa-chevron-down dropdown-arrow"></i>
+        <i className="fas fa-chevron-down menu-arrow-icon"></i>
       </Link>
       
-      {/* Apply the alignment class dynamically */}
-           <div className={`dropdown-menu ${align === 'right' ? 'align-right' : align === 'center' ? 'align-center' : ''}`}>        <div className="dropdown-grid">
+      <div className={`submenu-container ${align === 'right' ? 'align-right' : align === 'center' ? 'align-center' : ''}`}>
+        <div className="submenu-grid">
           {items.map((item, index) => (
-            <Link key={index} to={item.path} className="dropdown-item">
+            <Link key={index} to={item.path} className="submenu-link">
               {item.title}
             </Link>
           ))}
