@@ -316,7 +316,7 @@ header {
   display: flex;
   justify-content: flex-start; /* Changed from space-between to flex-start */
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 30px; /* Adds space between Logo and Menu */
 }
 
@@ -325,7 +325,7 @@ header {
   display: flex;
   gap: 10px; 
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 /* --- NEW DROPDOWN STYLES END HERE --- */
 /* Side Icon Bar */
