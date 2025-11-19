@@ -35,6 +35,12 @@ const societyMenuItems = [
   { title: 'Key Teams & Functions', path: '/society/teams' },
 ];
 
+const infraMenuItems = [
+  { title: 'Convenience and Safety', path: '/infrastructure/convenience' },
+  { title: 'Learning By Doing', path: '/infrastructure/learning' },
+  { title: 'Prepare and Present', path: '/infrastructure/prepare' },
+  { title: 'Refuel and Relax', path: '/infrastructure/refuel' },
+];
 function Subheader() {
   return (
     <div className="subheader">
@@ -57,7 +63,16 @@ function Subheader() {
 
           <Link to="/placements" className="nav-link">Placement</Link>
           <a href="#!" className="nav-link">Departments</a>
-          <a href="#!" className="nav-link">Infrastructure</a>
+
+          {/* 2. REPLACE THE STATIC LINK WITH THIS DROPDOWN */}
+          {/* We use align="center" to help keep it on screen */}
+          <NavDropdown 
+            title="Infrastructure" 
+            items={infraMenuItems} 
+            baseLink="/infrastructure" 
+            align="center" 
+          />
+
           <a href="#!" className="nav-link">Campus Life</a>
 
           <NavDropdown 

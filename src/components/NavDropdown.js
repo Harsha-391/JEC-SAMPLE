@@ -19,8 +19,7 @@ function NavDropdown({ title, items, baseLink = "#!", align = "left" }) {
       </Link>
       
       {/* Apply the alignment class dynamically */}
-      <div className={`dropdown-menu ${align === 'right' ? 'align-right' : ''}`}>
-        <div className="dropdown-grid">
+           <div className={`dropdown-menu ${align === 'right' ? 'align-right' : align === 'center' ? 'align-center' : ''}`}>        <div className="dropdown-grid">
           {items.map((item, index) => (
             <Link key={index} to={item.path} className="dropdown-item">
               {item.title}

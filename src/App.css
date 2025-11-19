@@ -7948,3 +7948,47 @@ footer {
 @media (max-width: 768px) {
     .ap-hero h1 { font-size: 36px; }
 }
+/* --- ADD THIS TO THE BOTTOM OF App.css --- */
+
+/* 1. Center Alignment Logic for the Infrastructure Menu */
+/* This assumes you pass the prop: align="center" to NavDropdown */
+.dropdown-menu.align-center {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) translateY(10px); /* Centers it horizontally */
+  min-width: 280px; /* Standard width */
+}
+
+/* Fix hover state for centered menu so it doesn't jump */
+.nav-item:hover .dropdown-menu.align-center {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* 2. Responsive / Mobile Adjustments */
+@media (max-width: 992px) {
+  .dropdown-menu,
+  .dropdown-menu.align-right,
+  .dropdown-menu.align-center {
+    /* On mobile, force all menus to center relative to the parent container */
+    position: absolute;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) translateY(10px);
+    
+    /* Make it fit the screen width */
+    width: 90vw;
+    min-width: unset;
+    box-sizing: border-box;
+  }
+
+  .nav-item:hover .dropdown-menu,
+  .nav-item:hover .dropdown-menu.align-right,
+  .nav-item:hover .dropdown-menu.align-center {
+     transform: translateX(-50%) translateY(0);
+  }
+
+  /* Ensure the grid inside is single column on small screens */
+  .dropdown-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
