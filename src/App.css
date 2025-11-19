@@ -7956,7 +7956,7 @@ footer {
   left: 50% !important;
   right: auto !important;
   transform: translateX(-50%) translateY(10px); /* Centers it horizontally */
-  min-width: 280px; /* Standard width */
+  min-width: 600px; /* Standard width */
 }
 
 /* Fix hover state for centered menu so it doesn't jump */
