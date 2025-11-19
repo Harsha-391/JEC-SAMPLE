@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
 
+// ... Keep your menu arrays (jecMenuItems, etc.) exactly as they are ...
 const jecMenuItems = [
   { title: 'JEC FAQ', path: '/jec/faq' },
   { title: 'Employment @JEC', path: '/jec/employment' },
@@ -48,35 +49,42 @@ function Subheader() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Close menu when a link is clicked
+  const closeMenu = () => setIsMobileMenuOpen(false);
+
   return (
     <div className="main-header-section">
       <div className="main-header-container max-width-container">
         
-        <div className="logo-wrapper">
-          <Link to="/" className="brand-logo-link">
-            <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
-            <div className="brand-text">
-              <span>JEC</span>
-              <span>KUKAS</span>
-            </div>
-          </Link>
-        </div>
+        {/* 1. Logo on the LEFT */}
+        <Link to="/" className="brand-logo-link" onClick={closeMenu}>
+          <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
+          <div className="brand-text">
+            <span>JEC</span>
+            <span>KUKAS</span>
+          </div>
+        </Link>
 
-        {/* Mobile Toggle Button */}
-        <button className="mobile-menu-toggle" onClick={toggleMenu} aria-label="Toggle navigation">
-          <i className={isMobileMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>
+        {/* 2. Menu Toggle Button on the RIGHT */}
+        <button 
+          className="mobile-menu-toggle" 
+          onClick={toggleMenu} 
+          aria-label="Toggle navigation"
+        >
+          {/* Using ellipsis-v for triple dot, or bars for hamburger */}
+          <i className={isMobileMenuOpen ? "fas fa-times" : "fas fa-ellipsis-v"}></i>
         </button>
 
-        {/* Navigation Menu - Conditional Class for Mobile */}
+        {/* 3. Navigation Menu (Hidden by default on mobile, shown when active) */}
         <nav className={`main-nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
-          <Link to="/" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+          <Link to="/" className="menu-link" onClick={closeMenu}>Home</Link>
           
           <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" />
           
           <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/admissions" />
 
-          <Link to="/placements" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Placement</Link>
-          <a href="#!" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Departments</a>
+          <Link to="/placements" className="menu-link" onClick={closeMenu}>Placement</Link>
+          <a href="#!" className="menu-link" onClick={closeMenu}>Departments</a>
 
           <NavDropdown 
             title="Infrastructure" 
@@ -85,7 +93,7 @@ function Subheader() {
             align="center" 
           />
 
-          <a href="#!" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Campus Life</a>
+          <a href="#!" className="menu-link" onClick={closeMenu}>Campus Life</a>
 
           <NavDropdown 
             title="Our Society" 
@@ -94,7 +102,7 @@ function Subheader() {
             align="right" 
           />
 
-          <Link to="/contact" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Contact Us</Link>
+          <Link to="/contact" className="menu-link" onClick={closeMenu}>Contact Us</Link>
         </nav>
 
       </div>

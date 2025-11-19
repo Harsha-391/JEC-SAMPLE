@@ -335,31 +335,40 @@ body {
 
 /* Tablet and Mobile Breakpoint */
 @media (max-width: 992px) {
+  /* 1. Header Container: Space Logo and Button */
   .main-header-container {
-    justify-content: space-between; /* Keep logo left, button right */
-    padding-bottom: 0;
+    justify-content: space-between; 
+    padding: 0 20px;
+    position: relative; /* Context for absolute menu */
   }
 
   /* Show the Toggle Button */
   .mobile-menu-toggle {
     display: block;
+    font-size: 24px;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    z-index: 1102; /* Above everything */
   }
 
   /* Hide the Nav Menu by default on mobile */
-  .main-nav-menu {
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
+ .main-nav-menu {
+    display: none; /* Hidden by default */
     position: absolute;
-    top: 100%;
+    top: 100%; /* Push it right below the header bar */
     left: 0;
-    background: var(--logo-white);
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-    padding: 10px 0;
-    border-top: 1px solid #eee;
-    max-height: 80vh; /* Limit height */
-    overflow-y: auto; /* Scroll if too long */
+    width: 100%; /* Full width */
+    background-color: var(--logo-white); /* Solid white background */
+    flex-direction: column; /* Stack items vertically */
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1); /* Shadow for depth */
+    border-top: 1px solid var(--color-border);
+    max-height: 80vh; /* Prevent it from being too tall */
+    overflow-y: auto; /* Scrollable if too many items */
+    z-index: 1101; /* Ensure it sits on top of page content */
+    padding-bottom: 20px;
   }
 
   /* Show Nav Menu when active class is added */
@@ -368,11 +377,22 @@ body {
   }
 
   /* Adjust Menu Items for Vertical Layout */
-  .menu-item, .menu-link {
+ .menu-item, 
+  .menu-link {
     width: 100%;
+    text-align: left;
     padding: 15px 20px;
     border-radius: 0;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f5f5f5;
+    display: flex;
+    justify-content: space-between; /* Align text left, arrow right */
+    align-items: center;
+  }
+
+  .menu-item:hover,
+  .menu-link:hover {
+    background-color: #f9f9f9;
+    transform: none;
   }
 
   .menu-link::after {
@@ -380,27 +400,25 @@ body {
   }
 
   /* Mobile Dropdown Styling */
-  .submenu-container,
+.submenu-container,
   .submenu-container.align-right,
   .submenu-container.align-center {
-    position: static; /* Stack normally in the flow */
+    position: static; /* Stack naturally below the parent link */
     width: 100%;
     min-width: unset;
-    max-width: none;
+    box-shadow: none;
+    border-top: none;
+    padding: 0;
+    display: none; /* Hidden until parent is hovered/clicked */
+    background-color: #f0f4f8; /* Slightly darker bg for contrast */
     transform: none !important;
     opacity: 1;
     visibility: visible;
-    box-shadow: none;
-    border-top: none;
-    padding: 0 0 0 20px; /* Indent dropdown items */
-    display: none; /* Hidden by default, rely on hover or JS */
-    background-color: #f9f9f9;
   }
 
   /* Show submenu on hover/click in mobile (simple CSS hover for now) */
-  .menu-item:hover .submenu-container {
+ .menu-item:hover .submenu-container {
     display: block;
-    transform: none !important;
   }
 
   .submenu-grid {
@@ -409,10 +427,9 @@ body {
     gap: 0;
   }
   
-  .submenu-link {
-    padding: 12px 15px;
-    font-size: 14px;
-    border-bottom: 1px solid #eee;
+ .submenu-link {
+    padding: 12px 30px; /* Indent submenu items */
+    border-bottom: 1px solid #e0e0e0;
   }
 }
 
