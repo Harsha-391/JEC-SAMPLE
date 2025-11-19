@@ -128,8 +128,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* Added for better responsiveness */
-  gap: 15px;
+  flex-wrap: nowrap; /* Added for better responsiveness */
+  gap: 20px;
 }
 
 .subheader-logo {
