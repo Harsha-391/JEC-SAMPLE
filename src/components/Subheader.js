@@ -1,6 +1,10 @@
+// src/components/Subheader.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
+
+// ... [Your existing array data: jecMenuItems, admissionMenuItems etc.] ...
+// Note: Keeping the data arrays as they were in your original file
 
 const jecMenuItems = [
   { title: 'JEC FAQ', path: '/jec/faq' },
@@ -23,8 +27,6 @@ const admissionMenuItems = [
   { title: 'REAP-2025', path: '/admissions/reap' }, 
   { title: 'Admission Open 2025', path: '/admissions/open' },
   { title: 'Karma Courses @JEC', path: '/admissions/karma' },
-  
-  // NEW: Points to the Admission Procedure page
   { title: 'Admission Procedure', path: '/admissions/procedure' },
 ];
 
@@ -41,31 +43,30 @@ const infraMenuItems = [
   { title: 'Prepare and Present', path: '/infrastructure/prepare' },
   { title: 'Refuel and Relax', path: '/infrastructure/refuel' },
 ];
+
 function Subheader() {
   return (
-    <div className="subheader">
-      <div className="subheader-content max-width-container">
+    <div className="main-header-section">
+      <div className="main-header-container max-width-container">
         
-        <Link to="/" className="subheader-logo">
+        <Link to="/" className="brand-logo-link">
           <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
-          <div className="logo-text">
+          <div className="brand-text">
             <span>JEC</span>
             <span>KUKAS</span>
           </div>
         </Link>
 
-        <nav className="subheader-nav">
-          <Link to="/" className="nav-link">Home</Link>
+        <nav className="main-nav-menu">
+          <Link to="/" className="menu-link">Home</Link>
           
           <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" />
           
           <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/admissions" />
 
-          <Link to="/placements" className="nav-link">Placement</Link>
-          <a href="#!" className="nav-link">Departments</a>
+          <Link to="/placements" className="menu-link">Placement</Link>
+          <a href="#!" className="menu-link">Departments</a>
 
-          {/* 2. REPLACE THE STATIC LINK WITH THIS DROPDOWN */}
-          {/* We use align="center" to help keep it on screen */}
           <NavDropdown 
             title="Infrastructure" 
             items={infraMenuItems} 
@@ -73,7 +74,7 @@ function Subheader() {
             align="center" 
           />
 
-          <a href="#!" className="nav-link">Campus Life</a>
+          <a href="#!" className="menu-link">Campus Life</a>
 
           <NavDropdown 
             title="Our Society" 
@@ -82,7 +83,7 @@ function Subheader() {
             align="right" 
           />
 
-          <Link to="/contact" className="nav-link">Contact Us</Link>
+          <Link to="/contact" className="menu-link">Contact Us</Link>
         </nav>
 
       </div>

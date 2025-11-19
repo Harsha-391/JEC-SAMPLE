@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 function Header() {
   return (
-    <header>
-      <div className="header-content max-width-container">
+    <header className="top-bar-section">
+      <div className="top-bar-container max-width-container">
         {/* Contact Info on the Left */}
-        <div className="header-contact">
+        <div className="top-bar-contact">
           <a href="tel:+918875071333">
             <i className="fas fa-phone"></i> +91-8875071333 (30 lines)
           </a>
@@ -17,7 +17,7 @@ function Header() {
         </div>
         
         {/* Links on the Right */}
-        <nav className="header-nav">
+        <nav className="top-bar-links">
           <a href="#!">
             <i className="fas fa-edit"></i> Admission Enquiry Open 2025
           </a>
