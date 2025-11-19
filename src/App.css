@@ -132,7 +132,7 @@ body {
  */
 .main-header-section {
   background: var(--color-background-light);
-  padding: 15px 0;
+  padding: 10px 0;
   border-bottom: 1px solid var(--color-border);
   position: relative; /* For absolute positioning of mobile menu */
 }
@@ -157,7 +157,7 @@ body {
 }
 
 .brand-logo-link img {
-  height: 60px;
+  height: 50px;
   width: auto;
 }
 
@@ -166,7 +166,7 @@ body {
   flex-direction: column;
   color: var(--logo-red);
   font-weight: 800;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.1;
 }
 
@@ -184,12 +184,14 @@ body {
   display: none;
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 28px;
   color: var(--logo-black);
-  cursor: pointer;
-  margin-left: auto; /* Pushes it to the right */
+  padding: 5px;
+  transition: color 0.3s ease;
 }
-
+.mobile-menu-toggle:hover {
+  color: var(--logo-red);
+}
 /* --- Navigation Items --- */
 .menu-item,
 .menu-link {
@@ -266,7 +268,7 @@ body {
   visibility: hidden;
   transform: translateY(10px);
   transition: all 0.3s ease;
-  z-index: 100;
+  z-index: 1100;
 }
 
 .menu-item:hover .submenu-container {
@@ -334,7 +336,7 @@ body {
 @media (max-width: 992px) {
   .main-header-container {
     justify-content: space-between; /* Keep logo left, button right */
-    padding-bottom: 0;
+    padding: 0 20px;
   }
 
   /* Show the Toggle Button */
@@ -346,17 +348,17 @@ body {
   .main-nav-menu {
     display: none;
     flex-direction: column;
-    align-items: stretch;
     width: 100%;
     position: absolute;
     top: 100%;
     left: 0;
     background: var(--logo-white);
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-    padding: 10px 0;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    padding: 0;
     border-top: 1px solid #eee;
-    max-height: 80vh; /* Limit height */
-    overflow-y: auto; /* Scroll if too long */
+    max-height: 80vh; 
+    overflow-y: auto; 
+    z-index: 1099;
   }
 
   /* Show Nav Menu when active class is added */
@@ -365,11 +367,11 @@ body {
   }
 
   /* Adjust Menu Items for Vertical Layout */
-  .menu-item, .menu-link {
+.menu-link {
     width: 100%;
     padding: 15px 20px;
-    border-radius: 0;
     border-bottom: 1px solid #f0f0f0;
+    justify-content: space-between; /* Align arrow to right */
   }
 
   .menu-link::after {
@@ -579,7 +581,7 @@ body {
 
   .brand-logo-link {
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
   }
 
   .main-nav-menu {
