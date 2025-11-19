@@ -34,13 +34,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   color: var(--color-text-primary);
   line-height: 1.6;
-}
-/* Header */
-/*
- * HEADER & SUBHEADER
- */
-
-.sticky-header {
+}.sticky-header {
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -48,9 +42,10 @@ body {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* --- Header (Top black bar) --- */
-/*
-/* --- Top Red Bar (Header) --- */
+/* * ==============================
+ * TOP HEADER (Black Bar)
+ * ==============================
+ */
 header {
   background: var(--logo-black);
   padding: 10px 0; 
@@ -63,7 +58,10 @@ header {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap; 
-  gap: 5px; 
+  gap: 10px; 
+  padding: 0 20px; /* Added padding for edge safety */
+  max-width: 1300px; /* Constraint width for large screens */
+  margin: 0 auto;
 }
 
 .header-contact,
@@ -75,24 +73,23 @@ header {
 }
 
 .header-content a {
-  color: var(--logo-white); /* Default color is white */
+  color: var(--logo-white);
   text-decoration: none;
   font-size: 12px;
   font-weight: 500;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  transition: color 0.3s ease, transform 0.3s ease;
   position: relative;
-  padding-bottom: 4px; /* Space for the underline */
+  padding-bottom: 4px;
 }
 
 .header-content a:hover {
-  color: var(--logo-gold); /* Hover color is yellow (logo-gold) */
-  transform: translateY(-1px); /* Subtle lift */
+  color: var(--logo-gold);
+  transform: translateY(-1px);
 }
 
-/* Add a subtle underline effect on hover */
 .header-content a::after {
   content: '';
   position: absolute;
@@ -107,17 +104,37 @@ header {
 }
 
 .header-content a:hover::after {
-  transform: scaleX(1); /* Show underline on hover */
+  transform: scaleX(1);
 }
 
-/* Style icons slightly larger */
 .header-content a i {
   font-size: 16px;
   width: 20px;
   text-align: center;
 }
 
-/* --- White Main Nav (Subheader) --- */
+/* --- RESPONSIVE HEADER --- */
+@media (max-width: 768px) {
+  .header-content {
+    justify-content: center; /* Center content on mobile */
+    flex-direction: column; /* Stack items */
+    padding: 5px 15px;
+  }
+  
+  .header-contact, .header-nav {
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .header-content a {
+    font-size: 11px; /* Slightly smaller font on mobile */
+  }
+}
+
+/* * ==============================
+ * SUBHEADER (Main Navigation)
+ * ==============================
+ */
 .subheader {
   background: var(--color-background-light);
   padding: 15px 0;
@@ -126,10 +143,13 @@ header {
 
 .subheader-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  flex-wrap: nowrap; /* Added for better responsiveness */
-  gap: 20px;
+  flex-wrap: nowrap;
+  gap: 30px;
+  max-width: 1300px; /* Align with top header */
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .subheader-logo {
@@ -137,10 +157,11 @@ header {
   align-items: center;
   gap: 15px;
   text-decoration: none;
+  flex-shrink: 0; /* Prevent logo from squishing */
 }
 
 .subheader-logo img {
-  height: 60px; /* Taller logo */
+  height: 60px;
   width: auto;
 }
 
@@ -153,26 +174,24 @@ header {
   line-height: 1.1;
 }
 
-/* --- NEW DROPDOWN STYLES START HERE --- */
 .subheader-nav {
   display: flex;
-  gap: 5px; /* Reduced gap for tightly packed items */
+  gap: 5px;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Allow wrapping on smaller laptops */
   margin-left: auto; 
 }
 
-/* This is the container for ONE nav link (or dropdown) */
+/* --- Navigation Items --- */
 .nav-item,
 .nav-link {
   position: relative;
   text-decoration: none;
-  padding: 10px 15px; /* Added padding for a larger click area */
+  padding: 10px 15px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
 
-/* This is the text link itself */
 .nav-link {
   color: var(--color-text-primary);
   font-weight: 600;
@@ -180,43 +199,40 @@ header {
   transition: color 0.3s ease, transform 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 8px; /* Space for the arrow */
-  padding-bottom: 4px; /* Space for the underline */
+  gap: 8px;
+  padding-bottom: 4px;
+  white-space: nowrap; /* Prevent text breaking */
 }
 
-/* The arrow icon */
 .dropdown-arrow {
   font-size: 10px;
   transition: transform 0.3s ease;
 }
 
-/* Hover state for all nav items */
+/* Hover States */
 .nav-item:hover,
 .nav-link:hover {
   background-color: var(--color-background-medium);
 }
 
-/* Hover state for the text/link */
 .nav-item:hover > .nav-link,
 .nav-link:hover {
-  color: var(--color-accent); /* CHANGED to yellow (logo-gold) */
-  transform: translateY(-1px); /* ADDED subtle lift */
+  color: var(--color-accent);
+  transform: translateY(-1px);
 }
 
-/* Rotate arrow on hover */
 .nav-item:hover .dropdown-arrow {
   transform: rotate(180deg);
 }
 
-/* ADDED underline animation for subheader */
 .nav-link::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 15px; /* Align with padding */
-  right: 15px; /* Align with padding */
+  left: 15px;
+  right: 15px;
   height: 2px;
-  background-color: var(--color-accent); /* Underline is yellow */
+  background-color: var(--color-accent);
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 0.3s ease;
@@ -224,22 +240,20 @@ header {
 
 .nav-item:hover > .nav-link::after,
 .nav-link:hover::after {
-  transform: scaleX(1); /* Show underline on hover */
+  transform: scaleX(1);
 }
 
-/* The hidden dropdown menu */
+/* --- Dropdown Menu --- */
 .dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 600px; /* Width of the 3x3 grid */
+  min-width: 600px;
   background: var(--logo-white);
   border-radius: 10px;
   box-shadow: var(--shadow-medium);
   padding: 20px;
   border-top: 3px solid var(--logo-blue);
- 
-  /* Hide by default */
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
@@ -247,21 +261,18 @@ header {
   z-index: 100;
 }
 
-/* Show the menu on hover */
 .nav-item:hover .dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
 
-/* The 3x3 Grid */
 .dropdown-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
 
-/* Each item in the grid */
 .dropdown-item {
   text-decoration: none;
   color: var(--color-text-primary);
@@ -270,6 +281,7 @@ header {
   font-weight: 500;
   font-size: 15px;
   transition: all 0.3s ease;
+  display: block;
 }
 
 .dropdown-item:hover {
@@ -277,55 +289,124 @@ header {
   color: var(--color-primary);
   transform: translateX(3px);
 }
-/* ... existing .dropdown-menu styles ... */
 
-/* 1. ADD THIS: Style for right-aligned menus */
+/* Alignment Helpers */
 .dropdown-menu.align-right {
   left: auto !important;
   right: 0 !important;
 }
 
-/* 2. ADD THIS: Responsive adjustments for smaller screens */
-@media (max-width: 992px) {
-  .dropdown-menu {
-    min-width: 300px; /* Shrink width on tablets */
-    width: 90vw;      /* Or make it responsive to viewport */
-    left: 50% !important;        /* Center it relative to parent... */
-    transform: translateX(-50%) translateY(10px); /* ...and offset center */
+.dropdown-menu.align-center {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) translateY(10px);
+}
+
+.nav-item:hover .dropdown-menu.align-center {
+  transform: translateX(-50%) translateY(0);
+}
+
+
+/* * ==============================
+ * RESPONSIVE SUBHEADER & DROPDOWNS
+ * ==============================
+ */
+
+/* Tablet and Small Laptop (max-width: 1200px) */
+@media (max-width: 1200px) {
+  .subheader-content {
+    gap: 15px;
   }
-  
-  /* Override alignment on mobile since we center everything */
-  .dropdown-menu.align-right {
-    left: 50% !important;
-    right: auto !important;
+  .nav-link {
+    font-size: 14px; /* Slightly smaller text to fit */
+    padding: 8px 10px;
+  }
+}
+
+/* Tablets and Mobile (max-width: 992px) */
+@media (max-width: 992px) {
+  .subheader-content {
+    flex-direction: column; /* Stack Logo and Nav */
+    align-items: stretch;
+    padding-bottom: 10px;
   }
 
-  /* Change grid to 2 columns or 1 column on small screens */
+  .subheader-logo {
+    justify-content: center; /* Center logo */
+    margin-bottom: 10px;
+  }
+
+  .subheader-nav {
+    justify-content: center; /* Center links */
+    margin-left: 0;
+    gap: 5px;
+  }
+  
+  .nav-item {
+    /* Position static allows dropdowns to be full width relative to the subheader container if needed, 
+       but for now we keep relative to stack dropdowns underneath */
+    position: relative; 
+  }
+
+  /* Mobile Dropdown Styling */
+  .dropdown-menu,
+  .dropdown-menu.align-right,
+  .dropdown-menu.align-center {
+    /* Force absolute positioning relative to the nav item, but centered on screen */
+    position: absolute;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) translateY(10px) !important;
+    
+    width: 90vw; /* Occupy 90% of viewport width */
+    min-width: unset;
+    max-width: 400px; /* Prevent it from getting too wide on tablets */
+    box-sizing: border-box;
+  }
+
+  /* Fix hover animation for mobile centered dropdowns */
+  .nav-item:hover .dropdown-menu,
+  .nav-item:hover .dropdown-menu.align-right,
+  .nav-item:hover .dropdown-menu.align-center {
+     transform: translateX(-50%) translateY(0) !important;
+  }
+
+  /* Change grid to 2 columns on tablets */
   .dropdown-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
+/* Small Mobile (max-width: 600px) */
 @media (max-width: 600px) {
-  .dropdown-grid {
-    grid-template-columns: 1fr; /* 1 column on mobile */
+  .subheader-logo img {
+    height: 50px; /* Smaller logo */
   }
-}
+  
+  .subheader-logo .logo-text {
+    font-size: 16px;
+  }
+  
+  .subheader-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-.subheader-content {
-  display: flex;
-  justify-content: flex-start; /* Changed from space-between to flex-start */
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 30px; /* Adds space between Logo and Menu */
-}
+  .nav-link {
+    font-size: 13px;
+    padding: 8px;
+  }
 
-/* Ensure the nav takes up available space if needed, or sits naturally */
-.subheader-nav {
-  display: flex;
-  gap: 10px; 
-  align-items: center;
-  flex-wrap: nowrap;
+  /* Single column dropdowns on phones */
+  .dropdown-grid {
+    grid-template-columns: 1fr; 
+  }
+  
+  /* Ensure dropdown doesn't go off screen */
+  .dropdown-menu {
+    width: 94vw;
+  }
 }
 /* --- NEW DROPDOWN STYLES END HERE --- */
 /* Side Icon Bar */
