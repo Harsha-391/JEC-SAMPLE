@@ -159,6 +159,7 @@ header {
   gap: 5px; /* Reduced gap for tightly packed items */
   align-items: center;
   flex-wrap: wrap;
+  margin-left: auto; 
 }
 
 /* This is the container for ONE nav link (or dropdown) */
