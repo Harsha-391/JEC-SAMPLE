@@ -2219,25 +2219,6 @@ footer {
   top: 139px; /* Adjust this value to match your main header's height */
   z-index: 999;
 }
-.about-page-new .subheader-content {
-  display: flex;
-  justify-content: flex-end;
-}
-.about-page-new .subheader-nav {
-  display: flex;
-  gap: 25px;
-}
-.about-page-new .subheader-nav a {
-  font-weight: 600;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: color 0.3s ease;
-  color: var(--color-text-primary);
-}
-.about-page-new .subheader-nav a:hover {
-  color: var(--color-secondary);
-}
 
 /* --- Hero Section --- */
 .about-page-new .hero {
