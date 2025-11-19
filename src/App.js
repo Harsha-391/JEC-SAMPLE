@@ -31,10 +31,11 @@ import CoursesOffered from './pages/CoursesOffered';
 import AdmissionOpen from './pages/AdmissionOpen'; 
 import AdmissionProcedure from './pages/AdmissionProcedure';
 
-// NEW IMPORTS
+// NEW IMPORTS FOR INFRASTRUCTURE PAGES
 import RefuelAndRelax from './pages/RefuelAndRelax';
 import PrepareAndPresent from './pages/PrepareAndPresent';
-import LearningByDoing from './pages/LearningByDoing'; // <-- Added this
+import LearningByDoing from './pages/LearningByDoing';
+import ConvenienceAndSafety from './pages/ConvenienceAndSafety'; // <-- Added this
 
 function App() {
   return (
@@ -59,7 +60,8 @@ function App() {
           {/* Infrastructure Dropdown Routes */}
           <Route path="infrastructure/refuel" element={<RefuelAndRelax />} />
           <Route path="infrastructure/prepare" element={<PrepareAndPresent />} />
-          <Route path="infrastructure/learning" element={<LearningByDoing />} /> {/* <-- Added this route */}
+          <Route path="infrastructure/learning" element={<LearningByDoing />} />
+          <Route path="infrastructure/convenience" element={<ConvenienceAndSafety />} /> {/* <-- Added this route */}
 
           <Route path="placements" element={<Placements />} />
           <Route path="about" element={<About />} />
