@@ -6,18 +6,6 @@ function About() {
     // This new wrapper class will scope all the new styles
     <div className="about-page-new">
 
-      {/* This subheader is now part of the page */}
-      <div className="subheader">
-        <div className="max-width-container subheader-content">
-          <div className="subheader-nav">
-            <a href="#who-we-are">Who We Are</a>
-            <a href="#vmc">V/M/C</a>
-            <a href="#credibility">Accreditation</a>
-            <a href="#features">Features</a>
-          </div>
-        </div>
-      </div>
-
       <section className="hero">
         <div className="hero-content">
           <h1>About JEC: Engineering Excellence</h1>
