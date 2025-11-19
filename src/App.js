@@ -31,8 +31,9 @@ import CoursesOffered from './pages/CoursesOffered';
 import AdmissionOpen from './pages/AdmissionOpen'; 
 import AdmissionProcedure from './pages/AdmissionProcedure';
 
-// NEW IMPORT FOR THE REFUEL & RELAX PAGE
+// NEW IMPORTS
 import RefuelAndRelax from './pages/RefuelAndRelax';
+import PrepareAndPresent from './pages/PrepareAndPresent'; // <-- Added this
 
 function App() {
   return (
@@ -55,8 +56,8 @@ function App() {
           <Route path="admissions/procedure" element={<AdmissionProcedure />} />
 
           {/* Infrastructure Dropdown Routes */}
-          {/* Added this specific route for Refuel & Relax */}
           <Route path="infrastructure/refuel" element={<RefuelAndRelax />} />
+          <Route path="infrastructure/prepare" element={<PrepareAndPresent />} /> {/* <-- Added this route */}
 
           <Route path="placements" element={<Placements />} />
           <Route path="about" element={<About />} />
