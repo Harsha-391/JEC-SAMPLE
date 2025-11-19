@@ -129,10 +129,13 @@ body {
  *//* * ==============================
  * MAIN NAVIGATION (Updated)
  * ==============================
+ *//* * ==============================
+ * MAIN NAVIGATION (Updated)
+ * ==============================
  */
 .main-header-section {
   background: var(--color-background-light);
-  padding: 10px 0;
+  padding: 15px 0;
   border-bottom: 1px solid var(--color-border);
   position: relative; /* For absolute positioning of mobile menu */
 }
@@ -157,7 +160,7 @@ body {
 }
 
 .brand-logo-link img {
-  height: 50px;
+  height: 60px;
   width: auto;
 }
 
@@ -166,7 +169,7 @@ body {
   flex-direction: column;
   color: var(--logo-red);
   font-weight: 800;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.1;
 }
 
@@ -184,252 +187,10 @@ body {
   display: none;
   background: none;
   border: none;
-  font-size: 28px;
+  font-size: 24px;
   color: var(--logo-black);
-  padding: 5px;
-  transition: color 0.3s ease;
-}
-.mobile-menu-toggle:hover {
-  color: var(--logo-red);
-}
-/* --- Navigation Items --- */
-.menu-item,
-.menu-link {
-  position: relative;
-  text-decoration: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.menu-link {
-  color: var(--color-text-primary);
-  font-weight: 600;
-  font-size: 16px;
-  transition: color 0.3s ease, transform 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding-bottom: 4px;
-  white-space: nowrap;
-}
-
-.menu-arrow-icon {
-  font-size: 10px;
-  transition: transform 0.3s ease;
-}
-
-/* Hover States */
-.menu-item:hover,
-.menu-link:hover {
-  background-color: var(--color-background-medium);
-}
-
-.menu-item:hover > .menu-link,
-.menu-link:hover {
-  color: var(--color-accent);
-  transform: translateY(-1px);
-}
-
-.menu-item:hover .menu-arrow-icon {
-  transform: rotate(180deg);
-}
-
-.menu-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 15px;
-  right: 15px;
-  height: 2px;
-  background-color: var(--color-accent);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.3s ease;
-}
-
-.menu-item:hover > .menu-link::after,
-.menu-link:hover::after {
-  transform: scaleX(1);
-}
-
-/* --- Dropdown Menu --- */
-.submenu-container {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 600px;
-  background: var(--logo-white);
-  border-radius: 10px;
-  box-shadow: var(--shadow-medium);
-  padding: 20px;
-  border-top: 3px solid var(--logo-blue);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
-  z-index: 1100;
-}
-
-.menu-item:hover .submenu-container {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.submenu-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.submenu-link {
-  text-decoration: none;
-  color: var(--color-text-primary);
-  padding: 12px 15px;
-  border-radius: 5px;
-  font-weight: 500;
-  font-size: 15px;
-  transition: all 0.3s ease;
-  display: block;
-}
-
-.submenu-link:hover {
-  background-color: var(--color-background-medium);
-  color: var(--color-primary);
-  transform: translateX(3px);
-}
-
-/* Alignment Helpers */
-.submenu-container.align-right {
-  left: auto !important;
-  right: 0 !important;
-}
-
-.submenu-container.align-center {
-  left: 50% !important;
-  right: auto !important;
-  transform: translateX(-50%) translateY(10px);
-}
-
-.menu-item:hover .submenu-container.align-center {
-  transform: translateX(-50%) translateY(0);
-}
-
-
-/* * ==============================
- * RESPONSIVE NAV (UPDATED)
- * ==============================
- */
-
-@media (max-width: 1200px) {
-  .main-header-container {
-    gap: 15px;
-  }
-  .menu-link {
-    font-size: 14px;
-    padding: 8px 10px;
-  }
-}
-
-/* Tablet and Mobile Breakpoint */
-@media (max-width: 992px) {
-  .main-header-container {
-    justify-content: space-between; /* Keep logo left, button right */
-    padding: 0 20px;
-  }
-
-  /* Show the Toggle Button */
-  .mobile-menu-toggle {
-    display: block;
-  }
-
-  /* Hide the Nav Menu by default on mobile */
-  .main-nav-menu {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: var(--logo-white);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    padding: 0;
-    border-top: 1px solid #eee;
-    max-height: 80vh; 
-    overflow-y: auto; 
-    z-index: 1099;
-  }
-
-  /* Show Nav Menu when active class is added */
-  .main-nav-menu.active {
-    display: flex;
-  }
-
-  /* Adjust Menu Items for Vertical Layout */
-.menu-link {
-    width: 100%;
-    padding: 15px 20px;
-    border-bottom: 1px solid #f0f0f0;
-    justify-content: space-between; /* Align arrow to right */
-  }
-
-  .menu-link::after {
-    display: none; /* Remove underline effect on mobile */
-  }
-
-  /* Mobile Dropdown Styling */
-  .submenu-container,
-  .submenu-container.align-right,
-  .submenu-container.align-center {
-    position: static; /* Stack normally in the flow */
-    width: 100%;
-    min-width: unset;
-    max-width: none;
-    transform: none !important;
-    opacity: 1;
-    visibility: visible;
-    box-shadow: none;
-    border-top: none;
-    padding: 0 0 0 20px; /* Indent dropdown items */
-    display: none; /* Hidden by default, rely on hover or JS */
-    background-color: #f9f9f9;
-  }
-
-  /* Show submenu on hover/click in mobile (simple CSS hover for now) */
-  .menu-item:hover .submenu-container {
-    display: block;
-    transform: none !important;
-  }
-
-  .submenu-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  
-  .submenu-link {
-    padding: 12px 15px;
-    font-size: 14px;
-    border-bottom: 1px solid #eee;
-  }
-}
-
-@media (max-width: 600px) {
-  .brand-logo-link img {
-    height: 45px;
-  }
-  .brand-logo-link .brand-text {
-    font-size: 16px;
-  }
-}
-
-.main-nav-menu {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-left: auto; 
+  cursor: pointer;
+  margin-left: auto; /* Pushes it to the right */
 }
 
 /* --- Navigation Items --- */
@@ -558,7 +319,7 @@ body {
 
 
 /* * ==============================
- * RESPONSIVE NAV
+ * RESPONSIVE NAV (UPDATED)
  * ==============================
  */
 
@@ -572,79 +333,95 @@ body {
   }
 }
 
+/* Tablet and Mobile Breakpoint */
 @media (max-width: 992px) {
   .main-header-container {
+    justify-content: space-between; /* Keep logo left, button right */
+    padding-bottom: 0;
+  }
+
+  /* Show the Toggle Button */
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  /* Hide the Nav Menu by default on mobile */
+  .main-nav-menu {
+    display: none;
     flex-direction: column;
     align-items: stretch;
-    padding-bottom: 10px;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--logo-white);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+    max-height: 80vh; /* Limit height */
+    overflow-y: auto; /* Scroll if too long */
   }
 
-  .brand-logo-link {
-    justify-content: center;
-    margin-bottom: 0px;
+  /* Show Nav Menu when active class is added */
+  .main-nav-menu.active {
+    display: flex;
   }
 
-  .main-nav-menu {
-    justify-content: center;
-    margin-left: 0;
-    gap: 5px;
+  /* Adjust Menu Items for Vertical Layout */
+  .menu-item, .menu-link {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 0;
+    border-bottom: 1px solid #f0f0f0;
   }
-  
-  .menu-item {
-    position: relative; 
+
+  .menu-link::after {
+    display: none; /* Remove underline effect on mobile */
   }
 
   /* Mobile Dropdown Styling */
   .submenu-container,
   .submenu-container.align-right,
   .submenu-container.align-center {
-    position: absolute;
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%) translateY(10px) !important;
-    width: 90vw;
+    position: static; /* Stack normally in the flow */
+    width: 100%;
     min-width: unset;
-    max-width: 400px;
-    box-sizing: border-box;
+    max-width: none;
+    transform: none !important;
+    opacity: 1;
+    visibility: visible;
+    box-shadow: none;
+    border-top: none;
+    padding: 0 0 0 20px; /* Indent dropdown items */
+    display: none; /* Hidden by default, rely on hover or JS */
+    background-color: #f9f9f9;
   }
 
-  .menu-item:hover .submenu-container,
-  .menu-item:hover .submenu-container.align-right,
-  .menu-item:hover .submenu-container.align-center {
-     transform: translateX(-50%) translateY(0) !important;
+  /* Show submenu on hover/click in mobile (simple CSS hover for now) */
+  .menu-item:hover .submenu-container {
+    display: block;
+    transform: none !important;
   }
 
   .submenu-grid {
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .submenu-link {
+    padding: 12px 15px;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
   }
 }
 
 @media (max-width: 600px) {
   .brand-logo-link img {
-    height: 50px;
+    height: 45px;
   }
-  
   .brand-logo-link .brand-text {
     font-size: 16px;
-  }
-  
-  .main-nav-menu {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .menu-link {
-    font-size: 13px;
-    padding: 8px;
-  }
-
-  .submenu-grid {
-    grid-template-columns: 1fr; 
-  }
-  
-  .submenu-container {
-    width: 94vw;
   }
 }
 /* --- NEW DROPDOWN STYLES END HERE --- */

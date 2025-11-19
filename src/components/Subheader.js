@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
 
-// ... [Keep your menu item arrays: jecMenuItems, admissionMenuItems, etc.] ...
-// (I am hiding them here for brevity, but keep them in your file)
 const jecMenuItems = [
   { title: 'JEC FAQ', path: '/jec/faq' },
   { title: 'Employment @JEC', path: '/jec/employment' },
@@ -50,42 +48,35 @@ function Subheader() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Close menu when a link is clicked
-  const closeMenu = () => setIsMobileMenuOpen(false);
-
   return (
     <div className="main-header-section">
       <div className="main-header-container max-width-container">
         
-        {/* LOGO (Left) */}
-        <Link to="/" className="brand-logo-link" onClick={closeMenu}>
-          <img src="/images/logo.png" alt="JEC Logo" />
-          <div className="brand-text">
-            <span>JEC</span>
-            <span>KUKAS</span>
-          </div>
-        </Link>
+        <div className="logo-wrapper">
+          <Link to="/" className="brand-logo-link">
+            <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
+            <div className="brand-text">
+              <span>JEC</span>
+              <span>KUKAS</span>
+            </div>
+          </Link>
+        </div>
 
-        {/* MENU TOGGLE BUTTON (Right on Mobile) */}
-        {/* Using 'fa-ellipsis-v' for triple dot, or swap to 'fa-bars' for hamburger */}
-        <button 
-          className="mobile-menu-toggle" 
-          onClick={toggleMenu} 
-          aria-label="Toggle navigation"
-        >
-          <i className={isMobileMenuOpen ? "fas fa-times" : "fas fa-ellipsis-v"}></i>
+        {/* Mobile Toggle Button */}
+        <button className="mobile-menu-toggle" onClick={toggleMenu} aria-label="Toggle navigation">
+          <i className={isMobileMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>
         </button>
 
-        {/* NAVIGATION MENU */}
+        {/* Navigation Menu - Conditional Class for Mobile */}
         <nav className={`main-nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
-          <Link to="/" className="menu-link" onClick={closeMenu}>Home</Link>
+          <Link to="/" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
           
           <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" />
           
           <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/admissions" />
 
-          <Link to="/placements" className="menu-link" onClick={closeMenu}>Placement</Link>
-          <a href="#!" className="menu-link" onClick={closeMenu}>Departments</a>
+          <Link to="/placements" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Placement</Link>
+          <a href="#!" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Departments</a>
 
           <NavDropdown 
             title="Infrastructure" 
@@ -94,7 +85,7 @@ function Subheader() {
             align="center" 
           />
 
-          <a href="#!" className="menu-link" onClick={closeMenu}>Campus Life</a>
+          <a href="#!" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Campus Life</a>
 
           <NavDropdown 
             title="Our Society" 
@@ -103,7 +94,7 @@ function Subheader() {
             align="right" 
           />
 
-          <Link to="/contact" className="menu-link" onClick={closeMenu}>Contact Us</Link>
+          <Link to="/contact" className="menu-link" onClick={() => setIsMobileMenuOpen(false)}>Contact Us</Link>
         </nav>
 
       </div>
