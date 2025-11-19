@@ -29,17 +29,10 @@ import FeeStructure from './pages/FeeStructure';
 import DocumentsRequired from './pages/DocumentsRequired';
 import CoursesOffered from './pages/CoursesOffered';
 import AdmissionOpen from './pages/AdmissionOpen'; 
-import AdmissionProcedure from './pages/AdmissionProcedure'; // <-- 1. IMPORT THE NEW PAGE
+import AdmissionProcedure from './pages/AdmissionProcedure';
 
-// --- Placeholder Component for other new pages ---
-const SocietyPlaceholder = ({ title }) => (
-  <div style={{ padding: '100px 20px', textAlign: 'center', background: '#f8f9fa', minHeight: '50vh' }}>
-    <h1 style={{ color: '#0072C6', marginBottom: '20px' }}>{title}</h1>
-    <p style={{ fontSize: '18px', color: '#666' }}>
-      This page is currently under construction. Content coming soon!
-    </p>
-  </div>
-);
+// NEW IMPORT FOR THE REFUEL & RELAX PAGE
+import RefuelAndRelax from './pages/RefuelAndRelax';
 
 function App() {
   return (
@@ -59,9 +52,11 @@ function App() {
           <Route path="admissions/documents" element={<DocumentsRequired />} />
           <Route path="admissions/courses" element={<CoursesOffered />} />
           <Route path="admissions/open" element={<AdmissionOpen />} />
-          
-          {/* 2. REPLACED PLACEHOLDER WITH REAL COMPONENT */}
           <Route path="admissions/procedure" element={<AdmissionProcedure />} />
+
+          {/* Infrastructure Dropdown Routes */}
+          {/* Added this specific route for Refuel & Relax */}
+          <Route path="infrastructure/refuel" element={<RefuelAndRelax />} />
 
           <Route path="placements" element={<Placements />} />
           <Route path="about" element={<About />} />
