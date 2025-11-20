@@ -1940,32 +1940,6 @@ footer {
   box-sizing: border-box;
 }
 
-/* Glass Navbar */
-.pg-navbar {
-  position: sticky;
-  top: 0;
-  z-index: 900;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 5px solid var(--pg-gold);
-}
-
-.pg-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 800;
-  color: var(--pg-primary);
-  font-size: 1.5rem;
-  text-transform: uppercase;
-}
-
 /* Hero Section */
 .pg-hero {
   position: relative;

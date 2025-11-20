@@ -11,12 +11,6 @@ function Placements() {
 
   return (
     <div className="placement-page-wrapper">
-      {/* Navbar */}
-      <nav className="pg-navbar">
-        <div className="pg-logo">
-          <i className="fas fa-university"></i> JEC Placement Cell
-        </div>
-      </nav>
 
       {/* Hero */}
       <header className="pg-hero">
