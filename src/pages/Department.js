@@ -118,7 +118,7 @@ function Department() {
               </div>
               <div>
                   <h3>Career Prospects</h3>
-                  <p>This course enables you to work as a professional in many roles:</p>
+                  <p>Unlock your potential to thrive in diverse industries, as this course equips you with the expertise to succeed in a multitude of professional roles.</p>
                   <div className="dept-pill-grid">
                       <div className="dept-pill dept-pill-hot">Artificial Intelligence Engineer</div>
                       <div className="dept-pill dept-pill-hot">Machine Learning Engineer</div>
