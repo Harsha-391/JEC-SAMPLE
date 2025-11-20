@@ -113,7 +113,6 @@ function Department() {
                       <div className="dept-pill">Data & AI Consulting</div>
                       <div className="dept-pill">AI Solution Architecture</div>
                       <div className="dept-pill">Neural Networks</div>
-                      <div className="dept-pill">Data Mining</div>
                   </div>
               </div>
               <div>
