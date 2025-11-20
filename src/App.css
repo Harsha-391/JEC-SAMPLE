@@ -539,7 +539,7 @@ body {
   overflow: hidden;
   
   /* Background Settings */
-  background-image: url("/images/hero.png"); /* Path relative to public folder */
+  background-image: url("../images/hero.png"); /* Path relative to public folder */
   background-size: cover; /* Ensures image covers the whole area */
   background-position: center;
   background-repeat: no-repeat;
