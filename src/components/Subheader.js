@@ -115,6 +115,9 @@ function Subheader() {
           />
 
           <a href="#!" className="menu-link" onClick={closeMenu}>Campus Life</a>
+          
+          {/* NEW: Gallery Link */}
+          <Link to="/gallery" className="menu-link" onClick={closeMenu}>Gallery</Link>
 
           <NavDropdown 
             title="Our Society" 

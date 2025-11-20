@@ -40,6 +40,9 @@ import ConvenienceAndSafety from './pages/ConvenienceAndSafety';
 // Import the new Department Template Page
 import Department from './pages/Department';
 
+// Import the new Gallery Page
+import Gallery from './pages/Gallery';
+
 function App() {
   return (
     <BrowserRouter>
@@ -69,6 +72,9 @@ function App() {
           <Route path="placements" element={<Placements />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
+          
+          {/* Gallery Route */}
+          <Route path="gallery" element={<Gallery />} />
 
           {/* JEC Dropdown Routes */}
           <Route path="jec/faq" element={<Faq />} />
