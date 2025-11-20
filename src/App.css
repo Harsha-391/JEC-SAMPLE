@@ -142,10 +142,10 @@ body {
 
 .main-header-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between; /* Forces Logo to Left, Menu to Right */
   align-items: center;
-  flex-wrap: nowrap;
-  gap: 30px;
+  flex-wrap: nowrap; /* Forbids wrapping */
+  gap: 10px; /* Reduced gap to save space */
   max-width: 1300px;
   margin: 0 auto;
   padding: 0 20px;
@@ -206,11 +206,12 @@ body {
 .menu-link {
   color: var(--color-text-primary);
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px; /* Reduced from 16px to fit better */
   transition: color 0.3s ease, transform 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 5px; /* Reduced gap between text and arrow */
+  padding: 10px 8px; /* Reduced side padding */
   padding-bottom: 4px;
   white-space: nowrap;
 }
@@ -333,60 +334,62 @@ body {
   }
 }
 
-/* Tablet and Mobile Breakpoint */
+/* Tablet and Mobile Breakpoint *//* Tablet and Mobile Breakpoint */
 @media (max-width: 992px) {
-  /* 1. Header Container: Space Logo and Button */
+  /* 1. Header Container: Keep Logo Left, Button Right */
   .main-header-container {
     justify-content: space-between; 
-    padding: 0 20px;
-    position: relative; /* Context for absolute menu */
+    padding: 0 15px;
+    position: relative; 
   }
 
-  /* Show the Toggle Button */
+  /* 2. The "Triple Bar" Button */
   .mobile-menu-toggle {
-    display: block;
-    font-size: 24px;
-    padding: 10px;
+    display: block; /* Make it visible */
+    font-size: 28px;
+    padding: 5px;
     background: transparent;
     border: none;
     cursor: pointer;
-    color: var(--color-text-primary);
-    z-index: 1102; /* Above everything */
+    color: var(--logo-black);
+    z-index: 1102; 
+    margin-left: auto; 
   }
 
-  /* Hide the Nav Menu by default on mobile */
+  /* 3. Hide the Menu by default */
  .main-nav-menu {
-    display: none; /* Hidden by default */
+    display: none; 
     position: absolute;
-    top: 100%; /* Push it right below the header bar */
+    top: 100%; 
     left: 0;
-    width: 100%; /* Full width */
-    background-color: var(--logo-white); /* Solid white background */
-    flex-direction: column; /* Stack items vertically */
-    box-shadow: 0 10px 15px rgba(0,0,0,0.1); /* Shadow for depth */
+    width: 100%; 
+    background-color: var(--logo-white); 
+    flex-direction: column; 
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1); 
     border-top: 1px solid var(--color-border);
-    max-height: 80vh; /* Prevent it from being too tall */
-    overflow-y: auto; /* Scrollable if too many items */
-    z-index: 1101; /* Ensure it sits on top of page content */
-    padding-bottom: 20px;
+    max-height: 80vh; 
+    overflow-y: auto; 
+    z-index: 1101; 
+    padding: 0;
+    margin: 0;
   }
 
-  /* Show Nav Menu when active class is added */
+  /* 4. Show Menu when 'active' class is added via JS */
   .main-nav-menu.active {
     display: flex;
   }
 
-  /* Adjust Menu Items for Vertical Layout */
- .menu-item, 
-  .menu-link {
+  /* 5. Styling individual links for mobile tap targets */
+ .menu-item {
     width: 100%;
-    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+ }
+
+ .menu-link {
+    width: 100%;
+    justify-content: space-between; 
     padding: 15px 20px;
-    border-radius: 0;
-    border-bottom: 1px solid #f5f5f5;
-    display: flex;
-    justify-content: space-between; /* Align text left, arrow right */
-    align-items: center;
+    font-size: 16px; /* Larger font for easy tapping */
   }
 
   .menu-item:hover,
@@ -396,27 +399,26 @@ body {
   }
 
   .menu-link::after {
-    display: none; /* Remove underline effect on mobile */
+    display: none; 
   }
 
-  /* Mobile Dropdown Styling */
-.submenu-container,
+  /* 6. Mobile Dropdowns (Click to show) */
+  .submenu-container,
   .submenu-container.align-right,
   .submenu-container.align-center {
-    position: static; /* Stack naturally below the parent link */
+    position: static; 
     width: 100%;
-    min-width: unset;
     box-shadow: none;
-    border-top: none;
+    border: none;
     padding: 0;
-    display: none; /* Hidden until parent is hovered/clicked */
-    background-color: #f0f4f8; /* Slightly darker bg for contrast */
+    display: none; 
+    background-color: #f8f9fa; 
     transform: none !important;
     opacity: 1;
     visibility: visible;
   }
 
-  /* Show submenu on hover/click in mobile (simple CSS hover for now) */
+  /* Show submenu on hover (or add logic for click) */
  .menu-item:hover .submenu-container {
     display: block;
   }
@@ -428,8 +430,9 @@ body {
   }
   
  .submenu-link {
-    padding: 12px 30px; /* Indent submenu items */
+    padding: 12px 40px; /* Indented for hierarchy */
     border-bottom: 1px solid #e0e0e0;
+    color: var(--color-text-secondary);
   }
 }
 
