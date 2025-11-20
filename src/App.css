@@ -526,50 +526,115 @@ body {
       transform: scale(1.1);
   }
 }
-/* Hero Section */
+/* Hero Section *//* --- HERO SECTION --- */
 .hero {
-  height: 680px;
+  position: relative;
+  width: 100%; /* Fixes the horizontal scroll issue */
+  min-height: 85vh; /* Takes up 85% of the screen height */
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--logo-white);
   text-align: center;
-  position: relative; /* This is crucial for the overlay */
+  color: var(--logo-white);
   overflow: hidden;
-  /* --- CORRECTED PATH --- */
-  background-image: url("../public/images/hero.png");
-  background-size: cover;
+  
+  /* Background Settings */
+  background-image: url("/images/hero.png"); /* Path relative to public folder */
+  background-size: cover; /* Ensures image covers the whole area */
   background-position: center;
   background-repeat: no-repeat;
-  isolation: isolate; /* Ensures content stays above the overlay */
+  background-attachment: fixed; /* OPTIONAL: Creates a cool parallax effect */
 }
-/* .hero::before {
+
+/* --- OVERLAY (Essential for text readability) --- */
+.hero::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  /* A gradient looks more premium than a flat black color */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
   z-index: 1;
-} */
+}
+
+/* --- CONTENT WRAPPER --- */
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 2; /* Sits on top of the overlay */
   width: 100%;
-  padding: 40px;
+  max-width: 900px; /* Keeps text from getting too wide on huge screens */
+  padding: 20px;
+  animation: fadeIn 1s ease-out; /* Adds a subtle entrance animation */
 }
+
+/* --- TYPOGRAPHY --- */
 .hero h1 {
-  font-size: 72px;
   font-weight: 800;
-  margin-bottom: 30px;
-  letter-spacing: 2px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Makes text pop */
+  
+  /* Responsive Font Sizing using clamp */
+  /* Minimum 2.5rem, Preferred 5vw, Maximum 4.5rem */
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
 }
+
+.hero p {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+/* --- DECORATIVE UNDERLINE --- */
 .hero-underline {
-  width: 120px;
-  height: 4px;
-  background: var(--color-accent); /* Logo Gold */
-  margin: 0 auto 40px;
+  width: 100px;
+  height: 5px;
+  background: var(--color-accent); /* Your Gold Color */
+  margin: 0 auto 30px;
+  border-radius: 2px;
+}
+
+/* --- ANIMATION --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- MEDIA QUERIES (For Specific Device Tweaks) --- */
+
+/* Tablet (Max width 1024px) */
+@media (max-width: 1024px) {
+  .hero {
+    min-height: 70vh; /* Slightly shorter on tablets */
+    background-attachment: scroll; /* Parallax can be jittery on touch screens */
+  }
+}
+
+/* Mobile (Max width 768px) */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 60vh;
+    align-items: center; /* Center vertically */
+  }
+
+  .hero h1 {
+    font-size: 2.5rem; /* Force smaller size on mobile */
+    margin-bottom: 15px;
+  }
+
+  .hero-content {
+    padding: 15px;
+  }
+
+  .hero-underline {
+    width: 80px;
+    height: 3px;
+    margin-bottom: 20px;
+  }
 }
 .ranking-cards {
   display: grid;
