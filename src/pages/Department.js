@@ -7,11 +7,6 @@ function Department() {
     <div className="dept-page-wrapper">
       
       {/* Internal Page Navbar */}
-      <div className="dept-navbar">
-          <div className="dept-logo">
-              <i className="fas fa-brain"></i> CSE (AI)
-          </div>
-      </div>
 
       <header className="dept-hero">
           <h1 className="dept-animated-section">B.Tech CSE (Artificial Intelligence)</h1>
