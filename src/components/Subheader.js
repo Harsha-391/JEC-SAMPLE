@@ -114,10 +114,8 @@ function Subheader() {
             align="center" 
           />
 
-          <a href="#!" className="menu-link" onClick={closeMenu}>Campus Life</a>
-          
-          {/* NEW: Gallery Link */}
-          <Link to="/gallery" className="menu-link" onClick={closeMenu}>Gallery</Link>
+          {/* Campus Life now links to Gallery */}
+          <Link to="/gallery" className="menu-link" onClick={closeMenu}>Campus Life</Link>
 
           <NavDropdown 
             title="Our Society" 
