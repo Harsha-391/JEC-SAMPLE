@@ -41,10 +41,10 @@ function Hero() {
           <p>
             {bannerData && bannerData.subheading 
               ? bannerData.subheading 
-              : "Empowering young minds through innovation, research, and excellence since 2000."}
+              : ""}
           </p>
           
-          <button className="apply-btn">Apply for Admission</button>
+        
       </div> 
     </section>
   );
