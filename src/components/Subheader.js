@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
 
-// ... Keep your menu arrays (jecMenuItems, etc.) exactly as they are ...
+// ... Existing menu arrays ...
 const jecMenuItems = [
   { title: 'JEC FAQ', path: '/jec/faq' },
   { title: 'Employment @JEC', path: '/jec/employment' },
@@ -26,6 +26,18 @@ const admissionMenuItems = [
   { title: 'Admission Open 2025', path: '/admissions/open' },
   { title: 'Karma Courses @JEC', path: '/admissions/karma' },
   { title: 'Admission Procedure', path: '/admissions/procedure' },
+];
+
+// --- NEW: Departments Menu Data ---
+const departmentMenuItems = [
+  { title: 'Computer Science (CSE)', path: '/departments/cse' },
+  { title: 'Artificial Intelligence (AI)', path: '/departments/ai' },
+  { title: 'Information Technology (IT)', path: '/departments/it' },
+  { title: 'Mechanical Engineering', path: '/departments/me' },
+  { title: 'Civil Engineering', path: '/departments/ce' },
+  { title: 'Electrical Engineering', path: '/departments/ee' },
+  { title: 'Electronics & Comm. (ECE)', path: '/departments/ece' },
+  { title: 'Applied Sciences', path: '/departments/ash' },
 ];
 
 const societyMenuItems = [
@@ -71,11 +83,10 @@ function Subheader() {
           onClick={toggleMenu} 
           aria-label="Toggle navigation"
         >
-          {/* Using ellipsis-v for triple dot, or bars for hamburger */}
           <i className={isMobileMenuOpen ? "fas fa-times" : "fas fa-ellipsis-v"}></i>
         </button>
 
-        {/* 3. Navigation Menu (Hidden by default on mobile, shown when active) */}
+        {/* 3. Navigation Menu */}
         <nav className={`main-nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
           <Link to="/" className="menu-link" onClick={closeMenu}>Home</Link>
           
@@ -84,7 +95,14 @@ function Subheader() {
           <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/admissions" />
 
           <Link to="/placements" className="menu-link" onClick={closeMenu}>Placement</Link>
-          <a href="#!" className="menu-link" onClick={closeMenu}>Departments</a>
+          
+          {/* --- UPDATED: Departments Dropdown --- */}
+          <NavDropdown 
+            title="Departments" 
+            items={departmentMenuItems} 
+            baseLink="/departments"
+            align="center"
+          />
 
           <NavDropdown 
             title="Infrastructure" 
