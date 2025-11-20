@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
 
-// ... Existing menu arrays ...
 const jecMenuItems = [
   { title: 'JEC FAQ', path: '/jec/faq' },
   { title: 'Employment @JEC', path: '/jec/employment' },
@@ -28,16 +27,20 @@ const admissionMenuItems = [
   { title: 'Admission Procedure', path: '/admissions/procedure' },
 ];
 
-// --- NEW: Departments Menu Data ---
+// --- NEW: Departments Menu Data (Matches the image uploaded) ---
 const departmentMenuItems = [
-  { title: 'Computer Science (CSE)', path: '/departments/cse' },
-  { title: 'Artificial Intelligence (AI)', path: '/departments/ai' },
-  { title: 'Information Technology (IT)', path: '/departments/it' },
+  { title: 'Computer Science & Engineering (AI)', path: '/departments/cse-ai' },
+  { title: 'Civil Engineering', path: '/departments/civil' },
+  { title: 'Information Technology', path: '/departments/it' },
+  { title: 'Applied Sciences & Humanities', path: '/departments/ash' },
+  { title: 'MOOCS: NPTEL SWAYAM', path: '/departments/moocs' },
+  { title: 'Computer Science Engineering', path: '/departments/cse' },
+  { title: 'Electronics & Communication', path: '/departments/ece' },
   { title: 'Mechanical Engineering', path: '/departments/me' },
-  { title: 'Civil Engineering', path: '/departments/ce' },
+  { title: 'Centre Of Excellence (COE)', path: '/departments/coe' },
+  { title: 'JEC Research Cell', path: '/departments/research' },
+  { title: 'Engineering @ JEC', path: '/departments/engineering' },
   { title: 'Electrical Engineering', path: '/departments/ee' },
-  { title: 'Electronics & Comm. (ECE)', path: '/departments/ece' },
-  { title: 'Applied Sciences', path: '/departments/ash' },
 ];
 
 const societyMenuItems = [
@@ -101,7 +104,7 @@ function Subheader() {
             title="Departments" 
             items={departmentMenuItems} 
             baseLink="/departments"
-            align="center"
+            align="center" 
           />
 
           <NavDropdown 

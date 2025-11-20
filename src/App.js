@@ -35,7 +35,10 @@ import AdmissionProcedure from './pages/AdmissionProcedure';
 import RefuelAndRelax from './pages/RefuelAndRelax';
 import PrepareAndPresent from './pages/PrepareAndPresent';
 import LearningByDoing from './pages/LearningByDoing';
-import ConvenienceAndSafety from './pages/ConvenienceAndSafety'; // <-- Added this
+import ConvenienceAndSafety from './pages/ConvenienceAndSafety';
+
+// Import the new Department Template Page
+import Department from './pages/Department';
 
 function App() {
   return (
@@ -61,7 +64,7 @@ function App() {
           <Route path="infrastructure/refuel" element={<RefuelAndRelax />} />
           <Route path="infrastructure/prepare" element={<PrepareAndPresent />} />
           <Route path="infrastructure/learning" element={<LearningByDoing />} />
-          <Route path="infrastructure/convenience" element={<ConvenienceAndSafety />} /> {/* <-- Added this route */}
+          <Route path="infrastructure/convenience" element={<ConvenienceAndSafety />} />
 
           <Route path="placements" element={<Placements />} />
           <Route path="about" element={<About />} />
@@ -82,6 +85,20 @@ function App() {
           <Route path="society/agrasen-college" element={<AgrasenCollege />} />
           <Route path="society/jces" element={<JCES />} />
           <Route path="society/teams" element={<KeyTeamsFunctions />} />
+
+          {/* Department Routes - All using the same Department template */}
+          <Route path="departments/cse-ai" element={<Department />} />
+          <Route path="departments/cse" element={<Department />} />
+          <Route path="departments/it" element={<Department />} />
+          <Route path="departments/civil" element={<Department />} />
+          <Route path="departments/ece" element={<Department />} />
+          <Route path="departments/ee" element={<Department />} />
+          <Route path="departments/me" element={<Department />} />
+          <Route path="departments/ash" element={<Department />} />
+          <Route path="departments/coe" element={<Department />} />
+          <Route path="departments/research" element={<Department />} />
+          <Route path="departments/engineering" element={<Department />} />
+          <Route path="departments/moocs" element={<Department />} />
 
         </Route>
       </Routes>
