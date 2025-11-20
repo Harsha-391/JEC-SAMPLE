@@ -9340,7 +9340,10 @@ footer {
    DEPARTMENT PAGE STYLES (From HTML)
    ========================================= */
 
-/* Page Wrapper to scope variables if needed */
+/* Page Wrapper to scope variables if needed *//* =========================================
+   DEPARTMENT PAGE STYLES
+   ========================================= */
+
 .dept-page-wrapper {
   --dept-blue: #0072C6;       
   --dept-red: #D62828;        
@@ -9360,7 +9363,8 @@ footer {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  padding: 9rem 1rem 12rem 1rem;
+  /* UPDATED: 80px vertical, 20px horizontal padding */
+  padding: 120px 20px 100px 20px;
   text-align: center;
   color: white;
 }
@@ -9377,7 +9381,7 @@ footer {
 .dept-hero .badge { background: var(--dept-gold); color: black; font-weight: 700; padding: 8px 20px; border-radius: 30px; display: inline-block; }
 
 /* --- STATS --- */
-.dept-stats-container { max-width: 1200px; margin: -6rem auto 5rem auto; padding: 0 1.5rem; position: relative; z-index: 10; }
+.dept-stats-container { max-width: 1200px; margin: -6rem auto 5rem auto; padding: 0 20px; position: relative; z-index: 10; }
 .dept-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
 .dept-stat-card {
   background: white; padding: 2rem 1.5rem; border-radius: var(--dept-radius);
@@ -9389,6 +9393,13 @@ footer {
 .dept-stat-label { font-size: 0.95rem; font-weight: 700; color: var(--dept-text-main); }
 
 /* --- SECTIONS --- */
+/* UPDATED: 80px top/bottom padding, 20px left/right for main content */
+.dept-container { 
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 80px 20px; 
+}
+
 .dept-section-header { text-align: center; margin: 5rem 0 3rem 0; }
 .dept-section-header h2 { font-family: 'Poppins', sans-serif; font-size: 2.5rem; color: var(--dept-text-main); }
 .dept-section-header span { color: var(--dept-blue); font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
