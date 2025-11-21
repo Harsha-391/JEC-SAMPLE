@@ -1313,7 +1313,7 @@ body {
 }
 /* Why JEC Section (Faculty) */
 .faculty {
-  padding: 100px 20px;
+  padding: 0px 5rem;
   background: var(--color-background-light);
   position: relative;
   overflow: hidden;
