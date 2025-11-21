@@ -1,59 +1,80 @@
-:root {
-  /* Logo-derived Colors */
-  --logo-red: #D62828; /* Primary shield and red text */
-  --logo-blue: #0072C6; /* Gear */
-  --logo-gold: #FCA311; /* Goddess, lotus, and ribbons */
-  --logo-black: #1D1D1D; /* "JAIPUR ENGINEERING COLLEGE" text */
-  --logo-white: #FFFFFF; /* Shield background */
-  /* Functional Palette */
-  --color-primary: var(--logo-red);
-  --color-secondary: var(--logo-blue);
-  --color-accent: var(--logo-gold);
-
-  --color-header-bg: var(--logo-black);
-  --color-header-text: var(--logo-white);
-
-  --color-button: var(--color-accent);
-  --color-button-text: var(--logo-black); /* Black text for readability on gold */
-  --color-text-primary: var(--logo-black);
-  --color-text-secondary: #555555; /* A neutral grey */
-
-  --color-background-light: var(--logo-white);
-  --color-background-medium: #f5f5f5; /* A very light neutral */
-  --color-background-dark: #f0f0f0; /* Another neutral */
-
-  --color-border: #dddddd; /* Neutral border */
+/* ==========================================================================
+   1. GLOBAL UTILITIES (Add this to the top of your CSS file)
+   ========================================================================== */
+.max-width-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  color: var(--color-text-primary);
-  line-height: 1.6;
-}/* * ==============================
- * TOP BAR (Previously Header)
- * ==============================
- */
-.top-bar-section {
-  background: var(--logo-black);
-  padding: 10px 0; 
-  color: var(--logo-white);
-  transition: background-color 0.3s ease;
-}
+/* ==========================================================================
+   2. HEADER & SUBHEADER SHARED STYLES
+   ========================================================================== */
 
-.top-bar-container {
+/* Shared Flex Layout for both Headers */
+.top-bar-container,
+.main-header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; 
-  gap: 10px; 
-  padding: 0 20px;
-  max-width: 1300px;
-  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Shared Underline Animation for Links */
+.top-bar-container a,
+.menu-link {
+  position: relative;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.top-bar-container a::after,
+.menu-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--logo-gold); /* Use gold for both for consistency, or override below */
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+/* Specific overrides for the Main Menu underline positioning */
+.menu-link::after {
+  bottom: 0;
+  left: 15px; 
+  right: 15px;
+  width: auto; /* Override width:100% from shared */
+  background-color: var(--color-accent);
+}
+
+.top-bar-container a:hover::after,
+.menu-item:hover > .menu-link::after,
+.menu-link:hover::after {
+  transform: scaleX(1);
+}
+
+.top-bar-container a:hover,
+.menu-item:hover > .menu-link,
+.menu-link:hover {
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   3. TOP BAR (Header.js)
+   ========================================================================== */
+.top-bar-section {
+  background: var(--logo-black);
+  padding: 10px 0;
+  color: var(--logo-white);
+  transition: background-color 0.3s ease;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .top-bar-contact,
@@ -61,42 +82,19 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 15px; 
+  gap: 15px;
 }
 
 .top-bar-container a {
   color: var(--logo-white);
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: color 0.3s ease, transform 0.3s ease;
-  position: relative;
   padding-bottom: 4px;
 }
 
 .top-bar-container a:hover {
   color: var(--logo-gold);
-  transform: translateY(-1px);
-}
-
-.top-bar-container a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--logo-gold);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.3s ease;
-}
-
-.top-bar-container a:hover::after {
-  transform: scaleX(1);
 }
 
 .top-bar-container a i {
@@ -105,52 +103,22 @@ body {
   text-align: center;
 }
 
-/* --- RESPONSIVE TOP BAR --- */
-@media (max-width: 768px) {
-  .top-bar-container {
-    justify-content: center;
-    flex-direction: column;
-    padding: 5px 15px;
-  }
-  
-  .top-bar-contact, .top-bar-links {
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  .top-bar-container a {
-    font-size: 11px;
-  }
-}
-
-/* * ==============================
- * MAIN NAVIGATION (Previously Subheader)
- * ==============================
- *//* * ==============================
- * MAIN NAVIGATION (Updated)
- * ==============================
- *//* * ==============================
- * MAIN NAVIGATION (Updated)
- * ==============================
- */
+/* ==========================================================================
+   4. MAIN NAVIGATION (Subheader.js)
+   ========================================================================== */
 .main-header-section {
   background: var(--color-background-light);
   padding: 15px 0;
   border-bottom: 1px solid var(--color-border);
-  position: relative; /* For absolute positioning of mobile menu */
+  position: relative;
+  z-index: 1000; /* Ensure menu stays on top */
 }
 
 .main-header-container {
-  display: flex;
-  justify-content: space-between; /* Forces Logo to Left, Menu to Right */
-  align-items: center;
-  flex-wrap: nowrap; /* Forbids wrapping */
-  gap: 10px; /* Reduced gap to save space */
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 20px;
+  flex-wrap: nowrap; /* Prevent wrapping on desktop */
 }
 
+/* --- Logo --- */
 .brand-logo-link {
   display: flex;
   align-items: center;
@@ -173,47 +141,31 @@ body {
   line-height: 1.1;
 }
 
-/* Desktop Menu Styles */
+/* --- Desktop Menu --- */
 .main-nav-menu {
   display: flex;
   gap: 5px;
   align-items: center;
   flex-wrap: wrap;
-  margin-left: auto; 
+  margin-left: auto;
 }
 
-/* Mobile Toggle Button (Hidden by default) */
-.mobile-menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: var(--logo-black);
-  cursor: pointer;
-  margin-left: auto; /* Pushes it to the right */
-}
-
-/* --- Navigation Items --- */
-.menu-item,
-.menu-link {
+.menu-item {
   position: relative;
-  text-decoration: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
 }
 
 .menu-link {
   color: var(--color-text-primary);
   font-weight: 600;
-  font-size: 14px; /* Reduced from 16px to fit better */
-  transition: color 0.3s ease, transform 0.3s ease;
+  font-size: 14px;
   display: flex;
   align-items: center;
-  gap: 5px; /* Reduced gap between text and arrow */
-  padding: 10px 8px; /* Reduced side padding */
+  gap: 5px;
+  padding: 10px 8px;
   padding-bottom: 4px;
   white-space: nowrap;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .menu-arrow-icon {
@@ -227,32 +179,12 @@ body {
   background-color: var(--color-background-medium);
 }
 
-.menu-item:hover > .menu-link,
 .menu-link:hover {
   color: var(--color-accent);
-  transform: translateY(-1px);
 }
 
 .menu-item:hover .menu-arrow-icon {
   transform: rotate(180deg);
-}
-
-.menu-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 15px;
-  right: 15px;
-  height: 2px;
-  background-color: var(--color-accent);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.3s ease;
-}
-
-.menu-item:hover > .menu-link::after,
-.menu-link:hover::after {
-  transform: scaleX(1);
 }
 
 /* --- Dropdown Menu --- */
@@ -263,7 +195,7 @@ body {
   min-width: 600px;
   background: var(--logo-white);
   border-radius: 10px;
-  box-shadow: var(--shadow-medium);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   padding: 20px;
   border-top: 3px solid var(--logo-blue);
   opacity: 0;
@@ -318,108 +250,110 @@ body {
   transform: translateX(-50%) translateY(0);
 }
 
+/* --- Mobile Menu Toggle --- */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--logo-black);
+  cursor: pointer;
+  margin-left: auto;
+}
 
-/* * ==============================
- * RESPONSIVE NAV (UPDATED)
- * ==============================
- */
+/* ==========================================================================
+   5. RESPONSIVE STYLES
+   ========================================================================== */
 
 @media (max-width: 1200px) {
   .main-header-container {
     gap: 15px;
   }
-  .menu-link {
-    font-size: 14px;
-    padding: 8px 10px;
-  }
 }
 
-/* Tablet and Mobile Breakpoint *//* Tablet and Mobile Breakpoint */
 @media (max-width: 992px) {
-  /* 1. Header Container: Keep Logo Left, Button Right */
+  /* Top Bar Adjustments */
+  .top-bar-container {
+    justify-content: center;
+    flex-direction: column;
+    padding: 5px 15px;
+  }
+  .top-bar-contact, .top-bar-links {
+    justify-content: center;
+    gap: 10px;
+  }
+  .top-bar-container a {
+    font-size: 11px;
+  }
+
+  /* Header / Nav Adjustments */
   .main-header-container {
-    justify-content: space-between; 
-    padding: 0 15px;
-    position: relative; 
+    justify-content: space-between;
+    position: relative;
   }
 
-  /* 2. The "Triple Bar" Button */
   .mobile-menu-toggle {
-    display: block; /* Make it visible */
-    font-size: 28px;
-    padding: 5px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: var(--logo-black);
-    z-index: 1102; 
-    margin-left: auto; 
+    display: block;
+    z-index: 1102;
   }
 
-  /* 3. Hide the Menu by default */
- .main-nav-menu {
-    display: none; 
+  /* Mobile Nav Drawer */
+  .main-nav-menu {
+    display: none; /* Hidden by default */
     position: absolute;
-    top: 100%; 
+    top: 100%;
     left: 0;
-    width: 100%; 
-    background-color: var(--logo-white); 
-    flex-direction: column; 
-    box-shadow: 0 10px 15px rgba(0,0,0,0.1); 
+    width: 100%;
+    background-color: var(--logo-white);
+    flex-direction: column;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
     border-top: 1px solid var(--color-border);
-    max-height: 80vh; 
-    overflow-y: auto; 
-    z-index: 1101; 
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 1101;
     padding: 0;
     margin: 0;
   }
 
-  /* 4. Show Menu when 'active' class is added via JS */
   .main-nav-menu.active {
     display: flex;
   }
 
-  /* 5. Styling individual links for mobile tap targets */
- .menu-item {
+  .menu-item {
     width: 100%;
     border-bottom: 1px solid #f0f0f0;
- }
-
- .menu-link {
-    width: 100%;
-    justify-content: space-between; 
-    padding: 15px 20px;
-    font-size: 16px; /* Larger font for easy tapping */
   }
 
-  .menu-item:hover,
-  .menu-link:hover {
-    background-color: #f9f9f9;
-    transform: none;
+  .menu-link {
+    width: 100%;
+    justify-content: space-between;
+    padding: 15px 20px;
+    font-size: 16px;
   }
 
   .menu-link::after {
-    display: none; 
+    display: none; /* No underline animation on mobile */
   }
 
-  /* 6. Mobile Dropdowns (Click to show) */
+  /* Mobile Dropdowns */
   .submenu-container,
   .submenu-container.align-right,
   .submenu-container.align-center {
-    position: static; 
+    position: static;
     width: 100%;
+    min-width: unset;
     box-shadow: none;
     border: none;
     padding: 0;
-    display: none; 
-    background-color: #f8f9fa; 
+    display: none; /* Hidden until hovered/clicked */
+    background-color: #f8f9fa;
     transform: none !important;
     opacity: 1;
     visibility: visible;
   }
 
-  /* Show submenu on hover (or add logic for click) */
- .menu-item:hover .submenu-container {
+  /* Simple hover effect for mobile (click handling logic is in JS) */
+  .menu-item:hover .submenu-container {
     display: block;
   }
 
@@ -428,9 +362,9 @@ body {
     flex-direction: column;
     gap: 0;
   }
-  
- .submenu-link {
-    padding: 12px 40px; /* Indented for hierarchy */
+
+  .submenu-link {
+    padding: 12px 40px;
     border-bottom: 1px solid #e0e0e0;
     color: var(--color-text-secondary);
   }
