@@ -525,114 +525,163 @@ body {
   50% {
       transform: scale(1.1);
   }
-}
-/* Hero Section *//* --- HERO SECTION --- */
-.hero {
+}/* =========================================
+   HERO SLIDER STYLES
+   ========================================= */
+
+.hero-slider {
   position: relative;
-  width: 100%; /* Fixes the horizontal scroll issue */
-  min-height: 85vh; /* Takes up 85% of the screen height */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--logo-white);
+  width: 100%;
+  height: 85vh; /* Adjust height as needed */
+  min-height: 600px;
   overflow: hidden;
-  
-  /* Background Settings */
-  background-size: cover; /* Ensures image covers the whole area */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed; /* OPTIONAL: Creates a cool parallax effect */
+  background-color: #000; /* Fallback color */
 }
 
-/* --- OVERLAY (Essential for text readability) --- */
-.hero::before {
-  content: '';
+/* Individual Slide */
+.hero-slide {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  /* A gradient looks more premium than a flat black color */
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0; /* Hidden by default */
+  transition: opacity 1s ease-in-out; /* Smooth fade transition */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   z-index: 1;
 }
 
-/* --- CONTENT WRAPPER --- */
+/* The Active Slide (Visible) */
+.hero-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+/* Dark Overlay for Text Readability */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 50% dark overlay */
+  z-index: 1;
+}
+
+/* Content Styling */
 .hero-content {
   position: relative;
-  z-index: 2; /* Sits on top of the overlay */
-  width: 100%;
-  max-width: 900px; /* Keeps text from getting too wide on huge screens */
+  z-index: 10; /* Sit above overlay */
+  max-width: 900px;
   padding: 20px;
-  animation: fadeIn 1s ease-out; /* Adds a subtle entrance animation */
+  color: white;
+  animation: slideUp 1s ease-out;
 }
 
-/* --- TYPOGRAPHY --- */
-.hero h1 {
+.hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 800;
   margin-bottom: 20px;
-  letter-spacing: 1px;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.3);
   line-height: 1.2;
-  text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Makes text pop */
-  
-  /* Responsive Font Sizing using clamp */
-  /* Minimum 2.5rem, Preferred 5vw, Maximum 4.5rem */
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
 }
 
-.hero p {
+.hero-content p {
   font-size: clamp(1rem, 2vw, 1.5rem);
-  margin-bottom: 2rem;
-  opacity: 0.9;
+  margin-bottom: 30px;
   font-weight: 300;
 }
 
-/* --- DECORATIVE UNDERLINE --- */
 .hero-underline {
   width: 100px;
   height: 5px;
-  background: var(--color-accent); /* Your Gold Color */
+  background: var(--color-accent, #FCA311);
   margin: 0 auto 30px;
   border-radius: 2px;
 }
 
-/* --- ANIMATION --- */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
+.apply-btn {
+  background-color: var(--color-accent, #FCA311);
+  color: black;
+  border: none;
+  padding: 15px 40px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.apply-btn:hover {
+  transform: scale(1.05);
+}
+
+/* --- Navigation Arrows --- */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 40px;
+  padding: 10px 20px;
+  cursor: pointer;
+  z-index: 20;
+  transition: background 0.3s;
+  border-radius: 5px;
+}
+
+.slider-arrow:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.slider-arrow.prev { left: 20px; }
+.slider-arrow.next { right: 20px; }
+
+/* --- Dots Indicator --- */
+.slider-dots {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: var(--color-accent, #FCA311);
+  transform: scale(1.2);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- MEDIA QUERIES (For Specific Device Tweaks) --- */
-
-/* Tablet (Max width 1024px) */
-@media (max-width: 1024px) {
-  .hero {
-    min-height: 70vh; /* Slightly shorter on tablets */
-    background-attachment: scroll; /* Parallax can be jittery on touch screens */
-  }
-}
-
-/* Mobile (Max width 768px) */
+/* Mobile Adjustments */
 @media (max-width: 768px) {
-  .hero {
-    min-height: 60vh;
-    align-items: center; /* Center vertically */
+  .hero-slider {
+    height: 65vh;
   }
-
-  .hero h1 {
-    font-size: 2.5rem; /* Force smaller size on mobile */
-    margin-bottom: 15px;
-  }
-
-  .hero-content {
-    padding: 15px;
-  }
-
-  .hero-underline {
-    width: 80px;
-    height: 3px;
-    margin-bottom: 20px;
+  .slider-arrow {
+    font-size: 30px;
+    padding: 5px 15px;
   }
 }
 .ranking-cards {
