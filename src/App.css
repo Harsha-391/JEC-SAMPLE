@@ -442,16 +442,20 @@ body {
 /* --- NEW DROPDOWN STYLES END HERE --- *//* ==========================================================================
    SIDEBAR (Side Icon Bar)
    ========================================================================== */
+/* ==========================================================================
+   SIDEBAR (Side Icon Bar)
+   ========================================================================== */
 .college-side-bar {
   position: fixed;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  background: rgba(29, 29, 29, 0.8); /* Matches --logo-black with opacity */
+  background: rgba(29, 29, 29, 0.8); /* Dark background */
   display: flex;
   flex-direction: column;
   gap: 4px;
-  z-index: 1001;
+  /* CHANGE: Increased z-index significantly to sit above Header/Mobile Menu */
+  z-index: 9999; 
   border-radius: 12px 0 0 12px;
   padding: 8px;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
@@ -460,21 +464,22 @@ body {
 .college-side-bar a {
   display: flex;
   align-items: center;
-  /* Text color forced to white */
-  color: var(--logo-white) !important; 
+  color: var(--logo-white) !important; /* Force White Text */
   text-decoration: none;
   font-size: 14px;
   font-family: 'Arial', sans-serif;
   transition: all 0.3s ease;
   position: relative;
   right: 0;
-  width: 48px; /* Compact icon-only width */
+  width: 48px; /* Compact width */
   height: 48px;
   border-radius: 8px;
   overflow: hidden;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-sizing: border-box;
+  /* CHANGE: Ensure background doesn't conflict */
+  background-color: transparent; 
 }
 
 .college-side-bar a i {
@@ -485,7 +490,7 @@ body {
   justify-content: center;
   font-size: 20px;
   flex-shrink: 0;
-  color: var(--logo-white); /* Ensure icons are white */
+  color: var(--logo-white);
 }
 
 .college-side-bar a span {
@@ -497,15 +502,15 @@ body {
   font-size: 14px;
   line-height: 48px;
   margin-left: 8px;
-  color: var(--logo-white); /* Ensure text is white */
+  color: var(--logo-white);
 }
 
-/* Hover State */
+/* Hover State - Desktop */
 .college-side-bar a:hover {
-  width: 140px; /* Expanded width */
-  right: 8px;
+  width: 140px;
+  right: 8px; /* Moves slightly left */
   transform: scale(1.05);
-  animation: sidebar-pulse 0.5s ease-in-out; /* Renamed animation */
+  animation: sidebar-pulse 0.5s ease-in-out;
 }
 
 .college-side-bar a:hover span {
@@ -514,17 +519,43 @@ body {
   margin-left: 8px;
 }
 
-/* Apply brand colors to hovers */
-.college-side-bar a:nth-child(1):hover { background: var(--logo-blue); } /* Helpline */
-.college-side-bar a:nth-child(2):hover { background: var(--logo-gold); } /* Brochure */
-.college-side-bar a:nth-child(3):hover { background: var(--logo-red); }  /* Admissions */
-.college-side-bar a:nth-child(4):hover { background: var(--logo-blue); } /* Events */
-.college-side-bar a:nth-child(5):hover { background: var(--logo-red); }  /* WhatsApp */
+/* Brand Color Hovers */
+.college-side-bar a:nth-child(1):hover { background: var(--logo-blue); }
+.college-side-bar a:nth-child(2):hover { background: var(--logo-gold); }
+.college-side-bar a:nth-child(3):hover { background: var(--logo-red); }
+.college-side-bar a:nth-child(4):hover { background: var(--logo-blue); }
+.college-side-bar a:nth-child(5):hover { background: var(--logo-red); }
 
-/* Renamed Animation to prevent conflicts */
 @keyframes sidebar-pulse {
   0%, 100% { transform: scale(1.05); }
   50% { transform: scale(1.1); }
+}
+
+/* ==========================================================================
+   MOBILE FIX (Add this to fix the "Out of Screen" issue)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Prevent body overflow causing horizontal scroll which hides fixed elements */
+  body, html {
+    overflow-x: hidden; 
+    width: 100%;
+  }
+
+  .college-side-bar {
+    /* Make sidebar slightly smaller on mobile if needed */
+    padding: 5px;
+    right: 0; /* Ensure it sticks to edge */
+  }
+
+  /* Optional: Disable the width expansion on touch to prevent layout shifts */
+  .college-side-bar a:hover {
+    width: 48px; /* Keep compact */
+    right: 0;
+    transform: none;
+    animation: none;
+  }
+  
+  /* Optional: If you want to see text on tap, remove the block above */
 }/* =========================================
    HERO SLIDER STYLES
    ========================================= */
