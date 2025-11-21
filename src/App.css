@@ -834,7 +834,9 @@ body {
     padding: 12px 30px;
     font-size: 16px;
   }
-}
+}/* ==========================================================================
+   RANKING CARDS (Keep if used in another component, otherwise safe to remove)
+   ========================================================================== */
 .ranking-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -843,28 +845,37 @@ body {
   width: 100%;
   padding: 0 40px;
 }
+
 .rank-card {
-  background: rgba(29, 29, 29, 0.7); /* Updated to use --logo-black equivalent */
+  background: rgba(29, 29, 29, 0.8); /* Dark transparent bg */
   padding: 20px;
   border-radius: 8px;
   text-align: center;
-  border: 2px solid var(--color-accent); /* Logo Gold */
+  border: 2px solid var(--logo-gold);
 }
+
 .rank-card h3 {
   font-size: 28px;
   margin-bottom: 8px;
-  color: var(--color-accent); /* Logo Gold */
+  color: var(--logo-gold);
 }
+
 .rank-card p {
   font-size: 12px;
   color: var(--color-background-medium);
 }
-/* Stats Section */
+
+/* ==========================================================================
+   STATS SECTION (Home Page)
+   ========================================================================== */
 .stats {
-  padding: 20px 20px;
+  /* Padding moved to content as requested, only top padding/bg here */
+  padding-top: 60px; 
   background: var(--color-background-medium);
   position: relative;
 }
+
+/* Top Gradient Border */
 .stats::before {
   content: '';
   position: absolute;
@@ -873,19 +884,23 @@ body {
   width: 100%;
   height: 4px;
   background: linear-gradient(90deg, var(--logo-blue), var(--logo-red), var(--logo-gold));
-  opacity: 0.2;
+  opacity: 0.6; /* Increased opacity for better visibility */
 }
+
 .stats-content {
-  max-width: 1300px; /* Slightly wider for balance */
+  max-width: 1300px;
   margin: 0 auto;
+  /* REQUESTED PADDING APPLIED HERE */
+  padding: 0 1.5rem 5rem; 
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Increased min width */
-  gap: 32px; /* More breathing room */
-  text-align: center;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Improved responsive sizing */
+  gap: 30px;
 }
+
+/* --- Stat Box (Card) --- */
 .stat-box {
   background: var(--logo-white);
-  padding: 48px 32px;
+  padding: 40px 30px;
   border-radius: 20px;
   position: relative;
   overflow: hidden;
@@ -895,83 +910,114 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  box-shadow:
-      0 20px 40px -20px rgba(0, 0, 0, 0.15),
-      0 40px 60px -30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+/* Hover Effect: Lift & Shadow */
 .stat-box:hover {
   transform: translateY(-10px);
-  box-shadow:
-      0 32px 64px -20px rgba(0, 0, 0, 0.2),
-      0 48px 80px -30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
 }
+
+/* Bottom Blue Line Animation */
 .stat-box::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 50%;
   width: 0;
-  height: 4px; /* Thicker underline */
+  height: 4px;
   background: var(--logo-blue);
-  transition: width 0.5s ease, left 0.5s ease;
+  transition: width 0.4s ease;
   transform: translateX(-50%);
 }
-.stat-box:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-}
+
 .stat-box:hover::after {
   width: 70%;
 }
+
+/* --- Typography --- */
 .stat-number {
-  font-size: 60px; /* Larger number */
+  font-size: 60px;
   font-weight: 800;
-  color: var(--color-text-primary);
-  margin-bottom: 16px;
+  color: var(--logo-black);
+  margin-bottom: 15px;
   line-height: 1;
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
 }
+
+/* For text-based stats like "AICTE" or "Active" */
 .stat-text {
-  font-size: 38px; /* Slightly larger for text stats */
+  font-size: 38px;
   color: var(--logo-blue);
+  font-weight: 700;
 }
+
 .stat-label {
-  font-size: 20px; /* Increased label size */
+  font-size: 18px;
   color: var(--color-text-secondary);
-  line-height: 1.5;
-  font-weight: 500;
-  max-width: 90%; /* Prevents overly wide text */
+  line-height: 1.4;
+  font-weight: 600;
+  max-width: 90%;
 }
+
+/* --- Disclaimer Box --- */
 .stats-disclaimer {
-  max-width: 1300px;
-  margin: 32px auto 0;
+  max-width: 1000px;
+  margin: -20px auto 40px; /* Pull up slightly */
   font-size: 14px;
-  color: var(--color-text-secondary);
+  color: #666;
   text-align: center;
-  padding: 16px 24px;
-  background: var(--color-background-dark);
-  border-radius: 12px;
-  font-weight: 500;
-  line-height: 1.5;
-  border-left: 3px solid var(--logo-blue);
+  padding: 15px 20px;
+  background: #eef2f6; /* Light grey-blue */
+  border-radius: 8px;
+  border-left: 4px solid var(--logo-blue);
+  position: relative;
+  z-index: 2;
 }
+
+/* ==========================================================================
+   RESPONSIVE STYLES
+   ========================================================================== */
 @media (max-width: 768px) {
-  .stat-number {
-      font-size: 48px;
-  }
-  .stat-text {
-      font-size: 32px;
-  }
-  .stat-label {
-      font-size: 16px;
-  }
-  .stat-box {
-      padding: 40px 24px;
-      min-height: 190px;
-  }
   .stats-content {
-      gap: 24px;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+    gap: 20px;
+    padding-bottom: 3rem; /* Reduce bottom padding on mobile */
+  }
+
+  .stat-box {
+    padding: 30px 20px;
+    min-height: 180px;
+  }
+
+  .stat-number {
+    font-size: 42px;
+  }
+  
+  .stat-text {
+    font-size: 28px;
+  }
+
+  .stat-label {
+    font-size: 15px;
+  }
+  
+  /* Ranking Cards Mobile */
+  .ranking-cards {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-content {
+    grid-template-columns: 1fr; /* 1 column on phones */
+  }
+  
+  .ranking-cards {
+    grid-template-columns: 1fr;
   }
 }
 /* Highlights Section */
