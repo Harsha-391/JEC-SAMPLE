@@ -70,9 +70,7 @@ body {
   color: var(--color-text-primary);
 
   line-height: 1.6;
-}
-
-/* ==========================================================================
+}/* ==========================================================================
    2. HEADER & SUBHEADER SHARED STYLES
    ========================================================================== */
 
@@ -92,8 +90,6 @@ body {
   position: relative;
   text-decoration: none;
   transition: color 0.3s ease, transform 0.3s ease;
-  /* CHANGE: Both headers now use white text by default because background is black */
-  color: var(--logo-white); 
 }
 
 /* Shared Underline Animation */
@@ -117,7 +113,6 @@ body {
   left: 15px; 
   right: 15px;
   width: auto;
-  background-color: var(--logo-gold); /* Keeps consistency */
 }
 
 /* Hover Effects */
@@ -131,18 +126,19 @@ body {
 .menu-item:hover > .menu-link,
 .menu-link:hover {
   transform: translateY(-1px);
-  color: var(--logo-gold); /* Gold hover for links */
+  color: var(--logo-gold);
 }
 
 /* ==========================================================================
-   3. TOP BAR (Header.js)
+   3. TOP BAR (Header.js) -> BLACK BACKGROUND
    ========================================================================== */
 .top-bar-section {
-  background: var(--logo-black);
+  background: var(--logo-black); /* Black Background */
   padding: 10px 0;
+  color: var(--logo-white); /* White Text */
   font-size: 12px;
   font-weight: 500;
-  border-bottom: 1px solid rgba(255,255,255,0.1); /* Subtle separator */
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .top-bar-contact,
@@ -154,6 +150,7 @@ body {
 }
 
 .top-bar-container a {
+  color: var(--logo-white); /* Links are White */
   display: flex;
   align-items: center;
   gap: 8px;
@@ -167,11 +164,10 @@ body {
 }
 
 /* ==========================================================================
-   4. MAIN NAVIGATION (Subheader.js)
+   4. MAIN NAVIGATION (Subheader.js) -> WHITE BACKGROUND
    ========================================================================== */
 .main-header-section {
-  /* CHANGE: Background is now Black */
-  background: var(--logo-black);
+  background: var(--logo-white); /* White Background */
   padding: 15px 0;
   border-bottom: 1px solid var(--color-border);
   position: relative;
@@ -182,7 +178,7 @@ body {
   flex-wrap: nowrap;
 }
 
-/* --- Logo --- */
+/* --- Logo (RED TEXT) --- */
 .brand-logo-link {
   display: flex;
   align-items: center;
@@ -199,8 +195,7 @@ body {
 .brand-logo-link .brand-text {
   display: flex;
   flex-direction: column;
-  /* CHANGE: Forced Logo Text to Red */
-  color: var(--logo-red) !important; 
+  color: var(--logo-red) !important; /* Forces Red Text */
   font-weight: 800;
   font-size: 20px;
   line-height: 1.1;
@@ -220,6 +215,7 @@ body {
 }
 
 .menu-link {
+  color: var(--logo-black); /* Links are Black to show on White bg */
   font-weight: 600;
   font-size: 14px;
   display: flex;
@@ -237,26 +233,25 @@ body {
   transition: transform 0.3s ease;
 }
 
-/* Hover States for Black Background */
+/* Hover States */
 .menu-item:hover,
 .menu-link:hover {
-  /* CHANGE: Use a dark transparent hover instead of light grey */
-  background-color: rgba(255, 255, 255, 0.1); 
+  background-color: var(--color-background-medium); /* Light grey hover */
 }
 
 .menu-item:hover .menu-arrow-icon {
   transform: rotate(180deg);
 }
 
-/* --- Dropdown Menu (Kept White for readability) --- */
+/* --- Dropdown Menu --- */
 .submenu-container {
   position: absolute;
   top: 100%;
   left: 0;
   min-width: 600px;
-  background: var(--logo-white); /* Dropdown stays white */
+  background: var(--logo-white);
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   padding: 20px;
   border-top: 3px solid var(--logo-blue);
   opacity: 0;
@@ -280,7 +275,7 @@ body {
 
 .submenu-link {
   text-decoration: none;
-  color: var(--color-text-primary); /* Dark text for white dropdown */
+  color: var(--color-text-primary);
   padding: 12px 15px;
   border-radius: 5px;
   font-weight: 500;
@@ -317,8 +312,7 @@ body {
   background: none;
   border: none;
   font-size: 24px;
-  /* CHANGE: Button is white to see on black background */
-  color: var(--logo-white); 
+  color: var(--logo-black); /* Black button for white header */
   cursor: pointer;
   margin-left: auto;
 }
@@ -366,11 +360,10 @@ body {
     top: 100%;
     left: 0;
     width: 100%;
-    /* CHANGE: Mobile menu background to black for consistency */
-    background-color: var(--logo-black); 
+    background-color: var(--logo-white);
     flex-direction: column;
     box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid var(--color-border);
     max-height: 80vh;
     overflow-y: auto;
     z-index: 1101;
@@ -384,7 +377,7 @@ body {
 
   .menu-item {
     width: 100%;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid #f0f0f0;
   }
 
   .menu-link {
@@ -392,7 +385,7 @@ body {
     justify-content: space-between;
     padding: 15px 20px;
     font-size: 16px;
-    color: var(--logo-white); /* Ensure links are white */
+    color: var(--logo-black);
   }
 
   .menu-link::after {
@@ -401,7 +394,7 @@ body {
   
   /* Hover on mobile */
   .menu-item:hover, .menu-link:hover {
-    background-color: rgba(255,255,255,0.1);
+    background-color: #f9f9f9;
   }
 
   /* Mobile Dropdowns */
@@ -415,7 +408,7 @@ body {
     border: none;
     padding: 0;
     display: none; 
-    background-color: #222; /* Slightly lighter black for contrast */
+    background-color: #f8f9fa;
     transform: none !important;
     opacity: 1;
     visibility: visible;
@@ -433,14 +426,8 @@ body {
 
   .submenu-link {
     padding: 12px 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    color: rgba(255,255,255,0.8); /* Light grey text */
-  }
-  
-  .submenu-link:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: var(--logo-gold);
-    transform: none;
+    border-bottom: 1px solid #e0e0e0;
+    color: var(--color-text-secondary);
   }
 }
 
