@@ -1,18 +1,82 @@
-/* ==========================================================================
-   1. GLOBAL UTILITIES (Add this to the top of your CSS file)
-   ========================================================================== */
-.max-width-container {
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 20px;
-  width: 100%;
+
+:root {
+
+  /* Logo-derived Colors */
+
+  --logo-red: #D62828; /* Primary shield and red text */
+
+  --logo-blue: #0072C6; /* Gear */
+
+  --logo-gold: #FCA311; /* Goddess, lotus, and ribbons */
+
+  --logo-black: #1D1D1D; /* "JAIPUR ENGINEERING COLLEGE" text */
+
+  --logo-white: #FFFFFF; /* Shield background */
+
+  /* Functional Palette */
+
+  --color-primary: var(--logo-red);
+
+  --color-secondary: var(--logo-blue);
+
+  --color-accent: var(--logo-gold);
+
+
+
+  --color-header-bg: var(--logo-black);
+
+  --color-header-text: var(--logo-white);
+
+
+
+  --color-button: var(--color-accent);
+
+  --color-button-text: var(--logo-black); /* Black text for readability on gold */
+
+  --color-text-primary: var(--logo-black);
+
+  --color-text-secondary: #555555; /* A neutral grey */
+
+
+
+  --color-background-light: var(--logo-white);
+
+  --color-background-medium: #f5f5f5; /* A very light neutral */
+
+  --color-background-dark: #f0f0f0; /* Another neutral */
+
+
+
+  --color-border: #dddddd; /* Neutral border */
+
+}
+
+
+
+* {
+
+  margin: 0;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+}
+
+body {
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+
+  color: var(--color-text-primary);
+
+  line-height: 1.6;
 }
 
 /* ==========================================================================
    2. HEADER & SUBHEADER SHARED STYLES
    ========================================================================== */
 
-/* Shared Flex Layout for both Headers */
+/* Shared Flex Layout */
 .top-bar-container,
 .main-header-container {
   display: flex;
@@ -22,14 +86,17 @@
   gap: 10px;
 }
 
-/* Shared Underline Animation for Links */
+/* Shared Link Styles - Base State */
 .top-bar-container a,
 .menu-link {
   position: relative;
   text-decoration: none;
   transition: color 0.3s ease, transform 0.3s ease;
+  /* CHANGE: Both headers now use white text by default because background is black */
+  color: var(--logo-white); 
 }
 
+/* Shared Underline Animation */
 .top-bar-container a::after,
 .menu-link::after {
   content: '';
@@ -38,21 +105,22 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: var(--logo-gold); /* Use gold for both for consistency, or override below */
+  background-color: var(--logo-gold);
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 0.3s ease;
 }
 
-/* Specific overrides for the Main Menu underline positioning */
+/* Specific Override for Main Menu Underline Positioning */
 .menu-link::after {
   bottom: 0;
   left: 15px; 
   right: 15px;
-  width: auto; /* Override width:100% from shared */
-  background-color: var(--color-accent);
+  width: auto;
+  background-color: var(--logo-gold); /* Keeps consistency */
 }
 
+/* Hover Effects */
 .top-bar-container a:hover::after,
 .menu-item:hover > .menu-link::after,
 .menu-link:hover::after {
@@ -63,6 +131,7 @@
 .menu-item:hover > .menu-link,
 .menu-link:hover {
   transform: translateY(-1px);
+  color: var(--logo-gold); /* Gold hover for links */
 }
 
 /* ==========================================================================
@@ -71,10 +140,9 @@
 .top-bar-section {
   background: var(--logo-black);
   padding: 10px 0;
-  color: var(--logo-white);
-  transition: background-color 0.3s ease;
   font-size: 12px;
   font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,0.1); /* Subtle separator */
 }
 
 .top-bar-contact,
@@ -86,15 +154,10 @@
 }
 
 .top-bar-container a {
-  color: var(--logo-white);
   display: flex;
   align-items: center;
   gap: 8px;
   padding-bottom: 4px;
-}
-
-.top-bar-container a:hover {
-  color: var(--logo-gold);
 }
 
 .top-bar-container a i {
@@ -107,15 +170,16 @@
    4. MAIN NAVIGATION (Subheader.js)
    ========================================================================== */
 .main-header-section {
-  background: var(--color-background-light);
+  /* CHANGE: Background is now Black */
+  background: var(--logo-black);
   padding: 15px 0;
   border-bottom: 1px solid var(--color-border);
   position: relative;
-  z-index: 1000; /* Ensure menu stays on top */
+  z-index: 1000;
 }
 
 .main-header-container {
-  flex-wrap: nowrap; /* Prevent wrapping on desktop */
+  flex-wrap: nowrap;
 }
 
 /* --- Logo --- */
@@ -135,7 +199,8 @@
 .brand-logo-link .brand-text {
   display: flex;
   flex-direction: column;
-  color: var(--logo-red);
+  /* CHANGE: Forced Logo Text to Red */
+  color: var(--logo-red) !important; 
   font-weight: 800;
   font-size: 20px;
   line-height: 1.1;
@@ -155,7 +220,6 @@
 }
 
 .menu-link {
-  color: var(--color-text-primary);
   font-weight: 600;
   font-size: 14px;
   display: flex;
@@ -173,29 +237,26 @@
   transition: transform 0.3s ease;
 }
 
-/* Hover States */
+/* Hover States for Black Background */
 .menu-item:hover,
 .menu-link:hover {
-  background-color: var(--color-background-medium);
-}
-
-.menu-link:hover {
-  color: var(--color-accent);
+  /* CHANGE: Use a dark transparent hover instead of light grey */
+  background-color: rgba(255, 255, 255, 0.1); 
 }
 
 .menu-item:hover .menu-arrow-icon {
   transform: rotate(180deg);
 }
 
-/* --- Dropdown Menu --- */
+/* --- Dropdown Menu (Kept White for readability) --- */
 .submenu-container {
   position: absolute;
   top: 100%;
   left: 0;
   min-width: 600px;
-  background: var(--logo-white);
+  background: var(--logo-white); /* Dropdown stays white */
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   padding: 20px;
   border-top: 3px solid var(--logo-blue);
   opacity: 0;
@@ -219,7 +280,7 @@
 
 .submenu-link {
   text-decoration: none;
-  color: var(--color-text-primary);
+  color: var(--color-text-primary); /* Dark text for white dropdown */
   padding: 12px 15px;
   border-radius: 5px;
   font-weight: 500;
@@ -256,7 +317,8 @@
   background: none;
   border: none;
   font-size: 24px;
-  color: var(--logo-black);
+  /* CHANGE: Button is white to see on black background */
+  color: var(--logo-white); 
   cursor: pointer;
   margin-left: auto;
 }
@@ -304,10 +366,11 @@
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: var(--logo-white);
+    /* CHANGE: Mobile menu background to black for consistency */
+    background-color: var(--logo-black); 
     flex-direction: column;
     box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid rgba(255,255,255,0.1);
     max-height: 80vh;
     overflow-y: auto;
     z-index: 1101;
@@ -321,7 +384,7 @@
 
   .menu-item {
     width: 100%;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
   }
 
   .menu-link {
@@ -329,10 +392,16 @@
     justify-content: space-between;
     padding: 15px 20px;
     font-size: 16px;
+    color: var(--logo-white); /* Ensure links are white */
   }
 
   .menu-link::after {
-    display: none; /* No underline animation on mobile */
+    display: none; 
+  }
+  
+  /* Hover on mobile */
+  .menu-item:hover, .menu-link:hover {
+    background-color: rgba(255,255,255,0.1);
   }
 
   /* Mobile Dropdowns */
@@ -345,14 +414,13 @@
     box-shadow: none;
     border: none;
     padding: 0;
-    display: none; /* Hidden until hovered/clicked */
-    background-color: #f8f9fa;
+    display: none; 
+    background-color: #222; /* Slightly lighter black for contrast */
     transform: none !important;
     opacity: 1;
     visibility: visible;
   }
 
-  /* Simple hover effect for mobile (click handling logic is in JS) */
   .menu-item:hover .submenu-container {
     display: block;
   }
@@ -365,8 +433,14 @@
 
   .submenu-link {
     padding: 12px 40px;
-    border-bottom: 1px solid #e0e0e0;
-    color: var(--color-text-secondary);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.8); /* Light grey text */
+  }
+  
+  .submenu-link:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: var(--logo-gold);
+    transform: none;
   }
 }
 
