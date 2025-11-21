@@ -1188,13 +1188,17 @@ body {
     padding: 30px 20px;
   }
 }
-/* Schools Section (Programs Offered) */
+/* Schools Section (Programs Offered) *//* ==========================================================================
+   SCHOOLS / PROGRAMS SECTION
+   ========================================================================== */
 .schools {
-  padding: 20px 20px;
+  padding: 80px 0; /* Consistent vertical spacing */
   background: var(--color-background-medium);
   position: relative;
   overflow: hidden;
 }
+
+/* Background Pattern */
 .schools::before {
   content: '';
   position: absolute;
@@ -1206,30 +1210,37 @@ body {
   pointer-events: none;
   z-index: 0;
 }
+
 .schools-content {
-  max-width: 1200px;
+  max-width: 1300px; /* Matched to Header/Stats */
   margin: 0 auto;
+  padding: 0 40px; /* Matched horizontal padding */
   position: relative;
   z-index: 1;
+  box-sizing: border-box;
 }
+
+/* --- Section Titles --- */
 .schools-title {
   font-size: 42px;
   font-weight: 700;
   margin-bottom: 20px;
-  color: var(--logo-blue); /* Title is Blue */
+  color: var(--logo-blue);
   text-align: center;
   position: relative;
-  animation: fadeInDown 0.8s ease-out;
+  animation: schools-fade-down 0.8s ease-out;
 }
+
 .schools-title::after {
   content: '';
   display: block;
   width: 80px;
   height: 4px;
-  background: var(--logo-blue); /* Underline is Blue */
+  background: var(--logo-blue);
   margin: 20px auto 0;
   border-radius: 2px;
 }
+
 .schools-subtitle {
   font-size: 18px;
   color: var(--color-text-secondary);
@@ -1237,29 +1248,36 @@ body {
   max-width: 800px;
   margin: 0 auto 60px;
   line-height: 1.6;
-  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  animation: schools-fade-up 0.8s ease-out 0.2s forwards;
   opacity: 0;
 }
+
+/* --- Grid Layout --- */
 .schools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Wider cards */
+  gap: 30px;
 }
+
+/* --- Card Styling --- */
 .school-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: var(--logo-white);
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  cursor: pointer;
+  padding: 35px 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: default; /* Changed from pointer to prevent confusion if not clicking */
   position: relative;
   overflow: hidden;
-  animation: fadeInUp 0.6s ease-out forwards;
+  border: 1px solid rgba(0,0,0,0.05);
+  animation: schools-fade-up 0.6s ease-out forwards;
   opacity: 0;
 }
+
+/* Staggered Animation Delays */
 .school-item:nth-child(1) { animation-delay: 0.1s; }
 .school-item:nth-child(2) { animation-delay: 0.2s; }
 .school-item:nth-child(3) { animation-delay: 0.3s; }
@@ -1268,86 +1286,135 @@ body {
 .school-item:nth-child(6) { animation-delay: 0.6s; }
 .school-item:nth-child(7) { animation-delay: 0.7s; }
 .school-item:nth-child(8) { animation-delay: 0.8s; }
+
+/* Hover Effects */
 .school-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+  border-color: transparent;
 }
+
+/* Colored Side Bar Animation */
 .school-item::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  width: 5px;
+  width: 4px;
   height: 100%;
-  background: #0072C6;
-  transition: width 0.3s ease, opacity 0.3s ease;
+  background: var(--logo-blue);
+  transition: width 0.4s ease, opacity 0.3s ease;
+  z-index: 0;
 }
+
 .school-item:hover::before {
   width: 100%;
-  opacity: 0.1; /* Light Blue hover fill */
+  opacity: 0.05; /* Very subtle fill on hover */
 }
+
 .school-info {
   flex: 1;
+  position: relative;
+  z-index: 1;
 }
+
+/* Program Type Badge (e.g., B.Tech) */
 .program-type {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-text-secondary);
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--logo-blue);
+  background: rgba(0, 114, 198, 0.1);
+  padding: 4px 12px;
+  border-radius: 20px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-  transition: color 0.3s ease;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
 }
+
+.school-item:hover .program-type {
+  background: var(--logo-blue);
+  color: var(--logo-white);
+}
+
 .program-name {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-text-primary);
   margin: 0 0 5px;
+  line-height: 1.3;
   transition: color 0.3s ease;
-  position: relative; /* To stay on top of the hover */
-  z-index: 2;
 }
+
 .school-item:hover .program-name {
-  color: var(--logo-red); /* Program name turns Red on hover */
+  color: var(--logo-blue);
 }
+
 .seats-info {
   font-size: 14px;
   color: var(--color-text-secondary);
   display: block;
-  position: relative; /* To stay on top of the hover */
-  z-index: 2;
+  margin-top: 5px;
+  font-weight: 500;
 }
+
+/* --- Arrow Icon --- */
 .school-item .arrow {
-  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.03);
+  font-size: 20px;
   color: var(--logo-blue);
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
   margin-left: 20px;
-  position: relative; /* To stay on top of the hover */
+  position: relative;
   z-index: 2;
 }
+
 .school-item:hover .arrow {
-  transform: translateX(10px);
-  color: var(--logo-red); /* Arrow turns Red on hover */
+  transform: translateX(5px);
+  background: var(--logo-blue);
+  color: var(--logo-white);
 }
-@keyframes fadeInDown {
+
+/* --- Scoped Animations --- */
+@keyframes schools-fade-down {
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-@keyframes fadeInUp {
+
+@keyframes schools-fade-up {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* --- Responsive --- */
 @media (max-width: 768px) {
+  .schools-content {
+    padding: 0 20px; /* Reduce padding for mobile */
+  }
+
   .schools-grid {
-      grid-template-columns: 1fr;
-      gap: 30px;
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
+
   .schools-title {
-      font-size: 32px;
+    font-size: 32px;
   }
+
   .school-item {
-      padding: 20px;
+    padding: 25px 20px;
+  }
+  
+  .program-name {
+    font-size: 18px;
   }
 }
 /* Why JEC Section (Faculty) */
