@@ -2097,7 +2097,7 @@ footer {
 .story-image {
   width: 100%;
   height: 220px;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.5s ease;
 }
 
@@ -2245,72 +2245,123 @@ footer {
     display: none; 
   }
 }
-/* Campus Life Section */
+/* Campus Life Section *//* ==========================================================================
+   CAMPUS LIFE SECTION
+   ========================================================================== */
 .campus-life {
-  padding: 80px 20px;
+  padding: 80px 0; /* Consistent vertical spacing */
   background: var(--color-background-medium);
+  position: relative;
+  overflow: hidden;
 }
+
 .campus-life-content {
-  max-width: 1200px;
+  max-width: 1300px; /* Matches other sections */
   margin: 0 auto;
+  padding: 0 40px; /* Consistent horizontal padding */
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
 }
+
 .campus-life-title {
-  font-size: 36px;
-  font-weight: 600;
+  font-size: 42px;
+  font-weight: 700;
   margin-bottom: 20px;
   color: var(--logo-blue);
   position: relative;
   display: inline-block;
   padding-bottom: 15px;
+  animation: jec-fade-down 0.8s ease-out;
 }
+
 .campus-life-title::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 80px; /* Matches underline width of other titles */
   height: 4px;
   background: linear-gradient(to right, var(--logo-red), var(--logo-blue));
+  border-radius: 2px;
 }
+
 .campus-life-desc {
   font-size: 18px;
   color: var(--color-text-secondary);
   margin-bottom: 50px;
   max-width: 800px;
+  line-height: 1.6;
+  animation: jec-fade-up 0.8s ease-out 0.2s forwards;
+  opacity: 0;
 }
+
+/* --- Gallery Grid --- */
 .campus-gallery {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-rows: 250px 250px; /* Fixed row height for alignment */
   gap: 20px;
   grid-template-areas:
       "large small1 small2"
       "large small3 small4";
+  animation: jec-fade-up 0.8s ease-out 0.4s forwards;
+  opacity: 0;
 }
+
 .gallery-item {
   position: relative;
   overflow: hidden;
-  border-radius: 15px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
 }
+
+.gallery-item:hover {
+  transform: scale(1.02); /* Subtle zoom on hover */
+  z-index: 2;
+}
+
 .gallery-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.5s ease;
 }
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
 .gallery-item.large {
   grid-area: large;
 }
+
+/* Overlay Text */
 .gallery-overlay {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
   color: var(--logo-white);
+  transform: translateY(100%); /* Hidden initially */
+  transition: transform 0.3s ease;
 }
+
+.gallery-item:hover .gallery-overlay {
+  transform: translateY(0); /* Slide up on hover */
+}
+
 .gallery-overlay h3 {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
+  margin: 0;
 }
+
+/* Play Button Overlay */
 .play-button {
   position: absolute;
   top: 50%;
@@ -2318,21 +2369,36 @@ footer {
   transform: translate(-50%, -50%);
   width: 60px;
   height: 60px;
-  background: rgba(29, 29, 29, 0.6); /* Updated to use --logo-black equivalent */
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
   color: var(--logo-white);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
+  border: 2px solid var(--logo-white);
+  transition: all 0.3s ease;
 }
-/* Campus Buzz Section / Grievance */
+
+.gallery-item:hover .play-button {
+  background: var(--logo-red);
+  border-color: var(--logo-red);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+
+/* ==========================================================================
+   GRIEVANCE & SUPPORT SECTION (Campus Buzz)
+   ========================================================================== */
 .campus-buzz {
-  padding: 100px 20px;
-  background: var(--color-background-light);
+  padding: 80px 0; /* Consistent spacing */
+  background: var(--logo-white);
   position: relative;
   overflow: hidden;
 }
+
+/* Background Pattern */
 .campus-buzz::before {
   content: '';
   position: absolute;
@@ -2340,121 +2406,212 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,20 L100,100 L0,80 Z" fill="%23ffffff" opacity="0.05"/></svg>') repeat;
+  background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.3;
   pointer-events: none;
   z-index: 0;
 }
+
 .campus-buzz-content {
-  max-width: 1200px;
+  max-width: 1300px; /* Aligned Width */
   margin: 0 auto;
+  padding: 0 40px; /* Aligned Padding */
   text-align: center;
   position: relative;
   z-index: 1;
+  box-sizing: border-box;
 }
+
 .campus-buzz-title {
   font-size: 42px;
   font-weight: 700;
   margin-bottom: 20px;
   color: var(--logo-blue);
   position: relative;
-  animation: fadeInDown 0.8s ease-out;
+  animation: jec-fade-down 0.8s ease-out;
 }
+
 .campus-buzz-title::after {
   content: '';
   display: block;
   width: 100px;
   height: 4px;
   background: linear-gradient(to right, var(--logo-blue), var(--logo-red), var(--logo-gold));
-  margin: 10px auto 0;
+  margin: 15px auto 0;
   border-radius: 2px;
 }
+
 .campus-buzz-subtitle {
   font-size: 18px;
   color: var(--color-text-secondary);
   max-width: 800px;
-  margin: 0 auto 50px;
+  margin: 0 auto 60px;
   line-height: 1.6;
-  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  animation: jec-fade-up 0.8s ease-out 0.2s forwards;
   opacity: 0;
 }
+
+/* --- Buzz Items Grid --- */
 .buzz-items {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
 }
+
+/* --- Buzz Item Card --- */
 .buzz-item {
   background: var(--logo-white);
-  padding: 30px;
-  border-radius: 12px;
+  padding: 40px 30px;
+  border-radius: 16px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   cursor: pointer;
-  animation: fadeInUp 0.6s ease-out forwards;
+  border: 1px solid rgba(0,0,0,0.05);
+  
+  /* Visibility Fix */
   opacity: 0;
+  animation: jec-fade-up 0.6s ease-out forwards;
 }
+
+/* Staggered Animation */
 .buzz-item:nth-child(1) { animation-delay: 0.1s; }
 .buzz-item:nth-child(2) { animation-delay: 0.2s; }
 .buzz-item:nth-child(3) { animation-delay: 0.3s; }
+
+/* Hover Effects */
 .buzz-item:hover {
   transform: translateY(-10px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+  border-color: transparent;
 }
+
+/* Top Color Bar */
 .buzz-item::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 5px;
+  height: 4px;
   background: linear-gradient(to right, var(--logo-blue), var(--logo-red), var(--logo-gold));
   transition: height 0.3s ease;
-  opacity: 0;
+  opacity: 0.8;
 }
+
 .buzz-item:hover::before {
-  height: 100%;
-  opacity: 0.1;
+  height: 6px;
 }
+
+/* Icon Styling */
 .buzz-icon {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  margin: 0 auto 20px;
+  margin: 0 auto 25px;
   object-fit: cover;
-  border: 2px solid var(--logo-blue);
+  border: 4px solid rgba(0, 114, 198, 0.1);
+  padding: 5px;
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
+
 .buzz-item:hover .buzz-icon {
   transform: scale(1.1);
-  border-color: var(--logo-red);
+  border-color: var(--logo-blue);
 }
+
+/* Text Styling */
 .buzz-item h3 {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--logo-blue);
-  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--logo-black);
+  margin-bottom: 15px;
   transition: color 0.3s ease;
 }
+
 .buzz-item:hover h3 {
-  color: var(--logo-red);
-}
-.buzz-item p {
-  font-size: 14px;
-  color: var(--color-text-secondary);
-  line-height: 1.5;
-  margin-bottom: 15px;
-}
-.buzz-link {
-  display: block;
-  font-size: 24px;
   color: var(--logo-blue);
-  text-decoration: none;
-  text-align: right;
-  transition: transform 0.3s ease, color 0.3s ease;
 }
+
+.buzz-item p {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Arrow Link */
+.buzz-link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 114, 198, 0.1);
+  color: var(--logo-blue);
+  border-radius: 50%;
+  font-size: 20px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
 .buzz-item:hover .buzz-link {
-  transform: translateX(10px);
-  color: var(--logo-gold);
+  background: var(--logo-blue);
+  color: var(--logo-white);
+  transform: translateX(5px);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 992px) {
+  .campus-gallery {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "large large"
+      "small1 small2"
+      "small3 small4";
+  }
+  .gallery-item.large {
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .campus-life, .campus-buzz {
+    padding: 60px 0;
+  }
+  
+  .campus-life-content, .campus-buzz-content {
+    padding: 0 20px; /* Standard mobile padding */
+  }
+
+  .campus-gallery {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "large" 
+      "small1" 
+      "small2" 
+      "small3" 
+      "small4";
+    grid-template-rows: 250px repeat(4, 200px);
+  }
+
+  .buzz-items {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .campus-buzz-title, .campus-life-title {
+    font-size: 32px;
+  }
+  
+  .buzz-item {
+    padding: 30px 20px;
+  }
 }
 /* Take a Tour Section */
 .take-a-tour {
