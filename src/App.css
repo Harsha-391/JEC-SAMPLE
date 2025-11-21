@@ -74,7 +74,21 @@ body {
    2. HEADER & SUBHEADER SHARED STYLES
    ========================================================================== */
 
-/* Shared Flex Layout */
+/* Shared Flex Layout *//* ==========================================================================
+   1. STICKY HEADER WRAPPER
+   ========================================================================== */
+/* This wraps both the Top Bar and Main Nav to make them stick together */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1100; /* High z-index to sit above page content */
+  width: 100%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+}
+
+/* ==========================================================================
+   2. HEADER & SUBHEADER SHARED LAYOUT
+   ========================================================================== */
 .top-bar-container,
 .main-header-container {
   display: flex;
@@ -82,9 +96,14 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
+  /* PADDING UPDATE: 40px for better visuals on desktop */
+  padding: 0 40px !important;
+  max-width: 1300px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
-/* Shared Link Styles - Base State */
+/* Shared Link Transitions */
 .top-bar-container a,
 .menu-link {
   position: relative;
@@ -107,10 +126,10 @@ body {
   transition: transform 0.3s ease;
 }
 
-/* Specific Override for Main Menu Underline Positioning */
+/* Specific positioning for Main Menu underline */
 .menu-link::after {
   bottom: 0;
-  left: 15px; 
+  left: 15px;
   right: 15px;
   width: auto;
 }
@@ -130,7 +149,7 @@ body {
 }
 
 /* ==========================================================================
-   3. TOP BAR (Header.js) -> BLACK BACKGROUND
+   3. TOP BAR SECTION (Black Background)
    ========================================================================== */
 .top-bar-section {
   background: var(--logo-black); /* Black Background */
@@ -164,7 +183,7 @@ body {
 }
 
 /* ==========================================================================
-   4. MAIN NAVIGATION (Subheader.js) -> WHITE BACKGROUND
+   4. MAIN NAVIGATION SECTION (White Background)
    ========================================================================== */
 .main-header-section {
   background: var(--logo-white); /* White Background */
@@ -178,7 +197,7 @@ body {
   flex-wrap: nowrap;
 }
 
-/* --- Logo (RED TEXT) --- */
+/* --- Logo Styles --- */
 .brand-logo-link {
   display: flex;
   align-items: center;
@@ -195,13 +214,13 @@ body {
 .brand-logo-link .brand-text {
   display: flex;
   flex-direction: column;
-  color: var(--logo-red) !important; /* Forces Red Text */
+  color: var(--logo-red) !important; /* Force Red Text */
   font-weight: 800;
   font-size: 20px;
   line-height: 1.1;
 }
 
-/* --- Desktop Menu --- */
+/* --- Desktop Menu Styles --- */
 .main-nav-menu {
   display: flex;
   gap: 5px;
@@ -215,7 +234,7 @@ body {
 }
 
 .menu-link {
-  color: var(--logo-black); /* Links are Black to show on White bg */
+  color: var(--logo-black); /* Links are Black */
   font-weight: 600;
   font-size: 14px;
   display: flex;
@@ -233,10 +252,10 @@ body {
   transition: transform 0.3s ease;
 }
 
-/* Hover States */
+/* Hover State for Menu Items */
 .menu-item:hover,
 .menu-link:hover {
-  background-color: var(--color-background-medium); /* Light grey hover */
+  background-color: var(--color-background-medium); /* Light Grey Hover */
 }
 
 .menu-item:hover .menu-arrow-icon {
@@ -290,7 +309,7 @@ body {
   transform: translateX(3px);
 }
 
-/* Alignment Helpers */
+/* Dropdown Alignment Helpers */
 .submenu-container.align-right {
   left: auto !important;
   right: 0 !important;
@@ -306,19 +325,19 @@ body {
   transform: translateX(-50%) translateY(0);
 }
 
-/* --- Mobile Menu Toggle --- */
+/* --- Mobile Menu Toggle Button --- */
 .mobile-menu-toggle {
   display: none;
   background: none;
   border: none;
   font-size: 24px;
-  color: var(--logo-black); /* Black button for white header */
+  color: var(--logo-black); /* Black button */
   cursor: pointer;
   margin-left: auto;
 }
 
 /* ==========================================================================
-   5. RESPONSIVE STYLES
+   5. RESPONSIVE ADJUSTMENTS
    ========================================================================== */
 
 @media (max-width: 1200px) {
@@ -328,23 +347,19 @@ body {
 }
 
 @media (max-width: 992px) {
-  /* Top Bar Adjustments */
+  /* Reset padding for smaller screens */
+  .top-bar-container,
+  .main-header-container {
+    justify-content: space-between;
+    padding: 5px 15px !important; /* Revert to 15px on mobile */
+  }
+  
   .top-bar-container {
     justify-content: center;
     flex-direction: column;
-    padding: 5px 15px;
   }
-  .top-bar-contact, .top-bar-links {
-    justify-content: center;
-    gap: 10px;
-  }
-  .top-bar-container a {
-    font-size: 11px;
-  }
-
-  /* Header / Nav Adjustments */
+  
   .main-header-container {
-    justify-content: space-between;
     position: relative;
   }
 
@@ -353,7 +368,7 @@ body {
     z-index: 1102;
   }
 
-  /* Mobile Nav Drawer */
+  /* Mobile Navigation Drawer */
   .main-nav-menu {
     display: none; /* Hidden by default */
     position: absolute;
@@ -389,14 +404,9 @@ body {
   }
 
   .menu-link::after {
-    display: none; 
+    display: none;
   }
   
-  /* Hover on mobile */
-  .menu-item:hover, .menu-link:hover {
-    background-color: #f9f9f9;
-  }
-
   /* Mobile Dropdowns */
   .submenu-container,
   .submenu-container.align-right,
