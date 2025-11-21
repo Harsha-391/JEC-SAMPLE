@@ -75,8 +75,7 @@ function Subheader() {
         <Link to="/" className="brand-logo-link" onClick={closeMenu}>
           <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
           <div className="brand-text">
-            <span>JEC</span>
-            <span>KUKAS</span>
+           
           </div>
         </Link>
 
