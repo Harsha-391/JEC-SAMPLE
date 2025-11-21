@@ -642,6 +642,89 @@ body {
 }
 
 /* Apply Button */
+/* ==========================================================================
+   HERO SLIDER STYLES (Home Page)
+   ========================================================================== */
+
+.hero-slider {
+  position: relative;
+  width: 100%;
+  height: 85vh; 
+  min-height: 600px;
+  overflow: hidden;
+  background-color: var(--logo-black);
+}
+
+/* Individual Slide */
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0; /* Hidden by default */
+  transition: opacity 1s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 1;
+}
+
+/* The Active Slide */
+.hero-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+/* Dark Overlay */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 1;
+}
+
+/* --- Content Styling (Scoped to .hero-slider) --- */
+.hero-slider .hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 900px;
+  padding: 20px;
+  color: var(--logo-white);
+  animation: hero-slide-up 1s ease-out;
+}
+
+.hero-slider .hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 800;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  line-height: 1.2;
+}
+
+.hero-slider .hero-content p {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  margin-bottom: 30px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-slider .hero-underline {
+  width: 100px;
+  height: 5px;
+  background: var(--logo-gold);
+  margin: 0 auto 30px;
+  border-radius: 2px;
+}
+
+/* Apply Button */
 .hero-slider .apply-btn {
   background-color: var(--logo-gold);
   color: var(--logo-black);
