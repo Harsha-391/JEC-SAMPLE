@@ -1,21 +1,42 @@
 // src/components/Team.js
-import React, { useRef } from 'react';
-
-// We can define the team data as an array
-const teamMembers = [
-  { id: 1, name: 'Dr. Ram K Sharma', title: 'Vice Chancellor, JEC', img: 'https://picsum.photos/400/500?random=1' },
-  { id: 2, name: 'Prof. Vijaysekhar Chellaboina', title: 'Dean, School of Computer Science', img: 'https://picsum.photos/400/500?random=2' },
-  { id: 3, name: 'Prof. Bhaskar Bhatt', title: 'Dean, School of Design', img: 'https://picsum.photos/400/500?random=3' },
-  // Add more members if needed
-];
+import React, { useRef, useState, useEffect } from 'react';
+import { collection, getDocs } from "firebase/firestore"; 
+import { db } from '../firebase'; // Import database connection
 
 function Team() {
-  // 1. Create a ref to attach to the carousel element
+  const [teamMembers, setTeamMembers] = useState([]);
   const carouselRef = useRef(null);
 
-  // 2. Define the scroll function
+  // Fetch faculty data from Firebase
+  useEffect(() => {
+    const fetchTeam = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "faculty_home"));
+        const members = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        
+        // If database is empty, use placeholder data so the site doesn't look broken
+        if (members.length > 0) {
+          setTeamMembers(members);
+        } else {
+          setTeamMembers([
+            { id: 1, name: 'Dr. Ram K Sharma', title: 'Vice Chancellor, JEC', imageUrl: 'https://picsum.photos/400/500?random=1' },
+            { id: 2, name: 'Prof. Vijaysekhar', title: 'Dean, Computer Science', imageUrl: 'https://picsum.photos/400/500?random=2' },
+            { id: 3, name: 'Prof. Bhaskar Bhatt', title: 'Dean, Design', imageUrl: 'https://picsum.photos/400/500?random=3' },
+          ]);
+        }
+      } catch (error) {
+        console.error("Error fetching team:", error);
+      }
+    };
+
+    fetchTeam();
+  }, []);
+
+  // Define the scroll function
   const scrollCarousel = (scrollAmount) => {
-    // 3. Access the element via .current and call its scrollBy method
     if (carouselRef.current) {
       carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
@@ -27,14 +48,13 @@ function Team() {
         <h2 className="stories-title">Our Team</h2>
         <p className="stories-subtitle">Meet the dedicated professionals...</p>
         
-        {/* 4. Attach the ref to the carousel div */}
         <div className="stories-carousel" id="team-carousel" ref={carouselRef}>
           
-          {/* We map over the data to create cards (the React way) */}
-          {/* We repeat the list twice to ensure seamless scrolling */}
+          {/* We map over the data from Firebase now */}
+          {/* We repeat the list twice to ensure seamless scrolling effect */}
           {[...teamMembers, ...teamMembers].map((member, index) => (
-            <div className="story-card" key={index}>
-              <img src={member.img} alt={member.name} className="story-image" />
+            <div className="story-card" key={`${member.id}-${index}`}>
+              <img src={member.imageUrl} alt={member.name} className="story-image" />
               <div className="story-content">
                 <h3>{member.name}</h3>
                 <p>{member.title}</p>
@@ -46,7 +66,6 @@ function Team() {
         <div className="carousel-wrapper">
           <div className="stories-nav">
             
-            {/* 5. Use React's onClick prop */}
             <button className="nav-button prev" onClick={() => scrollCarousel(-320)} aria-label="Previous">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
             </button>
