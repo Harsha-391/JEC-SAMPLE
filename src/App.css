@@ -1417,13 +1417,17 @@ body {
     font-size: 18px;
   }
 }
-/* Why JEC Section (Faculty) */
+/* Why JEC Section (Faculty) *//* ==========================================================================
+   WHY CHOOSE JEC (Faculty/Features Section)
+   ========================================================================== */
 .faculty {
-  padding: 0px 5rem;
-  background: var(--color-background-light);
+  padding: 80px 0; /* Consistent vertical spacing */
+  background: var(--logo-white);
   position: relative;
   overflow: hidden;
 }
+
+/* Subtle Background Pattern */
 .faculty::before {
   content: '';
   position: absolute;
@@ -1431,16 +1435,23 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,20 L100,100 L0,80 Z" fill="%23ffffff" opacity="0.05"/></svg>') repeat;
+  background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.3;
   pointer-events: none;
   z-index: 0;
 }
+
 .faculty-content {
-  max-width: 1400px;
+  max-width: 1300px; /* Matches Header/Stats max-width */
   margin: 0 auto;
+  padding: 0 40px; /* Matches Header/Stats padding */
   position: relative;
   z-index: 1;
+  box-sizing: border-box;
 }
+
+/* --- Typography --- */
 .faculty-title {
   font-size: 42px;
   font-weight: 700;
@@ -1448,107 +1459,176 @@ body {
   color: var(--logo-blue);
   text-align: center;
   position: relative;
-  animation: fadeInDown 0.8s ease-out;
+  animation: jec-fade-down 0.8s ease-out;
 }
+
 .faculty-title::after {
   content: '';
   display: block;
   width: 100px;
   height: 4px;
   background: linear-gradient(to right, var(--logo-blue), var(--logo-red));
-  margin: 10px auto 0;
+  margin: 15px auto 0;
   border-radius: 2px;
 }
+
 .faculty-subtitle {
   font-size: 18px;
   color: var(--color-text-secondary);
   text-align: center;
   max-width: 800px;
-  margin: 0 auto 50px;
+  margin: 0 auto 60px;
   line-height: 1.6;
-  animation: fadeInUp 0.8s ease-out 0.2s forwards;
-  opacity: 0;
+  animation: jec-fade-up 0.8s ease-out 0.2s forwards;
+  opacity: 0; /* Starts invisible, animates in */
 }
+
+/* --- Grid Layout --- */
 .faculty-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
 }
+
+/* --- Card Styling --- */
 .faculty-card {
-  text-align: center;
   background: var(--logo-white);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  padding: 40px 30px;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.05); /* Subtle border instead of shadow initially */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
-  cursor: pointer;
-  animation: fadeInUp 0.6s ease-out forwards;
-  opacity: 0;
+  overflow: hidden;
+  cursor: default;
+  
+  /* Fix visibility: Ensure animation runs */
+  opacity: 0; 
+  animation: jec-fade-up 0.6s ease-out forwards;
 }
+
+/* Staggered Delays */
 .faculty-card:nth-child(1) { animation-delay: 0.1s; }
 .faculty-card:nth-child(2) { animation-delay: 0.2s; }
 .faculty-card:nth-child(3) { animation-delay: 0.3s; }
 .faculty-card:nth-child(4) { animation-delay: 0.4s; }
 .faculty-card:nth-child(5) { animation-delay: 0.5s; }
 .faculty-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Hover Effects */
 .faculty-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+  border-color: transparent;
 }
-.faculty-card::before {
+
+/* Bottom Color Line on Hover */
+.faculty-card::after {
   content: '';
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 5px;
+  height: 4px;
   background: linear-gradient(to right, var(--logo-blue), var(--logo-red), var(--logo-gold));
-  transition: height 0.3s ease;
-  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.4s ease;
 }
-.faculty-card:hover::before {
-  height: 100%;
-  opacity: 0.1;
+
+.faculty-card:hover::after {
+  transform: scaleX(1);
 }
+
+/* --- Icon Styling --- */
 .faculty-icon {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   margin: 0 auto 20px;
-  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F0F9FF; /* Light blue bg */
+  border-radius: 50%;
+  color: var(--logo-blue);
+  font-size: 24px; /* If using font icons inside */
+  transition: all 0.3s ease;
 }
+
+/* SVG inside icon */
+.faculty-icon svg {
+  width: 32px;
+  height: 32px;
+  stroke: var(--logo-blue);
+  transition: stroke 0.3s ease;
+}
+
 .faculty-card:hover .faculty-icon {
+  background: var(--logo-blue);
   transform: scale(1.1);
 }
+
+.faculty-card:hover .faculty-icon svg {
+  stroke: var(--logo-white);
+}
+
+/* --- Text Styling --- */
 .faculty-card h3 {
   font-size: 20px;
-  font-weight: 600;
-  color: var(--logo-blue);
+  font-weight: 700;
+  color: var(--logo-black); /* Default black */
   margin-bottom: 10px;
   transition: color 0.3s ease;
 }
+
 .faculty-card:hover h3 {
-  color: var(--logo-red);
+  color: var(--logo-blue); /* Highlight blue on hover */
 }
+
 .faculty-card p {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--color-text-secondary);
-  line-height: 1.5;
+  line-height: 1.6;
   margin-bottom: 0;
 }
+
+/* ==========================================================================
+   KEYFRAMES (Renamed to avoid conflicts)
+   ========================================================================== */
+@keyframes jec-fade-down {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes jec-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
 @media (max-width: 768px) {
   .faculty {
-      padding: 80px 20px;
+    padding: 60px 0;
   }
+  
+  .faculty-content {
+    padding: 0 20px; /* Mobile padding matches other sections */
+  }
+
   .faculty-grid {
-      grid-template-columns: 1fr;
-      gap: 20px;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 20px;
   }
+
   .faculty-title {
-      font-size: 32px;
+    font-size: 32px;
   }
+
   .faculty-card {
-      padding: 20px;
+    padding: 30px 20px;
   }
 }
 /* Student Outcomes */
