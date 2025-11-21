@@ -1021,49 +1021,59 @@ body {
   }
 }
 /* Highlights Section */
-/* Highlights Section */
+/* Highlights Section *//* ==========================================================================
+   HIGHLIGHTS SECTION (Home Page)
+   ========================================================================== */
 .highlights {
-  padding: 60px 30px; /* Reduced from 200px to 60px */
+  padding: 80px 0; /* Increased vertical breathing room */
   background: var(--logo-white);
+  position: relative;
 }
 
 .highlights-content {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
+  /* MATCHING HEADER PADDING: 40px left/right */
+  padding: 0 40px; 
   text-align: center;
+  box-sizing: border-box;
 }
 
+/* --- Grid Layout --- */
 .highlight-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px; /* Reduced gap */
-  margin-bottom: 20px;
+  gap: 30px;
+  margin-bottom: 40px;
 }
 
+/* --- Card Styling --- */
 .highlight-card {
-  background: var(--color-background-medium);
-  padding: 30px 40px; /* Reduced from 80px/60px */
-  border-radius: 20px;
+  background: var(--color-background-medium); /* Light grey base */
+  padding: 40px 30px;
+  border-radius: 16px;
   text-align: left;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Smooth bounce */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0,0,0,0.05);
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
+/* Card Hover Effect */
 .highlight-card:hover {
-  transform: translateY(-10px) scale(1.02);
+  transform: translateY(-10px);
   background: var(--logo-white);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+  border-color: transparent;
 }
 
-.highlight-card:hover .card-graphic-top-blue,
-.highlight-card:hover .card-graphic-top-yellow,
-.highlight-card:hover .card-graphic-top-pink {
-  transform: scaleX(1.1);
-}
-
+/* --- Top Colored Bars (Animation) --- */
 .card-graphic-top-blue,
 .card-graphic-top-yellow,
 .card-graphic-top-pink {
@@ -1071,21 +1081,31 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 8px;
+  height: 6px;
   transform-origin: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease, height 0.3s ease;
+  transform: scaleX(1);
+}
+
+.highlight-card:hover .card-graphic-top-blue,
+.highlight-card:hover .card-graphic-top-yellow,
+.highlight-card:hover .card-graphic-top-pink {
+  transform: scaleX(1.05);
+  height: 8px; /* Slightly thicker on hover */
 }
 
 .card-graphic-top-blue { background: var(--logo-blue); }
 .card-graphic-top-yellow { background: var(--logo-gold); }
 .card-graphic-top-pink { background: var(--logo-red); }
 
+/* --- Typography --- */
 .highlight-card h3 {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 15px;
   color: var(--color-text-primary);
   transition: color 0.3s ease;
+  line-height: 1.3;
 }
 
 .highlight-card:hover h3 {
@@ -1096,58 +1116,83 @@ body {
   font-size: 16px;
   color: var(--color-text-secondary);
   line-height: 1.6;
-  margin-bottom: 20px; /* Reduced from 40px */
-  transition: color 0.3s ease;
+  margin-bottom: 25px;
+  flex-grow: 1;
 }
 
-.highlight-card:hover p {
-  color: var(--color-text-primary);
-}
-
+/* --- Arrow Link --- */
 .card-arrow {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
   font-size: 20px;
   text-decoration: none;
   color: var(--logo-blue);
-  transition: transform 0.3s ease, color 0.3s ease;
+  background: rgba(0, 114, 198, 0.1); /* Light blue circle */
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  align-self: flex-start;
 }
 
 .highlight-card:hover .card-arrow {
+  background: var(--logo-blue);
+  color: var(--logo-white);
   transform: translateX(5px);
-  color: var(--logo-blue);
 }
 
-.carousel-nav {
+/* --- Carousel Navigation (Dots) --- */
+/* Scoped to .highlights to avoid conflicts with other sliders */
+.highlights .carousel-nav {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 12px;
+  margin-top: 20px;
 }
 
-.nav-dot {
-  width: 10px;
-  height: 10px;
+.highlights .nav-dot {
+  width: 12px;
+  height: 12px;
   background: var(--color-border);
   border-radius: 50%;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.nav-dot.active {
-  background: var(--color-text-primary);
+.highlights .nav-dot:hover {
+  background: var(--logo-blue);
+  transform: scale(1.2);
 }
-.carousel-nav {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+
+.highlights .nav-dot.active {
+  background: var(--logo-red); /* Active dot is Red */
+  width: 30px; /* Elongated active dot */
+  border-radius: 10px;
 }
-.nav-dot {
-  width: 10px;
-  height: 10px;
-  background: var(--color-border);
-  border-radius: 50%;
-  cursor: pointer;
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 992px) {
+  .highlight-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
-.nav-dot.active {
-  background: var(--color-text-primary);
+
+@media (max-width: 768px) {
+  .highlights-content {
+    padding: 0 20px; /* Smaller padding on mobile */
+  }
+  
+  .highlight-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .highlight-card {
+    padding: 30px 20px;
+  }
 }
 /* Schools Section (Programs Offered) */
 .schools {
