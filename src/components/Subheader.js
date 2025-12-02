@@ -5,42 +5,42 @@ import NavDropdown from './NavDropdown';
 
 const jecMenuItems = [
   { title: 'JEC FAQ', path: '/jec/faq' },
-  { title: 'Employment @JEC', path: '/jec/employment' },
-  { title: 'About JEC', path: '/about' },
+  { title: 'Employment @JEC', path: '/jec/career' },
+  { title: 'About JEC', path: '/about-us' },
   { title: 'Students Testimonials', path: '/jec/testimonials' },
-  { title: 'Alumni', path: '/jec/alumni' },
+  { title: 'Alumni', path: '/jec/alumni-association' },
   { title: 'Human Network', path: '/jec/human-network' },
   { title: 'Anti-Ragging Committee', path: '/jec/anti-ragging' },
-  { title: 'Institution Innovation Council @JEC', path: '/jec/iic' },
-  { title: 'Management', path: '/jec/management' },
+  { title: 'Institution Innovation Council', path: '/jec/innovation-council' },
+  { title: 'Management', path: '/jec/management-team' },
 ];
 
 const admissionMenuItems = [
-  { title: 'Documents Required', path: '/admissions/documents' },
-  { title: 'Courses Offered', path: '/admissions/courses' },
-  { title: 'Fee Structure', path: '/admissions/fees' },
-  { title: 'Mandatory Disclosure', path: '/admissions/disclosure' },
-  { title: 'Financial Aids & Bank Loans', path: '/admissions/financial-aid' },
-  { title: 'REAP-2025', path: '/admissions/reap' }, 
-  { title: 'Admission Open 2025', path: '/admissions/open' },
-  { title: 'Karma Courses @JEC', path: '/admissions/karma' },
-  { title: 'Admission Procedure', path: '/admissions/procedure' },
+  { title: 'Documents Required', path: '/admission/documents-required' },
+  { title: 'Courses Offered', path: '/admission/courses-offered' },
+  { title: 'Fee Structure', path: '/admission/fee-structure' },
+  { title: 'Mandatory Disclosure', path: '/admission/mandatory-disclosure' },
+  { title: 'Financial Aids & Bank Loans', path: '/admission/financial-aid' },
+  { title: 'REAP-2025', path: '/admission/reap' }, 
+  { title: 'Admission Open 2025', path: '/admission/open-2025' },
+  { title: 'Karma Courses @JEC', path: '/admission/karma-scheme' },
+  { title: 'Admission Procedure', path: '/admission/procedure' },
 ];
 
 // --- NEW: Departments Menu Data (Matches the image uploaded) ---
 const departmentMenuItems = [
-  { title: 'Computer Science & Engineering (AI)', path: '/departments/cse-ai' },
-  { title: 'Civil Engineering', path: '/departments/civil' },
-  { title: 'Information Technology', path: '/departments/it' },
-  { title: 'Applied Sciences & Humanities', path: '/departments/ash' },
-  { title: 'MOOCS: NPTEL SWAYAM', path: '/departments/moocs' },
-  { title: 'Computer Science Engineering', path: '/departments/cse' },
-  { title: 'Electronics & Communication', path: '/departments/ece' },
-  { title: 'Mechanical Engineering', path: '/departments/me' },
-  { title: 'Centre Of Excellence (COE)', path: '/departments/coe' },
-  { title: 'JEC Research Cell', path: '/departments/research' },
-  { title: 'Engineering @ JEC', path: '/departments/engineering' },
-  { title: 'Electrical Engineering', path: '/departments/ee' },
+  { title: 'Computer Science & Engineering (AI)', path: '/department/cse-ai' },
+  { title: 'Civil Engineering', path: '/department/civil' },
+  { title: 'Information Technology', path: '/department/it' },
+  { title: 'Applied Sciences & Humanities', path: '/department/applied-science' },
+  { title: 'MOOCS: NPTEL SWAYAM', path: '/department/moocs' },
+  { title: 'Computer Science Engineering', path: '/department/cse' },
+  { title: 'Electronics & Communication', path: '/department/ece' },
+  { title: 'Mechanical Engineering', path: '/department/mechanical' },
+  { title: 'Centre Of Excellence (COE)', path: '/department/coe' },
+  { title: 'JEC Research Cell', path: '/department/research' },
+  { title: 'Engineering @ JEC', path: '/department/engineering' },
+  { title: 'Electrical Engineering', path: '/department/electrical' },
 ];
 
 const societyMenuItems = [
@@ -51,10 +51,10 @@ const societyMenuItems = [
 ];
 
 const infraMenuItems = [
-  { title: 'Convenience and Safety', path: '/infrastructure/convenience' },
-  { title: 'Learning By Doing', path: '/infrastructure/learning' },
-  { title: 'Prepare and Present', path: '/infrastructure/prepare' },
-  { title: 'Refuel and Relax', path: '/infrastructure/refuel' },
+  { title: 'Convenience and Safety', path: '/infrastructure/convenience-safety' },
+  { title: 'Learning By Doing', path: '/infrastructure/learning-by-doing' },
+  { title: 'Prepare and Present', path: '/infrastructure/prepare-present' },
+  { title: 'Refuel and Relax', path: '/infrastructure/refuel-relax' },
 ];
 
 function Subheader() {
@@ -94,15 +94,15 @@ function Subheader() {
           
           <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" />
           
-          <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/admissions" />
+          <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/admission" />
 
-          <Link to="/placements" className="menu-link" onClick={closeMenu}>Placement</Link>
+          <Link to="/placement" className="menu-link" onClick={closeMenu}>Placement</Link>
           
           {/* --- UPDATED: Departments Dropdown --- */}
           <NavDropdown 
             title="Departments" 
             items={departmentMenuItems} 
-            baseLink="/departments"
+            baseLink="/department"
             align="center" 
           />
 
@@ -123,7 +123,7 @@ function Subheader() {
             align="right" 
           />
 
-          <Link to="/contact" className="menu-link" onClick={closeMenu}>Contact Us</Link>
+          <Link to="/contact-us" className="menu-link" onClick={closeMenu}>Contact Us</Link>
         </nav>
 
       </div>

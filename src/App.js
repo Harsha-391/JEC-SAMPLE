@@ -50,39 +50,38 @@ function App() {
         <Route path="/" element={<Layout />}>
           
           <Route index element={<Home />} /> 
-          <Route path="admissions" element={<Admissions />} /> 
           
-          {/* Admission Dropdown Routes */}
-          <Route path="admissions/reap" element={<Reap2025 />} />
-          <Route path="admissions/disclosure" element={<MandatoryDisclosure />} />
-          <Route path="admissions/karma" element={<KarmaCourses />} />
-          <Route path="admissions/financial-aid" element={<FinancialAids />} />
-          <Route path="admissions/fees" element={<FeeStructure />} />
-          <Route path="admissions/documents" element={<DocumentsRequired />} />
-          <Route path="admissions/courses" element={<CoursesOffered />} />
-          <Route path="admissions/open" element={<AdmissionOpen />} />
-          <Route path="admissions/procedure" element={<AdmissionProcedure />} />
+          {/* Main Pages - Updated URLs */}
+          <Route path="about-us" element={<About />} />
+          <Route path="contact-us" element={<Contact />} />
+          <Route path="placement" element={<Placements />} />
+          <Route path="gallery" element={<Gallery />} />
+          
+          {/* Admission Routes - Changed 'admissions' to 'admission' (singular) */}
+          <Route path="admission" element={<Admissions />} /> 
+          <Route path="admission/reap" element={<Reap2025 />} />
+          <Route path="admission/mandatory-disclosure" element={<MandatoryDisclosure />} />
+          <Route path="admission/karma-scheme" element={<KarmaCourses />} />
+          <Route path="admission/financial-aid" element={<FinancialAids />} />
+          <Route path="admission/fee-structure" element={<FeeStructure />} />
+          <Route path="admission/documents-required" element={<DocumentsRequired />} />
+          <Route path="admission/courses-offered" element={<CoursesOffered />} />
+          <Route path="admission/open-2025" element={<AdmissionOpen />} />
+          <Route path="admission/procedure" element={<AdmissionProcedure />} />
 
           {/* Infrastructure Dropdown Routes */}
-          <Route path="infrastructure/refuel" element={<RefuelAndRelax />} />
-          <Route path="infrastructure/prepare" element={<PrepareAndPresent />} />
-          <Route path="infrastructure/learning" element={<LearningByDoing />} />
-          <Route path="infrastructure/convenience" element={<ConvenienceAndSafety />} />
-
-          <Route path="placements" element={<Placements />} />
-          <Route path="about" element={<About />} />
-          <Route path="contact" element={<Contact />} />
-          
-          {/* Gallery Route */}
-          <Route path="gallery" element={<Gallery />} />
+          <Route path="infrastructure/refuel-relax" element={<RefuelAndRelax />} />
+          <Route path="infrastructure/prepare-present" element={<PrepareAndPresent />} />
+          <Route path="infrastructure/learning-by-doing" element={<LearningByDoing />} />
+          <Route path="infrastructure/convenience-safety" element={<ConvenienceAndSafety />} />
 
           {/* JEC Dropdown Routes */}
           <Route path="jec/faq" element={<Faq />} />
-          <Route path="jec/management" element={<Management />} />
+          <Route path="jec/management-team" element={<Management />} />
           <Route path="jec/human-network" element={<HumanNetwork />} />
-          <Route path="jec/iic" element={<IIC />} />
-          <Route path="jec/alumni" element={<Alumni />} />
-          <Route path="jec/employment" element={<Employment />} />
+          <Route path="jec/innovation-council" element={<IIC />} />
+          <Route path="jec/alumni-association" element={<Alumni />} />
+          <Route path="jec/career" element={<Employment />} />
           <Route path="jec/anti-ragging" element={<AntiRagging />} />
           <Route path="jec/testimonials" element={<Testimonials />} />
 
@@ -92,19 +91,19 @@ function App() {
           <Route path="society/jces" element={<JCES />} />
           <Route path="society/teams" element={<KeyTeamsFunctions />} />
 
-          {/* Department Routes - All using the same Department template */}
-          <Route path="departments/cse-ai" element={<Department />} />
-          <Route path="departments/cse" element={<Department />} />
-          <Route path="departments/it" element={<Department />} />
-          <Route path="departments/civil" element={<Department />} />
-          <Route path="departments/ece" element={<Department />} />
-          <Route path="departments/ee" element={<Department />} />
-          <Route path="departments/me" element={<Department />} />
-          <Route path="departments/ash" element={<Department />} />
-          <Route path="departments/coe" element={<Department />} />
-          <Route path="departments/research" element={<Department />} />
-          <Route path="departments/engineering" element={<Department />} />
-          <Route path="departments/moocs" element={<Department />} />
+          {/* Department Routes - Changed 'departments' to 'department' */}
+          <Route path="department/cse-ai" element={<Department />} />
+          <Route path="department/cse" element={<Department />} />
+          <Route path="department/it" element={<Department />} />
+          <Route path="department/civil" element={<Department />} />
+          <Route path="department/ece" element={<Department />} />
+          <Route path="department/electrical" element={<Department />} />
+          <Route path="department/mechanical" element={<Department />} />
+          <Route path="department/applied-science" element={<Department />} />
+          <Route path="department/coe" element={<Department />} />
+          <Route path="department/research" element={<Department />} />
+          <Route path="department/engineering" element={<Department />} />
+          <Route path="department/moocs" element={<Department />} />
 
         </Route>
       </Routes>
