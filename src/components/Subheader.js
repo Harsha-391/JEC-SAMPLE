@@ -4,57 +4,57 @@ import { Link } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
 
 const jecMenuItems = [
-  { title: 'JEC FAQ', path: '/jec/faq' },
-  { title: 'Employment @JEC', path: '/jec/career' },
-  { title: 'About JEC', path: '/about-us' },
-  { title: 'Students Testimonials', path: '/jec/testimonials' },
-  { title: 'Alumni', path: '/jec/alumni-association' },
-  { title: 'Human Network', path: '/jec/human-network' },
-  { title: 'Anti-Ragging Committee', path: '/jec/anti-ragging' },
-  { title: 'Institution Innovation Council', path: '/jec/innovation-council' },
-  { title: 'Management', path: '/jec/management-team' },
+  { title: 'JEC FAQ', path: '/jec/JEC-FAQ' },
+  { title: 'Employment @JEC', path: '/jec/Employment-JEC' },
+  { title: 'About JEC', path: '/About-JEC' },
+  { title: 'Students Testimonials', path: '/jec/Students-Testimonials' },
+  { title: 'Alumni', path: '/jec/Alumni' },
+  { title: 'Human Network', path: '/jec/network' },
+  { title: 'Anti-Ragging Committee', path: '/jec/Anti-Ragging-Committee' },
+  { title: 'Institution Innovation Council', path: '/jec/Institution-Innovation-Council-JEC' },
+  { title: 'Management', path: '/jec/Management' },
 ];
 
 const admissionMenuItems = [
-  { title: 'Documents Required', path: '/admission/documents-required' },
-  { title: 'Courses Offered', path: '/admission/courses-offered' },
-  { title: 'Fee Structure', path: '/admission/fee-structure' },
-  { title: 'Mandatory Disclosure', path: '/admission/mandatory-disclosure' },
-  { title: 'Financial Aids & Bank Loans', path: '/admission/financial-aid' },
-  { title: 'REAP-2025', path: '/admission/reap' }, 
-  { title: 'Admission Open 2025', path: '/admission/open-2025' },
-  { title: 'Karma Courses @JEC', path: '/admission/karma-scheme' },
-  { title: 'Admission Procedure', path: '/admission/procedure' },
+  { title: 'Documents Required', path: '/admission/Documents-Required' },
+  { title: 'Courses Offered', path: '/admission/Courses-Offered' },
+  { title: 'Fee Structure', path: '/admission/Fee-Structure' },
+  { title: 'Mandatory Disclosure', path: '/admission/Mandatory-Disclosure' },
+  { title: 'Financial Aids & Bank Loans', path: '/admission/Financial-Aids-Bank-Loans' },
+  { title: 'REAP-2025', path: '/admission/REAP-2025' }, 
+  { title: 'Admission Open 2025', path: '/admission/btech-admissions' },
+  { title: 'Karma Courses @JEC', path: '/admission/Karma-Courses-JEC' },
+  { title: 'Admission Procedure', path: '/admission/Admission-Procedure' },
 ];
 
 // --- NEW: Departments Menu Data (Matches the image uploaded) ---
 const departmentMenuItems = [
-  { title: 'Computer Science & Engineering (AI)', path: '/department/cse-ai' },
-  { title: 'Civil Engineering', path: '/department/civil' },
-  { title: 'Information Technology', path: '/department/it' },
-  { title: 'Applied Sciences & Humanities', path: '/department/applied-science' },
-  { title: 'MOOCS: NPTEL SWAYAM', path: '/department/moocs' },
-  { title: 'Computer Science Engineering', path: '/department/cse' },
-  { title: 'Electronics & Communication', path: '/department/ece' },
-  { title: 'Mechanical Engineering', path: '/department/mechanical' },
-  { title: 'Centre Of Excellence (COE)', path: '/department/coe' },
-  { title: 'JEC Research Cell', path: '/department/research' },
-  { title: 'Engineering @ JEC', path: '/department/engineering' },
-  { title: 'Electrical Engineering', path: '/department/electrical' },
+  { title: 'Computer Science & Engineering (AI)', path: '/JEC-engineering/Computer-Science-Engineering-AI' },
+  { title: 'Civil Engineering', path: '/JEC-engineering/Civil-Engineering' },
+  { title: 'Information Technology', path: '/JEC-engineering/Information-Technology' },
+  { title: 'Applied Sciences & Humanities', path: '/JEC-engineering/Applied-Sciences-Humanities' },
+  { title: 'MOOCS: NPTEL SWAYAM', path: '/JEC-engineering/MOOCS-NPTEL-SWAYAM' },
+  { title: 'Computer Science Engineering', path: '/JEC-engineering/Computer-Science-Engineering' },
+  { title: 'Electronics & Communication', path: '/JEC-engineering/Electronics-Communication-Engineering' },
+  { title: 'Mechanical Engineering', path: '/JEC-engineering/Mechanical-Engineering' },
+  { title: 'Centre Of Excellence (COE)', path: '/JEC-engineering/Centre-Of-Excellence-COE' },
+  { title: 'JEC Research Cell', path: '/JEC-engineering/JEC-Research-Cell' },
+  { title: 'Engineering @ JEC', path: '/JEC-engineering/Engineering-JEC' },
+  { title: 'Electrical Engineering', path: '/JEC-engineering/Electrical-Engineering' },
 ];
 
 const societyMenuItems = [
-  { title: 'Foundation for Better Tomorrow', path: '/society/foundation' },
-  { title: 'Agrasen College', path: '/society/agrasen-college' },
-  { title: 'Jaipur College of Education & Science', path: '/society/jces' },
-  { title: 'Key Teams & Functions', path: '/society/teams' },
+  { title: 'Foundation for Better Tomorrow', path: '/Our-Society/Foundation-for-Better-Tomorrow' },
+  { title: 'Agrasen College', path: '/Our-Society/Other-Institutes-Agrasen-College' },
+  { title: 'Jaipur College of Education & Science', path: '/Our-Society/Other-Institutes-Jaipur-College-of-Education-and-Science' },
+  { title: 'Key Teams & Functions', path: '/Our-Society/Key-Teams-Functions' },
 ];
 
 const infraMenuItems = [
-  { title: 'Convenience and Safety', path: '/infrastructure/convenience-safety' },
-  { title: 'Learning By Doing', path: '/infrastructure/learning-by-doing' },
-  { title: 'Prepare and Present', path: '/infrastructure/prepare-present' },
-  { title: 'Refuel and Relax', path: '/infrastructure/refuel-relax' },
+  { title: 'Convenience and Safety', path: '/Infrastructure/Convenience-and-Safety' },
+  { title: 'Learning By Doing', path: '/Infrastructure/Learning-By-Doing' },
+  { title: 'Prepare and Present', path: '/Infrastructure/Prepare-and-Present' },
+  { title: 'Refuel and Relax', path: '/Infrastructure/Refuel-and-Relax' },
 ];
 
 function Subheader() {

@@ -51,59 +51,61 @@ function App() {
           
           <Route index element={<Home />} /> 
           
-          {/* Main Pages - Updated URLs */}
-          <Route path="about-us" element={<About />} />
+          {/* Main Pages */}
+          <Route path="About-JEC" element={<About />} />
           <Route path="contact-us" element={<Contact />} />
           <Route path="placement" element={<Placements />} />
           <Route path="gallery" element={<Gallery />} />
           
-          {/* Admission Routes - Changed 'admissions' to 'admission' (singular) */}
-          <Route path="admission" element={<Admissions />} /> 
-          <Route path="admission/reap" element={<Reap2025 />} />
-          <Route path="admission/mandatory-disclosure" element={<MandatoryDisclosure />} />
-          <Route path="admission/karma-scheme" element={<KarmaCourses />} />
-          <Route path="admission/financial-aid" element={<FinancialAids />} />
-          <Route path="admission/fee-structure" element={<FeeStructure />} />
-          <Route path="admission/documents-required" element={<DocumentsRequired />} />
-          <Route path="admission/courses-offered" element={<CoursesOffered />} />
-          <Route path="admission/open-2025" element={<AdmissionOpen />} />
-          <Route path="admission/procedure" element={<AdmissionProcedure />} />
+          {/* Admission Routes */}
+          {/* Note: 'admissions' path might still be used by footer, so kept as alias or main */}
+          <Route path="admissions" element={<Admissions />} /> 
+          
+          <Route path="admission/REAP-2025" element={<Reap2025 />} />
+          <Route path="admission/Mandatory-Disclosure" element={<MandatoryDisclosure />} />
+          <Route path="admission/Karma-Courses-JEC" element={<KarmaCourses />} />
+          <Route path="admission/Financial-Aids-Bank-Loans" element={<FinancialAids />} />
+          <Route path="admission/Fee-Structure" element={<FeeStructure />} />
+          <Route path="admission/Documents-Required" element={<DocumentsRequired />} />
+          <Route path="admission/Courses-Offered" element={<CoursesOffered />} />
+          <Route path="admission/btech-admissions" element={<AdmissionOpen />} />
+          <Route path="admission/Admission-Procedure" element={<AdmissionProcedure />} />
 
           {/* Infrastructure Dropdown Routes */}
-          <Route path="infrastructure/refuel-relax" element={<RefuelAndRelax />} />
-          <Route path="infrastructure/prepare-present" element={<PrepareAndPresent />} />
-          <Route path="infrastructure/learning-by-doing" element={<LearningByDoing />} />
-          <Route path="infrastructure/convenience-safety" element={<ConvenienceAndSafety />} />
+          <Route path="Infrastructure/Refuel-and-Relax" element={<RefuelAndRelax />} />
+          <Route path="Infrastructure/Prepare-and-Present" element={<PrepareAndPresent />} />
+          <Route path="Infrastructure/Learning-By-Doing" element={<LearningByDoing />} />
+          <Route path="Infrastructure/Convenience-and-Safety" element={<ConvenienceAndSafety />} />
 
           {/* JEC Dropdown Routes */}
-          <Route path="jec/faq" element={<Faq />} />
-          <Route path="jec/management-team" element={<Management />} />
-          <Route path="jec/human-network" element={<HumanNetwork />} />
-          <Route path="jec/innovation-council" element={<IIC />} />
-          <Route path="jec/alumni-association" element={<Alumni />} />
-          <Route path="jec/career" element={<Employment />} />
-          <Route path="jec/anti-ragging" element={<AntiRagging />} />
-          <Route path="jec/testimonials" element={<Testimonials />} />
+          <Route path="jec/JEC-FAQ" element={<Faq />} />
+          <Route path="jec/Management" element={<Management />} />
+          <Route path="jec/network" element={<HumanNetwork />} />
+          <Route path="jec/Institution-Innovation-Council-JEC" element={<IIC />} />
+          <Route path="jec/Alumni" element={<Alumni />} />
+          <Route path="jec/Employment-JEC" element={<Employment />} />
+          <Route path="jec/Anti-Ragging-Committee" element={<AntiRagging />} />
+          <Route path="jec/Students-Testimonials" element={<Testimonials />} />
 
           {/* Our Society Dropdown Routes */}
-          <Route path="society/foundation" element={<Foundation />} />
-          <Route path="society/agrasen-college" element={<AgrasenCollege />} />
-          <Route path="society/jces" element={<JCES />} />
-          <Route path="society/teams" element={<KeyTeamsFunctions />} />
+          <Route path="Our-Society/Foundation-for-Better-Tomorrow" element={<Foundation />} />
+          <Route path="Our-Society/Other-Institutes-Agrasen-College" element={<AgrasenCollege />} />
+          <Route path="Our-Society/Other-Institutes-Jaipur-College-of-Education-and-Science" element={<JCES />} />
+          <Route path="Our-Society/Key-Teams-Functions" element={<KeyTeamsFunctions />} />
 
-          {/* Department Routes - Changed 'departments' to 'department' */}
-          <Route path="department/cse-ai" element={<Department />} />
-          <Route path="department/cse" element={<Department />} />
-          <Route path="department/it" element={<Department />} />
-          <Route path="department/civil" element={<Department />} />
-          <Route path="department/ece" element={<Department />} />
-          <Route path="department/electrical" element={<Department />} />
-          <Route path="department/mechanical" element={<Department />} />
-          <Route path="department/applied-science" element={<Department />} />
-          <Route path="department/coe" element={<Department />} />
-          <Route path="department/research" element={<Department />} />
-          <Route path="department/engineering" element={<Department />} />
-          <Route path="department/moocs" element={<Department />} />
+          {/* Department Routes */}
+          <Route path="JEC-engineering/Computer-Science-Engineering-AI" element={<Department />} />
+          <Route path="JEC-engineering/Computer-Science-Engineering" element={<Department />} />
+          <Route path="JEC-engineering/Information-Technology" element={<Department />} />
+          <Route path="JEC-engineering/Civil-Engineering" element={<Department />} />
+          <Route path="JEC-engineering/Electronics-Communication-Engineering" element={<Department />} />
+          <Route path="JEC-engineering/Electrical-Engineering" element={<Department />} />
+          <Route path="JEC-engineering/Mechanical-Engineering" element={<Department />} />
+          <Route path="JEC-engineering/Applied-Sciences-Humanities" element={<Department />} />
+          <Route path="JEC-engineering/Centre-Of-Excellence-COE" element={<Department />} />
+          <Route path="JEC-engineering/JEC-Research-Cell" element={<Department />} />
+          <Route path="JEC-engineering/Engineering-JEC" element={<Department />} />
+          <Route path="JEC-engineering/MOOCS-NPTEL-SWAYAM" element={<Department />} />
 
         </Route>
       </Routes>
