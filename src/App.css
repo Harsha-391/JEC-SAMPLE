@@ -9605,86 +9605,225 @@ footer {
    DOCUMENTS REQUIRED PAGE STYLES
    ========================================
 */
-
-:root {
-    /* Brand Palette */
-    --docs-logo-red: #D62828; 
-    --docs-logo-blue: #0072C6; 
-    --docs-logo-dark-blue: #005a9e;
-    --docs-logo-gold: #FCA311; 
-    --docs-logo-black: #1D1D1D; 
-    --docs-logo-white: #FFFFFF; 
-
-    /* Functional Colors */
-    --docs-color-background-light: #ffffff;
-    --docs-color-background-medium: #f4f7fa;
-    --docs-color-text-main: #333;
-    --docs-color-text-light: #555;
+/* --- Scope Variables to this Page Container --- */
+.docs-page-container {
+    --doc-primary: #D62828;      /* Red */
+    --doc-secondary: #0072C6;    /* Blue */
+    --doc-dark: #1D1D1D;         /* Black */
+    --doc-accent: #FCA311;       /* Gold/Yellow */
+    --doc-bg: #f4f7fa;           /* Light Grey Background */
+    --doc-white: #ffffff;
+    --doc-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    --doc-border: #e0e0e0;
     
-    --docs-shadow-card: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-.docs-page {
     font-family: 'Segoe UI', 'Roboto', sans-serif;
-    color: var(--docs-color-text-main);
+    background-color: var(--doc-bg);
+    color: #333;
     line-height: 1.6;
-    background-color: var(--docs-color-background-medium);
+    min-height: 100vh;
+    padding-bottom: 60px; /* Bottom spacing */
 }
-
-.docs-page a { text-decoration: none; color: inherit; }
 
 /* --- Hero Section --- */
-.docs-hero {
-    background: linear-gradient(135deg, var(--docs-logo-blue) 0%, var(--docs-logo-dark-blue) 100%);
-    padding: 80px 20px;
+.docs-hero-section {
+    background: linear-gradient(135deg, var(--doc-secondary) 0%, #005a9e 100%);
+    padding: 60px 0 80px 0; /* Extra bottom padding for overlap effect if desired, or simple spacing */
+    color: var(--doc-white);
     text-align: center;
-    color: var(--docs-logo-white);
-    position: relative;
 }
 
-.docs-hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 15px; }
-.docs-hero p { font-size: 18px; max-width: 800px; margin: 0 auto; opacity: 0.9; }
+.docs-hero-content h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0 0 10px 0;
+}
 
-/* --- Content Layout --- */
-.docs-content-wrapper { padding: 60px 20px; }
+.docs-hero-content p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0 auto;
+    max-width: 700px;
+}
 
+/* --- Content Wrapper --- */
+/* IMPORTANT: No horizontal padding here to ensure alignment with Header/Subheader */
+.docs-content-wrapper {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* --- Notice Box --- */
 .docs-notice-box {
-    background: #fff3cd;
-    border-left: 5px solid var(--docs-logo-gold);
+    background: #fff8e1;
+    border-left: 5px solid var(--doc-accent);
     padding: 20px;
-    margin-bottom: 40px;
-    border-radius: 4px;
-    color: #856404;
+    border-radius: 6px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
 }
-.docs-notice-box strong { color: var(--docs-logo-black); }
 
-.docs-program-section { margin-bottom: 60px; background: var(--docs-logo-white); padding: 40px; border-radius: 12px; box-shadow: var(--docs-shadow-card); border-top: 5px solid var(--docs-logo-red); }
-.docs-program-section.docs-mtech { border-top-color: var(--docs-logo-blue); }
+.notice-icon i {
+    font-size: 1.5rem;
+    color: #b77908;
+    margin-top: 3px;
+}
 
-.docs-section-header { display: flex; align-items: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
-.docs-section-header i { font-size: 32px; color: var(--docs-logo-blue); margin-right: 15px; }
-.docs-section-header h2 { font-size: 28px; color: var(--docs-logo-black); margin: 0; }
-.docs-session-tag { background: var(--docs-logo-red); color: white; padding: 5px 10px; border-radius: 4px; font-size: 14px; margin-left: auto; font-weight: bold; }
+.notice-text {
+    color: #634d1b;
+    font-size: 0.95rem;
+}
+
+/* --- Cards (Main Sections) --- */
+.docs-card {
+    background: var(--doc-white);
+    border-radius: 12px;
+    box-shadow: var(--doc-shadow);
+    overflow: hidden;
+    border-top: 5px solid var(--doc-primary);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.docs-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+}
+
+.docs-card.mtech-card {
+    border-top-color: var(--doc-secondary);
+}
+
+/* --- Section Headers --- */
+.docs-card-header {
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--doc-border);
+    gap: 20px;
+}
+
+.header-icon i {
+    font-size: 2rem;
+    color: var(--doc-secondary);
+    opacity: 0.8;
+}
+
+.header-title {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.header-title h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--doc-dark);
+}
+
+.docs-session-badge {
+    background: var(--doc-primary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.docs-session-badge.badge-blue {
+    background: var(--doc-secondary);
+}
 
 /* --- Tables --- */
-.docs-table-responsive { overflow-x: auto; }
-.docs-doc-table { width: 100%; border-collapse: collapse; min-width: 600px; margin-bottom: 30px; }
-.docs-doc-table th, .docs-doc-table td { padding: 12px 15px; border: 1px solid #e0e0e0; text-align: left; }
-.docs-doc-table th { background: var(--docs-logo-blue); color: white; font-weight: 600; text-transform: uppercase; font-size: 14px; }
-.docs-doc-table tr:nth-child(even) { background: #f9f9f9; }
-.docs-doc-table tr:hover { background: #f1f1f1; }
+.docs-table-container {
+    overflow-x: auto;
+    padding: 20px 30px;
+}
 
-.docs-original-badge { color: var(--docs-logo-red); font-weight: 700; }
-.docs-copy-badge { color: var(--docs-logo-blue); font-weight: 600; }
+.docs-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
 
-/* --- Sub-tables (Lateral/Fee Waiver) --- */
-.docs-sub-section h3 { font-size: 20px; color: var(--docs-logo-red); margin-top: 30px; margin-bottom: 15px; font-weight: 700; display: flex; align-items: center; }
-.docs-sub-section h3::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--docs-logo-gold); border-radius: 50%; margin-right: 10px; }
+.docs-table th {
+    background: #f8f9fa;
+    color: var(--doc-dark);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid var(--doc-secondary);
+}
 
-/* --- Contact/Counselor Section --- */
-.docs-counselor-section {
-    background: var(--docs-logo-black);
-    color: white;
+.docs-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+.docs-table tr:last-child td {
+    border-bottom: none;
+}
+
+.docs-table tr:hover td {
+    background-color: #fcfcfc;
+}
+
+/* Badges in Table */
+.badge-original {
+    color: var(--doc-primary);
+    font-weight: 700;
+}
+
+.badge-copy {
+    color: var(--doc-secondary);
+    font-weight: 600;
+}
+
+.text-muted { color: #999; }
+.text-center { text-align: center; }
+.font-bold { font-weight: bold; }
+
+/* --- Subsections --- */
+.docs-subsection {
+    padding: 10px 0;
+}
+
+.subsection-title {
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.subsection-title .dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--doc-accent);
+    border-radius: 50%;
+}
+
+.subsection-title h3 {
+    font-size: 1.1rem;
+    color: var(--doc-primary);
+    margin: 0;
+}
+
+/* --- Contact Section --- */
+.docs-contact-section {
+    background: var(--doc-dark);
+    color: var(--doc-white);
     padding: 60px 40px;
     border-radius: 12px;
     text-align: center;
@@ -9692,20 +9831,87 @@ footer {
     overflow: hidden;
 }
 
-.docs-counselor-section h2 { font-size: 32px; color: var(--docs-logo-gold); margin-bottom: 20px; }
-.docs-counselor-section p { font-size: 16px; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; opacity: 0.9; }
-.docs-contact-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px; }
-.docs-contact-item { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 600; }
-.docs-contact-item i { color: var(--docs-logo-red); font-size: 24px; }
-.docs-contact-item a { color: white; transition: color 0.3s; }
-.docs-contact-item a:hover { color: var(--docs-logo-gold); }
-
-@media (max-width: 768px) {
-    .docs-section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .docs-session-tag { margin-left: 0; }
-    .docs-contact-grid { flex-direction: column; gap: 20px; }
+/* Decorative circle background effect */
+.docs-contact-section::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
 }
 
+.contact-content h2 {
+    color: var(--doc-accent);
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.contact-content p {
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+    opacity: 0.8;
+}
+
+.contact-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.contact-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.1);
+    padding: 12px 25px;
+    border-radius: 30px;
+    color: var(--doc-white);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.contact-pill:hover {
+    background: var(--doc-white);
+    color: var(--doc-dark);
+    transform: translateY(-3px);
+}
+
+.contact-pill i {
+    color: var(--doc-accent);
+}
+
+.contact-pill:hover i {
+    color: var(--doc-primary);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .header-title {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .docs-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .docs-table-container {
+        padding: 15px;
+    }
+
+    .contact-pill {
+        width: 100%;
+        justify-content: center;
+    }
+}
 /* ========================================
    ADMISSIONS OPEN PAGE STYLES
    ========================================
