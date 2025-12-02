@@ -9857,6 +9857,8 @@ footer {
 */
 /* --- Scope Variables to this Page Container --- *//* src/pages/DocumentsRequired.css */
 
+/* --- Page Container Scope --- *//* src/pages/DocumentsRequired.css */
+
 /* --- Page Container Scope --- */
 .docs-page-container {
     --doc-primary: #D62828;      /* Red */
@@ -9876,12 +9878,22 @@ footer {
     padding-bottom: 60px;
 }
 
+/* --- Layout Container (Strict Alignment) --- */
+.docs-container-layout {
+    /* Matches Header/Subheader exactly */
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px; 
+    box-sizing: border-box;
+    width: 100%;
+}
+
 /* --- Hero Section --- */
 .docs-hero-section {
     background: linear-gradient(135deg, var(--doc-secondary) 0%, #005a9e 100%);
     padding: 60px 0 80px 0;
     color: var(--doc-white);
-    /* CHANGED: Align text to left to match the Header/Logo alignment */
+    /* Align left to match Brand Logo position */
     text-align: left; 
 }
 
@@ -9894,15 +9906,14 @@ footer {
 .docs-hero-content p {
     font-size: 1.15rem;
     opacity: 0.95;
-    margin: 0; /* CHANGED: Removed auto margin to keep left alignment */
+    margin: 0; 
     max-width: 800px;
     line-height: 1.5;
 }
 
 /* --- Content Wrapper --- */
 .docs-content-wrapper {
-    /* IMPORTANT: Keep horizontal padding at 0 or inherits from container 
-       to align perfectly with Header's max-width-container */
+    /* Only vertical padding; horizontal is handled by .docs-container-layout */
     padding-top: 40px; 
     padding-bottom: 40px;
     display: flex;
@@ -10144,18 +10155,19 @@ footer {
     color: var(--doc-primary);
 }
 
-/* --- Responsive Adjustments --- */
-@media (max-width: 768px) {
+/* --- Responsive Alignment Adjustments --- */
+@media (max-width: 992px) {
+    /* Match App.css mobile padding logic for seamless alignment */
+    .docs-container-layout {
+        padding: 0 15px;
+    }
+    
     .docs-hero-section {
-        /* On mobile, center text often looks better, or keep left if preferred */
-        text-align: left; 
-        padding: 40px 0;
+        padding: 50px 0 60px 0;
     }
+}
 
-    .docs-hero-content h1 {
-        font-size: 2rem;
-    }
-
+@media (max-width: 768px) {
     .header-title {
         flex-direction: column;
         align-items: flex-start;
@@ -10174,6 +10186,10 @@ footer {
     .contact-pill {
         width: 100%;
         justify-content: center;
+    }
+    
+    .docs-hero-content h1 {
+        font-size: 2rem;
     }
 }
 /* ========================================

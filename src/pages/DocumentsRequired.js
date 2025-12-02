@@ -6,7 +6,8 @@ function DocumentsRequired() {
       
       {/* Hero Section */}
       <section className="docs-hero-section">
-        <div className="max-width-container">
+        {/* Using docs-container-layout to match Header alignment exactly */}
+        <div className="docs-container-layout">
             <div className="docs-hero-content">
                 <h1>Documents Required for Admission</h1>
                 <p>Essential checklist for B.Tech and M.Tech reporting candidates for Session 2025-26.</p>
@@ -15,7 +16,7 @@ function DocumentsRequired() {
       </section>
 
       {/* Main Content Wrapper */}
-      <div className="max-width-container docs-content-wrapper">
+      <div className="docs-container-layout docs-content-wrapper">
         
         {/* Notice/Instruction Box */}
         <div className="docs-notice-box">
