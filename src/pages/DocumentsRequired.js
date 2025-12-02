@@ -1,5 +1,4 @@
 import React from 'react';
-import './DocumentsRequired.css'; // Assuming you place the CSS in this file
 
 function DocumentsRequired() {
   return (
