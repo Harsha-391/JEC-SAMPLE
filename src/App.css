@@ -9855,7 +9855,9 @@ footer {
    DOCUMENTS REQUIRED PAGE STYLES
    ========================================
 */
-/* --- Scope Variables to this Page Container --- */
+/* --- Scope Variables to this Page Container --- *//* src/pages/DocumentsRequired.css */
+
+/* --- Page Container Scope --- */
 .docs-page-container {
     --doc-primary: #D62828;      /* Red */
     --doc-secondary: #0072C6;    /* Blue */
@@ -9871,34 +9873,37 @@ footer {
     color: #333;
     line-height: 1.6;
     min-height: 100vh;
-    padding-bottom: 60px; /* Bottom spacing */
+    padding-bottom: 60px;
 }
 
 /* --- Hero Section --- */
 .docs-hero-section {
     background: linear-gradient(135deg, var(--doc-secondary) 0%, #005a9e 100%);
-    padding: 60px 0 80px 0; /* Extra bottom padding for overlap effect if desired, or simple spacing */
+    padding: 60px 0 80px 0;
     color: var(--doc-white);
-    text-align: center;
+    /* CHANGED: Align text to left to match the Header/Logo alignment */
+    text-align: left; 
 }
 
 .docs-hero-content h1 {
     font-size: 2.5rem;
     font-weight: 800;
-    margin: 0 0 10px 0;
+    margin: 0 0 15px 0;
 }
 
 .docs-hero-content p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    margin: 0 auto;
-    max-width: 700px;
+    font-size: 1.15rem;
+    opacity: 0.95;
+    margin: 0; /* CHANGED: Removed auto margin to keep left alignment */
+    max-width: 800px;
+    line-height: 1.5;
 }
 
 /* --- Content Wrapper --- */
-/* IMPORTANT: No horizontal padding here to ensure alignment with Header/Subheader */
 .docs-content-wrapper {
-    padding-top: 40px;
+    /* IMPORTANT: Keep horizontal padding at 0 or inherits from container 
+       to align perfectly with Header's max-width-container */
+    padding-top: 40px; 
     padding-bottom: 40px;
     display: flex;
     flex-direction: column;
@@ -10081,7 +10086,6 @@ footer {
     overflow: hidden;
 }
 
-/* Decorative circle background effect */
 .docs-contact-section::before {
     content: '';
     position: absolute;
@@ -10142,6 +10146,16 @@ footer {
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
+    .docs-hero-section {
+        /* On mobile, center text often looks better, or keep left if preferred */
+        text-align: left; 
+        padding: 40px 0;
+    }
+
+    .docs-hero-content h1 {
+        font-size: 2rem;
+    }
+
     .header-title {
         flex-direction: column;
         align-items: flex-start;
