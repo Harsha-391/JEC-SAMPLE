@@ -77,7 +77,7 @@ function App() {
           <Route path="gallery" element={<Gallery />} />
 
           {/* JEC Dropdown Routes */}
-          <Route path="jec/faq" element={<Faq />} />
+          <Route path="JEC/JEC-FAQ" element={<Faq />} />
           <Route path="jec/management" element={<Management />} />
           <Route path="jec/human-network" element={<HumanNetwork />} />
           <Route path="jec/iic" element={<IIC />} />
