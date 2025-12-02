@@ -7184,7 +7184,7 @@ footer {
 .karma-stat-item p { font-size: 13px; font-weight: 600; text-transform: uppercase; color: #555; }
 
 /* --- Overview Section --- */
-.karma-overview-section { padding: 80px 20px; }
+.karma-overview-section { margin: 0 auto; max-width: 1200px; padding: 80px 20px; }
 .karma-section-title { 
     font-size: 32px; 
     color: var(--karma-logo-blue); 
@@ -7235,7 +7235,7 @@ footer {
 
 
 /* --- Guidelines Grid --- */
-.karma-guidelines-section { background-color: var(--karma-color-background-medium); padding: 80px 20px; }
+.karma-guidelines-section {margin: 0 auto; max-width: 1200px; padding: 80px 20px; }
 .karma-guidelines-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
