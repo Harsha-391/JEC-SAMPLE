@@ -7116,9 +7116,7 @@ footer {
 /* ========================================
    KARMA COURSES PAGE STYLES
    ========================================
-*/
-
-:root {
+*/:root {
     /* Brand Palette */
     --karma-logo-red: #D62828; 
     --karma-logo-blue: #0072C6; 
@@ -7144,6 +7142,7 @@ footer {
     color: var(--karma-color-text-main);
     line-height: 1.65;
     background-color: var(--karma-color-background-light);
+    width: 100%; /* Ensure full width */
 }
 
 .karma-page a { text-decoration: none; color: inherit; }
@@ -7156,6 +7155,8 @@ footer {
     padding: 100px 20px 140px; /* Extra bottom padding for stats overlap */
     text-align: center;
     color: var(--karma-logo-white);
+    position: relative; /* Helps with stacking */
+    z-index: 1;
 }
 .karma-hero h1 { font-size: 48px; margin-bottom: 15px; font-weight: 800; letter-spacing: 1px; }
 .karma-hero p { font-size: 20px; font-weight: 300; max-width: 900px; margin: 0 auto; color: var(--karma-logo-gold); }
@@ -7173,6 +7174,9 @@ footer {
     position: relative;
     z-index: 2;
     border-bottom: 4px solid var(--karma-logo-blue);
+    max-width: 1200px; /* Consistent with other pages */
+    margin-left: auto;
+    margin-right: auto;
 }
 .karma-stat-item { text-align: center; border-right: 1px solid #eee; }
 .karma-stat-item:last-child { border-right: none; }
@@ -7199,6 +7203,9 @@ footer {
     gap: 40px;
     align-items: center;
     margin-top: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .karma-intro-text {
@@ -7234,6 +7241,9 @@ footer {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
     margin-top: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .karma-guide-card {
     background: var(--karma-logo-white);
@@ -7251,7 +7261,7 @@ footer {
 .karma-guide-card li::before { content: '•'; color: var(--karma-logo-blue); font-weight: bold; position: absolute; left: 0; font-size: 18px; line-height: 1; }
 
 /* --- Course Table Section --- */
-.karma-table-section { padding: 80px 20px; }
+.karma-table-section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
 .karma-table-container {
     overflow-x: auto;
     box-shadow: var(--karma-shadow-card);
