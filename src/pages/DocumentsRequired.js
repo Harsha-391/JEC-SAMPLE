@@ -1,102 +1,120 @@
 import React from 'react';
+import './DocumentsRequired.css'; // Assuming you place the CSS in this file
 
 function DocumentsRequired() {
   return (
-    <div className="docs-page">
+    <div className="docs-page-container">
       
       {/* Hero Section */}
-      <section className="docs-hero">
+      <section className="docs-hero-section">
         <div className="max-width-container">
-            <h1>Documents Required for Admission</h1>
-            <p>Essential checklist for B.Tech and M.Tech reporting candidates for Session 2025-26.</p>
+            <div className="docs-hero-content">
+                <h1>Documents Required for Admission</h1>
+                <p>Essential checklist for B.Tech and M.Tech reporting candidates for Session 2025-26.</p>
+            </div>
         </div>
       </section>
 
+      {/* Main Content Wrapper */}
       <div className="max-width-container docs-content-wrapper">
         
+        {/* Notice/Instruction Box */}
         <div className="docs-notice-box">
-            <i className="fas fa-exclamation-circle"></i> <strong>Instructions:</strong> Candidates reporting for admission are required to fill up the admission form available in the college. Please bring the <strong>Original copies</strong> for verification along with <strong>self-attested photocopies in Duplicate</strong> (2 Sets).
+            <div className="notice-icon">
+                <i className="fas fa-exclamation-circle"></i>
+            </div>
+            <div className="notice-text">
+                <strong>Instructions:</strong> Candidates reporting for admission are required to fill up the admission form available in the college. Please bring the <strong>Original copies</strong> for verification along with <strong>self-attested photocopies in Duplicate</strong> (2 Sets).
+            </div>
         </div>
 
-        <section className="docs-program-section">
-            <div className="docs-section-header">
-                <i className="fas fa-user-graduate"></i>
-                <h2>B.Tech (1st Year & 2nd Year)</h2>
-                <span className="docs-session-tag">Session: 2025-26</span>
+        {/* B.Tech Section */}
+        <section className="docs-card">
+            <div className="docs-card-header">
+                <div className="header-icon">
+                    <i className="fas fa-user-graduate"></i>
+                </div>
+                <div className="header-title">
+                    <h2>B.Tech (1st Year & 2nd Year)</h2>
+                    <span className="docs-session-badge">Session: 2025-26</span>
+                </div>
             </div>
 
-            <div className="docs-table-responsive">
-                <table className="docs-doc-table">
+            <div className="docs-table-container">
+                <table className="docs-table">
                     <thead>
                         <tr>
-                            <th width="10%">Sr. No.</th>
-                            <th width="50%">Name of Document</th>
-                            <th width="20%">Set No. 1</th>
-                            <th width="20%">Set No. 2</th>
+                            <th style={{width: '8%'}}>Sr. No.</th>
+                            <th style={{width: '52%'}}>Name of Document</th>
+                            <th style={{width: '20%'}}>Set No. 1</th>
+                            <th style={{width: '20%'}}>Set No. 2</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>1</td><td>10+2 / 12th Mark sheet</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>2</td><td>10th Certificate & Mark sheet</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>3</td><td>Aadhaar Card</td><td className="docs-copy-badge">Photocopy</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>4</td><td>Transfer Certificate (TC)</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>5</td><td>Migration Certificate (CBSE/ICSE/Other Boards)</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>6</td><td>Affidavit for Gap Period (if passed before 2020)</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>7</td><td>Caste Certificate (OBC/SC/ST only)</td><td className="docs-copy-badge">Photocopy</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>8</td><td>Character Certificate</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>9</td><td>Medical Certificate (As per REAP Format)</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>10</td><td>Domicile Certificate of Father / Mother</td><td className="docs-copy-badge">Photocopy</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>11</td><td>REAP Allotment Letter (if applicable)</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>12</td><td>JEE (Mains) Score Card (If required)</td><td className="docs-copy-badge">Photocopy</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>13</td><td>Passport size photographs (Color)</td><td colSpan="2" style={{ textAlign: 'center', fontWeight: 'bold' }}>5 Nos.</td></tr>
+                        <tr><td>1</td><td>10+2 / 12th Mark sheet</td><td className="badge-original">Original</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>2</td><td>10th Certificate & Mark sheet</td><td className="badge-original">Original</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>3</td><td>Aadhaar Card</td><td className="badge-copy">Photocopy</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>4</td><td>Transfer Certificate (TC)</td><td className="badge-original">Original</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>5</td><td>Migration Certificate</td><td className="badge-original">Original</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>6</td><td>Affidavit for Gap Period (if applicable)</td><td className="badge-original">Original</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>7</td><td>Caste Certificate (OBC/SC/ST only)</td><td className="badge-copy">Photocopy</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>8</td><td>Character Certificate</td><td className="badge-original">Original</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>9</td><td>Medical Certificate (REAP Format)</td><td className="badge-original">Original</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>10</td><td>Domicile Certificate</td><td className="badge-copy">Photocopy</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>11</td><td>REAP Allotment Letter</td><td className="badge-original">Original</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>12</td><td>JEE (Mains) Score Card</td><td className="badge-copy">Photocopy</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>13</td><td>Passport size photographs</td><td colSpan="2" className="text-center font-bold">5 Nos. (Color)</td></tr>
                     </tbody>
                 </table>
             </div>
 
-            <div className="docs-sub-section">
-                <h3>Additional for Fee Waiver Candidates (TFWS)</h3>
-                <div className="docs-table-responsive">
-                    <table className="docs-doc-table">
+            {/* Sub-section: TFWS */}
+            <div className="docs-subsection">
+                <div className="subsection-title">
+                    <span className="dot"></span>
+                    <h3>Additional for Fee Waiver Candidates (TFWS)</h3>
+                </div>
+                <div className="docs-table-container">
+                    <table className="docs-table">
                         <tbody>
                             <tr>
-                                <td width="60%">Income certificate of Parent</td>
-                                <td width="20%" className="docs-original-badge">Original</td>
-                                <td width="20%" className="docs-copy-badge">Photocopy</td>
+                                <td style={{width: '60%'}}>Income certificate of Parent</td>
+                                <td style={{width: '20%'}} className="badge-original">Original</td>
+                                <td style={{width: '20%'}} className="badge-copy">Photocopy</td>
                             </tr>
                             <tr>
-                                <td>Affidavit on Rs. 10/- stamp paper (notarized)</td>
-                                <td className="docs-original-badge">Original</td>
-                                <td>-</td>
+                                <td>Affidavit on Rs. 10/- stamp paper</td>
+                                <td className="badge-original">Original</td>
+                                <td className="text-muted">-</td>
                             </tr>
                             <tr>
                                 <td>REAP Allotment Letter</td>
-                                <td className="docs-original-badge">Original</td>
-                                <td>-</td>
+                                <td className="badge-original">Original</td>
+                                <td className="text-muted">-</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <div className="docs-sub-section">
-                <h3>Additional for Lateral Entry (2nd Year) Candidates</h3>
-                <div className="docs-table-responsive">
-                    <table className="docs-doc-table">
+            {/* Sub-section: Lateral Entry */}
+            <div className="docs-subsection">
+                <div className="subsection-title">
+                    <span className="dot"></span>
+                    <h3>Additional for Lateral Entry (2nd Year) Candidates</h3>
+                </div>
+                <div className="docs-table-container">
+                    <table className="docs-table">
                         <tbody>
                             <tr>
-                                <td width="60%">Graduation / Diploma Mark sheets (All Years/Semesters)</td>
-                                <td width="20%" className="docs-original-badge">Original</td>
-                                <td width="20%" className="docs-copy-badge">Photocopy</td>
+                                <td style={{width: '60%'}}>Graduation / Diploma Mark sheets</td>
+                                <td style={{width: '20%'}} className="badge-original">Original</td>
+                                <td style={{width: '20%'}} className="badge-copy">Photocopy</td>
                             </tr>
                             <tr>
                                 <td>Migration (Graduation/ Diploma)</td>
-                                <td className="docs-original-badge">Original</td>
-                                <td className="docs-copy-badge">Photocopy</td>
-                            </tr>
-                            <tr>
-                                <td>Transfer Certificate</td>
-                                <td className="docs-original-badge">Original</td>
-                                <td className="docs-copy-badge">Photocopy</td>
+                                <td className="badge-original">Original</td>
+                                <td className="badge-copy">Photocopy</td>
                             </tr>
                         </tbody>
                     </table>
@@ -104,61 +122,61 @@ function DocumentsRequired() {
             </div>
         </section>
 
-        <section className="docs-program-section docs-mtech">
-            <div className="docs-section-header">
-                <i className="fas fa-award"></i>
-                <h2>M.Tech (1st Year)</h2>
-                <span className="docs-session-tag" style={{ background: 'var(--docs-logo-blue)' }}>Session: 2025-26</span>
+        {/* M.Tech Section */}
+        <section className="docs-card mtech-card">
+            <div className="docs-card-header">
+                <div className="header-icon">
+                    <i className="fas fa-award"></i>
+                </div>
+                <div className="header-title">
+                    <h2>M.Tech (1st Year)</h2>
+                    <span className="docs-session-badge badge-blue">Session: 2025-26</span>
+                </div>
             </div>
 
-            <div className="docs-table-responsive">
-                <table className="docs-doc-table">
+            <div className="docs-table-container">
+                <table className="docs-table">
                     <thead>
                         <tr>
-                            <th width="10%">Sr. No.</th>
-                            <th width="50%">Name of Document</th>
-                            <th width="20%">Set No. 1</th>
-                            <th width="20%">Set No. 2</th>
+                            <th style={{width: '8%'}}>Sr. No.</th>
+                            <th style={{width: '52%'}}>Name of Document</th>
+                            <th style={{width: '20%'}}>Set No. 1</th>
+                            <th style={{width: '20%'}}>Set No. 2</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>1</td><td>10+2 / 12th Mark sheet</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>2</td><td>10th Certificate & Mark sheet</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>3</td><td>B.Tech / B.E. Consolidated mark sheet (or all semesters)</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>4</td><td>Aadhaar Card</td><td className="docs-copy-badge">Photocopy</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>5</td><td>Transfer Certificate</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>6</td><td>Migration Certificate</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>7</td><td>Affidavit for GATE scholarship (Rs 50/- stamp paper)</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>8</td><td>Caste Certificate (OBC/SC/ST only)</td><td className="docs-copy-badge">Photocopy</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>9</td><td>Character Certificate</td><td className="docs-original-badge">Original</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>10</td><td>Domicile Certificate</td><td className="docs-copy-badge">Photocopy</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>11</td><td>CAM Allotment Letter</td><td className="docs-copy-badge">Photocopy</td><td className="docs-original-badge">Original</td></tr>
-                        <tr><td>12</td><td>GATE Score Card (If required)</td><td className="docs-copy-badge">Photocopy</td><td className="docs-copy-badge">Photocopy</td></tr>
-                        <tr><td>13</td><td>Passport size photographs (Color)</td><td colSpan="2" style={{ textAlign: 'center', fontWeight: 'bold' }}>4 Nos.</td></tr>
+                        <tr><td>1</td><td>10+2 / 12th Mark sheet</td><td className="badge-original">Original</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>2</td><td>10th Certificate & Mark sheet</td><td className="badge-original">Original</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>3</td><td>B.Tech / B.E. Consolidated Mark sheet</td><td className="badge-original">Original</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>4</td><td>Aadhaar Card</td><td className="badge-copy">Photocopy</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>5</td><td>Migration Certificate</td><td className="badge-original">Original</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>6</td><td>GATE Score Card (If applicable)</td><td className="badge-copy">Photocopy</td><td className="badge-copy">Photocopy</td></tr>
+                        <tr><td>7</td><td>Passport size photographs</td><td colSpan="2" className="text-center font-bold">4 Nos. (Color)</td></tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <section className="docs-counselor-section">
-            
-            <h2>Speak, Discuss & Meet Your Counselor!</h2>
-            <p>Just ask! Get answers! Don't miss out on your lifetime opportunity! Your admission counselors are ready to serve you! They are affectionate to assist you in your admission process and enable you to complete formalities with ease.</p>
-            
-            <div className="docs-contact-grid">
-                <div className="docs-contact-item">
-                    <i className="fas fa-phone-alt"></i>
-                    <span>8875071333 (30 Lines)</span>
-                </div>
-                <div className="docs-contact-item">
-                    <i className="fas fa-envelope"></i>
-                    <a href="mailto:admissions.jec@gmail.com">admissions.jec@gmail.com</a>
+        {/* Counselor / Contact Section */}
+        <section className="docs-contact-section">
+            <div className="contact-content">
+                <h2>Speak, Discuss & Meet Your Counselor!</h2>
+                <p>Just ask! Get answers! Don't miss out on your lifetime opportunity. Your admission counselors are ready to assist you in your admission process and enable you to complete formalities with ease.</p>
+                
+                <div className="contact-actions">
+                    <a href="tel:+918875071333" className="contact-pill">
+                        <i className="fas fa-phone-alt"></i>
+                        <span>+91-8875071333</span>
+                    </a>
+                    <a href="mailto:admissions.jec@gmail.com" className="contact-pill">
+                        <i className="fas fa-envelope"></i>
+                        <span>admissions.jec@gmail.com</span>
+                    </a>
                 </div>
             </div>
         </section>
 
-    </div>
-
+      </div>
     </div>
   );
 }
