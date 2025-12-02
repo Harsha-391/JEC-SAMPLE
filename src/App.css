@@ -7305,68 +7305,64 @@ footer {
    FINANCIAL AIDS PAGE STYLES
    ========================================
 */
-/* ========================================
-   KARMA COURSES PAGE STYLES
-   ========================================
-*/
 
 :root {
-    /* Scoped Brand Palette to avoid global conflicts */
-    --karma-red: #D62828; 
-    --karma-blue: #0072C6; 
-    --karma-gold: #FCA311; 
-    --karma-black: #1D1D1D; 
-    --karma-white: #FFFFFF; 
-    
+    /* Brand Palette */
+    --finaid-logo-red: #D62828; 
+    --finaid-logo-blue: #0072C6; 
+    --finaid-logo-gold: #FCA311; 
+    --finaid-logo-black: #1D1D1D; 
+    --finaid-logo-white: #FFFFFF; 
+
     /* Functional Colors */
-    --karma-bg-light: #FFFFFF;
-    --karma-bg-medium: #f7f7f7;
-    --karma-text-main: #333;
-    --karma-text-light: #555;
-    --karma-border: #e0e0e0;
+    --finaid-bg-light: #FFFFFF;
+    --finaid-bg-medium: #f7f7f7;
+    --finaid-text-main: #333;
+    --finaid-text-light: #555;
+    --finaid-border: #e0e0e0;
 
     /* Effects */
-    --karma-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    --karma-shadow-hover: 0 10px 25px rgba(0,0,0,0.12);
-    
+    --finaid-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    --finaid-shadow-hover: 0 10px 25px rgba(0,0,0,0.12);
+
     /* Alignment Variables (Matching Global Header/Subheader) */
-    --karma-container-width: 1300px;
-    --karma-container-padding: 40px;
+    --finaid-container-width: 1300px;
+    --finaid-container-padding: 40px;
 }
 
-.karma-page {
+.finaid-page {
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    color: var(--karma-text-main);
+    color: var(--finaid-text-main);
     line-height: 1.65;
-    background-color: var(--karma-bg-light);
+    background-color: var(--finaid-bg-light);
     width: 100%;
 }
 
-.karma-page a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+.finaid-page a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
 
 /* --- Reusable Container for Perfect Alignment with Header --- */
-.karma-page .max-width-container {
-    max-width: var(--karma-container-width);
+.finaid-page .max-width-container {
+    max-width: var(--finaid-container-width);
     margin: 0 auto;
-    padding: 0 var(--karma-container-padding);
+    padding: 0 var(--finaid-container-padding);
     box-sizing: border-box;
     width: 100%;
 }
 
 /* --- Hero Section --- */
-.karma-hero {
+.finaid-hero {
     position: relative;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Parallax Effect */
     padding: 120px 20px 160px; /* Increased bottom padding for stats overlap */
     text-align: center;
-    color: var(--karma-white);
+    color: var(--finaid-logo-white);
     z-index: 1;
 }
 
-.karma-hero h1 { 
+.finaid-hero h1 { 
     font-size: clamp(2.5rem, 5vw, 3.5rem); /* Responsive font sizing */
     margin-bottom: 1rem; 
     font-weight: 800; 
@@ -7374,18 +7370,18 @@ footer {
     text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
-.karma-hero p { 
+.finaid-hero p { 
     font-size: clamp(1.1rem, 2vw, 1.4rem); 
     font-weight: 300; 
     max-width: 800px; 
     margin: 0 auto; 
-    color: var(--karma-gold); 
+    color: var(--finaid-logo-gold); 
 }
 
-/* --- Stats Banner (Floating) --- */
-.karma-stats-bar {
+/* --- Quick Links Banner (Floating) --- */
+.finaid-quick-links-bar {
     margin-top: -80px; /* Negative margin creates overlap effect */
-    background: var(--karma-white);
+    background: var(--finaid-logo-white);
     border-radius: 16px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
     padding: 40px;
@@ -7394,17 +7390,25 @@ footer {
     gap: 30px;
     position: relative;
     z-index: 10;
-    border-bottom: 5px solid var(--karma-blue);
+    border-bottom: 5px solid var(--finaid-logo-red);
 }
 
-.karma-stat-item { 
+.finaid-quick-link-item { 
     text-align: center; 
     position: relative;
+    transition: transform 0.3s ease;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.finaid-quick-link-item:hover {
+    transform: translateY(-5px);
+    background-color: #fcfcfc;
 }
 
 /* Add vertical dividers on desktop */
 @media (min-width: 992px) {
-    .karma-stat-item:not(:last-child)::after {
+    .finaid-quick-link-item:not(:last-child)::after {
         content: '';
         position: absolute;
         right: -15px;
@@ -7415,27 +7419,25 @@ footer {
     }
 }
 
-.karma-stat-item h3 { 
+.finaid-quick-link-item i { 
     font-size: 2.5rem; 
-    color: var(--karma-red); 
-    margin-bottom: 5px; 
-    font-weight: 800;
+    color: var(--finaid-logo-blue); 
+    margin-bottom: 15px; 
+    display: block;
 }
 
-.karma-stat-item p { 
-    font-size: 0.9rem; 
+.finaid-quick-link-item h4 { 
+    font-size: 1.1rem; 
+    color: var(--finaid-logo-black); 
     font-weight: 700; 
-    text-transform: uppercase; 
-    color: #666; 
-    letter-spacing: 1px;
 }
 
-/* --- Overview Section --- */
-.karma-overview-section { padding: 80px 0; }
+/* --- Intro & Objectives --- */
+.finaid-content-section { padding: 80px 0; }
 
-.karma-section-title { 
+.finaid-section-title { 
     font-size: 2.2rem; 
-    color: var(--karma-blue); 
+    color: var(--finaid-logo-blue); 
     margin-bottom: 2rem; 
     position: relative; 
     display: inline-block;
@@ -7443,235 +7445,222 @@ footer {
     font-weight: 700;
 }
 
-.karma-section-title::after { 
+.finaid-section-title::after { 
     content: ''; 
     display: block; 
     width: 80px; 
     height: 4px; 
-    background: var(--karma-gold); 
+    background: var(--finaid-logo-gold); 
     margin-top: 8px; 
     border-radius: 2px;
 }
 
-.karma-text-block { 
+.finaid-intro-text { 
     max-width: 1000px; 
-    margin: 0 auto 40px; 
+    margin: 0 auto 50px; 
     text-align: justify; 
     font-size: 1.05rem; 
     color: #444; 
     line-height: 1.8;
 }
 
-/* Two-column Grid */
-.karma-intro-grid {
+/* Objective Cards Grid */
+.finaid-objectives-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-    margin-top: 40px;
-}
-
-.karma-intro-text p { margin-bottom: 1.5rem; }
-
-.karma-roadmap-img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: var(--karma-shadow);
-    border: 1px solid #eee;
-    transition: transform 0.3s ease;
-}
-
-.karma-roadmap-img:hover { transform: scale(1.02); }
-
-.karma-roadmap-caption {
-    font-size: 0.9rem;
-    color: var(--karma-text-light);
-    font-style: italic;
-    margin-top: 10px;
-    display: block;
-    text-align: center;
-}
-
-/* --- Guidelines Grid --- */
-.karma-guidelines-section { 
-    background-color: var(--karma-bg-medium); 
-    padding: 80px 0; 
-}
-
-.karma-guidelines-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
-.karma-guide-card {
-    background: var(--karma-white);
+.finaid-objective-card {
     padding: 40px 30px;
     border-radius: 16px;
-    box-shadow: var(--karma-shadow);
-    border-top: 5px solid var(--karma-blue);
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    box-shadow: var(--finaid-shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
 }
 
-.karma-guide-card:hover { 
-    transform: translateY(-10px); 
-    box-shadow: var(--karma-shadow-hover); 
+.finaid-objective-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--finaid-shadow-hover);
 }
 
-.karma-guide-card h4 { 
-    font-size: 1.4rem; 
-    color: var(--karma-black); 
-    margin-bottom: 20px; 
-    display: flex; 
-    align-items: center; 
-    gap: 12px; 
-}
+.finaid-bg-red { background-color: #c0392b; }
+.finaid-bg-green { background-color: #27ae60; }
+.finaid-bg-purple { background-color: #8e44ad; }
+.finaid-bg-teal { background-color: #16a085; }
 
-.karma-guide-card i { color: var(--karma-red); font-size: 1.5rem; }
-
-.karma-guide-card ul { list-style: none; padding: 0; }
-
-.karma-guide-card li { 
-    margin-bottom: 12px; 
-    padding-left: 25px; 
-    position: relative; 
-    font-size: 1rem; 
-    color: #555; 
-}
-
-.karma-guide-card li::before { 
-    content: '•'; 
-    color: var(--karma-blue); 
-    font-weight: bold; 
-    position: absolute; 
-    left: 0; 
-    font-size: 1.5rem; 
-    line-height: 1; 
-    top: -2px;
-}
-
-/* --- Course Table Section --- */
-.karma-table-section { padding: 80px 0; }
-
-.karma-table-container {
+/* --- Table Styles --- */
+.finaid-table-container {
     overflow-x: auto;
-    box-shadow: var(--karma-shadow);
+    margin-top: 40px;
+    box-shadow: var(--finaid-shadow);
     border-radius: 12px;
     border: 1px solid #eee;
     background: white;
 }
 
-.karma-course-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-    min-width: 900px; 
+.finaid-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
 }
 
-.karma-course-table th, 
-.karma-course-table td { 
-    padding: 18px 20px; 
-    text-align: left; 
-    border-bottom: 1px solid #eee; 
-    font-size: 0.95rem; 
+.finaid-data-table th, 
+.finaid-data-table td {
+    padding: 18px 20px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
 }
 
-.karma-course-table th { 
-    background: var(--karma-blue); 
-    color: white; 
-    font-weight: 700; 
-    text-transform: uppercase; 
-    font-size: 0.85rem; 
-    letter-spacing: 1px; 
+.finaid-data-table th {
+    background-color: var(--finaid-logo-blue);
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
 }
 
-.karma-course-table tr:nth-child(even) { background: #f8fbff; }
-.karma-course-table tr:hover { background: #eef6ff; }
+.finaid-data-table tr:nth-child(even) { background-color: #f8fbff; }
+.finaid-data-table tr:hover { background-color: #eef6ff; }
 
-/* --- Contact Bar --- */
-.karma-contact-bar {
-    background: var(--karma-black);
-    color: var(--karma-white);
+.finaid-data-table a { 
+    color: var(--finaid-logo-blue); 
+    font-weight: 600; 
+    transition: color 0.2s;
+}
+
+.finaid-data-table a:hover { 
+    text-decoration: underline; 
+    color: var(--finaid-logo-red); 
+}
+
+/* --- Budgeting Section --- */
+.finaid-budget-section {
+    background-color: var(--finaid-bg-medium);
+    padding: 80px 0;
+}
+
+.finaid-budget-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.finaid-budget-card {
+    background: var(--finaid-logo-white);
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: var(--finaid-shadow);
+    border-top: 5px solid var(--finaid-logo-gold);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.finaid-budget-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--finaid-shadow-hover);
+}
+
+.finaid-budget-card h4 { 
+    font-size: 1.3rem; 
+    color: var(--finaid-logo-black); 
+    margin-bottom: 20px; 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    font-weight: 700;
+}
+
+.finaid-budget-card i { 
+    color: var(--finaid-logo-gold); 
+    font-size: 1.5rem;
+}
+
+.finaid-budget-card p, 
+.finaid-budget-card ul { 
+    font-size: 1rem; 
+    color: #555; 
+    line-height: 1.6; 
+}
+
+.finaid-budget-card ul { 
+    padding-left: 20px; 
+    margin-top: 10px; 
+}
+
+.finaid-budget-card li {
+    margin-bottom: 8px;
+}
+
+/* --- External Links Banner --- */
+.finaid-external-links {
+    background: var(--finaid-logo-blue);
+    color: var(--finaid-logo-white);
     padding: 60px 0;
     text-align: center;
 }
 
-.karma-contact-bar h3 { 
-    font-size: 2rem; 
-    color: var(--karma-gold); 
-    margin-bottom: 15px; 
+.finaid-external-links p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 5px 0;
 }
 
-.karma-contact-bar p { 
-    font-size: 1.1rem; 
-    opacity: 0.8; 
-    margin-bottom: 30px; 
-    max-width: 700px; 
-    margin-left: auto; 
-    margin-right: auto; 
-}
-
-.karma-contact-info { 
-    font-size: 1.2rem; 
+.finaid-external-links a { 
+    color: var(--finaid-logo-gold); 
     font-weight: 700; 
-    display: flex; 
-    justify-content: center; 
-    gap: 40px; 
-    flex-wrap: wrap; 
+    text-decoration: none; 
+    margin: 0 5px; 
+    border-bottom: 1px dotted var(--finaid-logo-gold);
+    transition: all 0.3s ease;
 }
 
-.karma-contact-info a { 
-    color: white; 
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
-}
-
-.karma-contact-info a:hover { 
-    color: var(--karma-gold); 
-    transform: scale(1.05);
+.finaid-external-links a:hover {
+    color: #fff;
+    border-bottom-style: solid;
 }
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 992px) {
     /* Reset Container Padding for Mobile */
-    .karma-page .max-width-container {
+    .finaid-page .max-width-container {
         padding: 0 20px;
     }
-
-    .karma-intro-grid {
-        grid-template-columns: 1fr; /* Stack grid on tablet/mobile */
-        gap: 30px;
-    }
     
-    .karma-intro-image-container { 
-        order: -1; /* Image first on mobile */
-    }
-    
-    .karma-hero {
+    .finaid-hero {
         padding: 100px 20px 140px;
     }
 }
 
 @media (max-width: 768px) {
-    .karma-hero h1 { font-size: 2.5rem; }
+    .finaid-hero h1 { font-size: 2.5rem; }
     
-    .karma-stats-bar { 
-        padding: 20px; 
-        gap: 30px;
+    .finaid-quick-links-bar {
         margin-top: -60px;
+        padding: 30px 20px;
+        gap: 40px;
     }
     
-    .karma-stat-item p { font-size: 0.8rem; }
+    /* Remove vertical dividers on mobile */
+    .finaid-quick-link-item:not(:last-child)::after {
+        display: none;
+    }
     
-    .karma-contact-info { flex-direction: column; gap: 20px; }
-    
-    .karma-guidelines-section, 
-    .karma-table-section, 
-    .karma-overview-section { padding: 60px 0; }
+    .finaid-content-section,
+    .finaid-budget-section {
+        padding: 60px 0;
+    }
 }
 /* ========================================
    FEE STRUCTURE PAGE STYLES
