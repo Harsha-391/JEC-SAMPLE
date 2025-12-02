@@ -6,7 +6,7 @@ import NavDropdown from './NavDropdown';
 const jecMenuItems = [
   { title: 'JEC FAQ', path: '/jec/JEC-FAQ' },
   { title: 'Employment @JEC', path: '/jec/Employment-JEC' },
-  { title: 'About JEC', path: '/About-JEC' },
+  { title: 'About JEC', path: '/jec/About-JEC' },
   { title: 'Students Testimonials', path: '/jec/Students-Testimonials' },
   { title: 'Alumni', path: '/jec/Alumni' },
   { title: 'Human Network', path: '/jec/network' },

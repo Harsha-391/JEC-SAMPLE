@@ -52,6 +52,7 @@ function App() {
           <Route index element={<Home />} /> 
           
           {/* Main Pages */}
+          {/* 'About-JEC' is now used in the JEC dropdown in Subheader.js, but we keep the route here so it renders. */}
           <Route path="About-JEC" element={<About />} />
           <Route path="contact-us" element={<Contact />} />
           <Route path="placement" element={<Placements />} />
