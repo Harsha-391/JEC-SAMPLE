@@ -42,6 +42,8 @@ import Department from './pages/Department';
 
 // Import the new Gallery Page
 import Gallery from './pages/Gallery';
+import Blog from './pages/Blog';
+import SinglePost from './pages/SinglePost';
 
 function App() {
   return (
@@ -57,6 +59,8 @@ function App() {
           <Route path="contact-us" element={<Contact />} />
           <Route path="placement" element={<Placements />} />
           <Route path="gallery" element={<Gallery />} />
+          <Route path="blog" element={<Blog />} />
+          <Route path="blog/view" element={<SinglePost />} />
           
           {/* Admission Routes */}
           {/* Note: 'admissions' path might still be used by footer, so kept as alias or main */}
