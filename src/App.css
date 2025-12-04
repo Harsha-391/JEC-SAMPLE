@@ -9606,8 +9606,13 @@ footer {
    ========================================
 */
 /* --- Scope Variables to this Page Container --- */
+/* ========================================
+   ADMISSIONS OPEN PAGE STYLES
+   ========================================
+*/
+
+/* --- Scoped Variables --- */
 :root {
-    /* Brand Palette */
     --admissions-logo-red: #D62828; 
     --admissions-logo-blue: #0072C6; 
     --admissions-logo-dark-blue: #004a87;
@@ -9615,7 +9620,6 @@ footer {
     --admissions-logo-black: #1D1D1D; 
     --admissions-logo-white: #FFFFFF; 
 
-    /* Functional Colors */
     --admissions-color-background-light: #ffffff;
     --admissions-color-background-medium: #f4f7fa;
     --admissions-color-text-main: #333;
@@ -9623,6 +9627,10 @@ footer {
     
     --admissions-shadow-card: 0 10px 30px rgba(0,0,0,0.08);
     --admissions-shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+
+    /* Alignment Constants matching Subheader */
+    --admissions-container-width: 1300px;
+    --admissions-container-padding: 40px;
 }
 
 .admissions-page {
@@ -9630,9 +9638,20 @@ footer {
     color: var(--admissions-color-text-main);
     line-height: 1.6;
     background-color: var(--admissions-color-background-light);
+    width: 100%;
 }
 
 .admissions-page a { text-decoration: none; color: inherit; }
+
+/* --- STRICT ALIGNMENT CONTAINER --- */
+/* This class must be used inside your sections to align content with the header */
+.admissions-page .max-width-container {
+    max-width: var(--admissions-container-width);
+    margin: 0 auto;
+    padding: 0 var(--admissions-container-padding);
+    box-sizing: border-box;
+    width: 100%;
+}
 
 /* --- Hero Section --- */
 .admissions-hero {
@@ -9647,6 +9666,7 @@ footer {
     background-color: #111;
     overflow: hidden;
 }
+
 .admissions-hero-bg {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -9695,7 +9715,8 @@ footer {
 /* --- SECTION: THE JEC ADVANTAGE --- */
 .admissions-advantage-section {
     background: linear-gradient(135deg, var(--admissions-logo-blue) 0%, var(--admissions-logo-dark-blue) 100%);
-    padding: 80px 20px;
+    /* Removed horizontal padding here to let container handle alignment */
+    padding: 80px 0; 
     color: white;
     text-align: center;
     position: relative;
@@ -9778,8 +9799,18 @@ footer {
 }
 
 /* --- Common Section Styling --- */
-.admissions-section-padding { padding: 100px 20px; }
-.admissions-section-title { font-size: 42px; color: var(--admissions-logo-blue); margin-bottom: 60px; text-align: center; font-weight: 800; position: relative; }
+.admissions-section-padding { 
+    padding: 100px 0; /* Vertical padding only */
+}
+
+.admissions-section-title { 
+    font-size: 42px; 
+    color: var(--admissions-logo-blue); 
+    margin-bottom: 60px; 
+    text-align: center; 
+    font-weight: 800; 
+    position: relative; 
+}
 .admissions-section-title span { color: var(--admissions-logo-red); }
 .admissions-section-title::after { content: ''; display: block; width: 80px; height: 5px; background: var(--admissions-logo-gold); margin: 15px auto 0; border-radius: 2px; }
 
@@ -9835,21 +9866,38 @@ footer {
 .admissions-t-info span { font-size: 13px; color: var(--admissions-logo-red); font-weight: 600; }
 
 /* --- Bottom CTA --- */
-.admissions-bottom-cta { background: #111; color: white; padding: 100px 20px; text-align: center; }
+.admissions-bottom-cta { 
+    background: #111; 
+    color: white; 
+    padding: 100px 0; /* Let container handle horizontal padding */
+    text-align: center; 
+}
 .admissions-bottom-cta h2 { margin-bottom: 30px; color: var(--admissions-logo-gold); font-size: 48px; font-weight: 800; }
 .admissions-bottom-cta p { margin-bottom: 40px; font-size: 18px; opacity: 0.8; }
 
-/* Responsive */
+/* --- Responsive --- */
 @media (max-width: 992px) {
+    /* Adjust Container Padding for Mobile (Matches Subheader logic) */
+    .admissions-page .max-width-container {
+        padding: 0 20px; /* 20px left/right on mobile */
+    }
+
     .admissions-expert-card { grid-template-columns: 1fr; }
     .admissions-expert-img-wrapper { height: 350px; }
     .admissions-hero-content h1 { font-size: 56px; }
 }
+
 @media (max-width: 768px) {
     .admissions-hero-content h1 { font-size: 42px; }
     .admissions-hero { height: 600px; }
-    .admissions-advantage-section { padding: 60px 20px; }
+    
+    .admissions-advantage-section,
+    .admissions-section-padding { 
+        padding: 60px 0; 
+    }
+
     .admissions-stat-number { font-size: 36px; }
+    .admissions-bottom-cta { padding: 80px 0; }
 }
 /* ========================================
    DOCUMENTS REQUIRED PAGE STYLES
