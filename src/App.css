@@ -10244,6 +10244,10 @@ footer {
    ADMISSION PROCEDURE PAGE STYLES
    ========================================
 */
+/* ========================================
+   ADMISSION PROCEDURE PAGE STYLES
+   ========================================
+*/
 
 :root {
     /* Brand Palette */
@@ -10262,6 +10266,10 @@ footer {
 
     --ap-shadow-card: 0 5px 15px rgba(0,0,0,0.08);
     --ap-shadow-hover: 0 10px 25px rgba(0,0,0,0.12);
+
+    /* Alignment Constants (Matching Header) */
+    --ap-container-width: 1300px;
+    --ap-container-padding: 40px;
 }
 
 .ap-page {
@@ -10269,9 +10277,19 @@ footer {
     color: var(--ap-color-text-main);
     line-height: 1.65;
     background-color: var(--ap-color-background-light);
+    width: 100%;
 }
 
 .ap-page a { text-decoration: none; color: inherit; }
+
+/* --- STRICT ALIGNMENT CONTAINER --- */
+.ap-page .max-width-container {
+    max-width: var(--ap-container-width);
+    margin: 0 auto;
+    padding: 0 var(--ap-container-padding);
+    box-sizing: border-box;
+    width: 100%;
+}
 
 /* --- Hero Section --- */
 .ap-hero {
@@ -10279,9 +10297,11 @@ footer {
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../public/images/campus-intro.jpeg');
     background-size: cover;
     background-position: center;
-    padding: 100px 20px 140px;
+    /* Removed horizontal padding from section, let container handle it */
+    padding: 100px 0 140px; 
     text-align: center;
     color: var(--ap-logo-white);
+    position: relative;
 }
 .ap-hero h1 { font-size: 52px; margin-bottom: 15px; font-weight: 800; letter-spacing: 1px; }
 .ap-hero p { font-size: 22px; font-weight: 300; max-width: 800px; margin: 0 auto; color: var(--ap-logo-gold); }
@@ -10310,6 +10330,9 @@ footer {
     position: relative;
     z-index: 2;
     border-bottom: 4px solid var(--ap-logo-blue);
+    /* Ensure stats bar doesn't exceed container width visually */
+    width: 100%;
+    box-sizing: border-box;
 }
 .ap-stat-item { text-align: center; border-right: 1px solid #eee; }
 .ap-stat-item:last-child { border-right: none; }
@@ -10317,13 +10340,19 @@ footer {
 .ap-stat-item p { font-size: 14px; font-weight: 600; text-transform: uppercase; color: #555; }
 
 /* --- Intro Section --- */
-.ap-intro-section { padding: 80px 20px; text-align: center; }
+.ap-intro-section { 
+    padding: 80px 0; /* Vertical padding only */
+    text-align: center; 
+}
 .ap-section-title { font-size: 32px; color: var(--ap-logo-blue); margin-bottom: 20px; position: relative; display: inline-block; padding-bottom: 10px; }
 .ap-section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--ap-logo-gold); margin: 10px auto 0; }
 .ap-intro-text { max-width: 900px; margin: 0 auto; font-size: 16px; color: #444; }
 
 /* --- Eligibility Criteria --- */
-.ap-criteria-section { background-color: var(--ap-color-background-medium); padding: 80px 20px; }
+.ap-criteria-section { 
+    background-color: var(--ap-color-background-medium); 
+    padding: 80px 0; /* Vertical padding only */
+}
 .ap-criteria-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -10336,6 +10365,7 @@ footer {
     border-radius: 12px;
     box-shadow: var(--ap-shadow-card);
     border-top: 5px solid var(--ap-logo-red);
+    text-align: left;
 }
 .ap-criteria-card:nth-child(2) { border-top-color: var(--ap-logo-blue); }
 .ap-criteria-card:nth-child(3) { border-top-color: var(--ap-logo-gold); }
@@ -10346,7 +10376,9 @@ footer {
 .ap-criteria-card li::before { content: '•'; color: var(--ap-logo-red); font-weight: bold; position: absolute; left: 0; }
 
 /* --- Documents Section --- */
-.ap-docs-section { padding: 80px 20px; }
+.ap-docs-section { 
+    padding: 80px 0; /* Vertical padding only */
+}
 .ap-docs-list {
     display: flex;
     flex-wrap: wrap;
@@ -10369,7 +10401,11 @@ footer {
 .ap-doc-badge i { color: var(--ap-logo-gold); }
 
 /* --- Process Flow Images --- */
-.ap-process-flow-section { padding: 60px 20px; background: var(--ap-logo-white); text-align: center; }
+.ap-process-flow-section { 
+    padding: 60px 0; 
+    background: var(--ap-logo-white); 
+    text-align: center; 
+}
 .ap-flow-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -10390,7 +10426,7 @@ footer {
 .ap-admissions-contact {
     background: var(--ap-logo-blue);
     color: var(--ap-logo-white);
-    padding: 60px 20px;
+    padding: 60px 0; /* Vertical padding only */
     text-align: center;
 }
 .ap-contact-box {
@@ -10405,11 +10441,17 @@ footer {
 .ap-contact-details { font-size: 20px; font-weight: 700; margin-top: 20px; }
 .ap-contact-details a { color: white; text-decoration: underline; margin: 0 10px; }
 
-/* Responsive */
+/* --- Responsive --- */
 @media (max-width: 992px) {
+    /* Reset Container Padding for Mobile */
+    .ap-page .max-width-container {
+        padding: 0 20px;
+    }
+    
     .ap-flow-grid { grid-template-columns: 1fr; }
     .ap-stat-item { border-right: none; border-bottom: 1px solid #eee; padding-bottom: 15px; }
 }
+
 @media (max-width: 768px) {
     .ap-hero h1 { font-size: 36px; }
 }
