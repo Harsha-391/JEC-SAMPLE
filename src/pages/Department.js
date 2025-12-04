@@ -16,9 +16,14 @@ function Department() {
       setLoading(true);
       try {
         // 2. Extract the ID from the URL (getting the last part after the slash)
-        const pathSegments = location.pathname.split('/');
-        const deptId = pathSegments[pathSegments.length - 1]; 
-        
+      // NEW SAFER CODE
+// 1. Remove trailing slash if it exists
+const cleanPath = location.pathname.replace(/\/$/, '');
+// 2. Get the last segment
+const pathSegments = cleanPath.split('/');
+const deptId = decodeURIComponent(pathSegments[pathSegments.length - 1]);
+
+console.log("Cleaned ID to fetch:", deptId); // Check this log!
         console.log("Fetching data for:", deptId); // Debugging
 
         // 3. Fetch specific document from 'departments' collection
