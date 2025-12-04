@@ -9894,7 +9894,7 @@ footer {
     padding: 60px 0 80px 0;
     color: var(--doc-white);
     /* Align left to match Brand Logo position */
-    text-align: left; 
+    text-align: center; 
 }
 
 .docs-hero-content h1 {
@@ -9906,7 +9906,7 @@ footer {
 .docs-hero-content p {
     font-size: 1.15rem;
     opacity: 0.95;
-    margin: 0; 
+    margin: 0 auto; 
     max-width: 800px;
     line-height: 1.5;
 }
