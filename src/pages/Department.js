@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { db } from '../firebase'; // Ensure this points to your firebase config
 import { doc, getDoc } from 'firebase/firestore';
-import './Department.css'; // Assuming you have a CSS file for styles
 
 function Department() {
   const [activeTab, setActiveTab] = useState('tab-1');
