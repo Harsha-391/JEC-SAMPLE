@@ -1,116 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './Gallery.css';
-
-// --- DATA CONFIGURATION (Copied exactly from source) ---
-const galleryData = [
-    {
-        id: 1, title: "Freshers Party", count: 12,
-        cover: "https://cdn.pixabay.com/photo/2023/08/18/07/04/business-8197902_1280.jpg?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200", "https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=1200", "https://images.unsplash.com/photo-1530103862676-de3c9a59af57?q=80&w=1200"]
-    },
-    {
-        id: 2, title: "College Mess", count: 8,
-        cover: "https://jeckukas.org.in/managepro/uploads/Photos/2019-12-23_16:19:44IMG_7919.jpeg?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1554998171-7e5ecb5667be?q=80&w=1200", "https://images.unsplash.com/photo-1592861956120-e524fc739696?q=80&w=1200"]
-    },
-    {
-        id: 3, title: "Blood Donation Camp", count: 15,
-        cover: "https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=1200", "https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200"]
-    },
-    {
-        id: 4, title: "JEC in News", count: 6,
-        cover: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1585829365295-ab7cd400c167?q=80&w=1200"]
-    },
-    {
-        id: 5, title: "Independence Day", count: 20,
-        cover: "https://images.unsplash.com/photo-1532375810709-75b1da00537c?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1532375810709-75b1da00537c?q=80&w=1200", "https://images.unsplash.com/photo-1599421490111-ad70b2d6568e?q=80&w=1200"]
-    },
-    {
-        id: 6, title: "Jaipur Culture", count: 10,
-        cover: "https://images.unsplash.com/photo-1477587458883-47145ed94245?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1477587458883-47145ed94245?q=80&w=1200"]
-    },
-    {
-        id: 7, title: "Events at JEC", count: 25,
-        cover: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1475721027767-p42856986883?q=80&w=1200"]
-    },
-    {
-        id: 8, title: "Transport", count: 5,
-        cover: "https://images.unsplash.com/photo-1570126618953-d437176e8c79?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1570126618953-d437176e8c79?q=80&w=1200"]
-    },
-    {
-        id: 9, title: "Auditorium", count: 4,
-        cover: "https://cdn.pixabay.com/photo/2023/08/18/07/04/business-8197902_1280.jpg?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1584226761961-9827596a2170?q=80&w=1200"]
-    },
-    {
-        id: 10, title: "Fungama 2019", count: 30,
-        cover: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1533174072545-e8d4aa97d848?q=80&w=1200"]
-    },
-    {
-        id: 11, title: "Sports", count: 18,
-        cover: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1519834785169-98be25ec3f84?q=80&w=1200"]
-    },
-    {
-        id: 12, title: "Board Room", count: 5,
-        cover: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1200"]
-    },
-    {
-        id: 13, title: "Building", count: 8,
-        cover: "https://cdn.pixabay.com/photo/2023/08/18/07/04/business-8197902_1280.jpg?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200"]
-    },
-    {
-        id: 14, title: "Hostel", count: 10,
-        cover: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=1200"]
-    },
-    {
-        id: 15, title: "Canteen", count: 6,
-        cover: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=1200"]
-    },
-    {
-        id: 16, title: "Labs", count: 12,
-        cover: "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1200"]
-    },
-    {
-        id: 17, title: "Library", count: 9,
-        cover: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=1200"]
-    },
-    {
-        id: 18, title: "Net Labs", count: 7,
-        cover: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200"]
-    },
-    {
-        id: 19, title: "Student Life", count: 20,
-        cover: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1200"]
-    },
-    {
-        id: 20, title: "Induction Programme", count: 14,
-        cover: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1200"]
-    },
-    {
-        id: 21, title: "Cultural Events", count: 22,
-        cover: "https://cdn.pixabay.com/photo/2023/08/18/07/04/business-8197902_1280.jpg?q=80&w=500&auto=format&fit=crop",
-        images: ["https://images.unsplash.com/photo-1533174072545-e8d4aa97d848?q=80&w=1200"]
-    }
-];
+// --- FIREBASE IMPORTS ---
+import { db } from '../firebase'; 
+import { collection, getDocs } from 'firebase/firestore';
 
 function Gallery() {
+    // 1. STATE: We replaced the hardcoded 'const galleryData' with this state
+    const [galleryData, setGalleryData] = useState([]);
+
     // State for Modal (Album View)
     const [selectedAlbum, setSelectedAlbum] = useState(null);
     const [albumImages, setAlbumImages] = useState([]);
@@ -119,13 +16,40 @@ function Gallery() {
     const [viewerIndex, setViewerIndex] = useState(null);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
 
+    // 2. FETCH DATA: Load from Firebase when component mounts
+    useEffect(() => {
+        const fetchGallery = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, "albums"));
+                const albums = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                console.log("Fetched Albums:", albums); // Debugging
+                setGalleryData(albums);
+            } catch (error) {
+                console.error("Error fetching gallery:", error);
+            }
+        };
+
+        fetchGallery();
+    }, []);
+
     // --- OPEN CATEGORY GRID (Modal) ---
+    // (KEPT LOGIC EXACTLY AS IT WAS)
     const openModal = (album) => {
         // Replicating the "simulation" logic from the HTML file
         const simulatedImages = [];
-        for (let i = 0; i < album.count; i++) {
-            simulatedImages.push(album.images[i % album.images.length]);
+        
+        // Safety check: ensure images array exists, otherwise use empty array
+        const sourceImages = album.images || []; 
+        
+        if (sourceImages.length > 0) {
+            for (let i = 0; i < album.count; i++) {
+                simulatedImages.push(sourceImages[i % sourceImages.length]);
+            }
         }
+        
         setAlbumImages(simulatedImages);
         setSelectedAlbum(album);
         document.body.style.overflow = 'hidden'; // Disable scroll
@@ -202,7 +126,7 @@ function Gallery() {
 
     return (
         <div className="gallery-page">
-            {/* HERO SECTION */}
+            {/* HERO SECTION - (KEPT EXACTLY THE SAME FOR STYLES) */}
             <header className="modern-hero">
                 <div className="hero-content">
                     <div className="hero-badge"><i className="fas fa-camera"></i> JEC MEMORIES</div>
@@ -232,6 +156,7 @@ function Gallery() {
                 </div>
 
                 <div className="album-grid">
+                    {/* 3. MAPPING: Iterate over our state data instead of hardcoded data */}
                     {galleryData.map((item) => (
                         <div className="album-card" key={item.id} onClick={() => openModal(item)}>
                             <div className="album-cover">
