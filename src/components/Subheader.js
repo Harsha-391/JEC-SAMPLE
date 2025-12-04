@@ -115,6 +115,7 @@ function Subheader() {
 
           {/* Campus Life now links to Gallery */}
           <Link to="/gallery" className="menu-link" onClick={closeMenu}>Campus Life</Link>
+          <Link to="/blog" className="menu-link" onClick={closeMenu}>Blog</Link>
 
           <NavDropdown 
             title="Our Society" 
