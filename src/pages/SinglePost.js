@@ -1,12 +1,11 @@
-// src/pages/SinglePost.js
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom'; // useParams is key here
+import { Link, useParams } from 'react-router-dom';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
-import './Blog.css'; // Reusing the same CSS file
+import './Blog.css';
 
 const SinglePost = () => {
-  const { id } = useParams(); // Get the ID from the URL (e.g., /blog/view/123)
+  const { id } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -32,14 +31,47 @@ const SinglePost = () => {
     fetchPost();
   }, [id]);
 
+  // --- THE SMART PARSER FUNCTION ---
+  // This turns your plain text into a beautiful layout
+  const renderContent = (text) => {
+    if (!text) return null;
+
+    // Split the text by new lines so we can process each paragraph
+    const lines = text.split('\n');
+
+    return lines.map((line, index) => {
+      const trimmed = line.trim();
+      if (!trimmed) return <br key={index} />; // Empty line = space
+
+      // 1. Detect Headers (starts with ##)
+      if (trimmed.startsWith('##')) {
+        return <h3 key={index} className="blog-subtitle">{trimmed.replace('##', '')}</h3>;
+      }
+
+      // 2. Detect Images (starts with IMAGE:)
+      // Example: IMAGE: https://mysite.com/pic.jpg
+      if (trimmed.startsWith('IMAGE:')) {
+        const url = trimmed.replace('IMAGE:', '').trim();
+        return <img key={index} src={url} alt="Blog detail" className="blog-inline-img" />;
+      }
+
+      // 3. Detect Bullet Points (starts with *)
+      if (trimmed.startsWith('* ')) {
+        return <li key={index} className="blog-list-item">{trimmed.replace('* ', '')}</li>;
+      }
+
+      // 4. Default: It's a Paragraph
+      return <p key={index} className="blog-text">{trimmed}</p>;
+    });
+  };
+
   if (loading) return <div style={{padding:'100px', textAlign:'center'}}>Loading Article...</div>;
-  
   if (!post) return <div style={{padding:'100px', textAlign:'center'}}>Article not found.</div>;
 
   return (
     <div className="blog-page-wrapper">
       
-      {/* Navigation Breadcrumb */}
+      {/* Navigation */}
       <div style={{background: '#1E293B', color: '#fff', padding: '10px 2rem', fontSize: '0.9rem'}}>
           <Link to="/blog" style={{color: '#FCA311'}}> <i className="fas fa-arrow-left"></i> Back to Blog</Link>
       </div>
@@ -51,17 +83,17 @@ const SinglePost = () => {
           <div className="post-meta">
             <span><i className="fas fa-user-circle"></i> {post.author}</span>
             <span><i className="fas fa-calendar-alt"></i> {post.date}</span>
-            <span><i className="fas fa-clock"></i> {post.readTime || "5 Min Read"}</span>
           </div>
         </div>
       </header>
 
       <div className="single-post-container">
-        
         <article className="article-body">
           
-          {/* Render HTML Content safely */}
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          {/* USE THE PARSER HERE instead of dangerouslySetInnerHTML */}
+          <div className="dynamic-content">
+             {renderContent(post.content)}
+          </div>
 
           <div className="post-tags">
             <strong>Tags:</strong>
@@ -71,9 +103,9 @@ const SinglePost = () => {
               ))}
             </div>
           </div>
-
         </article>
 
+        {/* Sidebar (Kept same as before) */}
         <aside className="blog-sidebar">
           <div className="widget">
             <h3 className="widget-title">About the Author</h3>
@@ -81,15 +113,8 @@ const SinglePost = () => {
               <img src="https://via.placeholder.com/60" style={{borderRadius:'50%'}} alt={post.author} />
               <div>
                 <strong style={{display:'block', color:'var(--text-main)'}}>{post.author}</strong>
-                <span style={{fontSize:'0.85rem', color:'var(--text-muted)'}}>JEC Contributor</span>
               </div>
             </div>
-          </div>
-          
-          <div className="cta-box">
-            <h3 style={{color:'var(--text-main)'}}>Start Your Engineering Journey</h3>
-            <p>Inspired by this article? Join JEC today.</p>
-            <Link to="/admissions" className="btn-apply">Apply Now <i className="fas fa-angle-right"></i></Link>
           </div>
         </aside>
 
