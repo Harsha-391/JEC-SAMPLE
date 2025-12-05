@@ -44,7 +44,9 @@ import Department from './pages/Department';
 import Gallery from './pages/Gallery';
 import Blog from './pages/Blog';
 import SinglePost from './pages/SinglePost';
-import AdminLayout from './admin/AdminLayout'; // Ensure this exists from previous step
+
+// --- ADMIN IMPORTS ---
+import AdminLayout from './admin/AdminLayout'; 
 import EditHero from './admin/pages/EditHero';
 import EditBlog from './admin/pages/EditBlog';
 
@@ -52,12 +54,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        
+        {/* --- PUBLIC WEBSITE ROUTES --- */}
         <Route path="/" element={<Layout />}>
-          
           <Route index element={<Home />} /> 
           
           {/* Main Pages */}
-          {/* 'About-JEC' is now used in the JEC dropdown in Subheader.js, but we keep the route here so it renders. */}
           <Route path="About-JEC" element={<About />} />
           <Route path="contact-us" element={<Contact />} />
           <Route path="placement" element={<Placements />} />
@@ -66,9 +68,7 @@ function App() {
           <Route path="blog/view/:id" element={<SinglePost />} />
           
           {/* Admission Routes */}
-          {/* Note: 'admissions' path might still be used by footer, so kept as alias or main */}
           <Route path="admissions" element={<Admissions />} /> 
-          
           <Route path="admission/REAP-2025" element={<Reap2025 />} />
           <Route path="admission/Mandatory-Disclosure" element={<MandatoryDisclosure />} />
           <Route path="admission/Karma-Courses-JEC" element={<KarmaCourses />} />
@@ -114,19 +114,17 @@ function App() {
           <Route path="JEC-engineering/JEC-Research-Cell" element={<Department />} />
           <Route path="JEC-engineering/Engineering-JEC" element={<Department />} />
           <Route path="JEC-engineering/MOOCS-NPTEL-SWAYAM" element={<Department />} />
-           {/* --- ADMIN ROUTES --- */}
-           <Route path="/admin" element={<AdminLayout />}>
-           {/* When user clicks "Home Page" in sidebar, show EditHero */}
-           <Route path="edit-home" element={<EditHero />} />
-           
-           {/* You will add other pages here later, e.g.: */}
-           {/* <Route path="edit-about" element={<EditAbout />} /> */}
-           <Route path="/admin" element={<AdminLayout />}>
-                      <Route path="edit-home" element={<EditHero />} />
-              <Route path="manage-blogs" element={<EditBlog />} /> {/* ADD THIS LINE */}
-                 </Route>
-           </Route>
         </Route>
+
+        {/* --- ADMIN ROUTES (Separate Layout) --- */}
+        {/* This route is a sibling to the public layout, not a child */}
+        <Route path="/admin" element={<AdminLayout />}>
+           <Route path="edit-home" element={<EditHero />} />
+           <Route path="manage-blogs" element={<EditBlog />} />
+           {/* You can add a default dashboard view later */}
+           {/* <Route index element={<Dashboard />} /> */}
+        </Route>
+
       </Routes>
     </BrowserRouter>
   );
