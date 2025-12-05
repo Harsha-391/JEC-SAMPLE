@@ -44,6 +44,8 @@ import Department from './pages/Department';
 import Gallery from './pages/Gallery';
 import Blog from './pages/Blog';
 import SinglePost from './pages/SinglePost';
+import AdminLayout from './admin/AdminLayout'; // Ensure this exists from previous step
+import EditHero from './admin/pages/EditHero';
 
 function App() {
   return (
@@ -111,7 +113,14 @@ function App() {
           <Route path="JEC-engineering/JEC-Research-Cell" element={<Department />} />
           <Route path="JEC-engineering/Engineering-JEC" element={<Department />} />
           <Route path="JEC-engineering/MOOCS-NPTEL-SWAYAM" element={<Department />} />
-
+           {/* --- ADMIN ROUTES --- */}
+           <Route path="/admin" element={<AdminLayout />}>
+           {/* When user clicks "Home Page" in sidebar, show EditHero */}
+           <Route path="edit-home" element={<EditHero />} />
+           
+           {/* You will add other pages here later, e.g.: */}
+           {/* <Route path="edit-about" element={<EditAbout />} /> */}
+           </Route>
         </Route>
       </Routes>
     </BrowserRouter>
