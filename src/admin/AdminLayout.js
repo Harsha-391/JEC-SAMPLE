@@ -1,0 +1,48 @@
+import React from 'react';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import './Admin.css'; // We will create this for admin-specific styles
+
+const AdminLayout = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Add firebase signout logic here later
+    navigate('/admin/login');
+  };
+
+  return (
+    <div className="admin-container">
+      {/* Sidebar - The "WordPress" Menu */}
+      <aside className="admin-sidebar">
+        <div className="admin-brand">JEC Admin</div>
+        
+        <nav className="admin-nav">
+          <p className="menu-label">Dashboard</p>
+          <Link to="/admin" className="nav-item">Overview</Link>
+          
+          <p className="menu-label">Page Content</p>
+          <Link to="/admin/edit-home" className="nav-item">Home Page</Link>
+          <Link to="/admin/edit-about" className="nav-item">About Us</Link>
+          <Link to="/admin/edit-admissions" className="nav-item">Admissions</Link>
+          
+          <p className="menu-label">Dynamic Updates</p>
+          <Link to="/admin/manage-blogs" className="nav-item">Blogs & News</Link>
+          <Link to="/admin/manage-gallery" className="nav-item">Gallery Manager</Link>
+          <Link to="/admin/manage-faculty" className="nav-item">Faculty Members</Link>
+
+          <p className="menu-label">Settings</p>
+          <Link to="/admin/users" className="nav-item">User Management</Link>
+        </nav>
+
+        <button onClick={handleLogout} className="logout-btn">Logout</button>
+      </aside>
+
+      {/* Main Content Area - Where the forms appear */}
+      <main className="admin-content">
+        <Outlet /> {/* This renders the specific admin page selected */}
+      </main>
+    </div>
+  );
+};
+
+export default AdminLayout;
