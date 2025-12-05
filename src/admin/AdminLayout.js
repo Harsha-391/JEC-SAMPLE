@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import './Admin.css'; // We will create this for admin-specific styles
+import './Admin.css'; 
 
 const AdminLayout = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const AdminLayout = () => {
 
   return (
     <div className="admin-container">
-      {/* Sidebar - The "WordPress" Menu */}
+      {/* Sidebar */}
       <aside className="admin-sidebar">
         <div className="admin-brand">JEC Admin</div>
         
@@ -21,9 +21,8 @@ const AdminLayout = () => {
           <Link to="/admin" className="nav-item">Overview</Link>
           
           <p className="menu-label">Page Content</p>
+          {/* Removed About and Admissions as requested */}
           <Link to="/admin/edit-home" className="nav-item">Home Page</Link>
-          <Link to="/admin/edit-about" className="nav-item">About Us</Link>
-          <Link to="/admin/edit-admissions" className="nav-item">Admissions</Link>
           
           <p className="menu-label">Dynamic Updates</p>
           <Link to="/admin/manage-blogs" className="nav-item">Blogs & News</Link>
@@ -37,9 +36,9 @@ const AdminLayout = () => {
         <button onClick={handleLogout} className="logout-btn">Logout</button>
       </aside>
 
-      {/* Main Content Area - Where the forms appear */}
+      {/* Main Content Area */}
       <main className="admin-content">
-        <Outlet /> {/* This renders the specific admin page selected */}
+        <Outlet />
       </main>
     </div>
   );
