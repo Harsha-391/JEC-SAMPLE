@@ -60,7 +60,7 @@ function App() {
           <Route path="placement" element={<Placements />} />
           <Route path="gallery" element={<Gallery />} />
           <Route path="blog" element={<Blog />} />
-          <Route path="blog/view" element={<SinglePost />} />
+          <Route path="blog/view/:id" element={<SinglePost />} />
           
           {/* Admission Routes */}
           {/* Note: 'admissions' path might still be used by footer, so kept as alias or main */}
