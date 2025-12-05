@@ -46,6 +46,7 @@ import Blog from './pages/Blog';
 import SinglePost from './pages/SinglePost';
 import AdminLayout from './admin/AdminLayout'; // Ensure this exists from previous step
 import EditHero from './admin/pages/EditHero';
+import EditBlog from './admin/pages/EditBlog';
 
 function App() {
   return (
@@ -120,6 +121,10 @@ function App() {
            
            {/* You will add other pages here later, e.g.: */}
            {/* <Route path="edit-about" element={<EditAbout />} /> */}
+           <Route path="/admin" element={<AdminLayout />}>
+                      <Route path="edit-home" element={<EditHero />} />
+              <Route path="manage-blogs" element={<EditBlog />} /> {/* ADD THIS LINE */}
+                 </Route>
            </Route>
         </Route>
       </Routes>
