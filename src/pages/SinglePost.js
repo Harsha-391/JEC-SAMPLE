@@ -31,40 +31,6 @@ const SinglePost = () => {
     fetchPost();
   }, [id]);
 
-  // --- THE SMART PARSER FUNCTION ---
-  // This turns your plain text into a beautiful layout
-  const renderContent = (text) => {
-    if (!text) return null;
-
-    // Split the text by new lines so we can process each paragraph
-    const lines = text.split('\n');
-
-    return lines.map((line, index) => {
-      const trimmed = line.trim();
-      if (!trimmed) return <br key={index} />; // Empty line = space
-
-      // 1. Detect Headers (starts with ##)
-      if (trimmed.startsWith('##')) {
-        return <h3 key={index} className="blog-subtitle">{trimmed.replace('##', '')}</h3>;
-      }
-
-      // 2. Detect Images (starts with IMAGE:)
-      // Example: IMAGE: https://mysite.com/pic.jpg
-      if (trimmed.startsWith('IMAGE:')) {
-        const url = trimmed.replace('IMAGE:', '').trim();
-        return <img key={index} src={url} alt="Blog detail" className="blog-inline-img" />;
-      }
-
-      // 3. Detect Bullet Points (starts with *)
-      if (trimmed.startsWith('* ')) {
-        return <li key={index} className="blog-list-item">{trimmed.replace('* ', '')}</li>;
-      }
-
-      // 4. Default: It's a Paragraph
-      return <p key={index} className="blog-text">{trimmed}</p>;
-    });
-  };
-
   if (loading) return <div style={{padding:'100px', textAlign:'center'}}>Loading Article...</div>;
   if (!post) return <div style={{padding:'100px', textAlign:'center'}}>Article not found.</div>;
 
@@ -90,31 +56,41 @@ const SinglePost = () => {
       <div className="single-post-container">
         <article className="article-body">
           
-          {/* USE THE PARSER HERE instead of dangerouslySetInnerHTML */}
-          <div className="dynamic-content">
-             {renderContent(post.content)}
-          </div>
+          {/* ✅ FIXED: This renders the HTML from React Quill correctly */}
+          <div 
+            className="dynamic-content"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
 
           <div className="post-tags">
             <strong>Tags:</strong>
             <div className="tag-cloud">
-              {post.tags && post.tags.map((tag, index) => (
-                <span key={index} className="tag">{tag}</span>
-              ))}
+               {/* Fallback in case tags don't exist yet */}
+               <span className="tag">{post.category}</span>
+               <span className="tag">JEC Blog</span>
             </div>
           </div>
         </article>
 
-        {/* Sidebar (Kept same as before) */}
+        {/* Sidebar */}
         <aside className="blog-sidebar">
           <div className="widget">
             <h3 className="widget-title">About the Author</h3>
             <div style={{display:'flex', alignItems:'center', gap:'15px'}}>
-              <img src="https://via.placeholder.com/60" style={{borderRadius:'50%'}} alt={post.author} />
+              <div style={{width:'50px', height:'50px', background:'#eee', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center'}}>
+                <i className="fas fa-user" style={{color:'#888'}}></i>
+              </div>
               <div>
                 <strong style={{display:'block', color:'var(--text-main)'}}>{post.author}</strong>
+                <span style={{fontSize:'12px', color:'#666'}}>Content Creator</span>
               </div>
             </div>
+          </div>
+
+          <div className="cta-box">
+            <h3>Admission Open 2025</h3>
+            <p>Join the league of successful engineers.</p>
+            <Link to="/admissions" className="btn-apply">Apply Now</Link>
           </div>
         </aside>
 
