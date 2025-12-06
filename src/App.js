@@ -49,6 +49,7 @@ import SinglePost from './pages/SinglePost';
 import AdminLayout from './admin/AdminLayout'; 
 import EditHero from './admin/pages/EditHero';
 import EditBlog from './admin/pages/EditBlog';
+import EditFaculty from './admin/pages/EditFaculty';
 
 function App() {
   return (
@@ -117,12 +118,10 @@ function App() {
         </Route>
 
         {/* --- ADMIN ROUTES (Separate Layout) --- */}
-        {/* This route is a sibling to the public layout, not a child */}
         <Route path="/admin" element={<AdminLayout />}>
            <Route path="edit-home" element={<EditHero />} />
            <Route path="manage-blogs" element={<EditBlog />} />
-           {/* You can add a default dashboard view later */}
-           {/* <Route index element={<Dashboard />} /> */}
+           <Route path="manage-faculty" element={<EditFaculty />} />
         </Route>
 
       </Routes>
