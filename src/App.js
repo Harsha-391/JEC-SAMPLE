@@ -63,7 +63,7 @@ function App() {
           <Route index element={<Home />} /> 
           
           {/* Main Pages */}
-          <Route path="About-JEC" element={<About />} />
+          <Route path="jec/About-JEC" element={<About />} />
           <Route path="contact-us" element={<Contact />} />
           <Route path="placement" element={<Placements />} />
           <Route path="gallery" element={<Gallery />} />
