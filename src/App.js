@@ -50,6 +50,7 @@ import AdminLayout from './admin/AdminLayout';
 import EditHero from './admin/pages/EditHero';
 import EditBlog from './admin/pages/EditBlog';
 import EditFaculty from './admin/pages/EditFaculty';
+import GutsNGlory from './pages/GutsNGlory';
 
 function App() {
   return (
@@ -124,6 +125,8 @@ function App() {
            <Route path="manage-faculty" element={<EditFaculty />} />
         </Route>
 
+        {/* Campus Life Routes */}
+        <Route path="/campus-life/guts-n-glory" element={<GutsNGlory />} />
       </Routes>
     </BrowserRouter>
   );
