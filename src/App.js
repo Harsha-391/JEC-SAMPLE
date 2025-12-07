@@ -58,6 +58,7 @@ function App() {
       <Routes>
         
         {/* --- PUBLIC WEBSITE ROUTES --- */}
+        {/* Everything inside this Layout wrapper gets the Header & Footer */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} /> 
           
@@ -68,6 +69,9 @@ function App() {
           <Route path="gallery" element={<Gallery />} />
           <Route path="blog" element={<Blog />} />
           <Route path="blog/view/:id" element={<SinglePost />} />
+          
+          {/* Campus Life Routes - MOVED HERE INSIDE LAYOUT */}
+          <Route path="/campus-life/guts-n-glory" element={<GutsNGlory />} />
           
           {/* Admission Routes */}
           <Route path="admissions" element={<Admissions />} /> 
@@ -125,8 +129,6 @@ function App() {
            <Route path="manage-faculty" element={<EditFaculty />} />
         </Route>
 
-        {/* Campus Life Routes */}
-        <Route path="/campus-life/guts-n-glory" element={<GutsNGlory />} />
       </Routes>
     </BrowserRouter>
   );
