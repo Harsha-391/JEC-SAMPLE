@@ -56,6 +56,18 @@ const infraMenuItems = [
   { title: 'Prepare and Present', path: '/Infrastructure/Prepare-and-Present' },
   { title: 'Refuel and Relax', path: '/Infrastructure/Refuel-and-Relax' },
 ];
+const campusLifeItems = [
+  { title: 'Image Gallery', path: '/Gallery' },
+  { title: 'JEC: Vibrant India', path: '/campus-life/jec-vibrant-india' },
+  { title: 'Committees Zone', path: '/campus-life/committees-zone' },
+  { title: 'Video Gallery', path: '/campus-life/video-gallery' },
+  { title: 'Engineering Projects', path: '/campus-life/engineering-projects' },
+  { title: 'Academic Achievers', path: '/campus-life/academic-achievers' },
+  { title: 'Student Mental Health & Wellbeing', path: '/campus-life/mental-health' },
+  { title: 'JEC Students Corner', path: '/campus-life/students-corner' },
+  { title: 'Games and Sports', path: '/campus-life/games-and-sports' },
+  { title: 'Guts n Glory', path: '/campus-life/guts-n-glory' },
+];
 
 function Subheader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -114,7 +126,12 @@ function Subheader() {
           />
 
           {/* Campus Life now links to Gallery */}
-          <Link to="/gallery" className="menu-link" onClick={closeMenu}>Campus Life</Link>
+          <NavDropdown 
+  title="Campus Life" 
+  items={campusLifeItems} 
+  baseLink="/campus-life" 
+  align="center" 
+/>
           <Link to="/blog" className="menu-link" onClick={closeMenu}>Blog</Link>
 
           <NavDropdown 
