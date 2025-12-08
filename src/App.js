@@ -50,7 +50,10 @@ import AdminLayout from './admin/AdminLayout';
 import EditHero from './admin/pages/EditHero';
 import EditBlog from './admin/pages/EditBlog';
 import EditFaculty from './admin/pages/EditFaculty';
+
+// --- NEW PAGE IMPORTS ---
 import GutsNGlory from './pages/GutsNGlory';
+import StudentsCorner from './pages/StudentsCorner'; // ✅ ADDED THIS IMPORT
 
 function App() {
   return (
@@ -70,8 +73,9 @@ function App() {
           <Route path="blog" element={<Blog />} />
           <Route path="blog/view/:id" element={<SinglePost />} />
           
-          {/* Campus Life Routes - MOVED HERE INSIDE LAYOUT */}
+          {/* Campus Life Routes */}
           <Route path="/campus-life/guts-n-glory" element={<GutsNGlory />} />
+          <Route path="/campus-life/students-corner" element={<StudentsCorner />} /> {/* ✅ ADDED THIS ROUTE */}
           
           {/* Admission Routes */}
           <Route path="admissions" element={<Admissions />} /> 
