@@ -54,7 +54,8 @@ import EditFaculty from './admin/pages/EditFaculty';
 // --- NEW PAGE IMPORTS ---
 import GutsNGlory from './pages/GutsNGlory';
 import StudentsCorner from './pages/StudentsCorner';
-import GamesAndSports from './pages/GamesAndSports'; // ✅ ADDED IMPORT
+import GamesAndSports from './pages/GamesAndSports'; 
+import VibrantIndia from './pages/VibrantIndia';
 
 function App() {
   return (
@@ -78,7 +79,7 @@ function App() {
           <Route path="/campus-life/guts-n-glory" element={<GutsNGlory />} />
           <Route path="/campus-life/students-corner" element={<StudentsCorner />} />
           <Route path="/campus-life/games-and-sports" element={<GamesAndSports />} /> {/* ✅ ADDED ROUTE */}
-          
+          <Route path="/campus-life/jec-vibrant-india" element={<VibrantIndia />} />
           {/* Admission Routes */}
           <Route path="admissions" element={<Admissions />} /> 
           <Route path="admission/REAP-2025" element={<Reap2025 />} />
