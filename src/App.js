@@ -57,7 +57,8 @@ import StudentsCorner from './pages/StudentsCorner';
 import GamesAndSports from './pages/GamesAndSports';
 import VibrantIndia from './pages/VibrantIndia'; 
 import CommitteesZone from './pages/CommitteesZone'; 
-import MentalHealth from './pages/MentalHealth'; // ✅ ADD THIS IMPORT
+import MentalHealth from './pages/MentalHealth';
+import AcademicAchievers from './pages/AcademicAchievers'; // ✅ ADD THIS IMPORT
 
 function App() {
   return (
@@ -82,9 +83,8 @@ function App() {
           <Route path="/campus-life/games-and-sports" element={<GamesAndSports />} />
           <Route path="/campus-life/jec-vibrant-india" element={<VibrantIndia />} />
           <Route path="/campus-life/committees-zone" element={<CommitteesZone />} />
-          
-          {/* ✅ ADD THIS NEW ROUTE */}
           <Route path="/campus-life/mental-health" element={<MentalHealth />} />
+          <Route path="/campus-life/academic-achievers" element={<AcademicAchievers />} /> {/* ✅ ADD THIS ROUTE */}
           
           {/* Admission Routes */}
           <Route path="admissions" element={<Admissions />} /> 

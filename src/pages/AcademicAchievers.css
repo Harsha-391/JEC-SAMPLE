@@ -1,0 +1,188 @@
+/* src/pages/AcademicAchievers.css */
+
+.academic-achievers-page {
+    /* --- 1. DESIGN TOKENS (Prepare & Present System) --- */
+    --primary: #0072C6;        /* JEC Blue */
+    --primary-dark: #005a9e;
+    --accent: #D62828;         /* JEC Red */
+    --gold: #FCA311;           /* Highlight */
+    
+    --bg-body: #F8FAFC;
+    --bg-surface: #FFFFFF;
+    --text-main: #0F172A;
+    --text-muted: #475569;
+    --border: #E2E8F0;
+    
+    --radius-lg: 20px;
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+    /* --- 2. BASE STYLES --- */
+    font-family: 'Inter', sans-serif;
+    color: var(--text-main);
+    line-height: 1.6;
+    background-color: var(--bg-body);
+    padding-bottom: 50px;
+}
+
+.academic-achievers-page .max-width-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* --- 3. HERO SECTION --- */
+.academic-achievers-page .hero {
+    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: 80px 0 40px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.academic-achievers-page .hero h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.academic-achievers-page .hero p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+/* --- 4. INTRO SECTION --- */
+.academic-achievers-page .intro-section {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.academic-achievers-page .intro-text {
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+
+.academic-achievers-page .intro-text h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--gold);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.academic-achievers-page .intro-text p {
+    color: var(--text-muted);
+    font-size: 17px;
+    text-align: justify;
+}
+
+/* --- 5. ACHIEVERS GRID SECTIONS --- */
+.academic-achievers-page .year-section {
+    background: var(--bg-surface);
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    border-left: 8px solid var(--primary);
+}
+
+.academic-achievers-page .year-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border);
+}
+
+.academic-achievers-page .year-title i {
+    margin-right: 10px;
+    color: var(--gold);
+}
+
+.academic-achievers-page .branch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.academic-achievers-page .branch-card {
+    background: var(--bg-body);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    box-shadow: var(--shadow-card);
+}
+
+.academic-achievers-page .branch-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
+
+.academic-achievers-page .branch-header {
+    background: var(--primary-dark);
+    color: white;
+    padding: 15px 20px;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.academic-achievers-page .branch-header i {
+    font-size: 22px;
+    color: var(--gold);
+}
+
+.academic-achievers-page .branch-card table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.academic-achievers-page .branch-card td {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 16px;
+}
+
+.academic-achievers-page .branch-card tr:last-child td { border-bottom: none; }
+.academic-achievers-page .branch-card tr:nth-child(even) { background-color: #f7f7f7; }
+
+.academic-achievers-page .branch-card .rank {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.1em;
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.academic-achievers-page .branch-card .rank-1 { color: #FFD700; /* Gold */ }
+.academic-achievers-page .branch-card .rank-2 { color: #C0C0C0; /* Silver */ }
+.academic-achievers-page .branch-card .rank-3 { color: #CD7F32; /* Bronze */ }
+
+.academic-achievers-page .branch-card .student-name {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+/* --- 6. CTA / FOOTER STYLES (Match existing footer styling if possible) --- */
+.academic-achievers-page .page-footer {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+    background-color: var(--bg-body);
+    border-top: 1px solid var(--border);
+}
+
+.academic-achievers-page .page-footer p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .academic-achievers-page .hero h1 { font-size: 32px; }
+    .academic-achievers-page .year-title { font-size: 24px; }
+    .academic-achievers-page .branch-grid { grid-template-columns: 1fr; }
+}
