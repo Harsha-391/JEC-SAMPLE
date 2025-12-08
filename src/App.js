@@ -56,7 +56,8 @@ import GutsNGlory from './pages/GutsNGlory';
 import StudentsCorner from './pages/StudentsCorner';
 import GamesAndSports from './pages/GamesAndSports';
 import VibrantIndia from './pages/VibrantIndia'; 
-import CommitteesZone from './pages/CommitteesZone'; // ✅ Ensure this is imported
+import CommitteesZone from './pages/CommitteesZone'; 
+import MentalHealth from './pages/MentalHealth'; // ✅ ADD THIS IMPORT
 
 function App() {
   return (
@@ -80,9 +81,10 @@ function App() {
           <Route path="/campus-life/students-corner" element={<StudentsCorner />} />
           <Route path="/campus-life/games-and-sports" element={<GamesAndSports />} />
           <Route path="/campus-life/jec-vibrant-india" element={<VibrantIndia />} />
-          
-          {/* ✅ FIXED ROUTE: This now matches the /campus-life/ prefix */}
           <Route path="/campus-life/committees-zone" element={<CommitteesZone />} />
+          
+          {/* ✅ ADD THIS NEW ROUTE */}
+          <Route path="/campus-life/mental-health" element={<MentalHealth />} />
           
           {/* Admission Routes */}
           <Route path="admissions" element={<Admissions />} /> 
