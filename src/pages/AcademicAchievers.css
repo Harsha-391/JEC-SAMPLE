@@ -1,7 +1,7 @@
 /* src/pages/AcademicAchievers.css */
 
 .academic-achievers-page {
-    /* --- 1. DESIGN TOKENS (Prepare & Present System) --- */
+    /* --- 1. DESIGN TOKENS --- */
     --primary: #0072C6;        /* JEC Blue */
     --primary-dark: #005a9e;
     --accent: #D62828;         /* JEC Red */
@@ -9,7 +9,7 @@
     
     --bg-body: #F8FAFC;
     --bg-surface: #FFFFFF;
-    --text-main: #0F172A;
+    --text-main: #0F172A;      /* Dark Slate - Primary Text */
     --text-muted: #475569;
     --border: #E2E8F0;
     
@@ -40,11 +40,13 @@
     font-size: 40px;
     font-weight: 800;
     margin-bottom: 5px;
+    color: white; /* Ensure explicitly white */
 }
 
 .academic-achievers-page .hero p {
     font-size: 18px;
     opacity: 0.9;
+    color: white; /* Ensure explicitly white */
 }
 
 /* --- 4. INTRO SECTION --- */
@@ -106,7 +108,7 @@
 }
 
 .academic-achievers-page .branch-card {
-    background: var(--bg-body);
+    background: #FFFFFF; /* Ensure white background */
     border: 1px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
@@ -142,11 +144,24 @@
     padding: 15px 20px;
     border-bottom: 1px solid var(--border);
     font-size: 16px;
+    /* Removed background-color here to let row background show */
 }
 
+/* Table Row Styling */
 .academic-achievers-page .branch-card tr:last-child td { border-bottom: none; }
-.academic-achievers-page .branch-card tr:nth-child(even) { background-color: #f7f7f7; }
 
+/* Zebra Striping */
+.academic-achievers-page .branch-card tr:nth-child(even) { background-color: #F8FAFC; }
+.academic-achievers-page .branch-card tr:nth-child(odd) { background-color: #FFFFFF; }
+
+/* --- FIX: VISIBILITY OF NAMES --- */
+.academic-achievers-page .branch-card .student-name {
+    color: #1a202c; /* Very Dark Gray/Black for high contrast */
+    font-weight: 700; /* Made bolder */
+    font-size: 1.05rem; /* Slightly larger */
+}
+
+/* Rank Styling */
 .academic-achievers-page .branch-card .rank {
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
@@ -155,18 +170,15 @@
     width: 30px;
     text-align: center;
     margin-right: 10px;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.1); /* Subtle shadow to pop */
 }
 
-.academic-achievers-page .branch-card .rank-1 { color: #FFD700; /* Gold */ }
-.academic-achievers-page .branch-card .rank-2 { color: #C0C0C0; /* Silver */ }
-.academic-achievers-page .branch-card .rank-3 { color: #CD7F32; /* Bronze */ }
+.academic-achievers-page .branch-card .rank-1 { color: #D97706; /* Darker Gold */ }
+.academic-achievers-page .branch-card .rank-2 { color: #64748B; /* Darker Silver/Slate */ }
+.academic-achievers-page .branch-card .rank-3 { color: #B45309; /* Darker Bronze */ }
 
-.academic-achievers-page .branch-card .student-name {
-    color: var(--text-main);
-    font-weight: 600;
-}
 
-/* --- 6. CTA / FOOTER STYLES (Match existing footer styling if possible) --- */
+/* --- 6. CTA / FOOTER STYLES --- */
 .academic-achievers-page .page-footer {
     text-align: center;
     padding: 30px 20px;
