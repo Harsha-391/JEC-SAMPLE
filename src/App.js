@@ -51,12 +51,12 @@ import EditHero from './admin/pages/EditHero';
 import EditBlog from './admin/pages/EditBlog';
 import EditFaculty from './admin/pages/EditFaculty';
 
-// --- NEW PAGE IMPORTS ---
+// --- CAMPUS LIFE IMPORTS ---
 import GutsNGlory from './pages/GutsNGlory';
 import StudentsCorner from './pages/StudentsCorner';
-import GamesAndSports from './pages/GamesAndSports'; 
-import VibrantIndia from './pages/VibrantIndia';
-import CommitteesZone from './pages/CommitteesZone';
+import GamesAndSports from './pages/GamesAndSports';
+import VibrantIndia from './pages/VibrantIndia'; 
+import CommitteesZone from './pages/CommitteesZone'; // ✅ Ensure this is imported
 
 function App() {
   return (
@@ -64,7 +64,6 @@ function App() {
       <Routes>
         
         {/* --- PUBLIC WEBSITE ROUTES --- */}
-        {/* Everything inside this Layout wrapper gets the Header & Footer */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} /> 
           
@@ -79,9 +78,12 @@ function App() {
           {/* Campus Life Routes */}
           <Route path="/campus-life/guts-n-glory" element={<GutsNGlory />} />
           <Route path="/campus-life/students-corner" element={<StudentsCorner />} />
-          <Route path="/campus-life/games-and-sports" element={<GamesAndSports />} /> {/* ✅ ADDED ROUTE */}
+          <Route path="/campus-life/games-and-sports" element={<GamesAndSports />} />
           <Route path="/campus-life/jec-vibrant-india" element={<VibrantIndia />} />
-          <Route path="/committees-zone" element={<CommitteesZone />} />
+          
+          {/* ✅ FIXED ROUTE: This now matches the /campus-life/ prefix */}
+          <Route path="/campus-life/committees-zone" element={<CommitteesZone />} />
+          
           {/* Admission Routes */}
           <Route path="admissions" element={<Admissions />} /> 
           <Route path="admission/REAP-2025" element={<Reap2025 />} />
