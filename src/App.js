@@ -53,7 +53,8 @@ import EditFaculty from './admin/pages/EditFaculty';
 
 // --- NEW PAGE IMPORTS ---
 import GutsNGlory from './pages/GutsNGlory';
-import StudentsCorner from './pages/StudentsCorner'; // ✅ ADDED THIS IMPORT
+import StudentsCorner from './pages/StudentsCorner';
+import GamesAndSports from './pages/GamesAndSports'; // ✅ ADDED IMPORT
 
 function App() {
   return (
@@ -75,7 +76,8 @@ function App() {
           
           {/* Campus Life Routes */}
           <Route path="/campus-life/guts-n-glory" element={<GutsNGlory />} />
-          <Route path="/campus-life/students-corner" element={<StudentsCorner />} /> {/* ✅ ADDED THIS ROUTE */}
+          <Route path="/campus-life/students-corner" element={<StudentsCorner />} />
+          <Route path="/campus-life/games-and-sports" element={<GamesAndSports />} /> {/* ✅ ADDED ROUTE */}
           
           {/* Admission Routes */}
           <Route path="admissions" element={<Admissions />} /> 
