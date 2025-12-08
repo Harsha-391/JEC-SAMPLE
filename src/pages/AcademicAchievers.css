@@ -23,245 +23,166 @@
     background-color: var(--bg-body);
     padding-bottom: 50px;
 }
-/* src/pages/AcademicAchievers.css */
 
-/* Page Wrapper */
-.academic-achievers-page {
-    font-family: 'Inter', sans-serif;
-    color: #0F172A; /* var(--text-main) */
-    line-height: 1.8;
-    background-color: #F8FAFC; /* var(--bg-body) */
-}
+.academic-achievers-page .max-width-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-.aa-max-width-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* --- Hero Section (Renamed to aa-hero) --- */
-.aa-hero {
-    position: relative;
-    background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(0, 114, 198, 0.8)), 
-                url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1920');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    padding: 9rem 1rem 12rem 1rem;
-    text-align: center;
+/* --- 3. HERO SECTION --- */
+.academic-achievers-page .hero {
+    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: white;
-    z-index: 0;
-}
-
-.aa-hero h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(to right, #fff, #cbd5e1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: white; /* Fallback */
-    letter-spacing: -1px;
-}
-
-.aa-hero p {
-    font-size: 1.4rem;
-    color: #FCA311; /* var(--gold) */
-    font-weight: 600;
-    letter-spacing: 1px;
-}
-
-/* --- Stats Section (Renamed) --- */
-.aa-stats-container {
-    max-width: 1200px;
-    margin: -6rem auto 5rem auto;
-    padding: 0 1.5rem;
-    position: relative;
-    z-index: 10;
-}
-
-.aa-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-}
-
-.aa-stat-card {
-    background: #FFFFFF;
-    padding: 1.5rem;
-    border-radius: 20px;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    padding: 80px 0 40px;
     text-align: center;
-    transition: transform 0.3s;
-    border-bottom: 4px solid #0072C6; /* var(--primary) */
-    position: relative;
-    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.aa-stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-    border-color: #D62828; /* var(--accent) */
-}
-
-.aa-stat-value {
-    font-size: 1.6rem;
-    font-weight: 800;
+.academic-achievers-page .hero h1 {
     font-family: 'Poppins', sans-serif;
-    color: #0072C6;
-    line-height: 1.2;
+    font-size: 40px;
+    font-weight: 800;
     margin-bottom: 5px;
 }
 
-.aa-stat-label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #475569;
-    text-transform: uppercase;
+.academic-achievers-page .hero p {
+    font-size: 18px;
+    opacity: 0.9;
 }
 
-/* --- Content Sections --- */
-.aa-section-header {
+/* --- 4. INTRO SECTION --- */
+.academic-achievers-page .intro-section {
+    padding: 50px 0;
     text-align: center;
-    margin-bottom: 3rem;
-    margin-top: 4rem;
 }
 
-.aa-section-header h2 {
+.academic-achievers-page .intro-text {
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+
+.academic-achievers-page .intro-text h2 {
     font-family: 'Poppins', sans-serif;
-    font-size: 2.5rem;
-    color: #0F172A;
-    margin-bottom: 0.5rem;
+    font-size: 32px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--gold);
+    display: inline-block;
+    padding-bottom: 5px;
 }
 
-.aa-section-header span {
-    color: #D62828;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.aa-section-header p {
-    max-width: 700px;
-    margin: 0 auto;
-    color: #475569;
-}
-
-.aa-quote-banner {
-    background: #FFFBEB;
-    border-left: 6px solid #FCA311;
-    padding: 2rem;
-    border-radius: 8px;
-    margin-bottom: 4rem;
-    text-align: center;
-    font-size: 1.2rem;
-    color: #78350F;
-    font-style: italic;
-    position: relative;
-}
-
-.aa-quote-banner::before {
-    content: '\f10d'; /* FontAwesome Quote Icon */
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    opacity: 0.1;
-    font-size: 3rem;
-}
-
-.aa-intro-text p {
-    margin-bottom: 1.5rem;
+.academic-achievers-page .intro-text p {
+    color: var(--text-muted);
+    font-size: 17px;
     text-align: justify;
-    font-size: 1.05rem;
-    color: #475569;
 }
 
-/* --- Achiever Tables (Renamed) --- */
-.aa-year-section {
-    margin-bottom: 5rem;
+/* --- 5. ACHIEVERS GRID SECTIONS --- */
+.academic-achievers-page .year-section {
+    background: var(--bg-surface);
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    border-left: 8px solid var(--primary);
 }
 
-.aa-year-title {
+.academic-achievers-page .year-title {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.8rem;
-    color: #0072C6;
-    border-bottom: 2px solid #E2E8F0;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 25px;
     padding-bottom: 10px;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    border-bottom: 1px dashed var(--border);
 }
 
-.aa-year-title i {
-    color: #FCA311;
+.academic-achievers-page .year-title i {
+    margin-right: 10px;
+    color: var(--gold);
 }
 
-.aa-branch-grid {
+.academic-achievers-page .branch-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    gap: 30px;
 }
 
-.aa-branch-card {
-    background: white;
+.academic-achievers-page .branch-card {
+    background: var(--bg-body);
+    border: 1px solid var(--border);
     border-radius: 12px;
-    border: 1px solid #E2E8F0;
     overflow: hidden;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    box-shadow: var(--shadow-card);
 }
 
-.aa-branch-header {
-    background: #0F172A;
+.academic-achievers-page .branch-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
+
+.academic-achievers-page .branch-header {
+    background: var(--primary-dark);
     color: white;
-    padding: 12px 20px;
-    font-weight: 700;
-    font-family: 'Poppins', sans-serif;
+    padding: 15px 20px;
+    font-size: 18px;
+    font-weight: 600;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.aa-table {
+.academic-achievers-page .branch-header i {
+    font-size: 22px;
+    color: var(--gold);
+}
+
+.academic-achievers-page .branch-card table {
     width: 100%;
     border-collapse: collapse;
+    margin: 0;
 }
 
-.aa-table td {
-    padding: 12px 20px;
-    border-bottom: 1px solid #E2E8F0;
-    font-size: 0.95rem;
+.academic-achievers-page .branch-card td {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 16px;
 }
 
-.aa-table tr:last-child td {
-    border-bottom: none;
-}
+.academic-achievers-page .branch-card tr:last-child td { border-bottom: none; }
+.academic-achievers-page .branch-card tr:nth-child(even) { background-color: #f7f7f7; }
 
-/* Rank Badges */
-.aa-rank {
-    font-weight: 700;
-    font-size: 0.9rem;
-    padding: 4px 10px;
-    border-radius: 20px;
+.academic-achievers-page .branch-card .rank {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.1em;
     display: inline-block;
-    width: 40px;
+    width: 30px;
     text-align: center;
+    margin-right: 10px;
 }
 
-.aa-rank-1 { background: #FEF3C7; color: #D97706; border: 1px solid #FCD34D; } /* Gold */
-.aa-rank-2 { background: #F1F5F9; color: #64748B; border: 1px solid #CBD5E1; } /* Silver */
-.aa-rank-3 { background: #FFF7ED; color: #EA580C; border: 1px solid #FFEDD5; } /* Bronze */
+.academic-achievers-page .branch-card .rank-1 { color: #FFD700; /* Gold */ }
+.academic-achievers-page .branch-card .rank-2 { color: #C0C0C0; /* Silver */ }
+.academic-achievers-page .branch-card .rank-3 { color: #CD7F32; /* Bronze */ }
 
-.aa-student-name {
+.academic-achievers-page .branch-card .student-name {
+    color: var(--text-main);
     font-weight: 600;
-    color: #0F172A;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-    .aa-hero h1 { font-size: 2.5rem; }
-    .aa-stats-grid { grid-template-columns: 1fr 1fr; }
-    .aa-branch-grid { grid-template-columns: 1fr; }
+/* --- 6. CTA / FOOTER STYLES (Match existing footer styling if possible) --- */
+.academic-achievers-page .page-footer {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+    background-color: var(--bg-body);
+    border-top: 1px solid var(--border);
+}
+
+.academic-achievers-page .page-footer p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .academic-achievers-page .hero h1 { font-size: 32px; }
+    .academic-achievers-page .year-title { font-size: 24px; }
+    .academic-achievers-page .branch-grid { grid-template-columns: 1fr; }
 }
