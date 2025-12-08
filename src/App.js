@@ -2,6 +2,9 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 
+//header
+import AdmissionEnquiry from './pages/AdmissionEnquiry';
+
 // Import your Layout and Page components
 import Layout from './components/Layout';
 import Home from './pages/Home';
@@ -58,7 +61,12 @@ import GamesAndSports from './pages/GamesAndSports';
 import VibrantIndia from './pages/VibrantIndia'; 
 import CommitteesZone from './pages/CommitteesZone'; 
 import MentalHealth from './pages/MentalHealth';
-import AcademicAchievers from './pages/AcademicAchievers'; // ✅ ADD THIS IMPORT
+import AcademicAchievers from './pages/AcademicAchievers';
+import EngineeringProjects from './pages/EngineeringProjects';
+import VideoGallery from './pages/VideoGallery'; // ✅ ADD THIS IMPORT
+import Overview from './admin/pages/Overview';
+import EditTestimonials from './admin/pages/EditTestimonials';
+import EditDepartment from './admin/pages/EditDepartment';
 
 function App() {
   return (
@@ -68,6 +76,9 @@ function App() {
         {/* --- PUBLIC WEBSITE ROUTES --- */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} /> 
+
+          {/* header */}
+          <Route path="admission-enquiry" element={<AdmissionEnquiry />} />
           
           {/* Main Pages */}
           <Route path="jec/About-JEC" element={<About />} />
@@ -84,8 +95,10 @@ function App() {
           <Route path="/campus-life/jec-vibrant-india" element={<VibrantIndia />} />
           <Route path="/campus-life/committees-zone" element={<CommitteesZone />} />
           <Route path="/campus-life/mental-health" element={<MentalHealth />} />
-          <Route path="/campus-life/academic-achievers" element={<AcademicAchievers />} /> {/* ✅ ADD THIS ROUTE */}
-          
+          <Route path="/campus-life/academic-achievers" element={<AcademicAchievers />} />
+          <Route path="/campus-life/engineering-projects" element={<EngineeringProjects />} /> {/* ✅ ADD THIS ROUTE */}
+                    <Route path="/campus-life/video-gallery" element={<VideoGallery />} /> {/* ✅ ADD THIS ROUTE */}
+
           {/* Admission Routes */}
           <Route path="admissions" element={<Admissions />} /> 
           <Route path="admission/REAP-2025" element={<Reap2025 />} />
@@ -140,6 +153,9 @@ function App() {
            <Route path="edit-home" element={<EditHero />} />
            <Route path="manage-blogs" element={<EditBlog />} />
            <Route path="manage-faculty" element={<EditFaculty />} />
+           <Route index element={<Overview />} />
+           <Route path="manage-testimonials" element={<EditTestimonials />} />
+           <Route path="manage-departments" element={<EditDepartment />} />
         </Route>
 
       </Routes>

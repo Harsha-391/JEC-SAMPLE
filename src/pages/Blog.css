@@ -357,3 +357,23 @@
   font-size: 1.5rem;
   line-height: 1.2rem;
 }
+/* src/pages/Blog.css */
+
+/* Make links inside the blog post visible and clickable */
+.dynamic-content a {
+    color: #0072C6; /* JEC Blue */
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.dynamic-content a:hover {
+    color: #D62828; /* JEC Red on hover */
+    text-decoration: none;
+}
+
+/* Optional: Add styles for lists if they are also missing */
+.dynamic-content ul, .dynamic-content ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}

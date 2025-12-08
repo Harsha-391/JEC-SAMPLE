@@ -1,5 +1,6 @@
 // src/components/Header.js
 import React from 'react';
+import AdmissionEnquiry from '../pages/AdmissionEnquiry';
 import { Link } from 'react-router-dom';
 
 function Header() {
@@ -18,9 +19,9 @@ function Header() {
         
         {/* Links on the Right */}
         <nav className="top-bar-links">
-          <a href="#!">
+          <Link to="/admission-enquiry">
             <i className="fas fa-edit"></i> Admission Enquiry Open 2025
-          </a>
+         </Link>
           <Link to="/admissions">
             <i className="fas fa-user-graduate"></i> Apply for Admission
           </Link>

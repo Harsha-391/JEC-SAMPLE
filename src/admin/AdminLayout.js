@@ -28,6 +28,8 @@ const AdminLayout = () => {
           <Link to="/admin/manage-blogs" className="nav-item">Blogs & News</Link>
           <Link to="/admin/manage-gallery" className="nav-item">Gallery Manager</Link>
           <Link to="/admin/manage-faculty" className="nav-item">Faculty Members</Link>
+          <Link to="/admin/manage-testimonials" className="nav-item">Testimonials</Link>
+          <Link to="/admin/manage-departments" className="nav-item">Departments</Link>
 
           <p className="menu-label">Settings</p>
           <Link to="/admin/users" className="nav-item">User Management</Link>

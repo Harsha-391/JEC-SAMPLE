@@ -106,7 +106,7 @@ function Subheader() {
           
           <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" />
           
-          <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/admission" />
+          <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/#!" />
 
           <Link to="/placement" className="menu-link" onClick={closeMenu}>Placement</Link>
           
@@ -114,14 +114,14 @@ function Subheader() {
           <NavDropdown 
             title="Departments" 
             items={departmentMenuItems} 
-            baseLink="/department"
+            baseLink="/#!"
             align="center" 
           />
 
           <NavDropdown 
             title="Infrastructure" 
             items={infraMenuItems} 
-            baseLink="/infrastructure" 
+            baseLink="/#!" 
             align="center" 
           />
 
@@ -129,7 +129,7 @@ function Subheader() {
           <NavDropdown 
   title="Campus Life" 
   items={campusLifeItems} 
-  baseLink="/campus-life" 
+  baseLink="/#!" 
   align="center" 
 />
           <Link to="/blog" className="menu-link" onClick={closeMenu}>Blog</Link>
@@ -137,7 +137,7 @@ function Subheader() {
           <NavDropdown 
             title="Our Society" 
             items={societyMenuItems} 
-            baseLink="/society"
+            baseLink="/#!"
             align="right" 
           />
 

@@ -2,10 +2,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function NavDropdown({ title, items, baseLink = "#!", align = "left" }) {
+function NavDropdown({ title, items, baseLink = "#", align = "left" }) {
   
   const handleClick = (e) => {
-    if (baseLink === "#!") {
+    if (baseLink === "#") {
       e.preventDefault();
     }
   };
