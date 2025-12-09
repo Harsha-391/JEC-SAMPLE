@@ -105,7 +105,7 @@ function AdmissionOpen() {
             
             <div className="admissions-logo-slider">
                 <div className="admissions-slide-track">
-                    <div className="admissions-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg" alt="TCS" /></div>
+                    <div className="admissions-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Tata_Consultancy_Services_old_logo.svg/1024px-Tata_Consultancy_Services_old_logo.svg.png?20210617123944" alt="TCS" /></div>
                     <div className="admissions-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg" alt="Infosys" /></div>
                     <div className="admissions-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg" alt="Wipro" /></div>
                     <div className="admissions-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Dell_Logo.png" alt="Dell" /></div>
@@ -113,7 +113,7 @@ function AdmissionOpen() {
                     <div className="admissions-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" /></div>
                     <div className="admissions-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" /></div>
                     
-                    <div className="admissions-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg" alt="TCS" /></div>
+                    <div className="admissions-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Tata_Consultancy_Services_old_logo.svg/1024px-Tata_Consultancy_Services_old_logo.svg.png?20210617123944" alt="TCS" /></div>
                     <div className="admissions-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg" alt="Infosys" /></div>
                     <div className="admissions-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg" alt="Wipro" /></div>
                     <div className="admissions-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Dell_Logo.png" alt="Dell" /></div>
