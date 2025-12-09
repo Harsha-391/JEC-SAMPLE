@@ -1,24 +1,11 @@
 // src/pages/AdmissionEnquiry.js
 import React, { useState } from 'react';
-import { db } from '../firebase'; // Importing from your existing firebase.js
+import { db } from '../firebase'; 
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'; 
+import { State, City } from 'country-state-city';
 import './AdmissionEnquiry.css';
 
 // --- DATA LISTS ---
-
-const statesAndCities = {
-  "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Ajmer", "Bikaner"],
-  "Delhi": ["New Delhi", "North Delhi", "South Delhi", "East Delhi", "West Delhi"],
-  "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad"],
-  "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra", "Varanasi", "Noida", "Ghaziabad"],
-  "Haryana": ["Gurugram", "Faridabad", "Panipat", "Ambala", "Karnal"],
-  "Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot"],
-  "Madhya Pradesh": ["Indore", "Bhopal", "Gwalior", "Jabalpur"],
-  "Punjab": ["Ludhiana", "Amritsar", "Jalandhar", "Patiala", "Chandigarh"],
-  "Bihar": ["Patna", "Gaya", "Muzaffarpur", "Bhagalpur"],
-  "West Bengal": ["Kolkata", "Howrah", "Durgapur", "Siliguri"]
-  // Add more states as needed
-};
 
 const programs = {
   "UG": [
@@ -42,15 +29,29 @@ const AdmissionEnquiry = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
-    countryCode: '+91',
+    phoneCode: '+91', // Hardcoded default
     mobile: '',
     state: '',
     city: '',
-    level: '', // UG or PG
+    level: '', 
     program: ''
   });
 
   const [loading, setLoading] = useState(false);
+
+  // --- DYNAMIC DATA CALCULATIONS ---
+  
+  // 1. Hardcode Country to India ('IN') for the state list
+  const countryCode = 'IN';
+
+  // 2. Get all states of India directly
+  const states = State.getStatesOfCountry(countryCode);
+
+  // 3. Get cities based on selected state
+  const cities = formData.state 
+    ? City.getCitiesOfState(countryCode, formData.state) 
+    : [];
+
 
   // Handle Input Changes
   const handleChange = (e) => {
@@ -75,12 +76,21 @@ const AdmissionEnquiry = () => {
     setLoading(true);
 
     try {
-      // 1. Send to Firebase Firestore
-      await addDoc(collection(db, "enquiries"), {
+      // --- DATA CLEANING BEFORE SAVE ---
+      // Convert state code (e.g. "RJ") back to Name ("Rajasthan") 
+      const stateObj = State.getStateByCodeAndCountry(formData.state, countryCode);
+      
+      const finalData = {
         ...formData,
-        timestamp: serverTimestamp(), // detailed time of submission
-        status: 'new' // To track follow-ups
-      });
+        country: 'India', 
+        phoneCode: '+91', // Ensure this is always sent
+        state: stateObj ? stateObj.name : formData.state,
+        timestamp: serverTimestamp(),
+        status: 'new'
+      };
+
+      // 1. Send to Firebase Firestore
+      await addDoc(collection(db, "enquiries"), finalData);
 
       alert("Thank you! Your enquiry has been submitted successfully. Our admission cell will contact you shortly.");
       
@@ -88,7 +98,7 @@ const AdmissionEnquiry = () => {
       setFormData({
         fullName: '',
         email: '',
-        countryCode: '+91',
+        phoneCode: '+91',
         mobile: '',
         state: '',
         city: '',
@@ -107,7 +117,7 @@ const AdmissionEnquiry = () => {
   return (
     <div className="enquiry-page-wrapper">
       
-      {/* Header Section (Matching Theme) */}
+      {/* Header Section */}
       <section className="enquiry-header-section">
         <div className="max-width-container">
           <h1>Admission Enquiry 2025</h1>
@@ -148,24 +158,9 @@ const AdmissionEnquiry = () => {
               />
             </div>
 
-            {/* 3. Mobile Number with Country Code */}
-            <div className="form-group">
-              <label>Country Code</label>
-              <select 
-                name="countryCode" 
-                value={formData.countryCode} 
-                onChange={handleChange}
-              >
-                <option value="+91">+91 (India)</option>
-                <option value="+1">+1 (USA/Canada)</option>
-                <option value="+44">+44 (UK)</option>
-                <option value="+971">+971 (UAE)</option>
-                {/* Add more if needed */}
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label>Mobile Number <span style={{color:'red'}}>*</span></label>
+            {/* 3. Mobile Number (Code removed from UI, hardcoded to +91) */}
+            <div className="form-group full-width">
+              <label>Mobile Number (+91) <span style={{color:'red'}}>*</span></label>
               <input 
                 type="tel" 
                 name="mobile" 
@@ -178,7 +173,7 @@ const AdmissionEnquiry = () => {
               />
             </div>
 
-            {/* 4. State Dropdown */}
+            {/* 4. State Dropdown (India Only) */}
             <div className="form-group">
               <label>State <span style={{color:'red'}}>*</span></label>
               <select 
@@ -188,13 +183,15 @@ const AdmissionEnquiry = () => {
                 required
               >
                 <option value="">-- Select State --</option>
-                {Object.keys(statesAndCities).map((state) => (
-                  <option key={state} value={state}>{state}</option>
+                {states.map((state) => (
+                  <option key={state.isoCode} value={state.isoCode}>
+                    {state.name}
+                  </option>
                 ))}
               </select>
             </div>
 
-            {/* 5. City Dropdown (Dependent) */}
+            {/* 5. City Dropdown */}
             <div className="form-group">
               <label>City <span style={{color:'red'}}>*</span></label>
               <select 
@@ -205,8 +202,10 @@ const AdmissionEnquiry = () => {
                 disabled={!formData.state} // Disable if no state selected
               >
                 <option value="">-- Select City --</option>
-                {formData.state && statesAndCities[formData.state]?.map((city) => (
-                  <option key={city} value={city}>{city}</option>
+                {cities.map((city) => (
+                  <option key={city.name} value={city.name}>
+                    {city.name}
+                  </option>
                 ))}
               </select>
             </div>
@@ -226,7 +225,7 @@ const AdmissionEnquiry = () => {
               </select>
             </div>
 
-            {/* 7. Program Name Dropdown (Dependent) */}
+            {/* 7. Program Name Dropdown */}
             <div className="form-group full-width">
               <label>Program / Branch Interest <span style={{color:'red'}}>*</span></label>
               <select 

@@ -42,6 +42,9 @@
     border-radius: 20px; /* Matching --radius-lg */
     box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1); /* Matching --shadow-card */
     border: 1px solid #E2E8F0; /* Matching --border */
+    /* FIX: Added position: relative and a high z-index to ensure dropdowns stack above any sticky/fixed subheader. */
+    position: relative;
+    z-index: 10;
 }
 
 .enquiry-card h3 {
@@ -145,6 +148,14 @@
 }
 
 /* Responsive */
+
+/* Tablet/Medium Screen adjustments for header */
+@media (max-width: 992px) {
+    .enquiry-header-section {
+        padding: 3rem 1.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .form-grid {
         grid-template-columns: 1fr;
@@ -152,5 +163,18 @@
     
     .enquiry-card {
         padding: 2rem 1.5rem;
+    }
+
+    .enquiry-header-section {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .enquiry-header-section h1 {
+        font-size: 2rem;
+    }
+
+    .enquiry-header-section p {
+        font-size: 1rem;
     }
 }

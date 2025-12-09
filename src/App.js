@@ -67,6 +67,7 @@ import VideoGallery from './pages/VideoGallery'; // ✅ ADD THIS IMPORT
 import Overview from './admin/pages/Overview';
 import EditTestimonials from './admin/pages/EditTestimonials';
 import EditDepartment from './admin/pages/EditDepartment';
+import EditVideoGallery from './admin/pages/EditVideoGallery';
 
 function App() {
   return (
@@ -156,6 +157,7 @@ function App() {
            <Route index element={<Overview />} />
            <Route path="manage-testimonials" element={<EditTestimonials />} />
            <Route path="manage-departments" element={<EditDepartment />} />
+           <Route path="manage-videos" element={<EditVideoGallery />} />
         </Route>
 
       </Routes>
