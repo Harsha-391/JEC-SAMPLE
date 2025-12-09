@@ -1,46 +1,50 @@
 // src/pages/VideoGallery.js
 import React, { useState, useEffect, useMemo } from 'react';
-import './VideoGallery.css'; // Import the maintained CSS
-
-// --- 1. DATA CONFIGURATION (Strictly from Videos.html) ---
-const rawVideos = [
-  { title: "About JEC : Jaipur Engineering College", id: "dQw4w9WgXcQ", category: "Campus Life" },
-  { title: "Jaipur Engineering College Overview", id: "dQw4w9WgXcQ", category: "Campus Life" },
-  { title: "JEC Group of Colleges Official", id: "dQw4w9WgXcQ", category: "Campus Life" },
-  { title: "Hostel & Canteen Tour", id: "dQw4w9WgXcQ", category: "Campus Life" },
-  
-  { title: "JEC Fungama 2016 Father Daughter relationship", id: "dQw4w9WgXcQ", category: "Fungama" },
-  { title: "JEC Fungama 2016 Faculty Ramp Walk", id: "dQw4w9WgXcQ", category: "Fungama" },
-  { title: "JEC Fungama 2015 Rini Chandra performance", id: "dQw4w9WgXcQ", category: "Fungama" },
-  { title: "Fungama 2019 Highlights", id: "dQw4w9WgXcQ", category: "Fungama" },
-  { title: "FUNGAMA 2018", id: "dQw4w9WgXcQ", category: "Fungama" },
-  
-  { title: "FUNGAMA-2015 Fashion Show", id: "dQw4w9WgXcQ", category: "Fashion Show" },
-  { title: "JEC Faculty Fashion @ Fungama 2017", id: "dQw4w9WgXcQ", category: "Fashion Show" },
-  { title: "JEC Fungama 2016 Dhriti Saharan", id: "dQw4w9WgXcQ", category: "Fashion Show" },
-  
-  { title: "AAGMAN 2013", id: "dQw4w9WgXcQ", category: "Freshers Party" },
-  { title: "JEC Aagaman 2016", id: "dQw4w9WgXcQ", category: "Freshers Party" },
-  { title: "AAGMAN 2014", id: "dQw4w9WgXcQ", category: "Freshers Party" },
-  
-  { title: "ROSTRUM 2014 JEC & JIET KUKAS", id: "dQw4w9WgXcQ", category: "Events" },
-  { title: "FUNGAMA 2014 JEC & JIET", id: "dQw4w9WgXcQ", category: "Events" }
-];
+import { db } from '../firebase'; // Ensure this path is correct
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import './VideoGallery.css';
 
 const VideoGallery = () => {
-  // State for Modals
+  // --- State ---
+  const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [playingVideoId, setPlayingVideoId] = useState(null);
 
-  // --- 2. GROUPING LOGIC (Converted to useMemo) ---
+  // --- 1. FETCH DATA FROM FIREBASE ---
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        // Fetch videos ordered by newest first (assuming you saved 'createdAt')
+        const q = query(collection(db, "video_gallery"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        
+        const videoList = querySnapshot.docs.map(doc => ({
+          id: doc.id,       // Firebase Document ID
+          ...doc.data()     // Contains: title, videoId, category, url
+        }));
+
+        setVideos(videoList);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching video gallery:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchVideos();
+  }, []);
+
+  // --- 2. GROUPING LOGIC ---
   const albums = useMemo(() => {
     const grouped = {};
-    rawVideos.forEach(vid => {
+    videos.forEach(vid => {
+      // Create category array if it doesn't exist
       if (!grouped[vid.category]) grouped[vid.category] = [];
       grouped[vid.category].push(vid);
     });
     return grouped;
-  }, []);
+  }, [videos]);
 
   // --- Handlers ---
   
@@ -56,15 +60,15 @@ const VideoGallery = () => {
   };
 
   // Level 2: Play Video
-  const playVideo = (id) => {
-    setPlayingVideoId(id);
+  const playVideo = (videoId) => {
+    setPlayingVideoId(videoId); // Ensure we pass the YouTube ID, not Doc ID
   };
 
   const closePlayer = () => {
     setPlayingVideoId(null);
   };
 
-  // Escape Key Support (Converted to useEffect)
+  // Escape Key Support
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
@@ -79,6 +83,17 @@ const VideoGallery = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [playingVideoId, selectedCategory]);
+
+  if (loading) {
+    return <div className="video-gallery-wrapper" style={{display:'flex', justifyContent:'center', alignItems:'center', height:'100vh', color:'#fff', background:'#0F172A'}}>
+        <h2>Loading Gallery...</h2>
+    </div>;
+  }
+
+  // Helper to get a cover image for the collage (First 3 videos or placeholders)
+  const cover1 = videos[0]?.videoId || 'dQw4w9WgXcQ';
+  const cover2 = videos[1]?.videoId || 'dQw4w9WgXcQ';
+  const cover3 = videos[2]?.videoId || 'dQw4w9WgXcQ';
 
   return (
     <div className="video-gallery-wrapper">
@@ -97,9 +112,9 @@ const VideoGallery = () => {
         <div className="hero-collage">
           <div className="blob blob-1"></div>
           <div className="blob blob-2"></div>
-          <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" className="collage-img img-main" alt="Main Video" />
-          <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" className="collage-img img-sub-1" alt="Event Video" />
-          <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" className="collage-img img-sub-2" alt="Campus Video" />
+          <img src={`https://img.youtube.com/vi/${cover1}/hqdefault.jpg`} className="collage-img img-main" alt="Main Video" />
+          <img src={`https://img.youtube.com/vi/${cover2}/hqdefault.jpg`} className="collage-img img-sub-1" alt="Event Video" />
+          <img src={`https://img.youtube.com/vi/${cover3}/hqdefault.jpg`} className="collage-img img-sub-2" alt="Campus Video" />
         </div>
       </header>
 
@@ -112,27 +127,32 @@ const VideoGallery = () => {
           </div>
         </div>
         
-        <div id="album-root" className="album-grid">
-          {Object.entries(albums).map(([category, videos]) => {
-            const coverImg = `https://img.youtube.com/vi/${videos[0].id}/hqdefault.jpg`;
-            const count = videos.length;
-            
-            return (
-              <div key={category} className="album-card" onClick={() => openCategory(category)}>
-                <div className="album-cover">
-                  <img src={coverImg} alt={category} />
-                  <div className="folder-overlay">
-                    <div className="view-btn">View Playlist</div>
-                  </div>
+        {Object.keys(albums).length === 0 ? (
+            <div style={{textAlign:'center', color:'#666', padding:'40px'}}>No video albums found.</div>
+        ) : (
+            <div id="album-root" className="album-grid">
+            {Object.entries(albums).map(([category, catVideos]) => {
+                // Use the first video in the category as the cover
+                const coverImg = `https://img.youtube.com/vi/${catVideos[0].videoId}/hqdefault.jpg`;
+                const count = catVideos.length;
+                
+                return (
+                <div key={category} className="album-card" onClick={() => openCategory(category)}>
+                    <div className="album-cover">
+                    <img src={coverImg} alt={category} />
+                    <div className="folder-overlay">
+                        <div className="view-btn">View Playlist</div>
+                    </div>
+                    </div>
+                    <div className="album-info">
+                    <span className="album-count">{count} Videos</span>
+                    <div className="album-title">{category}</div>
+                    </div>
                 </div>
-                <div className="album-info">
-                  <span className="album-count">{count} Videos</span>
-                  <div className="album-title">{category}</div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                );
+            })}
+            </div>
+        )}
       </div>
 
       {/* --- CATEGORY MODAL (THE LIST) --- */}
@@ -145,10 +165,10 @@ const VideoGallery = () => {
             </button>
           </div>
           <div id="videoListRoot" className="cat-grid">
-            {albums[selectedCategory]?.map((vid, index) => {
-              const thumb = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
+            {albums[selectedCategory]?.map((vid) => {
+              const thumb = `https://img.youtube.com/vi/${vid.videoId}/hqdefault.jpg`;
               return (
-                <div key={index} className="video-item" onClick={() => playVideo(vid.id)}>
+                <div key={vid.id} className="video-item" onClick={() => playVideo(vid.videoId)}>
                   <div className="vid-thumb">
                     <img src={thumb} loading="lazy" alt={vid.title} />
                     <div className="play-icon"><i className="fas fa-play-circle"></i></div>

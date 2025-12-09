@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+// src/pages/SinglePost.js
+import React, { useState, useEffect, useRef } from 'react'; // 1. Import useRef
 import { Link, useParams } from 'react-router-dom';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
@@ -8,6 +9,9 @@ const SinglePost = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
+  
+  // 2. Create a reference for the content container
+  const contentRef = useRef(null);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -30,6 +34,31 @@ const SinglePost = () => {
 
     fetchPost();
   }, [id]);
+
+  // 3. Add this NEW useEffect to fix the links automatically
+  useEffect(() => {
+    if (post && contentRef.current) {
+      // Find all links inside the blog content
+      const links = contentRef.current.querySelectorAll('a');
+      
+      links.forEach(link => {
+        const href = link.getAttribute('href');
+        
+        if (href) {
+          // If link starts with "www." or doesn't have "http", fix it
+          if (!href.startsWith('http') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('mailto:')) {
+            link.setAttribute('href', `https://${href}`);
+          }
+          
+          // Optional: Force external links to open in a new tab
+          if (!href.startsWith('/')) {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+          }
+        }
+      });
+    }
+  }, [post]); // Runs whenever the post data loads
 
   if (loading) return <div style={{padding:'100px', textAlign:'center'}}>Loading Article...</div>;
   if (!post) return <div style={{padding:'100px', textAlign:'center'}}>Article not found.</div>;
@@ -56,8 +85,9 @@ const SinglePost = () => {
       <div className="single-post-container">
         <article className="article-body">
           
-          {/* ✅ FIXED: This renders the HTML from React Quill correctly */}
+          {/* 4. Attach the ref to this div so we can find the links inside */}
           <div 
+            ref={contentRef}
             className="dynamic-content"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
@@ -65,7 +95,6 @@ const SinglePost = () => {
           <div className="post-tags">
             <strong>Tags:</strong>
             <div className="tag-cloud">
-               {/* Fallback in case tags don't exist yet */}
                <span className="tag">{post.category}</span>
                <span className="tag">JEC Blog</span>
             </div>
@@ -90,7 +119,7 @@ const SinglePost = () => {
           <div className="cta-box">
             <h3>Admission Open 2025</h3>
             <p>Join the league of successful engineers.</p>
-            <Link to="/admissions" className="btn-apply">Apply Now</Link>
+            <Link to="/admission-enquiry" className="btn-apply">Apply Now</Link>
           </div>
         </aside>
 

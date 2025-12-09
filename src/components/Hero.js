@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from '../firebase';
+import { Link } from 'react-router-dom'; // 1. Import Link
 
 function Hero() {
   const [banners, setBanners] = useState([]);
@@ -87,7 +88,9 @@ function Hero() {
             <h1>{banner.heading}</h1>
             <div className="hero-underline"></div>
             {banner.subheading && <p>{banner.subheading}</p>}
-            <button className="apply-btn">Apply for Admission</button>
+            <Link to="/admission-enquiry" className="apply-btn">
+      Apply for Admission
+    </Link>
           </div>
         </div>
       ))}

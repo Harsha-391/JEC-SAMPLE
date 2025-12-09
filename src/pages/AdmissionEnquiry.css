@@ -42,7 +42,7 @@
     border-radius: 20px; /* Matching --radius-lg */
     box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1); /* Matching --shadow-card */
     border: 1px solid #E2E8F0; /* Matching --border */
-    /* FIX: Added position: relative and a high z-index to ensure dropdowns stack above any sticky/fixed subheader. */
+    /* Fix for dropdown going above subheader: Establishes a correct stacking context */
     position: relative;
     z-index: 10;
 }
@@ -96,7 +96,7 @@
 /* Input & Select Styling - Matches Contact.js inputs */
 .form-group input,
 .form-group select {
-    width: 100%;
+    width: 100%; 
     padding: 12px 15px;
     border: 2px solid #E2E8F0;
     border-radius: 8px;
@@ -105,6 +105,8 @@
     transition: all 0.3s ease;
     background-color: #F8FAFC;
     color: #334155;
+    /* FIX: Ensures padding/border is included in the 100% width, fixing overflow on mobile. */
+    box-sizing: border-box; 
 }
 
 .form-group input:focus,
@@ -157,6 +159,7 @@
 }
 
 @media (max-width: 768px) {
+    /* Changes 2-column grid to a single column for mobile */
     .form-grid {
         grid-template-columns: 1fr;
     }
@@ -165,6 +168,7 @@
         padding: 2rem 1.5rem;
     }
 
+    /* Smaller header padding for mobile view */
     .enquiry-header-section {
         padding: 2rem 1rem;
         margin-bottom: 2rem;
