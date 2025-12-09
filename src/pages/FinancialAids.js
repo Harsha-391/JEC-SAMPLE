@@ -77,12 +77,12 @@ function FinancialAids() {
                         <tr>
                             <td>Chief Minister Scholarship Scheme (Samajik Nyay Vibhag)</td>
                             <td>Jaipur (Rajasthan)</td>
-                            <td>Advertisement in leading dailies at academic year start. Visit <a href="#!">Dept Website</a></td>
+                            <td>Advertisement in leading dailies at academic year start. Visit <a href="www.collegeeducation.rajasthan.gov.in/">Dept Website</a></td>
                         </tr>
                         <tr>
                             <td>District Minority Welfare Officer</td>
                             <td>All Districts, Rajasthan</td>
-                            <td>Contact relevant office. Visit <a href="#!">SJE Website</a></td>
+                            <td>Contact relevant office. Visit <a href="www.sje.rajasthan.gov.in/About%20Deptt/Phone.htm">SJE Website</a></td>
                         </tr>
                         <tr>
                             <td>Jharkhand State Tribal Coop. Dev. Corp.</td>
@@ -92,22 +92,23 @@ function FinancialAids() {
                         <tr>
                             <td>District Welfare Officers (Zila Kalyan)</td>
                             <td>All Bihar Districts</td>
-                            <td>Contact relevant office. Visit <a href="#!">Education Bihar</a></td>
+                            <td>Contact relevant office. Visit <a href="http://www.educationbihar.gov.in/">Education Bihar</a></td>
                         </tr>
                         <tr>
                             <td>District Backward Class Welfare Officer</td>
                             <td>Rajkot (Gujarat)</td>
-                            <td>Contact relevant office. Visit <a href="#!">SJE Gujarat</a></td>
+                            <td>Contact relevant office. Visit <a href="http://www.sje.gujarat.gov.in/">SJE Gujarat</a></td>
                         </tr>
                         <tr>
                             <td>Teachers Welfare Fund Trust (Board of Secondary Ed.)</td>
                             <td>Ajmer (Rajasthan)</td>
-                            <td>Contact relevant office. Visit <a href="#!">Raj Edu Board</a></td>
+                            <td>Contact relevant office. Visit <a href="http://rajeduboard.rajasthan.gov.in/">Raj Edu Board</a></td>
                         </tr>
                         <tr>
                             <td>Minority Welfare Scholarship System</td>
                             <td>All Over India</td>
-                            <td>National Portal. Visit <a href="#!">MOMA Scholarship</a></td>
+                            <td>National Portal. Visit <a href="	
+http://minoritywelfare.bih.nic.in/">MOMA Scholarship</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -207,7 +208,7 @@ function FinancialAids() {
       <section className="finaid-external-links">
         <div className="max-width-container">
             <p>Students are advised to regularly visit the National Scholarship Portal: <a href="https://www.scholarships.gov.in" target="_blank" rel="noreferrer">www.scholarships.gov.in</a></p>
-            <p style={{ marginTop: '10px', fontSize: '14px', opacity: 0.8 }}>For college-specific scholarships, visit <a href="http://www.asetmax.com" target="_blank" rel="noreferrer">www.asetmax.com</a></p>
+           
         </div>
       </section>
 

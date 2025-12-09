@@ -63,13 +63,16 @@ import CommitteesZone from './pages/CommitteesZone';
 import MentalHealth from './pages/MentalHealth';
 import AcademicAchievers from './pages/AcademicAchievers';
 import EngineeringProjects from './pages/EngineeringProjects';
-import VideoGallery from './pages/VideoGallery'; // ✅ ADD THIS IMPORT
+import VideoGallery from './pages/VideoGallery';
 import Overview from './admin/pages/Overview';
 import EditTestimonials from './admin/pages/EditTestimonials';
 import EditDepartment from './admin/pages/EditDepartment';
 import EditVideoGallery from './admin/pages/EditVideoGallery';
+
+// ✅ AUTH & USER MANAGEMENT IMPORTS
 import Login from './admin/pages/Login';
 import ProtectedRoute from './admin/components/ProtectedRoute';
+import UserManagement from './admin/pages/UserManagement'; 
 
 function App() {
   return (
@@ -99,8 +102,8 @@ function App() {
           <Route path="/campus-life/committees-zone" element={<CommitteesZone />} />
           <Route path="/campus-life/mental-health" element={<MentalHealth />} />
           <Route path="/campus-life/academic-achievers" element={<AcademicAchievers />} />
-          <Route path="/campus-life/engineering-projects" element={<EngineeringProjects />} /> {/* ✅ ADD THIS ROUTE */}
-                    <Route path="/campus-life/video-gallery" element={<VideoGallery />} /> {/* ✅ ADD THIS ROUTE */}
+          <Route path="/campus-life/engineering-projects" element={<EngineeringProjects />} />
+          <Route path="/campus-life/video-gallery" element={<VideoGallery />} />
 
           {/* Admission Routes */}
           <Route path="admissions" element={<Admissions />} /> 
@@ -150,16 +153,21 @@ function App() {
           <Route path="JEC-engineering/Engineering-JEC" element={<Department />} />
           <Route path="JEC-engineering/MOOCS-NPTEL-SWAYAM" element={<Department />} />
         </Route>
-<Route path="/admin/login" element={<Login />} />
-        {/* --- ADMIN ROUTES (Separate Layout) --- */}
-       <Route 
+
+        {/* ✅ LOGIN ROUTE (Must be separate & outside ProtectedRoute) */}
+        <Route path="/admin/login" element={<Login />} />
+
+        {/* --- ADMIN ROUTES (Protected by RBAC) --- */}
+        <Route 
           path="/admin" 
           element={
-            <ProtectedRoute>
+            // 1. Both Admins and Editors can enter the main Admin Layout
+            <ProtectedRoute allowedRoles={['admin', 'editor']}>
               <AdminLayout />
             </ProtectedRoute>
           }
         >
+           {/* Common Routes (Both roles can access these) */}
            <Route index element={<Overview />} />
            <Route path="edit-home" element={<EditHero />} />
            <Route path="manage-blogs" element={<EditBlog />} />
@@ -167,7 +175,18 @@ function App() {
            <Route path="manage-testimonials" element={<EditTestimonials />} />
            <Route path="manage-departments" element={<EditDepartment />} />
            <Route path="manage-videos" element={<EditVideoGallery />} />
+
+           {/* 2. STRICTLY ADMIN ONLY: User Management */}
+           <Route 
+             path="users" 
+             element={
+               <ProtectedRoute allowedRoles={['admin']}>
+                 <UserManagement />
+               </ProtectedRoute>
+             } 
+           />
         </Route>
+
       </Routes>
     </BrowserRouter>
   );

@@ -11,7 +11,7 @@ function Alumni() {
           <h1>JEC Alumni Network</h1>
           <p>Our heritage spans over 21 years of excellence. Join a community of over 7300+ successful professionals shaping the future worldwide.</p>
           {/* Use React Router's <Link> tag for internal links */}
-          <Link to="/admissions" className="alumni-hero-btn">Join Alumni Network</Link>
+          <div className="alumni-hero-btn">Join Alumni Network</div>
         </div>
       </section>
 

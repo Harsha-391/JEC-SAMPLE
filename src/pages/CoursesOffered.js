@@ -136,7 +136,7 @@ function CoursesOffered() {
                 <li>5% seats offered to PwD students under fee waiver.</li>
                 <li>Round-the-year admission based on course duration.</li>
             </ul>
-            <a href="/admissions/karma" style={{ color: 'var(--courses-logo-blue)', fontWeight: 'bold', marginTop: '15px', display: 'inline-block' }}>View 24 KARMA Courses &rarr;</a>
+            <a  style={{ color: 'var(--courses-logo-blue)', fontWeight: 'bold', marginTop: '15px', display: 'inline-block' }}>View 24 KARMA Courses &rarr;</a>
         </div>
 
         <h2 className="courses-section-title" style={{ marginTop: '60px' }}>Career Opportunities</h2>
