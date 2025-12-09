@@ -68,6 +68,8 @@ import Overview from './admin/pages/Overview';
 import EditTestimonials from './admin/pages/EditTestimonials';
 import EditDepartment from './admin/pages/EditDepartment';
 import EditVideoGallery from './admin/pages/EditVideoGallery';
+import Login from './admin/pages/Login'; // ✅ Import Login
+import ProtectedRoute from './admin/components/ProtectedRoute';
 
 function App() {
   return (
@@ -150,16 +152,22 @@ function App() {
         </Route>
 
         {/* --- ADMIN ROUTES (Separate Layout) --- */}
-        <Route path="/admin" element={<AdminLayout />}>
+       <Route 
+          path="/admin" 
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+           <Route index element={<Overview />} />
            <Route path="edit-home" element={<EditHero />} />
            <Route path="manage-blogs" element={<EditBlog />} />
            <Route path="manage-faculty" element={<EditFaculty />} />
-           <Route index element={<Overview />} />
            <Route path="manage-testimonials" element={<EditTestimonials />} />
            <Route path="manage-departments" element={<EditDepartment />} />
            <Route path="manage-videos" element={<EditVideoGallery />} />
         </Route>
-
       </Routes>
     </BrowserRouter>
   );
