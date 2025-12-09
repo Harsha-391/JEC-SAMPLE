@@ -68,7 +68,7 @@ import Overview from './admin/pages/Overview';
 import EditTestimonials from './admin/pages/EditTestimonials';
 import EditDepartment from './admin/pages/EditDepartment';
 import EditVideoGallery from './admin/pages/EditVideoGallery';
-import Login from './admin/pages/Login'; // ✅ Import Login
+import Login from './admin/pages/Login';
 import ProtectedRoute from './admin/components/ProtectedRoute';
 
 function App() {
@@ -150,7 +150,7 @@ function App() {
           <Route path="JEC-engineering/Engineering-JEC" element={<Department />} />
           <Route path="JEC-engineering/MOOCS-NPTEL-SWAYAM" element={<Department />} />
         </Route>
-
+<Route path="/admin/login" element={<Login />} />
         {/* --- ADMIN ROUTES (Separate Layout) --- */}
        <Route 
           path="/admin" 
