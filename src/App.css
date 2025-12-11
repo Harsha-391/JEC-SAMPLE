@@ -243,6 +243,8 @@ body {
 
 /* ==========================================================================
    5. RESPONSIVE / MOBILE STYLES (Max-Width: 992px)
+   ========================================================================== *//* ==========================================================================
+   5. RESPONSIVE / MOBILE STYLES (Max-Width: 992px)
    ========================================================================== */
 @media (max-width: 992px) {
   
@@ -253,7 +255,7 @@ body {
   
   /* 2. Show the Toggle Button */
   .mobile-menu-toggle {
-    display: block !important; /* Force visible */
+    display: block !important;
     z-index: 1102;
   }
 
@@ -268,15 +270,14 @@ body {
     flex-direction: column;
     box-shadow: 0 10px 15px rgba(0,0,0,0.1);
     border-top: 1px solid var(--color-border);
-    max-height: 80vh; /* Scrollable if long */
+    max-height: 80vh; 
     overflow-y: auto;
     z-index: 1101;
     padding: 0;
     margin: 0;
-    align-items: stretch; /* Full width items */
+    align-items: stretch; 
   }
 
-  /* Open State */
   .main-nav-menu.active {
     display: flex;
   }
@@ -285,6 +286,8 @@ body {
   .menu-item {
     width: 100%;
     border-bottom: 1px solid #f0f0f0;
+    position: relative;
+    display: block; /* Ensure it takes full width */
   }
 
   .menu-link {
@@ -293,53 +296,73 @@ body {
     padding: 15px 20px;
     font-size: 16px;
     background: transparent;
+    display: flex;
+    box-sizing: border-box;
   }
 
-  /* 4. Mobile Dropdowns (Accordion Style) */
+  /* --- 4. CRITICAL FIX: Dropdowns Expand "In-Place" (Accordion) --- */
+  
+  /* We target ALL variations of submenu containers to override desktop alignment */
   .submenu-container,
   .submenu-container.align-right,
   .submenu-container.align-center {
-    position: static; /* Stack vertically */
-    width: 100%;
-    min-width: unset;
-    box-shadow: none;
-    border: none;
-    border-top: 1px solid #eee;
-    padding: 0;
     
-    /* Logic: Hidden unless .show class added by JS */
-    display: none; 
-    
-    background-color: #f9f9f9;
+    /* 1. Reset Positioning */
+    position: static !important; 
     transform: none !important;
-    opacity: 1;
-    visibility: visible;
+    left: auto !important;
+    right: auto !important;
+    margin: 0 !important;
+    
+    /* 2. Reset Visuals */
+    width: 100% !important;
+    min-width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-top: 1px solid #eee !important;
+    border-radius: 0 !important;
+    
+    /* 3. Layout */
+    background-color: #f9f9f9 !important;
+    padding: 0 !important;
+    
+    /* 4. Display Logic */
+    display: none; /* Hidden until .show class is added */
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
-  /* When JS adds 'show', display it */
+  /* Only show when the JS adds the 'show' class */
   .submenu-container.show {
     display: block !important;
   }
 
-  /* Disable hover effects on mobile */
+  /* Disable hover effects completely on mobile */
   .menu-item:hover .submenu-container {
-    display: none; /* Rely strictly on click */
+    display: none; 
   }
+  /* But ensure if JS set .show, it overrides the hover rule */
   .menu-item .submenu-container.show {
-    display: block;
+    display: block !important;
   }
 
+  /* Grid Reset */
   .submenu-grid {
     display: flex;
     flex-direction: column;
     gap: 0;
+    width: 100%;
   }
 
+  /* Links indent slightly to show hierarchy */
   .submenu-link {
-    padding: 12px 40px; /* Indent sub-items */
+    padding: 12px 20px 12px 40px; /* Indent left by 40px */
     border-bottom: 1px solid #e6e6e6;
     font-size: 15px;
     color: #555;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 @media (max-width: 600px) {
