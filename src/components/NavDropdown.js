@@ -1,26 +1,52 @@
 // src/components/NavDropdown.js
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function NavDropdown({ title, items, baseLink = "#", align = "left" }) {
-  
-  const handleClick = (e) => {
-    if (baseLink === "#") {
-      e.preventDefault();
-    }
+function NavDropdown({ title, items, baseLink = "#", align = "left", closeMenu }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Toggle dropdown visibility
+  const toggleDropdown = (e) => {
+    e.preventDefault();
+    e.stopPropagation(); // Prevent bubbling issues
+    setIsOpen(!isOpen);
+  };
+
+  // Close both this dropdown and the main menu
+  const handleItemClick = () => {
+    setIsOpen(false);
+    if (closeMenu) closeMenu();
   };
 
   return (
-    <div className="menu-item has-dropdown">
-      <Link to={baseLink} className="menu-link" onClick={handleClick}>
+    <div 
+      className={`menu-item has-dropdown ${isOpen ? 'dropdown-active' : ''}`}
+      // On desktop, we still want hover, but on mobile we rely on click.
+      // We can keep onMouseEnter/Leave for desktop feel if needed, 
+      // but usually CSS :hover handles desktop.
+    >
+      <Link 
+        to={baseLink} 
+        className="menu-link" 
+        onClick={toggleDropdown}
+      >
         {title}
-        <i className="fas fa-chevron-down menu-arrow-icon"></i>
+        {/* Rotate icon based on state */}
+        <i className={`fas fa-chevron-down menu-arrow-icon ${isOpen ? 'rotate' : ''}`}></i>
       </Link>
       
-      <div className={`submenu-container ${align === 'right' ? 'align-right' : align === 'center' ? 'align-center' : ''}`}>
+      {/* On Mobile: visible only if isOpen is true. 
+         On Desktop: visible on hover (handled via CSS usually, but we can add a helper class).
+      */}
+      <div className={`submenu-container ${align === 'right' ? 'align-right' : align === 'center' ? 'align-center' : ''} ${isOpen ? 'show' : ''}`}>
         <div className="submenu-grid">
           {items.map((item, index) => (
-            <Link key={index} to={item.path} className="submenu-link">
+            <Link 
+              key={index} 
+              to={item.path} 
+              className="submenu-link"
+              onClick={handleItemClick}
+            >
               {item.title}
             </Link>
           ))}

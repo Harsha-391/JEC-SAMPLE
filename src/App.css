@@ -77,298 +77,187 @@ body {
 /* Shared Flex Layout *//* ==========================================================================
    1. STICKY HEADER WRAPPER
    ========================================================================== */
-/* This wraps both the Top Bar and Main Nav to make them stick together */
+/* This wraps both the Top Bar and Main Nav to make them stick together *//* ==========================================================================
+   2. HEADER & SUBHEADER (CONSOLIDATED & FIXED)
+   ========================================================================== */
+
+/* --- 1. Sticky Wrapper --- */
 .sticky-header {
   position: sticky;
   top: 0;
-  z-index: 1100; /* High z-index to sit above page content */
+  z-index: 1100;
   width: 100%;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
-/* ==========================================================================
-   2. HEADER & SUBHEADER SHARED LAYOUT
-   ========================================================================== */
+/* --- 2. Shared Container Layout --- */
 .top-bar-container,
 .main-header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
-  /* PADDING UPDATE: 40px for better visuals on desktop */
   padding: 0 40px !important;
   max-width: 1300px;
   margin: 0 auto;
   box-sizing: border-box;
 }
 
-/* Shared Link Transitions */
-.top-bar-container a,
-.menu-link {
-  position: relative;
-  text-decoration: none;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-/* Shared Underline Animation */
-.top-bar-container a::after,
-.menu-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--logo-gold);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.3s ease;
-}
-
-/* Specific positioning for Main Menu underline */
-.menu-link::after {
-  bottom: 0;
-  left: 15px;
-  right: 15px;
-  width: auto;
-}
-
-/* Hover Effects */
-.top-bar-container a:hover::after,
-.menu-item:hover > .menu-link::after,
-.menu-link:hover::after {
-  transform: scaleX(1);
-}
-
-.top-bar-container a:hover,
-.menu-item:hover > .menu-link,
-.menu-link:hover {
-  transform: translateY(-1px);
-  color: var(--logo-gold);
-}
-
-/* ==========================================================================
-   3. TOP BAR SECTION (Black Background)
-   ========================================================================== */
+/* --- 3. Top Bar (Black) --- */
 .top-bar-section {
-  background: var(--logo-black); /* Black Background */
+  background: var(--logo-black);
   padding: 10px 0;
-  color: var(--logo-white); /* White Text */
+  color: var(--logo-white);
   font-size: 12px;
   font-weight: 500;
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-.top-bar-contact,
-.top-bar-links {
+.top-bar-contact, .top-bar-links {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 15px;
 }
 
 .top-bar-container a {
-  color: var(--logo-white); /* Links are White */
+  color: var(--logo-white);
+  text-decoration: none;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding-bottom: 4px;
+  transition: color 0.3s;
 }
+.top-bar-container a:hover { color: var(--logo-gold); }
 
-.top-bar-container a i {
-  font-size: 16px;
-  width: 20px;
-  text-align: center;
-}
-
-/* ==========================================================================
-   4. MAIN NAVIGATION SECTION (White Background)
-   ========================================================================== */
+/* --- 4. Main Navigation (White) --- */
 .main-header-section {
-  background: var(--logo-white); /* White Background */
+  background: var(--logo-white);
   padding: 15px 0;
   border-bottom: 1px solid var(--color-border);
   position: relative;
   z-index: 1000;
 }
 
-.main-header-container {
-  flex-wrap: nowrap;
-}
+.brand-logo-link img { height: 60px; width: auto; }
 
-/* --- Logo Styles --- */
-.brand-logo-link {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  text-decoration: none;
-  flex-shrink: 0;
-}
-
-.brand-logo-link img {
-  height: 60px;
-  width: auto;
-}
-
-.brand-logo-link .brand-text {
-  display: flex;
-  flex-direction: column;
-  color: var(--logo-red) !important; /* Force Red Text */
-  font-weight: 800;
-  font-size: 20px;
-  line-height: 1.1;
-}
-
-/* --- Desktop Menu Styles --- */
+/* Desktop Menu (Hidden on Mobile) */
 .main-nav-menu {
   display: flex;
   gap: 5px;
   align-items: center;
-  flex-wrap: wrap;
   margin-left: auto;
 }
 
-.menu-item {
-  position: relative;
-}
+.menu-item { position: relative; }
 
 .menu-link {
-  color: var(--logo-black); /* Links are Black */
+  color: var(--logo-black);
   font-weight: 600;
   font-size: 14px;
+  text-decoration: none;
+  padding: 10px 15px;
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 10px 8px;
-  padding-bottom: 4px;
-  white-space: nowrap;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.menu-arrow-icon {
-  font-size: 10px;
-  transition: transform 0.3s ease;
-}
-
-/* Hover State for Menu Items */
-.menu-item:hover,
 .menu-link:hover {
-  background-color: var(--color-background-medium); /* Light Grey Hover */
+  background-color: var(--color-background-medium);
+  color: var(--logo-blue);
 }
 
-.menu-item:hover .menu-arrow-icon {
-  transform: rotate(180deg);
-}
+/* Arrow Rotation Class */
+.menu-arrow-icon { transition: transform 0.3s ease; font-size: 10px; }
+.menu-arrow-icon.rotate { transform: rotate(180deg); }
 
-/* --- Dropdown Menu --- */
+/* --- Desktop Dropdowns --- */
 .submenu-container {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 600px;
+  min-width: 260px;
   background: var(--logo-white);
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  padding: 15px;
   border-top: 3px solid var(--logo-blue);
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
   transition: all 0.3s ease;
-  z-index: 100;
+  z-index: 1100;
 }
 
-.menu-item:hover .submenu-container {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.submenu-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+/* Show dropdown on Desktop Hover ONLY */
+@media (min-width: 993px) {
+  .menu-item:hover .submenu-container {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  /* Alignment Helpers */
+  .submenu-container.align-right { left: auto; right: 0; }
+  .submenu-container.align-center { 
+    left: 50%; 
+    transform: translateX(-50%) translateY(10px); 
+  }
+  .menu-item:hover .submenu-container.align-center {
+    transform: translateX(-50%) translateY(0);
+  }
+  
+  /* Wide menus for desktop */
+  .submenu-container.align-center { min-width: 600px; }
+  .submenu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 }
 
 .submenu-link {
+  display: block;
   text-decoration: none;
   color: var(--color-text-primary);
-  padding: 12px 15px;
-  border-radius: 5px;
-  font-weight: 500;
-  font-size: 15px;
-  transition: all 0.3s ease;
-  display: block;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: 0.2s;
 }
-
 .submenu-link:hover {
-  background-color: var(--color-background-medium);
-  color: var(--color-primary);
-  transform: translateX(3px);
+  background: var(--color-background-medium);
+  color: var(--logo-blue);
+  transform: translateX(5px);
 }
 
-/* Dropdown Alignment Helpers */
-.submenu-container.align-right {
-  left: auto !important;
-  right: 0 !important;
-}
-
-.submenu-container.align-center {
-  left: 50% !important;
-  right: auto !important;
-  transform: translateX(-50%) translateY(10px);
-}
-
-.menu-item:hover .submenu-container.align-center {
-  transform: translateX(-50%) translateY(0);
-}
-
-/* --- Mobile Menu Toggle Button --- */
+/* --- Mobile Menu Toggle Button (Default Hidden) --- */
 .mobile-menu-toggle {
-  display: none;
+  display: none; /* Hidden on Desktop */
   background: none;
   border: none;
   font-size: 24px;
-  color: var(--logo-black); /* Black button */
+  color: var(--logo-black);
   cursor: pointer;
   margin-left: auto;
+  padding: 5px;
 }
 
 /* ==========================================================================
-   5. RESPONSIVE ADJUSTMENTS
+   5. RESPONSIVE / MOBILE STYLES (Max-Width: 992px)
    ========================================================================== */
-
-@media (max-width: 1200px) {
-  .main-header-container {
-    gap: 15px;
-  }
-}
-
 @media (max-width: 992px) {
-  /* Reset padding for smaller screens */
-  .top-bar-container,
-  .main-header-container {
-    justify-content: space-between;
-    padding: 5px 15px !important; /* Revert to 15px on mobile */
+  
+  /* 1. Header Layout */
+  .top-bar-container, .main-header-container {
+    padding: 10px 20px !important;
   }
   
-  .top-bar-container {
-    justify-content: center;
-    flex-direction: column;
-  }
-  
-  .main-header-container {
-    position: relative;
-  }
-
+  /* 2. Show the Toggle Button */
   .mobile-menu-toggle {
-    display: block;
+    display: block !important; /* Force visible */
     z-index: 1102;
   }
 
-  /* Mobile Navigation Drawer */
+  /* 3. Mobile Navigation Drawer */
   .main-nav-menu {
     display: none; /* Hidden by default */
     position: absolute;
@@ -379,17 +268,20 @@ body {
     flex-direction: column;
     box-shadow: 0 10px 15px rgba(0,0,0,0.1);
     border-top: 1px solid var(--color-border);
-    max-height: 80vh;
+    max-height: 80vh; /* Scrollable if long */
     overflow-y: auto;
     z-index: 1101;
     padding: 0;
     margin: 0;
+    align-items: stretch; /* Full width items */
   }
 
+  /* Open State */
   .main-nav-menu.active {
     display: flex;
   }
 
+  /* Mobile Menu Items */
   .menu-item {
     width: 100%;
     border-bottom: 1px solid #f0f0f0;
@@ -400,31 +292,40 @@ body {
     justify-content: space-between;
     padding: 15px 20px;
     font-size: 16px;
-    color: var(--logo-black);
+    background: transparent;
   }
 
-  .menu-link::after {
-    display: none;
-  }
-  
-  /* Mobile Dropdowns */
+  /* 4. Mobile Dropdowns (Accordion Style) */
   .submenu-container,
   .submenu-container.align-right,
   .submenu-container.align-center {
-    position: static;
+    position: static; /* Stack vertically */
     width: 100%;
     min-width: unset;
     box-shadow: none;
     border: none;
+    border-top: 1px solid #eee;
     padding: 0;
+    
+    /* Logic: Hidden unless .show class added by JS */
     display: none; 
-    background-color: #f8f9fa;
+    
+    background-color: #f9f9f9;
     transform: none !important;
     opacity: 1;
     visibility: visible;
   }
 
+  /* When JS adds 'show', display it */
+  .submenu-container.show {
+    display: block !important;
+  }
+
+  /* Disable hover effects on mobile */
   .menu-item:hover .submenu-container {
+    display: none; /* Rely strictly on click */
+  }
+  .menu-item .submenu-container.show {
     display: block;
   }
 
@@ -435,12 +336,12 @@ body {
   }
 
   .submenu-link {
-    padding: 12px 40px;
-    border-bottom: 1px solid #e0e0e0;
-    color: var(--color-text-secondary);
+    padding: 12px 40px; /* Indent sub-items */
+    border-bottom: 1px solid #e6e6e6;
+    font-size: 15px;
+    color: #555;
   }
 }
-
 @media (max-width: 600px) {
   .brand-logo-link img {
     height: 45px;
@@ -5076,7 +4977,15 @@ footer {
 /*
 --- STUDENT TESTIMONIALS PAGE ---
 */
+/* src/App.css */
 
+/* ... (Keep existing CSS above this point) ... */
+
+/* --- STUDENT TESTIMONIALS PAGE --- *//* src/App.css */
+
+/* ... (Keep your existing CSS above) ... */
+
+/* --- STUDENT TESTIMONIALS PAGE --- */
 .testimonials-page .max-width-container { 
   max-width: 1200px; 
   margin: 0 auto; 
@@ -5118,6 +5027,7 @@ footer {
   gap: 30px;
 }
 
+/* Card Styling */
 .testimonials-page .t-card {
   background: var(--logo-white);
   border-radius: 12px;
@@ -5125,6 +5035,7 @@ footer {
   padding: 30px;
   display: flex;
   flex-direction: column;
+  height: 100%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-top: 4px solid var(--logo-red);
 }
@@ -5139,22 +5050,46 @@ footer {
   opacity: 0.7;
   margin-bottom: 15px;
 }
+
+/* Content wrapper pushes student info to the bottom */
+.testimonials-page .quote-content-wrapper {
+  flex: 1;
+  margin-bottom: 25px;
+}
+
 .testimonials-page .quote-text {
   font-size: 16px;
   color: var(--color-text-light);
-  margin-bottom: 25px;
-  flex-grow: 1; /* Ensures cards have same height */
   font-style: italic;
   line-height: 1.7;
+  margin: 0;
+}
+
+.testimonials-page .read-more-btn {
+  background: none;
+  border: none;
+  color: var(--logo-blue);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 8px;
+  font-size: 14px;
+  display: block;
+}
+
+.testimonials-page .read-more-btn:hover {
+  text-decoration: underline;
 }
 
 .testimonials-page .student-info {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 15px;
   border-top: 1px solid var(--color-border);
   padding-top: 20px;
+  margin-top: auto;
 }
+
 .testimonials-page .student-avatar {
   width: 60px;
   height: 60px;
@@ -5166,9 +5101,22 @@ footer {
   font-size: 24px;
   color: var(--logo-blue);
   flex-shrink: 0;
+  overflow: hidden;
 }
-.testimonials-page .student-avatar i {
-  opacity: 0.8;
+.testimonials-page .student-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* FIX: Use Flex Column on student details.
+   This forces Name, Course, Placement, and CTC to always stack vertically.
+*/
+.testimonials-page .student-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .testimonials-page .student-details h4 {
@@ -5183,24 +5131,52 @@ footer {
   font-weight: 500;
   margin-bottom: 8px;
 }
+
 .testimonials-page .placement-badge {
   background: var(--logo-red);
   color: var(--logo-white);
   font-size: 12px;
   font-weight: 600;
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: 4px;
-  display: inline-block;
-  margin-right: 5px;
+  margin-bottom: 6px; /* Adds space between Placement and Salary */
+  width: fit-content;
 }
+
 .testimonials-page .salary-badge {
   background: var(--color-background-dark);
   color: var(--color-text-main);
   font-size: 12px;
   font-weight: 600;
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: 4px;
-  display: inline-block;
+  border: 1px solid #ddd;
+  width: fit-content;
+}
+
+/* Load More Button Styling */
+.testimonials-page .load-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.testimonials-page .load-more-main-btn {
+  background-color: var(--logo-blue);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.testimonials-page .load-more-main-btn:hover {
+  background-color: var(--logo-red);
 }
 
 /* Responsive */

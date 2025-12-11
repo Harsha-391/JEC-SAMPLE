@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
 
+// --- Menu Data ---
 const jecMenuItems = [
   { title: 'JEC FAQ', path: '/jec/JEC-FAQ' },
   { title: 'Employment @JEC', path: '/jec/Employment-JEC' },
@@ -27,7 +28,6 @@ const admissionMenuItems = [
   { title: 'Admission Procedure', path: '/admission/Admission-Procedure' },
 ];
 
-// --- NEW: Departments Menu Data (Matches the image uploaded) ---
 const departmentMenuItems = [
   { title: 'Computer Science & Engineering (AI)', path: '/JEC-engineering/Computer-Science-Engineering-AI' },
   { title: 'Civil Engineering', path: '/JEC-engineering/Civil-Engineering' },
@@ -56,6 +56,7 @@ const infraMenuItems = [
   { title: 'Prepare and Present', path: '/Infrastructure/Prepare-and-Present' },
   { title: 'Refuel and Relax', path: '/Infrastructure/Refuel-and-Relax' },
 ];
+
 const campusLifeItems = [
   { title: 'Image Gallery', path: '/Gallery' },
   { title: 'JEC: Vibrant India', path: '/campus-life/jec-vibrant-india' },
@@ -76,69 +77,68 @@ function Subheader() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Close menu when a link is clicked
-  const closeMenu = () => setIsMobileMenuOpen(false);
+  const closeMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <div className="main-header-section">
       <div className="main-header-container max-width-container">
         
-        {/* 1. Logo on the LEFT */}
         <Link to="/" className="brand-logo-link" onClick={closeMenu}>
           <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
-          <div className="brand-text">
-           
-          </div>
         </Link>
 
-        {/* 2. Menu Toggle Button on the RIGHT */}
         <button 
           className="mobile-menu-toggle" 
           onClick={toggleMenu} 
           aria-label="Toggle navigation"
         >
+          {/* Changed back to 'fa-ellipsis-v' to show the three dots */}
           <i className={isMobileMenuOpen ? "fas fa-times" : "fas fa-ellipsis-v"}></i>
         </button>
 
-        {/* 3. Navigation Menu */}
         <nav className={`main-nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
           <Link to="/" className="menu-link" onClick={closeMenu}>Home</Link>
           
-          <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" />
+          <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" closeMenu={closeMenu} />
           
-          <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/#!" />
+          <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/#!" closeMenu={closeMenu} />
 
           <Link to="/placement" className="menu-link" onClick={closeMenu}>Placement</Link>
           
-          {/* --- UPDATED: Departments Dropdown --- */}
           <NavDropdown 
             title="Departments" 
             items={departmentMenuItems} 
             baseLink="/#!"
-            align="center" 
+            align="center"
+            closeMenu={closeMenu}
           />
 
           <NavDropdown 
             title="Infrastructure" 
             items={infraMenuItems} 
             baseLink="/#!" 
-            align="center" 
+            align="center"
+            closeMenu={closeMenu} 
           />
 
-          {/* Campus Life now links to Gallery */}
           <NavDropdown 
-  title="Campus Life" 
-  items={campusLifeItems} 
-  baseLink="/#!" 
-  align="center" 
-/>
+            title="Campus Life" 
+            items={campusLifeItems} 
+            baseLink="/#!" 
+            align="center"
+            closeMenu={closeMenu} 
+          />
+
           <Link to="/blog" className="menu-link" onClick={closeMenu}>Blog</Link>
 
           <NavDropdown 
             title="Our Society" 
             items={societyMenuItems} 
             baseLink="/#!"
-            align="right" 
+            align="right"
+            closeMenu={closeMenu}
           />
 
           <Link to="/contact-us" className="menu-link" onClick={closeMenu}>Contact Us</Link>

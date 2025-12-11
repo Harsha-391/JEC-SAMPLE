@@ -45,13 +45,7 @@ function CampusLife() {
         </p>
 
         {/* Category Filter Buttons */}
-        <div className="filter-container" style={{marginBottom: '2rem', display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap'}}>
-          <button className={`filter-btn ${activeCategory === 'all' ? 'active' : ''}`} onClick={() => setActiveCategory('all')}>All</button>
-          <button className={`filter-btn ${activeCategory === 'college' ? 'active' : ''}`} onClick={() => setActiveCategory('college')}>College Campus</button>
-          <button className={`filter-btn ${activeCategory === 'hostel' ? 'active' : ''}`} onClick={() => setActiveCategory('hostel')}>Hostel Life</button>
-          <button className={`filter-btn ${activeCategory === 'mess' ? 'active' : ''}`} onClick={() => setActiveCategory('mess')}>Mess & Canteen</button>
-          <button className={`filter-btn ${activeCategory === 'fests' ? 'active' : ''}`} onClick={() => setActiveCategory('fests')}>Fests & Events</button>
-        </div>
+ 
 
         {loading ? (
            <p style={{textAlign:'center', color: 'white'}}>Loading Gallery...</p>
