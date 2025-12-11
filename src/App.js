@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async'; // 1. Import HelmetProvider
 import './App.css';
 
 // Layouts (Keep these as standard imports for faster initial render)
@@ -114,121 +115,123 @@ const LoadingFallback = () => (
 
 function App() {
   return (
-    <BrowserRouter>
-      {/* Wrap everything in Suspense to handle the lazy loading state */}
-      <Suspense fallback={<LoadingFallback />}>
-        <Routes>
-          
-          {/* --- PUBLIC WEBSITE ROUTES --- */}
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} /> 
-
-            {/* Header */}
-            <Route path="admission-enquiry" element={<AdmissionEnquiry />} />
+    <HelmetProvider> {/* 2. Wrap App with HelmetProvider for SEO */}
+      <BrowserRouter>
+        {/* Wrap everything in Suspense to handle the lazy loading state */}
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
             
-            {/* Main Pages */}
-            <Route path="jec/About-JEC" element={<About />} />
-            <Route path="contact-us" element={<Contact />} />
-            <Route path="placement" element={<Placements />} />
-            <Route path="gallery" element={<Gallery />} />
-            <Route path="blog" element={<Blog />} />
-            <Route path="blog/view/:id" element={<SinglePost />} />
-            
-            {/* Campus Life Routes */}
-            <Route path="/campus-life/guts-n-glory" element={<GutsNGlory />} />
-            <Route path="/campus-life/students-corner" element={<StudentsCorner />} />
-            <Route path="/campus-life/games-and-sports" element={<GamesAndSports />} />
-            <Route path="/campus-life/jec-vibrant-india" element={<VibrantIndia />} />
-            <Route path="/campus-life/committees-zone" element={<CommitteesZone />} />
-            <Route path="/campus-life/mental-health" element={<MentalHealth />} />
-            <Route path="/campus-life/academic-achievers" element={<AcademicAchievers />} />
-            <Route path="/campus-life/engineering-projects" element={<EngineeringProjects />} />
-            <Route path="/campus-life/video-gallery" element={<VideoGallery />} />
+            {/* --- PUBLIC WEBSITE ROUTES --- */}
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} /> 
 
-            {/* Admission Routes */}
-            <Route path="admissions" element={<Admissions />} /> 
-            <Route path="admission/REAP-2025" element={<Reap2025 />} />
-            <Route path="admission/Mandatory-Disclosure" element={<MandatoryDisclosure />} />
-            <Route path="admission/Karma-Courses-JEC" element={<KarmaCourses />} />
-            <Route path="admission/Financial-Aids-Bank-Loans" element={<FinancialAids />} />
-            <Route path="admission/Fee-Structure" element={<FeeStructure />} />
-            <Route path="admission/Documents-Required" element={<DocumentsRequired />} />
-            <Route path="admission/Courses-Offered" element={<CoursesOffered />} />
-            <Route path="admission/btech-admissions" element={<AdmissionOpen />} />
-            <Route path="admission/Admission-Procedure" element={<AdmissionProcedure />} />
+              {/* Header */}
+              <Route path="admission-enquiry" element={<AdmissionEnquiry />} />
+              
+              {/* Main Pages */}
+              <Route path="jec/About-JEC" element={<About />} />
+              <Route path="contact-us" element={<Contact />} />
+              <Route path="placement" element={<Placements />} />
+              <Route path="gallery" element={<Gallery />} />
+              <Route path="blog" element={<Blog />} />
+              <Route path="blog/view/:id" element={<SinglePost />} />
+              
+              {/* Campus Life Routes */}
+              <Route path="/campus-life/guts-n-glory" element={<GutsNGlory />} />
+              <Route path="/campus-life/students-corner" element={<StudentsCorner />} />
+              <Route path="/campus-life/games-and-sports" element={<GamesAndSports />} />
+              <Route path="/campus-life/jec-vibrant-india" element={<VibrantIndia />} />
+              <Route path="/campus-life/committees-zone" element={<CommitteesZone />} />
+              <Route path="/campus-life/mental-health" element={<MentalHealth />} />
+              <Route path="/campus-life/academic-achievers" element={<AcademicAchievers />} />
+              <Route path="/campus-life/engineering-projects" element={<EngineeringProjects />} />
+              <Route path="/campus-life/video-gallery" element={<VideoGallery />} />
 
-            {/* Infrastructure Dropdown Routes */}
-            <Route path="Infrastructure/Refuel-and-Relax" element={<RefuelAndRelax />} />
-            <Route path="Infrastructure/Prepare-and-Present" element={<PrepareAndPresent />} />
-            <Route path="Infrastructure/Learning-By-Doing" element={<LearningByDoing />} />
-            <Route path="Infrastructure/Convenience-and-Safety" element={<ConvenienceAndSafety />} />
+              {/* Admission Routes */}
+              <Route path="admissions" element={<Admissions />} /> 
+              <Route path="admission/REAP-2025" element={<Reap2025 />} />
+              <Route path="admission/Mandatory-Disclosure" element={<MandatoryDisclosure />} />
+              <Route path="admission/Karma-Courses-JEC" element={<KarmaCourses />} />
+              <Route path="admission/Financial-Aids-Bank-Loans" element={<FinancialAids />} />
+              <Route path="admission/Fee-Structure" element={<FeeStructure />} />
+              <Route path="admission/Documents-Required" element={<DocumentsRequired />} />
+              <Route path="admission/Courses-Offered" element={<CoursesOffered />} />
+              <Route path="admission/btech-admissions" element={<AdmissionOpen />} />
+              <Route path="admission/Admission-Procedure" element={<AdmissionProcedure />} />
 
-            {/* JEC Dropdown Routes */}
-            <Route path="jec/JEC-FAQ" element={<Faq />} />
-            <Route path="jec/Management" element={<Management />} />
-            <Route path="jec/network" element={<HumanNetwork />} />
-            <Route path="jec/Institution-Innovation-Council-JEC" element={<IIC />} />
-            <Route path="jec/Alumni" element={<Alumni />} />
-            <Route path="jec/Employment-JEC" element={<Employment />} />
-            <Route path="jec/Anti-Ragging-Committee" element={<AntiRagging />} />
-            <Route path="jec/Students-Testimonials" element={<Testimonials />} />
+              {/* Infrastructure Dropdown Routes */}
+              <Route path="Infrastructure/Refuel-and-Relax" element={<RefuelAndRelax />} />
+              <Route path="Infrastructure/Prepare-and-Present" element={<PrepareAndPresent />} />
+              <Route path="Infrastructure/Learning-By-Doing" element={<LearningByDoing />} />
+              <Route path="Infrastructure/Convenience-and-Safety" element={<ConvenienceAndSafety />} />
 
-            {/* Our Society Dropdown Routes */}
-            <Route path="Our-Society/Foundation-for-Better-Tomorrow" element={<Foundation />} />
-            <Route path="Our-Society/Other-Institutes-Agrasen-College" element={<AgrasenCollege />} />
-            <Route path="Our-Society/Other-Institutes-Jaipur-College-of-Education-and-Science" element={<JCES />} />
-            <Route path="Our-Society/Key-Teams-Functions" element={<KeyTeamsFunctions />} />
+              {/* JEC Dropdown Routes */}
+              <Route path="jec/JEC-FAQ" element={<Faq />} />
+              <Route path="jec/Management" element={<Management />} />
+              <Route path="jec/network" element={<HumanNetwork />} />
+              <Route path="jec/Institution-Innovation-Council-JEC" element={<IIC />} />
+              <Route path="jec/Alumni" element={<Alumni />} />
+              <Route path="jec/Employment-JEC" element={<Employment />} />
+              <Route path="jec/Anti-Ragging-Committee" element={<AntiRagging />} />
+              <Route path="jec/Students-Testimonials" element={<Testimonials />} />
 
-            {/* Department Routes - Note: These all use the same 'Department' template */}
-            <Route path="JEC-engineering/Computer-Science-Engineering-AI" element={<Department />} />
-            <Route path="JEC-engineering/Computer-Science-Engineering" element={<Department />} />
-            <Route path="JEC-engineering/Information-Technology" element={<Department />} />
-            <Route path="JEC-engineering/Civil-Engineering" element={<Department />} />
-            <Route path="JEC-engineering/Electronics-Communication-Engineering" element={<Department />} />
-            <Route path="JEC-engineering/Electrical-Engineering" element={<Department />} />
-            <Route path="JEC-engineering/Mechanical-Engineering" element={<Department />} />
-            <Route path="JEC-engineering/Applied-Sciences-Humanities" element={<Department />} />
-            <Route path="JEC-engineering/Centre-Of-Excellence-COE" element={<Department />} />
-            <Route path="JEC-engineering/JEC-Research-Cell" element={<Department />} />
-            <Route path="JEC-engineering/Engineering-JEC" element={<Department />} />
-            <Route path="JEC-engineering/MOOCS-NPTEL-SWAYAM" element={<Department />} />
-          </Route>
+              {/* Our Society Dropdown Routes */}
+              <Route path="Our-Society/Foundation-for-Better-Tomorrow" element={<Foundation />} />
+              <Route path="Our-Society/Other-Institutes-Agrasen-College" element={<AgrasenCollege />} />
+              <Route path="Our-Society/Other-Institutes-Jaipur-College-of-Education-and-Science" element={<JCES />} />
+              <Route path="Our-Society/Key-Teams-Functions" element={<KeyTeamsFunctions />} />
 
-          {/* Login Route */}
-          <Route path="/admin/login" element={<Login />} />
+              {/* Department Routes - Note: These all use the same 'Department' template */}
+              <Route path="JEC-engineering/Computer-Science-Engineering-AI" element={<Department />} />
+              <Route path="JEC-engineering/Computer-Science-Engineering" element={<Department />} />
+              <Route path="JEC-engineering/Information-Technology" element={<Department />} />
+              <Route path="JEC-engineering/Civil-Engineering" element={<Department />} />
+              <Route path="JEC-engineering/Electronics-Communication-Engineering" element={<Department />} />
+              <Route path="JEC-engineering/Electrical-Engineering" element={<Department />} />
+              <Route path="JEC-engineering/Mechanical-Engineering" element={<Department />} />
+              <Route path="JEC-engineering/Applied-Sciences-Humanities" element={<Department />} />
+              <Route path="JEC-engineering/Centre-Of-Excellence-COE" element={<Department />} />
+              <Route path="JEC-engineering/JEC-Research-Cell" element={<Department />} />
+              <Route path="JEC-engineering/Engineering-JEC" element={<Department />} />
+              <Route path="JEC-engineering/MOOCS-NPTEL-SWAYAM" element={<Department />} />
+            </Route>
 
-          {/* --- ADMIN ROUTES --- */}
-          <Route 
-            path="/admin" 
-            element={
-              <ProtectedRoute allowedRoles={['admin', 'editor']}>
-                <AdminLayout />
-              </ProtectedRoute>
-            }
-          >
-             <Route index element={<Overview />} />
-             <Route path="edit-home" element={<EditHero />} />
-             <Route path="manage-blogs" element={<EditBlog />} />
-             <Route path="manage-faculty" element={<EditFaculty />} />
-             <Route path="manage-testimonials" element={<EditTestimonials />} />
-             <Route path="manage-departments" element={<EditDepartment />} />
-             <Route path="manage-videos" element={<EditVideoGallery />} />
-             <Route path="manage-gallery" element={<EditGallery />} />
+            {/* Login Route */}
+            <Route path="/admin/login" element={<Login />} />
 
-             {/* Admin Only */}
-             <Route 
-               path="users" 
-               element={
-                 <ProtectedRoute allowedRoles={['admin']}>
-                   <UserManagement />
-                 </ProtectedRoute>
-               } 
-             />
-          </Route>
+            {/* --- ADMIN ROUTES --- */}
+            <Route 
+              path="/admin" 
+              element={
+                <ProtectedRoute allowedRoles={['admin', 'editor']}>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }
+            >
+                <Route index element={<Overview />} />
+                <Route path="edit-home" element={<EditHero />} />
+                <Route path="manage-blogs" element={<EditBlog />} />
+                <Route path="manage-faculty" element={<EditFaculty />} />
+                <Route path="manage-testimonials" element={<EditTestimonials />} />
+                <Route path="manage-departments" element={<EditDepartment />} />
+                <Route path="manage-videos" element={<EditVideoGallery />} />
+                <Route path="manage-gallery" element={<EditGallery />} />
 
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+                {/* Admin Only */}
+                <Route 
+                  path="users" 
+                  element={
+                    <ProtectedRoute allowedRoles={['admin']}>
+                      <UserManagement />
+                    </ProtectedRoute>
+                  } 
+                />
+            </Route>
+
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 

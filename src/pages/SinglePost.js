@@ -1,8 +1,8 @@
-// src/pages/SinglePost.js
-import React, { useState, useEffect, useRef } from 'react'; // 1. Import useRef
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { Helmet } from 'react-helmet-async'; // 1. Import Helmet
 import './Blog.css';
 
 const SinglePost = () => {
@@ -10,7 +10,6 @@ const SinglePost = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   
-  // 2. Create a reference for the content container
   const contentRef = useRef(null);
 
   useEffect(() => {
@@ -35,37 +34,58 @@ const SinglePost = () => {
     fetchPost();
   }, [id]);
 
-  // 3. Add this NEW useEffect to fix the links automatically
+  // Fix links automatically
   useEffect(() => {
     if (post && contentRef.current) {
-      // Find all links inside the blog content
       const links = contentRef.current.querySelectorAll('a');
-      
       links.forEach(link => {
         const href = link.getAttribute('href');
-        
         if (href) {
-          // If link starts with "www." or doesn't have "http", fix it
           if (!href.startsWith('http') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('mailto:')) {
             link.setAttribute('href', `https://${href}`);
           }
-          
-          // Optional: Force external links to open in a new tab
           if (!href.startsWith('/')) {
             link.setAttribute('target', '_blank');
-            link.setAttribute('rel', 'noopener noreferrer');
+            link.setAttribute('rel', 'noopener noreferrer'); // Important for SEO & Security
           }
         }
       });
     }
-  }, [post]); // Runs whenever the post data loads
+  }, [post]);
 
   if (loading) return <div style={{padding:'100px', textAlign:'center'}}>Loading Article...</div>;
   if (!post) return <div style={{padding:'100px', textAlign:'center'}}>Article not found.</div>;
 
+  // Fallback logic if meta fields weren't filled out
+  const pageTitle = post.metaTitle || post.title;
+  const pageDesc = post.metaDesc || post.excerpt || "Read this article on JEC Blog";
+  const currentUrl = window.location.href;
+
   return (
     <div className="blog-page-wrapper">
       
+      {/* 2. DYNAMIC SEO TAGS */}
+      <Helmet>
+        {/* Standard Metadata */}
+        <title>{pageTitle} | JEC Jaipur</title>
+        <meta name="description" content={pageDesc} />
+        <meta name="keywords" content={post.metaKeywords || "Engineering, JEC, College"} />
+        <link rel="canonical" href={currentUrl} />
+
+        {/* Open Graph / Facebook (Crucial for sharing links) */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDesc} />
+        <meta property="og:image" content={post.image} />
+        <meta property="og:url" content={currentUrl} />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDesc} />
+        <meta name="twitter:image" content={post.image} />
+      </Helmet>
+
       {/* Navigation */}
       <div style={{background: '#1E293B', color: '#fff', padding: '10px 2rem', fontSize: '0.9rem'}}>
           <Link to="/blog" style={{color: '#FCA311'}}> <i className="fas fa-arrow-left"></i> Back to Blog</Link>
@@ -84,8 +104,13 @@ const SinglePost = () => {
 
       <div className="single-post-container">
         <article className="article-body">
-          
-          {/* 4. Attach the ref to this div so we can find the links inside */}
+          {/* 3. Hidden Image for SEO Scrapers (Since hero uses background-image) */}
+          <img 
+            src={post.image} 
+            alt={post.imageAlt || post.title} 
+            style={{display: 'none'}} 
+          />
+
           <div 
             ref={contentRef}
             className="dynamic-content"
@@ -96,13 +121,15 @@ const SinglePost = () => {
             <strong>Tags:</strong>
             <div className="tag-cloud">
                <span className="tag">{post.category}</span>
-               <span className="tag">JEC Blog</span>
+               {post.metaKeywords && post.metaKeywords.split(',').map((k, i) => (
+                 <span key={i} className="tag">{k.trim()}</span>
+               ))}
             </div>
           </div>
         </article>
 
-        {/* Sidebar */}
         <aside className="blog-sidebar">
+          {/* ... Sidebar Code remains same ... */}
           <div className="widget">
             <h3 className="widget-title">About the Author</h3>
             <div style={{display:'flex', alignItems:'center', gap:'15px'}}>

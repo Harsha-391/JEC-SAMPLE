@@ -22,6 +22,12 @@ const EditBlog = () => {
   const [content, setContent] = useState('');
   const [isFeatured, setIsFeatured] = useState(false);
 
+  // --- NEW SEO STATE VARIABLES ---
+  const [imageAlt, setImageAlt] = useState('');
+  const [metaTitle, setMetaTitle] = useState('');
+  const [metaDesc, setMetaDesc] = useState('');
+  const [metaKeywords, setMetaKeywords] = useState('');
+
   // 1. Fetch Posts
   const fetchPosts = async () => {
     try {
@@ -58,9 +64,13 @@ const EditBlog = () => {
       author,
       date,
       image,
+      imageAlt,     // Save Alt Text
       excerpt,
       content,
       isFeatured,
+      metaTitle,    // Save Meta Title
+      metaDesc,     // Save Meta Description
+      metaKeywords, // Save Meta Keywords
       createdAt: new Date()
     };
 
@@ -90,6 +100,13 @@ const EditBlog = () => {
     setExcerpt(post.excerpt);
     setContent(post.content);
     setIsFeatured(post.isFeatured || false);
+    
+    // Set new fields (with fallbacks)
+    setImageAlt(post.imageAlt || '');
+    setMetaTitle(post.metaTitle || '');
+    setMetaDesc(post.metaDesc || '');
+    setMetaKeywords(post.metaKeywords || '');
+
     setEditId(post.id);
     setIsEditing(true);
     window.scrollTo(0, 0);
@@ -112,6 +129,13 @@ const EditBlog = () => {
     setExcerpt('');
     setContent('');
     setIsFeatured(false);
+    
+    // Reset new fields
+    setImageAlt('');
+    setMetaTitle('');
+    setMetaDesc('');
+    setMetaKeywords('');
+
     setIsEditing(false);
     setEditId(null);
   };
@@ -130,7 +154,7 @@ const EditBlog = () => {
         <form onSubmit={handleSubmit}>
           <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px' }}>
             
-            {/* LEFT COLUMN */}
+            {/* LEFT COLUMN: Main Content */}
             <div>
               <label style={styles.label}>Title</label>
               <input 
@@ -150,10 +174,18 @@ const EditBlog = () => {
               </div>
             </div>
 
-            {/* RIGHT COLUMN */}
+            {/* RIGHT COLUMN: Settings & SEO */}
             <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', height: 'fit-content' }}>
+              
               <ImageUpload label="Cover Image" onUploadComplete={setImage} />
               {image && <img src={image} alt="Preview" style={{ width: '100%', borderRadius: '5px', marginTop: '10px' }} />}
+
+              {/* 2. Alt Text for Image */}
+              <label style={styles.label}>Image Alt Text</label>
+              <input 
+                type="text" value={imageAlt} onChange={e => setImageAlt(e.target.value)} 
+                style={styles.input} placeholder="Description for screen readers..." 
+              />
 
               <label style={styles.label}>Category</label>
               <select value={category} onChange={e => setCategory(e.target.value)} style={styles.input}>
@@ -175,8 +207,32 @@ const EditBlog = () => {
                   <input type="checkbox" checked={isFeatured} onChange={e => setIsFeatured(e.target.checked)} />
                   <strong>Feature this post?</strong>
                 </label>
-                <small style={{ color: '#666' }}>Featured posts appear big at the top.</small>
               </div>
+
+              {/* --- SEO SECTION --- */}
+              <hr style={{ border: 'none', borderTop: '1px solid #ddd', margin: '15px 0' }} />
+              <h4 style={{ margin: '0 0 10px', color: '#333' }}>SEO Settings</h4>
+
+              {/* 1. Meta Title */}
+              <label style={styles.label}>Meta Title</label>
+              <input 
+                type="text" value={metaTitle} onChange={e => setMetaTitle(e.target.value)} 
+                style={styles.input} placeholder="Browser tab title..." 
+              />
+
+              {/* 3. Meta Description */}
+              <label style={styles.label}>Meta Description</label>
+              <textarea 
+                value={metaDesc} onChange={e => setMetaDesc(e.target.value)} 
+                style={{...styles.input, height: '60px'}} placeholder="Search engine summary..." 
+              />
+
+              {/* 4. Meta Keywords */}
+              <label style={styles.label}>Meta Keywords</label>
+              <input 
+                type="text" value={metaKeywords} onChange={e => setMetaKeywords(e.target.value)} 
+                style={styles.input} placeholder="Comma separated keys..." 
+              />
 
               <button type="submit" style={styles.saveBtn}>
                 {isEditing ? "Update Post" : "Publish Post"}
@@ -213,7 +269,7 @@ const EditBlog = () => {
 const styles = {
   card: { background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' },
   label: { display: 'block', fontWeight: '600', margin: '10px 0 5px', fontSize: '14px' },
-  input: { width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '5px', fontSize: '14px' },
+  input: { width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '5px', fontSize: '14px', boxSizing: 'border-box' },
   saveBtn: { width: '100%', padding: '12px', background: '#2563EB', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold', marginTop: '10px' },
   cancelBtn: { padding: '8px 15px', background: '#64748B', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' },
   listContainer: { display: 'flex', flexDirection: 'column', gap: '15px' },

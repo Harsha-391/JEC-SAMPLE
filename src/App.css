@@ -82,6 +82,11 @@ body {
    ========================================================================== */
 
 /* --- 1. Sticky Wrapper --- */
+/* ==========================================================================
+   2. HEADER & SUBHEADER (STRICT SEPARATION)
+   ========================================================================== */
+
+/* --- 1. Base Styles (Shared) --- */
 .sticky-header {
   position: sticky;
   top: 0;
@@ -90,20 +95,18 @@ body {
   box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
-/* --- 2. Shared Container Layout --- */
 .top-bar-container,
 .main-header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  padding: 0 40px !important;
   max-width: 1300px;
   margin: 0 auto;
   box-sizing: border-box;
 }
 
-/* --- 3. Top Bar (Black) --- */
+/* Top Bar (Black) */
 .top-bar-section {
   background: var(--logo-black);
   padding: 10px 0;
@@ -125,11 +128,9 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: color 0.3s;
 }
-.top-bar-container a:hover { color: var(--logo-gold); }
 
-/* --- 4. Main Navigation (White) --- */
+/* Main Nav (White) */
 .main-header-section {
   background: var(--logo-white);
   padding: 15px 0;
@@ -140,128 +141,130 @@ body {
 
 .brand-logo-link img { height: 60px; width: auto; }
 
-/* Desktop Menu (Hidden on Mobile) */
-.main-nav-menu {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  margin-left: auto;
-}
-
-.menu-item { position: relative; }
-
-.menu-link {
-  color: var(--logo-black);
-  font-weight: 600;
-  font-size: 14px;
-  text-decoration: none;
-  padding: 10px 15px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.menu-link:hover {
-  background-color: var(--color-background-medium);
-  color: var(--logo-blue);
-}
-
-/* Arrow Rotation Class */
-.menu-arrow-icon { transition: transform 0.3s ease; font-size: 10px; }
-.menu-arrow-icon.rotate { transform: rotate(180deg); }
-
-/* --- Desktop Dropdowns --- */
-.submenu-container {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 260px;
-  background: var(--logo-white);
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  padding: 15px;
-  border-top: 3px solid var(--logo-blue);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
-  z-index: 1100;
-}
-
-/* Show dropdown on Desktop Hover ONLY */
-@media (min-width: 993px) {
-  .menu-item:hover .submenu-container {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  
-  /* Alignment Helpers */
-  .submenu-container.align-right { left: auto; right: 0; }
-  .submenu-container.align-center { 
-    left: 50%; 
-    transform: translateX(-50%) translateY(10px); 
-  }
-  .menu-item:hover .submenu-container.align-center {
-    transform: translateX(-50%) translateY(0);
-  }
-  
-  /* Wide menus for desktop */
-  .submenu-container.align-center { min-width: 600px; }
-  .submenu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-}
-
-.submenu-link {
-  display: block;
-  text-decoration: none;
-  color: var(--color-text-primary);
-  padding: 8px 12px;
-  font-size: 14px;
-  border-radius: 4px;
-  transition: 0.2s;
-}
-.submenu-link:hover {
-  background: var(--color-background-medium);
-  color: var(--logo-blue);
-  transform: translateX(5px);
-}
-
-/* --- Mobile Menu Toggle Button (Default Hidden) --- */
 .mobile-menu-toggle {
-  display: none; /* Hidden on Desktop */
+  display: none; /* Hidden by default */
   background: none;
   border: none;
   font-size: 24px;
   color: var(--logo-black);
   cursor: pointer;
   margin-left: auto;
-  padding: 5px;
 }
 
 /* ==========================================================================
-   5. RESPONSIVE / MOBILE STYLES (Max-Width: 992px)
-   ========================================================================== *//* ==========================================================================
-   5. RESPONSIVE / MOBILE STYLES (Max-Width: 992px)
+   DESKTOP ONLY STYLES (Min-Width: 993px)
+   ========================================================================== */
+@media (min-width: 993px) {
+  
+  .top-bar-container, .main-header-container {
+    padding: 0 40px;
+  }
+
+  .main-nav-menu {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .menu-item { position: relative; }
+
+  .menu-link {
+    color: var(--logo-black);
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .menu-link:hover {
+    background-color: var(--color-background-medium);
+    color: var(--logo-blue);
+  }
+
+  /* Desktop Dropdown Container */
+  .submenu-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 260px; /* Base width */
+    background: var(--logo-white);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    padding: 15px;
+    border-top: 3px solid var(--logo-blue);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1100;
+  }
+
+  /* Show on Hover (Desktop) */
+  .menu-item:hover .submenu-container {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Alignment Modifiers (Desktop Only) */
+  .submenu-container.align-right { left: auto; right: 0; }
+  
+  /* Center Align Logic */
+  .submenu-container.align-center {
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    min-width: 600px; /* Wide dropdown for desktop */
+  }
+  .menu-item:hover .submenu-container.align-center {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Grid for Wide Menus (Desktop) */
+  .submenu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .submenu-link {
+    display: block;
+    text-decoration: none;
+    color: var(--color-text-primary);
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: 0.2s;
+  }
+  .submenu-link:hover {
+    background: var(--color-background-medium);
+    color: var(--logo-blue);
+    transform: translateX(5px);
+  }
+}
+
+/* ==========================================================================
+   MOBILE ONLY STYLES (Max-Width: 992px)
    ========================================================================== */
 @media (max-width: 992px) {
   
-  /* 1. Header Layout */
   .top-bar-container, .main-header-container {
-    padding: 10px 20px !important;
-  }
-  
-  /* 2. Show the Toggle Button */
-  .mobile-menu-toggle {
-    display: block !important;
-    z-index: 1102;
+    padding: 10px 20px;
   }
 
-  /* 3. Mobile Navigation Drawer */
+  .mobile-menu-toggle {
+    display: block; /* Show hamburger/dots */
+  }
+
+  /* Main Drawer */
   .main-nav-menu {
-    display: none; /* Hidden by default */
+    display: none;
     position: absolute;
     top: 100%;
     left: 0;
@@ -270,24 +273,22 @@ body {
     flex-direction: column;
     box-shadow: 0 10px 15px rgba(0,0,0,0.1);
     border-top: 1px solid var(--color-border);
-    max-height: 80vh; 
+    max-height: 80vh;
     overflow-y: auto;
     z-index: 1101;
     padding: 0;
     margin: 0;
-    align-items: stretch; 
   }
 
   .main-nav-menu.active {
     display: flex;
   }
 
-  /* Mobile Menu Items */
+  /* Mobile Links */
   .menu-item {
     width: 100%;
     border-bottom: 1px solid #f0f0f0;
-    position: relative;
-    display: block; /* Ensure it takes full width */
+    display: block; /* Strict block layout */
   }
 
   .menu-link {
@@ -295,73 +296,72 @@ body {
     justify-content: space-between;
     padding: 15px 20px;
     font-size: 16px;
-    background: transparent;
+    color: var(--logo-black);
+    text-decoration: none;
     display: flex;
+    align-items: center;
     box-sizing: border-box;
   }
 
-  /* --- 4. CRITICAL FIX: Dropdowns Expand "In-Place" (Accordion) --- */
-  
-  /* We target ALL variations of submenu containers to override desktop alignment */
+  /* Arrow Rotation */
+  .menu-arrow-icon {
+    transition: transform 0.3s;
+  }
+  .menu-arrow-icon.rotate {
+    transform: rotate(180deg);
+  }
+
+  /* --- NUCLEAR OPTION for Dropdowns: Reset EVERYTHING --- */
   .submenu-container,
   .submenu-container.align-right,
   .submenu-container.align-center {
-    
-    /* 1. Reset Positioning */
-    position: static !important; 
+    /* Force Static Positioning (In-Flow) */
+    position: static !important;
     transform: none !important;
     left: auto !important;
     right: auto !important;
     margin: 0 !important;
     
-    /* 2. Reset Visuals */
+    /* Force Full Width */
     width: 100% !important;
-    min-width: 100% !important;
+    min-width: 0 !important; /* Kill the 600px desktop rule */
+    max-width: 100% !important;
+    
+    /* Reset Styles */
     box-shadow: none !important;
     border: none !important;
-    border-top: 1px solid #eee !important;
     border-radius: 0 !important;
-    
-    /* 3. Layout */
     background-color: #f9f9f9 !important;
     padding: 0 !important;
     
-    /* 4. Display Logic */
-    display: none; /* Hidden until .show class is added */
+    /* Display Logic */
+    display: none;
     opacity: 1 !important;
     visibility: visible !important;
   }
 
-  /* Only show when the JS adds the 'show' class */
+  /* Show only when class is added */
   .submenu-container.show {
     display: block !important;
   }
 
-  /* Disable hover effects completely on mobile */
-  .menu-item:hover .submenu-container {
-    display: none; 
-  }
-  /* But ensure if JS set .show, it overrides the hover rule */
-  .menu-item .submenu-container.show {
-    display: block !important;
-  }
-
-  /* Grid Reset */
+  /* Force Single Column Grid */
   .submenu-grid {
     display: flex;
     flex-direction: column;
-    gap: 0;
     width: 100%;
+    gap: 0;
   }
 
-  /* Links indent slightly to show hierarchy */
+  /* Submenu Links */
   .submenu-link {
-    padding: 12px 20px 12px 40px; /* Indent left by 40px */
-    border-bottom: 1px solid #e6e6e6;
-    font-size: 15px;
-    color: #555;
     display: block;
     width: 100%;
+    padding: 12px 20px 12px 40px; /* Indent */
+    border-bottom: 1px solid #e6e6e6;
+    color: #555;
+    text-decoration: none;
+    font-size: 15px;
     box-sizing: border-box;
   }
 }

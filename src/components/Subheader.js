@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
 
-// --- Menu Data ---
+// ... (Keep your existing menu items arrays: jecMenuItems, admissionMenuItems, etc. unchanged) ...
 const jecMenuItems = [
   { title: 'JEC FAQ', path: '/jec/JEC-FAQ' },
   { title: 'Employment @JEC', path: '/jec/Employment-JEC' },
@@ -72,13 +72,22 @@ const campusLifeItems = [
 
 function Subheader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null); // Track strictly ONE open menu
 
   const toggleMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+    setActiveDropdown(null); // Close all dropdowns when toggling main menu
   };
 
   const closeMenu = () => {
     setIsMobileMenuOpen(false);
+    setActiveDropdown(null);
+  };
+
+  const handleDropdownToggle = (title) => {
+    // If clicking the one already open -> Close it (set to null)
+    // If clicking a new one -> Open it (set to title)
+    setActiveDropdown(prev => prev === title ? null : title);
   };
 
   return (
@@ -89,21 +98,35 @@ function Subheader() {
           <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
         </Link>
 
+        {/* 3-Dots Mobile Button */}
         <button 
           className="mobile-menu-toggle" 
           onClick={toggleMenu} 
           aria-label="Toggle navigation"
         >
-          {/* Changed back to 'fa-ellipsis-v' to show the three dots */}
           <i className={isMobileMenuOpen ? "fas fa-times" : "fas fa-ellipsis-v"}></i>
         </button>
 
         <nav className={`main-nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
           <Link to="/" className="menu-link" onClick={closeMenu}>Home</Link>
           
-          <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" closeMenu={closeMenu} />
+          <NavDropdown 
+            title="JEC" 
+            items={jecMenuItems} 
+            baseLink="/#!" 
+            isOpen={activeDropdown === 'JEC'}
+            onToggle={() => handleDropdownToggle('JEC')}
+            closeMenu={closeMenu} 
+          />
           
-          <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/#!" closeMenu={closeMenu} />
+          <NavDropdown 
+            title="Admission" 
+            items={admissionMenuItems} 
+            baseLink="/#!" 
+            isOpen={activeDropdown === 'Admission'}
+            onToggle={() => handleDropdownToggle('Admission')}
+            closeMenu={closeMenu} 
+          />
 
           <Link to="/placement" className="menu-link" onClick={closeMenu}>Placement</Link>
           
@@ -112,6 +135,8 @@ function Subheader() {
             items={departmentMenuItems} 
             baseLink="/#!"
             align="center"
+            isOpen={activeDropdown === 'Departments'}
+            onToggle={() => handleDropdownToggle('Departments')}
             closeMenu={closeMenu}
           />
 
@@ -120,6 +145,8 @@ function Subheader() {
             items={infraMenuItems} 
             baseLink="/#!" 
             align="center"
+            isOpen={activeDropdown === 'Infrastructure'}
+            onToggle={() => handleDropdownToggle('Infrastructure')}
             closeMenu={closeMenu} 
           />
 
@@ -128,6 +155,8 @@ function Subheader() {
             items={campusLifeItems} 
             baseLink="/#!" 
             align="center"
+            isOpen={activeDropdown === 'Campus Life'}
+            onToggle={() => handleDropdownToggle('Campus Life')}
             closeMenu={closeMenu} 
           />
 
@@ -138,6 +167,8 @@ function Subheader() {
             items={societyMenuItems} 
             baseLink="/#!"
             align="right"
+            isOpen={activeDropdown === 'Our Society'}
+            onToggle={() => handleDropdownToggle('Our Society')}
             closeMenu={closeMenu}
           />
 
