@@ -3866,7 +3866,7 @@ footer {
   border-radius: 50%;
   background: #ddd;
   margin: 0 auto 15px;
-  object-fit: cover;
+  object-fit: fill;
   border: 3px solid var(--logo-white);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
