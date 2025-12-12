@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { db } from '../firebase';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import { collection, getDocs, query } from 'firebase/firestore';
 import './Blog.css';
 
 const Blog = () => {
@@ -14,15 +14,17 @@ const Blog = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        // Fetch posts, ordered by date (descending) if you have a date field, or just fetch all
-        // For simplicity, fetching all now. You can add orderBy('date', 'desc') later.
         const q = query(collection(db, "blog_posts")); 
         const querySnapshot = await getDocs(q);
         
-        const postsData = querySnapshot.docs.map(doc => ({
+        let postsData = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
         }));
+
+        // --- NEW: Sort by Date manually in JavaScript ---
+        // This ensures the newest dates (descending) come first
+        postsData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         setPosts(postsData);
         setLoading(false);
@@ -36,6 +38,7 @@ const Blog = () => {
   }, []);
 
   // Helper: Separate Featured Post from Regular Feed
+  // Note: Since 'posts' is now sorted, the find() will naturally look at the newest ones first
   const featuredPost = posts.find(post => post.isFeatured === true);
   const regularPosts = posts.filter(post => post.id !== featuredPost?.id);
 
@@ -106,7 +109,7 @@ const Blog = () => {
             <p>No articles found matching your search.</p>
           )}
 
-          {/* Pagination (Static for now, can be made dynamic later) */}
+          {/* Pagination (Static for now) */}
           <div className="pagination">
             <span className="page-link active">1</span>
             <span className="page-link"><i className="fas fa-chevron-right"></i></span>

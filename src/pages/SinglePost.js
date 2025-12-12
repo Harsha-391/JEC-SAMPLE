@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
-import { Helmet } from 'react-helmet-async'; // 1. Import Helmet
+import { Helmet } from 'react-helmet-async'; 
 import './Blog.css';
 
 const SinglePost = () => {
@@ -46,44 +46,65 @@ const SinglePost = () => {
           }
           if (!href.startsWith('/')) {
             link.setAttribute('target', '_blank');
-            link.setAttribute('rel', 'noopener noreferrer'); // Important for SEO & Security
+            link.setAttribute('rel', 'noopener noreferrer'); 
           }
         }
       });
     }
   }, [post]);
 
-  if (loading) return <div style={{padding:'100px', textAlign:'center'}}>Loading Article...</div>;
-  if (!post) return <div style={{padding:'100px', textAlign:'center'}}>Article not found.</div>;
+  if (loading) {
+    return (
+      <div className="blog-page-wrapper" style={{padding:'100px', textAlign:'center'}}>
+        <Helmet>
+          <title>Loading Article... | JEC Jaipur</title>
+          <meta name="robots" content="noindex" />
+        </Helmet>
+        <div>Loading Article...</div>
+      </div>
+    );
+  }
 
-  // Fallback logic if meta fields weren't filled out
-  const pageTitle = post.metaTitle || post.title;
+  if (!post) {
+    return (
+      <div className="blog-page-wrapper" style={{padding:'100px', textAlign:'center'}}>
+         <Helmet>
+          <title>Article Not Found | JEC Jaipur</title>
+          <meta name="robots" content="noindex" />
+        </Helmet>
+        <div>Article not found.</div>
+      </div>
+    );
+  }
+
+  // Safe Fallback logic
+  const pageTitle = post.metaTitle || post.title || "Blog Post";
   const pageDesc = post.metaDesc || post.excerpt || "Read this article on JEC Blog";
   const currentUrl = window.location.href;
+  const pageImage = post.image || "https://your-domain.com/default-image.jpg"; 
 
   return (
     <div className="blog-page-wrapper">
       
-      {/* 2. DYNAMIC SEO TAGS */}
+      {/* DYNAMIC SEO TAGS */}
       <Helmet>
-        {/* Standard Metadata */}
         <title>{pageTitle} | JEC Jaipur</title>
         <meta name="description" content={pageDesc} />
         <meta name="keywords" content={post.metaKeywords || "Engineering, JEC, College"} />
         <link rel="canonical" href={currentUrl} />
 
-        {/* Open Graph / Facebook (Crucial for sharing links) */}
+        {/* Open Graph / Facebook */}
         <meta property="og:type" content="article" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDesc} />
-        <meta property="og:image" content={post.image} />
+        <meta property="og:image" content={pageImage} />
         <meta property="og:url" content={currentUrl} />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={pageDesc} />
-        <meta name="twitter:image" content={post.image} />
+        <meta name="twitter:image" content={pageImage} />
       </Helmet>
 
       {/* Navigation */}
@@ -104,11 +125,18 @@ const SinglePost = () => {
 
       <div className="single-post-container">
         <article className="article-body">
-          {/* 3. Hidden Image for SEO Scrapers (Since hero uses background-image) */}
+          
+          {/* --- UPDATED: Visible Featured Image --- */}
           <img 
             src={post.image} 
             alt={post.imageAlt || post.title} 
-            style={{display: 'none'}} 
+            style={{
+              width: '100%', 
+              height: 'auto', 
+              borderRadius: '8px', 
+              marginBottom: '30px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.08)' // Subtle shadow for better look
+            }} 
           />
 
           <div 
@@ -129,7 +157,6 @@ const SinglePost = () => {
         </article>
 
         <aside className="blog-sidebar">
-          {/* ... Sidebar Code remains same ... */}
           <div className="widget">
             <h3 className="widget-title">About the Author</h3>
             <div style={{display:'flex', alignItems:'center', gap:'15px'}}>
