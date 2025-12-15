@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { db } from '../firebase'; 
 import { collection, query, where, getDocs } from 'firebase/firestore'; 
 import { Helmet } from 'react-helmet-async'; 
+import './Department.css'; 
 
 function Department() {
   const [activeTab, setActiveTab] = useState('tab-1');
@@ -19,20 +20,12 @@ function Department() {
         const pathSegments = cleanPath.split('/');
         const urlSlug = decodeURIComponent(pathSegments[pathSegments.length - 1]);
 
-        console.log("Searching for Department with slug:", urlSlug);
-
-        const q = query(
-          collection(db, "departments"), 
-          where("slug", "==", urlSlug)
-        );
-        
+        const q = query(collection(db, "departments"), where("slug", "==", urlSlug));
         const querySnapshot = await getDocs(q);
 
         if (!querySnapshot.empty) {
-          const docData = querySnapshot.docs[0].data();
-          setData(docData);
+          setData(querySnapshot.docs[0].data());
         } else {
-          console.error("No department found with this slug.");
           setData(null);
         }
       } catch (error) {
@@ -41,89 +34,84 @@ function Department() {
         setLoading(false);
       }
     };
-
     fetchDepartmentData();
   }, [location]);
 
-  if (loading) {
-    return <div style={{padding:"100px", textAlign:"center", fontSize:"1.5rem"}}>Loading Department Details...</div>;
-  }
+  // Scroll Animations
+  useEffect(() => {
+    if (!data) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0.1 });
 
-  if (!data) {
-    return (
-      <div style={{padding:"100px", textAlign:"center"}}>
-        <h2>Department Not Found</h2>
-        <p>Could not find data for this link. Please check the Admin Panel "Slug".</p>
-      </div>
-    );
-  }
+    const elements = document.querySelectorAll('.dept-animated-section');
+    elements.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [data]);
+
+  if (loading) return <div style={{padding:"100px", textAlign:"center"}}>Loading...</div>;
+  if (!data) return <div style={{padding:"100px", textAlign:"center"}}><h2>Department Not Found</h2></div>;
+
+  const getPills = (str) => str ? str.split(',').map(s => s.trim()) : [];
 
   return (
     <div className="dept-page-wrapper">
       <Helmet>
-        <title>{data.title || data.name} | Jaipur Engineering College</title>
-        <meta name="description" content={data.about ? data.about.substring(0, 150) : "Department details at JEC Jaipur"} />
+        <title>{data.title || data.name || "JEC Department"} | Jaipur Engineering College</title>
+        <meta name="description" content={data.subtitle || "Department details at JEC Jaipur"} />
       </Helmet>
-      
-      {/* HERO SECTION */}
-      <header className="dept-hero" style={{backgroundImage: `url(${data.bannerImage || '/images/hero.jpg'})`}}>
-          <div style={{position:'absolute', inset:0, background:'rgba(0,0,0,0.6)', zIndex:0}}></div>
-          <div style={{position:'relative', zIndex:1}}>
-            <h1 className="dept-animated-section">{data.title || data.name}</h1>
-            <p className="dept-animated-section" style={{animationDelay: '0.1s'}}>{data.subtitle || "Shaping Future Innovators"}</p>
-            <div className="badge dept-animated-section" style={{animationDelay: '0.2s'}}>Approved by AICTE, New Delhi</div>
-          </div>
+
+      {/* HERO */}
+      <header className="dept-hero" style={{backgroundImage: `linear-gradient(rgba(0, 114, 198, 0.9), rgba(0, 50, 100, 0.8)), url(${data.bannerImage || '/images/hero.jpg'})`}}>
+          <h1 className="dept-animated-section">{data.title || data.name}</h1>
+          <p className="dept-animated-section" style={{animationDelay: '0.1s'}}>
+            {data.subtitle}
+          </p>
+          <div className="badge dept-animated-section" style={{animationDelay: '0.2s'}}>Approved by AICTE, New Delhi</div>
       </header>
 
-      {/* STATS GRID */}
+      {/* STATS (Static for now, as requested) */}
       <div className="dept-stats-container">
           <div className="dept-stats-grid">
-              {(data.stats || []).map((stat, index) => (
-                  <div className="dept-stat-card dept-animated-section" style={{animationDelay: `0.${index+3}s`}} key={index}>
-                      <div className="dept-stat-icon"><i className={stat.icon || "fas fa-star"}></i></div>
-                      <div className="dept-stat-label">{stat.label}</div>
-                  </div>
-              ))}
+               <div className="dept-stat-card dept-animated-section"><div className="dept-stat-icon"><i className="fas fa-laptop-code"></i></div><div className="dept-stat-label">Core Competencies</div></div>
+               <div className="dept-stat-card dept-animated-section"><div className="dept-stat-icon"><i className="fas fa-sync-alt"></i></div><div className="dept-stat-label">Evolving Curriculum</div></div>
+               <div className="dept-stat-card dept-animated-section"><div className="dept-stat-icon"><i className="fas fa-shield-alt"></i></div><div className="dept-stat-label">Secure Career</div></div>
+               <div className="dept-stat-card dept-animated-section"><div className="dept-stat-icon"><i className="fas fa-briefcase"></i></div><div className="dept-stat-label">Industry Ready</div></div>
           </div>
       </div>
 
       <div className="dept-container">
 
-          {/* INTRO SECTION */}
+          {/* INTRO */}
           <div className="dept-section-split dept-animated-section">
               <div className="dept-text-block">
-                  <h3>{data.about_title || "About the Course"}</h3>
-                  <div dangerouslySetInnerHTML={{ __html: data.about }} />
+                  <h3>{data.about_title}</h3>
+                  <div dangerouslySetInnerHTML={{ __html: data.about || "" }} />
               </div>
               <div className="dept-img-block">
-                  <img 
-                    src={data.aboutImage || "https://via.placeholder.com/600x400?text=About+Image+Not+Set"} 
-                    alt="About Department" 
-                  />
+                  <img src={data.aboutImage || "https://via.placeholder.com/600x400?text=JEC+Department"} alt="About" />
               </div>
           </div>
 
-          {/* HOD MESSAGE SECTION */}
-          {data.hodName && (
-            <div className="dept-section-split dept-animated-section" style={{marginTop:'3rem', background:'#f9f9f9', padding:'2rem', borderRadius:'10px'}}>
-               <div className="dept-img-block">
-                  <img 
-                    src={data.hodImage || "https://via.placeholder.com/150?text=HOD"} 
-                    alt={data.hodName} 
-                    style={{borderRadius:'10px', maxHeight:'300px', objectFit:'cover'}} 
-                  />
-              </div>
-              <div className="dept-text-block">
-                  <h3>Head of Department</h3>
-                  <h4>{data.hodName}</h4>
-                  <p><em>"{data.hodMessage}"</em></p>
-              </div>
+          {/* PARALLAX */}
+          {data.parallaxTitle && (
+            <div className="dept-parallax-section dept-animated-section" style={{backgroundImage: `url(${data.parallaxImage || '/images/hero.jpg'})`}}>
+                <div className="dept-parallax-overlay"></div>
+                <div className="dept-parallax-content">
+                    <h3>{data.parallaxTitle}</h3>
+                    <div dangerouslySetInnerHTML={{ __html: data.parallaxDesc || "" }} />
+                </div>
             </div>
           )}
 
-          {/* --- NEW TABS SECTION --- */}
+          {/* TABS */}
           <div className="dept-section-header dept-animated-section">
-              <span>Course Curriculum</span>
+              <span>Course Goals</span>
               <h2>Program Outcomes</h2>
           </div>
           
@@ -134,34 +122,80 @@ function Department() {
                   <button className={`dept-tab-btn ${activeTab === 'tab-3' ? 'active' : ''}`} onClick={() => setActiveTab('tab-3')}>Advanced Application</button>
               </div>
               
-              {/* Tab 1: Core Knowledge */}
               <div className={`dept-tab-content ${activeTab === 'tab-1' ? 'active' : ''}`}>
-                 {/* Render HTML content from Quill Editor */}
-                 <div dangerouslySetInnerHTML={{ __html: data.coreKnowledge || "<p>Content coming soon...</p>" }} />
+                 <div dangerouslySetInnerHTML={{ __html: data.coreKnowledge || "<p>Information available soon.</p>" }} />
               </div>
-
-              {/* Tab 2: Professional Skills */}
               <div className={`dept-tab-content ${activeTab === 'tab-2' ? 'active' : ''}`}>
-                 <div dangerouslySetInnerHTML={{ __html: data.professionalSkills || "<p>Content coming soon...</p>" }} />
+                 <div dangerouslySetInnerHTML={{ __html: data.professionalSkills || "<p>Information available soon.</p>" }} />
               </div>
-
-               {/* Tab 3: Advanced Application */}
-               <div className={`dept-tab-content ${activeTab === 'tab-3' ? 'active' : ''}`}>
-                 <div dangerouslySetInnerHTML={{ __html: data.advancedApplication || "<p>Content coming soon...</p>" }} />
+              <div className={`dept-tab-content ${activeTab === 'tab-3' ? 'active' : ''}`}>
+                 <div dangerouslySetInnerHTML={{ __html: data.advancedApplication || "<p>Information available soon.</p>" }} />
               </div>
           </div>
 
+          {/* MID BANNER */}
+          {data.midBannerImage && (
+            <div className="dept-banner-img-block dept-animated-section">
+                <img src={data.midBannerImage} alt="Feature Banner" />
+            </div>
+          )}
+
+          {/* AUDIENCE */}
+          <div className="dept-audience-grid dept-animated-section">
+              <div className="dept-audience-card">
+                  <h4><i className="fas fa-book" style={{color:'var(--jec-red)'}}></i> {data.audienceTitle1 || "The Foundational Learner"}</h4>
+                  <p>{data.audienceDesc1 || "For individuals seeking a solid theoretical foundation."}</p>
+              </div>
+              <div className="dept-audience-card">
+                  <h4><i className="fas fa-briefcase" style={{color:'var(--jec-gold)'}}></i> {data.audienceTitle2 || "The Career-Builder"}</h4>
+                  <p>{data.audienceDesc2 || "For students looking for exceptional career prospects."}</p>
+              </div>
+          </div>
+
+          {/* PILLS */}
+          <div className="dept-section-split dept-animated-section">
+              <div>
+                  <h3>Key Subjects</h3>
+                  <div className="dept-pill-grid">
+                      {getPills(data.keySubjects).length > 0 ? getPills(data.keySubjects).map((sub, i) => (
+                          <div className="dept-pill" key={i}>{sub}</div>
+                      )) : <p style={{color:'#666'}}>Curriculum details coming soon.</p>}
+                  </div>
+              </div>
+              <div>
+                  <h3>Career Prospects</h3>
+                  <div className="dept-pill-grid">
+                      {getPills(data.careerProspects).length > 0 ? getPills(data.careerProspects).map((car, i) => (
+                          <div className={`dept-pill ${i < 3 ? 'dept-pill-hot' : ''}`} key={i}>{car}</div>
+                      )) : <p style={{color:'#666'}}>Career details coming soon.</p>}
+                  </div>
+              </div>
+          </div>
+
+          {/* COMPANIES */}
+          {data.companiesImage && (
+             <>
+                <div className="dept-section-header dept-animated-section">
+                    <span>Join the Revolution</span>
+                    <h2>Leading Companies</h2>
+                </div>
+                <div className="dept-img-block dept-animated-section" style={{padding: '2rem', background: 'white'}}>
+                    <img src={data.companiesImage} alt="Companies" />
+                </div>
+             </>
+          )}
+
+          {/* CTA */}
           <div className="dept-cta-box dept-animated-section">
               <div className="dept-cta-split">
                   <div>
                       <h3>Eligibility & How to Apply</h3>
-                      <p style={{color:'var(--dept-text-muted)', marginBottom: '1rem'}}>
-                          <strong>Degree: 4 Years / 8 Semesters</strong><br/>
-                          {data.eligibility || "Pass in 10+2 with Physics and Mathematics as compulsory subjects."}
-                      </p>
+                      <div dangerouslySetInnerHTML={{ __html: data.eligibility || "<p>Contact admission cell for details.</p>" }} style={{color:'var(--text-muted)', marginBottom:'1rem'}} />
+                      <h4 style={{color:'var(--text-main)', marginTop:'1rem'}}>SPEAK, DISCUSS & MEET YOUR COUNSELOR!</h4>
                   </div>
                   <div className="dept-cta-action">
-                      <a href="/admissions" className="dept-cta-btn">Apply Now</a>
+                      {data.ctaImage && <img src={data.ctaImage} alt="Counselor" />}
+                      <a href="/admission-enquiry" className="dept-cta-btn">Apply Now</a>
                   </div>
               </div>
           </div>

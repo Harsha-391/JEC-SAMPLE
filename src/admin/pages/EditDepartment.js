@@ -1,4 +1,3 @@
-// src/admin/pages/EditDepartment.js
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
 import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc, query, orderBy } from "firebase/firestore";
@@ -13,247 +12,263 @@ const EditDepartment = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
 
-  // Form State
+  // --- FORM STATES ---
   const [name, setName] = useState(''); 
   const [slug, setSlug] = useState(''); 
-  const [bannerImage, setBannerImage] = useState('');
-  const [aboutImage, setAboutImage] = useState(''); 
-  const [about, setAbout] = useState(''); 
-  
-  // New Fields replacing Vision/Mission
+  const [title, setTitle] = useState('');
+  const [subtitle, setSubtitle] = useState('');
+  const [bannerImage, setBannerImage] = useState(''); 
+
+  const [about_title, setAboutTitle] = useState('');
+  const [about, setAbout] = useState('');
+  const [aboutImage, setAboutImage] = useState('');
+
+  const [parallaxTitle, setParallaxTitle] = useState('');
+  const [parallaxDesc, setParallaxDesc] = useState('');
+  const [parallaxImage, setParallaxImage] = useState('');
+
   const [coreKnowledge, setCoreKnowledge] = useState('');
   const [professionalSkills, setProfessionalSkills] = useState('');
   const [advancedApplication, setAdvancedApplication] = useState('');
 
-  const [hodName, setHodName] = useState('');
-  const [hodMessage, setHodMessage] = useState('');
-  const [hodImage, setHodImage] = useState('');
+  const [midBannerImage, setMidBannerImage] = useState('');
 
-  // 1. Fetch Departments
-  const fetchDepartments = async () => {
-    try {
-      const q = query(collection(db, "departments"), orderBy("name"));
-      const querySnapshot = await getDocs(q);
-      const list = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setDepartments(list);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching departments:", error);
-      const querySnapshot = await getDocs(collection(db, "departments"));
-      const list = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setDepartments(list);
-      setLoading(false);
-    }
-  };
+  const [audienceTitle1, setAudienceTitle1] = useState('');
+  const [audienceDesc1, setAudienceDesc1] = useState('');
+  const [audienceTitle2, setAudienceTitle2] = useState('');
+  const [audienceDesc2, setAudienceDesc2] = useState('');
 
+  const [keySubjects, setKeySubjects] = useState('');
+  const [careerProspects, setCareerProspects] = useState('');
+
+  const [companiesImage, setCompaniesImage] = useState('');
+  const [ctaImage, setCtaImage] = useState('');
+  const [eligibility, setEligibility] = useState('');
+
+  // --- FETCH & SUBMIT ---
   useEffect(() => {
     fetchDepartments();
   }, []);
 
-  // 2. Handle Submit
+  const fetchDepartments = async () => {
+    try {
+      const q = query(collection(db, "departments"), orderBy("name"));
+      const querySnapshot = await getDocs(q);
+      setDepartments(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !slug) {
-      toast.warn("Department Name and Slug are required!");
-      return;
+    
+    // --- REMOVED VALIDATION: Nothing is mandatory now ---
+    
+    // Auto-generate slug if missing but name exists (Optional helper)
+    let finalSlug = slug;
+    if (!finalSlug && name) {
+        finalSlug = name.toLowerCase().replace(/ /g, '-');
     }
 
-    const deptData = {
-      name,
-      slug,
+    const data = {
+      name, 
+      slug: finalSlug, 
+      title, 
+      subtitle, 
       bannerImage,
+      about_title, 
+      about, 
       aboutImage,
-      about,
-      // Save new fields
+      parallaxTitle, 
+      parallaxDesc, 
+      parallaxImage,
       coreKnowledge, 
-      professionalSkills,
+      professionalSkills, 
       advancedApplication,
-      hodName,
-      hodMessage,
-      hodImage,
+      midBannerImage,
+      audienceTitle1, 
+      audienceDesc1, 
+      audienceTitle2, 
+      audienceDesc2,
+      keySubjects, 
+      careerProspects,
+      companiesImage, 
+      ctaImage, 
+      eligibility,
       updatedAt: new Date()
     };
 
     try {
       if (isEditing) {
-        await updateDoc(doc(db, "departments", editId), deptData);
-        toast.success("Department updated successfully!");
+        await updateDoc(doc(db, "departments", editId), data);
+        toast.success("Updated (Live)");
       } else {
-        await addDoc(collection(db, "departments"), deptData);
-        toast.success("New Department added!");
+        await addDoc(collection(db, "departments"), data);
+        toast.success("Created (Live)");
       }
       resetForm();
       fetchDepartments();
     } catch (error) {
-      console.error("Error saving department:", error);
-      toast.error("Error saving data.");
+      toast.error("Error saving.");
     }
   };
 
-  // 3. Edit & Delete
   const handleEdit = (dept) => {
-    setName(dept.name);
-    setSlug(dept.slug);
-    setBannerImage(dept.bannerImage);
-    setAboutImage(dept.aboutImage || '');
-    setAbout(dept.about);
+    setName(dept.name || '');
+    setSlug(dept.slug || '');
+    setTitle(dept.title || '');
+    setSubtitle(dept.subtitle || '');
+    setBannerImage(dept.bannerImage || '');
     
-    // Load new fields (fallback to empty string)
+    setAboutTitle(dept.about_title || '');
+    setAbout(dept.about || '');
+    setAboutImage(dept.aboutImage || '');
+
+    setParallaxTitle(dept.parallaxTitle || '');
+    setParallaxDesc(dept.parallaxDesc || '');
+    setParallaxImage(dept.parallaxImage || '');
+
     setCoreKnowledge(dept.coreKnowledge || '');
     setProfessionalSkills(dept.professionalSkills || '');
     setAdvancedApplication(dept.advancedApplication || '');
 
-    setHodName(dept.hodName);
-    setHodMessage(dept.hodMessage);
-    setHodImage(dept.hodImage);
+    setMidBannerImage(dept.midBannerImage || '');
     
+    setAudienceTitle1(dept.audienceTitle1 || '');
+    setAudienceDesc1(dept.audienceDesc1 || '');
+    setAudienceTitle2(dept.audienceTitle2 || '');
+    setAudienceDesc2(dept.audienceDesc2 || '');
+
+    setKeySubjects(dept.keySubjects || '');
+    setCareerProspects(dept.careerProspects || '');
+
+    setCompaniesImage(dept.companiesImage || '');
+    setCtaImage(dept.ctaImage || '');
+    setEligibility(dept.eligibility || '');
+
     setEditId(dept.id);
     setIsEditing(true);
     window.scrollTo(0, 0);
   };
 
-  const handleDelete = async (id) => {
-    if (window.confirm("Delete this department permanently?")) {
-      await deleteDoc(doc(db, "departments", id));
-      toast.success("Department deleted.");
-      fetchDepartments();
-    }
-  };
-
   const resetForm = () => {
-    setName('');
-    setSlug('');
-    setBannerImage('');
-    setAboutImage('');
-    setAbout('');
-    setCoreKnowledge('');
-    setProfessionalSkills('');
-    setAdvancedApplication('');
-    setHodName('');
-    setHodMessage('');
-    setHodImage('');
-    setIsEditing(false);
-    setEditId(null);
+    setIsEditing(false); setEditId(null);
+    setName(''); setSlug(''); setTitle(''); setSubtitle(''); setBannerImage('');
+    setAboutTitle(''); setAbout(''); setAboutImage('');
+    setParallaxTitle(''); setParallaxDesc(''); setParallaxImage('');
+    setCoreKnowledge(''); setProfessionalSkills(''); setAdvancedApplication('');
+    setMidBannerImage(''); 
+    setAudienceTitle1(''); setAudienceDesc1(''); 
+    setAudienceTitle2(''); setAudienceDesc2('');
+    setKeySubjects(''); setCareerProspects('');
+    setCompaniesImage(''); setCtaImage(''); setEligibility('');
   };
 
   return (
     <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
       <ToastContainer />
+      <h2>{isEditing ? "Edit Department" : "Add Department"}</h2>
       
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <h2>{isEditing ? "Edit Department" : "Add New Department"}</h2>
-        {isEditing && <button onClick={resetForm} style={styles.cancelBtn}>Cancel Edit</button>}
-      </div>
+      <div style={{background:'white', padding:'20px', borderRadius:'10px', boxShadow:'0 2px 10px rgba(0,0,0,0.1)'}}>
+          <form onSubmit={handleSubmit} style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'20px'}}>
+              
+              {/* COL 1 */}
+              <div>
+                  <label>Department Name</label>
+                  <input type="text" value={name} onChange={e=>setName(e.target.value)} style={styles.input} placeholder="Name (for admin list)" />
+                  
+                  <label>URL Slug (e.g. 'cse-ai')</label>
+                  <input type="text" value={slug} onChange={e=>setSlug(e.target.value)} style={styles.input} placeholder="Leave empty to auto-generate from Name" />
 
-      {/* --- FORM --- */}
-      <div style={styles.card}>
-        <form onSubmit={handleSubmit}>
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '30px' }}>
-            
-            {/* LEFT COLUMN: Main Info */}
-            <div>
-              <label style={styles.label}>Department Name</label>
-              <input 
-                type="text" 
-                value={name} 
-                onChange={e => setName(e.target.value)} 
-                style={styles.input} 
-                placeholder="e.g. Computer Science Engineering" 
-              />
+                  <h3 style={styles.head}>Hero Section</h3>
+                  <input type="text" value={title} onChange={e=>setTitle(e.target.value)} style={styles.input} placeholder="Main Title (e.g. B.Tech CSE)" />
+                  <textarea value={subtitle} onChange={e=>setSubtitle(e.target.value)} style={styles.input} placeholder="Subtitle" />
 
-              <div style={{ background: '#e0f2fe', padding: '10px', borderRadius: '5px', margin: '15px 0' }}>
-                <label style={{...styles.label, color: '#0284c7'}}>URL Slug (Must match App.js route exactly)</label>
-                <input 
-                    type="text" 
-                    value={slug} 
-                    onChange={e => setSlug(e.target.value)} 
-                    style={{...styles.input, borderColor: '#0284c7'}} 
-                    placeholder="e.g. Computer-Science-Engineering" 
-                />
+                  <h3 style={styles.head}>Intro Section</h3>
+                  <input type="text" value={about_title} onChange={e=>setAboutTitle(e.target.value)} style={styles.input} placeholder="Intro Heading" />
+                  <label>Intro Text</label>
+                  <ReactQuill theme="snow" value={about} onChange={setAbout} />
+
+                  <h3 style={styles.head}>Parallax Section</h3>
+                  <input type="text" value={parallaxTitle} onChange={e=>setParallaxTitle(e.target.value)} style={styles.input} placeholder="Parallax Heading" />
+                  <label>Parallax Description</label>
+                  <ReactQuill theme="snow" value={parallaxDesc} onChange={setParallaxDesc} />
+
+                  <h3 style={styles.head}>Program Outcomes (Tabs)</h3>
+                  <label>1. Core Knowledge</label>
+                  <ReactQuill theme="snow" value={coreKnowledge} onChange={setCoreKnowledge} />
+                  <label>2. Professional Skills</label>
+                  <ReactQuill theme="snow" value={professionalSkills} onChange={setProfessionalSkills} />
+                  <label>3. Advanced Application</label>
+                  <ReactQuill theme="snow" value={advancedApplication} onChange={setAdvancedApplication} />
               </div>
 
-              <label style={styles.label}>About Department (Rich Text)</label>
-              <ReactQuill theme="snow" value={about} onChange={setAbout} style={{ height: '200px', marginBottom: '50px' }} />
+              {/* COL 2 */}
+              <div>
+                   <h3 style={styles.head}>Audience Section</h3>
+                   <input type="text" value={audienceTitle1} onChange={e=>setAudienceTitle1(e.target.value)} style={styles.input} placeholder="Audience 1 Title" />
+                   <textarea value={audienceDesc1} onChange={e=>setAudienceDesc1(e.target.value)} style={styles.input} placeholder="Audience 1 Desc" />
+                   
+                   <input type="text" value={audienceTitle2} onChange={e=>setAudienceTitle2(e.target.value)} style={styles.input} placeholder="Audience 2 Title" />
+                   <textarea value={audienceDesc2} onChange={e=>setAudienceDesc2(e.target.value)} style={styles.input} placeholder="Audience 2 Desc" />
 
-              {/* --- NEW SECTIONS --- */}
-              <h3 style={{marginTop:'30px', borderBottom:'2px solid #eee', paddingBottom:'10px'}}>Program Outcomes</h3>
-              
-              <label style={styles.label}>1. Core Knowledge</label>
-              <ReactQuill theme="snow" value={coreKnowledge} onChange={setCoreKnowledge} style={{ height: '150px', marginBottom: '50px' }} />
+                   <h3 style={styles.head}>Pills</h3>
+                   <label>Key Subjects (comma separated)</label>
+                   <textarea value={keySubjects} onChange={e=>setKeySubjects(e.target.value)} style={styles.input} />
 
-              <label style={styles.label}>2. Professional Skills</label>
-              <ReactQuill theme="snow" value={professionalSkills} onChange={setProfessionalSkills} style={{ height: '150px', marginBottom: '50px' }} />
+                   <label>Career Prospects (comma separated)</label>
+                   <textarea value={careerProspects} onChange={e=>setCareerProspects(e.target.value)} style={styles.input} />
 
-              <label style={styles.label}>3. Advanced Application</label>
-              <ReactQuill theme="snow" value={advancedApplication} onChange={setAdvancedApplication} style={{ height: '150px', marginBottom: '50px' }} />
+                   <h3 style={styles.head}>Images</h3>
+                   <ImageUpload label="Hero Background" onUploadComplete={setBannerImage} />
+                   {bannerImage && <small style={{color:'green'}}>✓ Uploaded</small>}
+                   <div style={{margin:'10px 0'}}></div>
 
-            </div>
+                   <ImageUpload label="Intro Side Image" onUploadComplete={setAboutImage} />
+                   {aboutImage && <small style={{color:'green'}}>✓ Uploaded</small>}
+                   <div style={{margin:'10px 0'}}></div>
 
-            {/* RIGHT COLUMN: HOD & Images */}
-            <div style={{ background: '#f8f9fa', padding: '20px', borderRadius: '8px', height:'fit-content' }}>
-              
-              <ImageUpload label="1. Banner Image (Top)" onUploadComplete={setBannerImage} />
-              {bannerImage && <img src={bannerImage} alt="Banner" style={{ width: '100%', height:'100px', objectFit:'cover', borderRadius: '5px', marginTop: '10px', marginBottom:'20px' }} />}
+                   <ImageUpload label="Parallax Background" onUploadComplete={setParallaxImage} />
+                   {parallaxImage && <small style={{color:'green'}}>✓ Uploaded</small>}
+                   <div style={{margin:'10px 0'}}></div>
 
-              <hr style={{borderTop:'1px solid #ddd', margin:'20px 0'}} />
-              <ImageUpload label="2. About Section Image" onUploadComplete={setAboutImage} />
-              {aboutImage && <img src={aboutImage} alt="About" style={{ width: '100%', height:'150px', objectFit:'cover', borderRadius: '5px', marginTop: '10px', marginBottom:'20px' }} />}
+                   <ImageUpload label="Mid Page Banner" onUploadComplete={setMidBannerImage} />
+                   {midBannerImage && <small style={{color:'green'}}>✓ Uploaded</small>}
+                   <div style={{margin:'10px 0'}}></div>
 
-              <hr style={{borderTop:'1px solid #ddd', margin:'20px 0'}} />
-              <h4>HOD Details</h4>
-              <ImageUpload label="3. HOD Photo" onUploadComplete={setHodImage} />
-              {hodImage && <img src={hodImage} alt="HOD" style={{ width: '80px', height:'80px', borderRadius: '50%', objectFit:'cover', marginTop: '10px' }} />}
+                   <ImageUpload label="Companies Cloud" onUploadComplete={setCompaniesImage} />
+                   {companiesImage && <small style={{color:'green'}}>✓ Uploaded</small>}
+                   <div style={{margin:'10px 0'}}></div>
 
-              <label style={styles.label}>HOD Name</label>
-              <input type="text" value={hodName} onChange={e => setHodName(e.target.value)} style={styles.input} placeholder="Dr. XYZ" />
+                   <ImageUpload label="CTA Side Image" onUploadComplete={setCtaImage} />
+                   {ctaImage && <small style={{color:'green'}}>✓ Uploaded</small>}
 
-              <label style={styles.label}>HOD Message</label>
-              <textarea value={hodMessage} onChange={e => setHodMessage(e.target.value)} style={{...styles.input, height:'80px'}} />
-
-              <button type="submit" style={styles.saveBtn}>
-                {isEditing ? "Update Department" : "Create Department"}
-              </button>
-            </div>
-
-          </div>
-        </form>
-      </div>
-
-      {/* --- LIST --- */}
-      <div style={{ marginTop: '50px' }}>
-        <h3>Existing Departments</h3>
-        <div style={styles.grid}>
-            {departments.map(dept => (
-              <div key={dept.id} style={styles.deptCard}>
-                <img src={dept.bannerImage || "https://via.placeholder.com/300x100"} alt="banner" style={{ width:'100%', height:'120px', objectFit:'cover' }} />
-                <div style={{ padding: '15px' }}>
-                    <h4 style={{ margin: '0 0 5px 0', color: '#0072C6' }}>{dept.name}</h4>
-                    <small style={{ display: 'block', color: '#666', marginBottom: '10px' }}>Slug: {dept.slug}</small>
-                    
-                    <div style={{ display: 'flex', gap: '10px' }}>
-                        <button onClick={() => handleEdit(dept)} style={styles.editBtn}>Edit</button>
-                        <button onClick={() => handleDelete(dept.id)} style={styles.deleteBtn}>Delete</button>
-                    </div>
-                </div>
+                   <h3 style={styles.head}>Eligibility</h3>
+                   <ReactQuill theme="snow" value={eligibility} onChange={setEligibility} />
+                   
+                   <button type="submit" style={styles.saveBtn}>{isEditing ? "Update Department" : "Create Department"}</button>
               </div>
-            ))}
-        </div>
+          </form>
       </div>
-
+      
+      <div style={{marginTop:'50px'}}>
+          {departments.map(d => (
+              <div key={d.id} style={{padding:'10px', borderBottom:'1px solid #ccc', display:'flex', justifyContent:'space-between'}}>
+                  <span>{d.name || "(No Name)"} / {d.slug || "(No Slug)"}</span>
+                  <button onClick={() => handleEdit(d)} style={{cursor:'pointer', padding:'5px 10px'}}>Edit</button>
+              </div>
+          ))}
+      </div>
     </div>
   );
 };
 
 const styles = {
-  card: { background: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' },
-  label: { display: 'block', fontWeight: '600', margin: '15px 0 5px', fontSize: '13px', color: '#444' },
-  input: { width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '6px', fontSize: '14px' },
-  saveBtn: { width: '100%', padding: '12px', background: '#0072C6', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', marginTop: '20px' },
-  cancelBtn: { padding: '8px 15px', background: '#64748B', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' },
-  grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' },
-  deptCard: { background: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', border: '1px solid #eee' },
-  editBtn: { flex: 1, padding: '8px', background: '#E0F2FE', color: '#0284C7', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: '600' },
-  deleteBtn: { flex: 1, padding: '8px', background: '#FEE2E2', color: '#DC2626', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: '600' }
+    input: { width:'100%', padding:'8px', marginBottom:'10px', borderRadius:'4px', border:'1px solid #ddd' },
+    head: { marginTop:'20px', borderBottom:'2px solid #eee', paddingBottom:'5px', color:'#0072C6' },
+    saveBtn: { width:'100%', padding:'15px', background:'#0072C6', color:'white', border:'none', borderRadius:'5px', marginTop:'20px', cursor:'pointer', fontSize:'16px' }
 };
 
 export default EditDepartment;
