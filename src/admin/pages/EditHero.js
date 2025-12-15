@@ -13,7 +13,8 @@ const EditHero = () => {
   const [heading, setHeading] = useState('');
   const [subheading, setSubheading] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  const [editingId, setEditingId] = useState(null); // If null, we are adding new
+  const [altText, setAltText] = useState(''); // 1. Add Alt Text State
+  const [editingId, setEditingId] = useState(null);
 
   // 1. Fetch Existing Banners
   const fetchBanners = async () => {
@@ -35,8 +36,8 @@ const EditHero = () => {
   // 2. Handle Form Submit (Add or Update)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!heading || !imageUrl) {
-      toast.warn("Please provide at least a Heading and an Image.");
+    if (!heading || !imageUrl || !altText) { // 2. Validate Alt Text
+      toast.warn("Please provide Heading, Image, and Alt Text.");
       return;
     }
 
@@ -45,16 +46,15 @@ const EditHero = () => {
         heading,
         subheading,
         imageUrl,
-        order: Date.now() // Simple way to keep order
+        altText, // 3. Save Alt Text
+        order: Date.now()
       };
 
       if (editingId) {
-        // Update existing
         const bannerRef = doc(db, "home_banners", editingId);
         await updateDoc(bannerRef, bannerData);
         toast.success("Banner updated successfully!");
       } else {
-        // Create new
         await addDoc(collection(db, "home_banners"), bannerData);
         toast.success("New banner added!");
       }
@@ -63,6 +63,7 @@ const EditHero = () => {
       setHeading('');
       setSubheading('');
       setImageUrl('');
+      setAltText(''); // Reset Alt Text
       setEditingId(null);
       fetchBanners();
 
@@ -90,8 +91,9 @@ const EditHero = () => {
     setHeading(banner.heading);
     setSubheading(banner.subheading);
     setImageUrl(banner.imageUrl);
+    setAltText(banner.altText || ''); // Load Alt Text
     setEditingId(banner.id);
-    window.scrollTo(0,0); // Scroll to top to see form
+    window.scrollTo(0,0);
   };
 
   // 5. Cancel Edit
@@ -99,6 +101,7 @@ const EditHero = () => {
     setHeading('');
     setSubheading('');
     setImageUrl('');
+    setAltText('');
     setEditingId(null);
   }
 
@@ -127,7 +130,19 @@ const EditHero = () => {
 
           {/* Text Fields */}
           <div style={{ marginBottom: '15px' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>2. Main Heading</label>
+            <label style={{ display: 'block', marginBottom: '5px' }}>2. Image Alt Text (SEO)</label>
+            <input 
+              type="text" 
+              value={altText} 
+              onChange={(e) => setAltText(e.target.value)} 
+              style={{ width: '100%', padding: '10px', fontSize: '14px', border: '1px solid #ccc', borderRadius: '4px' }}
+              placeholder="Describe the image (e.g. Students working in robotics lab)"
+              required
+            />
+          </div>
+
+          <div style={{ marginBottom: '15px' }}>
+            <label style={{ display: 'block', marginBottom: '5px' }}>3. Main Heading</label>
             <input 
               type="text" 
               value={heading} 
@@ -138,7 +153,7 @@ const EditHero = () => {
           </div>
 
           <div style={{ marginBottom: '15px' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>3. Subheading (Optional)</label>
+            <label style={{ display: 'block', marginBottom: '5px' }}>4. Subheading (Optional)</label>
             <input 
               type="text" 
               value={subheading} 
@@ -177,12 +192,13 @@ const EditHero = () => {
             <div key={banner.id} style={{ display: 'flex', alignItems: 'center', background: 'white', padding: '15px', borderRadius: '8px', border: '1px solid #eee' }}>
               <img 
                 src={banner.imageUrl} 
-                alt="thumb" 
+                alt={banner.altText || "banner"} 
                 style={{ width: '100px', height: '60px', objectFit: 'cover', borderRadius: '4px', marginRight: '20px' }} 
               />
               <div style={{ flexGrow: 1 }}>
                 <h4 style={{ margin: '0 0 5px 0' }}>{banner.heading}</h4>
                 <p style={{ margin: 0, color: '#666', fontSize: '14px' }}>{banner.subheading}</p>
+                <small style={{ color: '#888' }}>Alt: {banner.altText}</small>
               </div>
               <div>
                 <button 

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from '../firebase';
-import { Link } from 'react-router-dom'; // 1. Import Link
+import { Link } from 'react-router-dom';
 
 function Hero() {
   const [banners, setBanners] = useState([]);
@@ -13,7 +13,6 @@ function Hero() {
     const fetchBanners = async () => {
       try {
         const bannersRef = collection(db, "home_banners");
-        // We try to order them by 'order' field if you added it, otherwise it just fetches
         const q = query(bannersRef, orderBy("order")); 
         const querySnapshot = await getDocs(q);
         
@@ -25,20 +24,21 @@ function Hero() {
         if (bannerList.length > 0) {
           setBanners(bannerList);
         } else {
-          // Fallback if DB is empty
+          // Fallback if DB is empty - Added altText here
           setBanners([{ 
             imageUrl: '/images/hero.png', 
             heading: "Jaipur’s best engineering college for your bright future.",
-            subheading: "Empowering young minds through innovation."
+            subheading: "Empowering young minds through innovation.",
+            altText: "Jaipur Engineering College (JEC) Main Campus Building and Student Activity Center"
           }]);
         }
       } catch (error) {
         console.error("Error fetching banners:", error);
-        // Fallback on error
         setBanners([{ 
             imageUrl: '/images/hero.png', 
             heading: "Jaipur’s best engineering college for your bright future.",
-            subheading: "Empowering young minds through innovation."
+            subheading: "Empowering young minds through innovation.",
+            altText: "Jaipur Engineering College (JEC) Main Campus Building"
           }]);
       }
     };
@@ -46,20 +46,20 @@ function Hero() {
     fetchBanners();
   }, []);
 
-  // 2. Auto-Play Logic (Timer)
+  // 2. Auto-Play Logic
   useEffect(() => {
-    if (banners.length <= 1) return; // Don't slide if only 1 banner
+    if (banners.length <= 1) return; 
 
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => 
         prevIndex === banners.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000); // Change slide every 5 seconds
+    }, 5000); 
 
-    return () => clearInterval(timer); // Cleanup timer on unmount
+    return () => clearInterval(timer); 
   }, [banners.length]);
 
-  // 3. Manual Navigation Helper Functions
+  // 3. Navigation Functions
   const nextSlide = () => {
     setCurrentIndex(currentIndex === banners.length - 1 ? 0 : currentIndex + 1);
   };
@@ -74,13 +74,29 @@ function Hero() {
 
   // 4. Render
   return (
-    <section className="hero-slider">
+    <section className="hero-slider" style={{ position: 'relative', overflow: 'hidden' }}>
       {banners.map((banner, index) => (
         <div 
           key={banner.id || index}
           className={`hero-slide ${index === currentIndex ? 'active' : ''}`}
-          style={{ backgroundImage: `url(${banner.imageUrl})` }}
+          // REMOVED style={{ backgroundImage: ... }} to use real <img> tag below
         >
+          {/* NEW: Image Tag for SEO and Accessibility */}
+          <img 
+            src={banner.imageUrl} 
+            alt={banner.altText || "Jaipur Engineering College (JEC) Campus Life and Events"} 
+            className="hero-bg-image"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              zIndex: -1
+            }}
+          />
+
           {/* Overlay to make text readable */}
           <div className="hero-overlay"></div>
 
@@ -89,13 +105,13 @@ function Hero() {
             <div className="hero-underline"></div>
             {banner.subheading && <p>{banner.subheading}</p>}
             <Link to="/admission-enquiry" className="apply-btn">
-      Apply for Admission
-    </Link>
+              Apply for Admission
+            </Link>
           </div>
         </div>
       ))}
 
-      {/* Navigation Arrows (Only show if more than 1 slide) */}
+      {/* Navigation Arrows */}
       {banners.length > 1 && (
         <>
           <button className="slider-arrow prev" onClick={prevSlide}>❮</button>

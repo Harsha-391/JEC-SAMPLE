@@ -14,15 +14,20 @@ const EditDepartment = () => {
   const [editId, setEditId] = useState(null);
 
   // Form State
-  const [name, setName] = useState(''); // e.g. "Computer Science & Engineering"
-  const [slug, setSlug] = useState(''); // e.g. "cse" (used for matching routes if needed)
+  const [name, setName] = useState(''); 
+  const [slug, setSlug] = useState(''); 
   const [bannerImage, setBannerImage] = useState('');
-  const [about, setAbout] = useState(''); // Rich Text
+  const [aboutImage, setAboutImage] = useState(''); 
+  const [about, setAbout] = useState(''); 
+  
+  // New Fields replacing Vision/Mission
+  const [coreKnowledge, setCoreKnowledge] = useState('');
+  const [professionalSkills, setProfessionalSkills] = useState('');
+  const [advancedApplication, setAdvancedApplication] = useState('');
+
   const [hodName, setHodName] = useState('');
   const [hodMessage, setHodMessage] = useState('');
   const [hodImage, setHodImage] = useState('');
-  const [vision, setVision] = useState('');
-  const [mission, setMission] = useState('');
 
   // 1. Fetch Departments
   const fetchDepartments = async () => {
@@ -34,7 +39,6 @@ const EditDepartment = () => {
       setLoading(false);
     } catch (error) {
       console.error("Error fetching departments:", error);
-      // Fallback without sort if index missing
       const querySnapshot = await getDocs(collection(db, "departments"));
       const list = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setDepartments(list);
@@ -49,21 +53,24 @@ const EditDepartment = () => {
   // 2. Handle Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !about) {
-      toast.warn("Department Name and About section are required!");
+    if (!name || !slug) {
+      toast.warn("Department Name and Slug are required!");
       return;
     }
 
     const deptData = {
       name,
-      slug: slug || name.toLowerCase().replace(/ /g, '-'),
+      slug,
       bannerImage,
+      aboutImage,
       about,
+      // Save new fields
+      coreKnowledge, 
+      professionalSkills,
+      advancedApplication,
       hodName,
       hodMessage,
       hodImage,
-      vision,
-      mission,
       updatedAt: new Date()
     };
 
@@ -88,12 +95,17 @@ const EditDepartment = () => {
     setName(dept.name);
     setSlug(dept.slug);
     setBannerImage(dept.bannerImage);
+    setAboutImage(dept.aboutImage || '');
     setAbout(dept.about);
+    
+    // Load new fields (fallback to empty string)
+    setCoreKnowledge(dept.coreKnowledge || '');
+    setProfessionalSkills(dept.professionalSkills || '');
+    setAdvancedApplication(dept.advancedApplication || '');
+
     setHodName(dept.hodName);
     setHodMessage(dept.hodMessage);
     setHodImage(dept.hodImage);
-    setVision(dept.vision);
-    setMission(dept.mission);
     
     setEditId(dept.id);
     setIsEditing(true);
@@ -112,12 +124,14 @@ const EditDepartment = () => {
     setName('');
     setSlug('');
     setBannerImage('');
+    setAboutImage('');
     setAbout('');
+    setCoreKnowledge('');
+    setProfessionalSkills('');
+    setAdvancedApplication('');
     setHodName('');
     setHodMessage('');
     setHodImage('');
-    setVision('');
-    setMission('');
     setIsEditing(false);
     setEditId(null);
   };
@@ -139,33 +153,55 @@ const EditDepartment = () => {
             {/* LEFT COLUMN: Main Info */}
             <div>
               <label style={styles.label}>Department Name</label>
-              <input type="text" value={name} onChange={e => setName(e.target.value)} style={styles.input} placeholder="e.g. Computer Science Engineering" />
+              <input 
+                type="text" 
+                value={name} 
+                onChange={e => setName(e.target.value)} 
+                style={styles.input} 
+                placeholder="e.g. Computer Science Engineering" 
+              />
+
+              <div style={{ background: '#e0f2fe', padding: '10px', borderRadius: '5px', margin: '15px 0' }}>
+                <label style={{...styles.label, color: '#0284c7'}}>URL Slug (Must match App.js route exactly)</label>
+                <input 
+                    type="text" 
+                    value={slug} 
+                    onChange={e => setSlug(e.target.value)} 
+                    style={{...styles.input, borderColor: '#0284c7'}} 
+                    placeholder="e.g. Computer-Science-Engineering" 
+                />
+              </div>
 
               <label style={styles.label}>About Department (Rich Text)</label>
               <ReactQuill theme="snow" value={about} onChange={setAbout} style={{ height: '200px', marginBottom: '50px' }} />
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                <div>
-                    <label style={styles.label}>Vision</label>
-                    <textarea value={vision} onChange={e => setVision(e.target.value)} style={{...styles.input, height:'100px'}} />
-                </div>
-                <div>
-                    <label style={styles.label}>Mission</label>
-                    <textarea value={mission} onChange={e => setMission(e.target.value)} style={{...styles.input, height:'100px'}} />
-                </div>
-              </div>
+              {/* --- NEW SECTIONS --- */}
+              <h3 style={{marginTop:'30px', borderBottom:'2px solid #eee', paddingBottom:'10px'}}>Program Outcomes</h3>
+              
+              <label style={styles.label}>1. Core Knowledge</label>
+              <ReactQuill theme="snow" value={coreKnowledge} onChange={setCoreKnowledge} style={{ height: '150px', marginBottom: '50px' }} />
+
+              <label style={styles.label}>2. Professional Skills</label>
+              <ReactQuill theme="snow" value={professionalSkills} onChange={setProfessionalSkills} style={{ height: '150px', marginBottom: '50px' }} />
+
+              <label style={styles.label}>3. Advanced Application</label>
+              <ReactQuill theme="snow" value={advancedApplication} onChange={setAdvancedApplication} style={{ height: '150px', marginBottom: '50px' }} />
+
             </div>
 
             {/* RIGHT COLUMN: HOD & Images */}
             <div style={{ background: '#f8f9fa', padding: '20px', borderRadius: '8px', height:'fit-content' }}>
               
-              <ImageUpload label="Banner Image" onUploadComplete={setBannerImage} />
+              <ImageUpload label="1. Banner Image (Top)" onUploadComplete={setBannerImage} />
               {bannerImage && <img src={bannerImage} alt="Banner" style={{ width: '100%', height:'100px', objectFit:'cover', borderRadius: '5px', marginTop: '10px', marginBottom:'20px' }} />}
 
               <hr style={{borderTop:'1px solid #ddd', margin:'20px 0'}} />
-              
+              <ImageUpload label="2. About Section Image" onUploadComplete={setAboutImage} />
+              {aboutImage && <img src={aboutImage} alt="About" style={{ width: '100%', height:'150px', objectFit:'cover', borderRadius: '5px', marginTop: '10px', marginBottom:'20px' }} />}
+
+              <hr style={{borderTop:'1px solid #ddd', margin:'20px 0'}} />
               <h4>HOD Details</h4>
-              <ImageUpload label="HOD Photo" onUploadComplete={setHodImage} />
+              <ImageUpload label="3. HOD Photo" onUploadComplete={setHodImage} />
               {hodImage && <img src={hodImage} alt="HOD" style={{ width: '80px', height:'80px', borderRadius: '50%', objectFit:'cover', marginTop: '10px' }} />}
 
               <label style={styles.label}>HOD Name</label>
@@ -191,13 +227,9 @@ const EditDepartment = () => {
               <div key={dept.id} style={styles.deptCard}>
                 <img src={dept.bannerImage || "https://via.placeholder.com/300x100"} alt="banner" style={{ width:'100%', height:'120px', objectFit:'cover' }} />
                 <div style={{ padding: '15px' }}>
-                    <h4 style={{ margin: '0 0 10px 0', color: '#0072C6' }}>{dept.name}</h4>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom:'15px' }}>
-                        <img src={dept.hodImage || "https://via.placeholder.com/40"} alt="HOD" style={{width:'40px', height:'40px', borderRadius:'50%'}} />
-                        <div style={{fontSize:'13px'}}>
-                            <strong>HOD:</strong> {dept.hodName || 'N/A'}
-                        </div>
-                    </div>
+                    <h4 style={{ margin: '0 0 5px 0', color: '#0072C6' }}>{dept.name}</h4>
+                    <small style={{ display: 'block', color: '#666', marginBottom: '10px' }}>Slug: {dept.slug}</small>
+                    
                     <div style={{ display: 'flex', gap: '10px' }}>
                         <button onClick={() => handleEdit(dept)} style={styles.editBtn}>Edit</button>
                         <button onClick={() => handleDelete(dept.id)} style={styles.deleteBtn}>Delete</button>

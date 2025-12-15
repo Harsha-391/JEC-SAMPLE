@@ -1,10 +1,18 @@
 // src/pages/About.js
 import React from 'react';
+import { Helmet } from 'react-helmet-async'; // Import Helmet
 
 function About() {
   return (
     // This new wrapper class will scope all the new styles
     <div className="about-page-new">
+      <Helmet>
+        <title>About JEC | 25 Years of Engineering Excellence in Jaipur</title>
+        <meta 
+          name="description" 
+          content="Discover Jaipur Engineering College (JEC), established in 2000. A hub for innovation, research, and holistic development with 10,000+ global alumni and state-of-the-art infrastructure in Kukas, Jaipur." 
+        />
+      </Helmet>
 
       <section className="hero">
         <div className="hero-content">
@@ -50,8 +58,12 @@ function About() {
             <p>Since its inception in 2000, Jaipur Engineering College (JEC) has consistently enabled students to carve a niche for themselves and develop a strong personality. The Institute is committed to advancing knowledge and educating students in various branches of engineering that will best serve the nation and the world in the 21st century.</p>
             <p>Our community is driven by a shared purpose: to make a better world through education, research, and innovation. Our holistic approach, combined with state-of-the-art infrastructure on the serene outskirts of Jaipur, defines JEC as a unique force for positive transformation.</p>
             
-            {/* This image MUST exist at public/images/campus-intro.jpg */}
-            <img src="../images/campus-intro.jpeg" alt="JEC Campus Overview" className="intro-image" />
+            {/* UPDATED ALT TEXT HERE */}
+            <img 
+              src="../images/campus-intro.jpeg" 
+              alt="Panoramic view of Jaipur Engineering College (JEC) campus lush green infrastructure in Kukas, Jaipur" 
+              className="intro-image" 
+            />
           </div>
         </div>
       </section>
