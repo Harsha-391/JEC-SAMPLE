@@ -16,7 +16,7 @@ const ImageUpload = ({ onUploadComplete, label = "Upload Image", constraints }) 
       let maxSizeBytes = 1024 * 1024; // Default 1MB
       if (constraints) {
          if (constraints.width >= 2000) maxSizeBytes = 2 * 1024 * 1024; // 2MB for Banners
-         else if (constraints.width <= 500) maxSizeBytes = 500 * 1024;  // 500KB for Small images
+         else if (constraints.width <= 500) maxSizeBytes = 1024 * 1024;  // 500KB for Small images
       }
 
       if (file.size > maxSizeBytes) {
