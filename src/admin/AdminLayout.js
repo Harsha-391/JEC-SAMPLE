@@ -21,7 +21,6 @@ const AdminLayout = () => {
           <Link to="/admin" className="nav-item">Overview</Link>
           
           <p className="menu-label">Page Content</p>
-          {/* Removed About and Admissions as requested */}
           <Link to="/admin/edit-home" className="nav-item">Home Page</Link>
           
           <p className="menu-label">Dynamic Updates</p>
@@ -31,6 +30,7 @@ const AdminLayout = () => {
           <Link to="/admin/manage-testimonials" className="nav-item">Testimonials</Link>
           <Link to="/admin/manage-departments" className="nav-item">Departments</Link>
           <Link to="/admin/manage-videos" className="nav-item">Video Gallery</Link>
+          <Link to="/admin/manage-placements" className="nav-item">Placements</Link> {/* <-- ADDED */}
 
           <p className="menu-label">Settings</p>
           <Link to="/admin/users" className="nav-item">User Management</Link>

@@ -1,13 +1,13 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async'; // 1. Import HelmetProvider
+import { HelmetProvider } from 'react-helmet-async'; 
 import './App.css';
 
-// Layouts (Keep these as standard imports for faster initial render)
+// Layouts
 import Layout from './components/Layout';
 import AdminLayout from './admin/AdminLayout';
 
-// Auth Components (Standard import for speed)
+// Auth Components
 import ProtectedRoute from './admin/components/ProtectedRoute';
 
 // --- LAZY IMPORT PAGES ---
@@ -32,44 +32,45 @@ const Testimonials = lazy(() => import('./pages/Testimonials'));
 // 3. Society Dropdown
 const JCES = lazy(() => import('./pages/JCES'));
 const AgrasenCollege = lazy(() => import('./pages/AgrasenCollege'));
-const KeyTeamsFunctions = lazy(() => import('./pages/KeyTeamsFunctions'));
-const Foundation = lazy(() => import('./pages/Foundation'));
 
-// 4. Admission Sub-pages
-const Reap2025 = lazy(() => import('./pages/Reap2025'));
-const MandatoryDisclosure = lazy(() => import('./pages/MandatoryDisclosure'));
-const KarmaCourses = lazy(() => import('./pages/KarmaCourses'));
-const FinancialAids = lazy(() => import('./pages/FinancialAids'));
+// 4. Programs Dropdown
+const CoursesOffered = lazy(() => import('./pages/CoursesOffered'));
+const EngineeringProjects = lazy(() => import('./pages/EngineeringProjects'));
+const AcademicAchievers = lazy(() => import('./pages/AcademicAchievers'));
+const Department = lazy(() => import('./pages/Department'));
+
+// 5. Admissions Dropdown
+const AdmissionProcedure = lazy(() => import('./pages/AdmissionProcedure'));
 const FeeStructure = lazy(() => import('./pages/FeeStructure'));
 const DocumentsRequired = lazy(() => import('./pages/DocumentsRequired'));
-const CoursesOffered = lazy(() => import('./pages/CoursesOffered'));
+const Reap2025 = lazy(() => import('./pages/Reap2025'));
+const FinancialAids = lazy(() => import('./pages/FinancialAids'));
 const AdmissionOpen = lazy(() => import('./pages/AdmissionOpen'));
-const AdmissionProcedure = lazy(() => import('./pages/AdmissionProcedure'));
 
-// 5. Infrastructure
-const RefuelAndRelax = lazy(() => import('./pages/RefuelAndRelax'));
-const PrepareAndPresent = lazy(() => import('./pages/PrepareAndPresent'));
+// 6. Campus Dropdown
+const StudentsCorner = lazy(() => import('./pages/StudentsCorner'));
+const CampusLife = lazy(() => import('./components/CampusLife')); 
+const VideoGallery = lazy(() => import('./pages/VideoGallery'));
+const Gallery = lazy(() => import('./pages/Gallery'));
+const Grievance = lazy(() => import('./components/Grievance'));
+const MandatoryDisclosure = lazy(() => import('./pages/MandatoryDisclosure'));
+
+// 7. Research
+const Foundation = lazy(() => import('./pages/Foundation'));
+const KeyTeamsFunctions = lazy(() => import('./pages/KeyTeamsFunctions'));
 const LearningByDoing = lazy(() => import('./pages/LearningByDoing'));
+const PrepareAndPresent = lazy(() => import('./pages/PrepareAndPresent'));
+const RefuelAndRelax = lazy(() => import('./pages/RefuelAndRelax'));
+const VibrantIndia = lazy(() => import('./pages/VibrantIndia'));
+const MentalHealth = lazy(() => import('./pages/MentalHealth'));
+const KarmaCourses = lazy(() => import('./pages/KarmaCourses'));
 const ConvenienceAndSafety = lazy(() => import('./pages/ConvenienceAndSafety'));
 
-// 6. Dynamic Content (Blog, Gallery, Dept)
-const Department = lazy(() => import('./pages/Department'));
-const Gallery = lazy(() => import('./pages/Gallery'));
+// 8. Blog
 const Blog = lazy(() => import('./pages/Blog'));
 const SinglePost = lazy(() => import('./pages/SinglePost'));
-const VideoGallery = lazy(() => import('./pages/VideoGallery'));
 
-// 7. Campus Life
-const GutsNGlory = lazy(() => import('./pages/GutsNGlory'));
-const StudentsCorner = lazy(() => import('./pages/StudentsCorner'));
-const GamesAndSports = lazy(() => import('./pages/GamesAndSports'));
-const VibrantIndia = lazy(() => import('./pages/VibrantIndia'));
-const CommitteesZone = lazy(() => import('./pages/CommitteesZone'));
-const MentalHealth = lazy(() => import('./pages/MentalHealth'));
-const AcademicAchievers = lazy(() => import('./pages/AcademicAchievers'));
-const EngineeringProjects = lazy(() => import('./pages/EngineeringProjects'));
-
-// --- LAZY IMPORT ADMIN PAGES ---
+// --- ADMIN PAGES ---
 const Login = lazy(() => import('./admin/pages/Login'));
 const Overview = lazy(() => import('./admin/pages/Overview'));
 const EditHero = lazy(() => import('./admin/pages/EditHero'));
@@ -79,121 +80,76 @@ const EditTestimonials = lazy(() => import('./admin/pages/EditTestimonials'));
 const EditDepartment = lazy(() => import('./admin/pages/EditDepartment'));
 const EditVideoGallery = lazy(() => import('./admin/pages/EditVideoGallery'));
 const EditGallery = lazy(() => import('./admin/pages/EditGallery'));
+const EditPlacements = lazy(() => import('./admin/pages/EditPlacements')); // <--- NEW IMPORT
 const UserManagement = lazy(() => import('./admin/pages/UserManagement'));
-
-
-// --- LOADING SPINNER COMPONENT ---
-const LoadingFallback = () => (
-  <div style={{
-    height: '100vh', 
-    display: 'flex', 
-    justifyContent: 'center', 
-    alignItems: 'center', 
-    flexDirection: 'column',
-    color: '#0072C6'
-  }}>
-    <div className="spinner"></div>
-    <h3>Loading JEC...</h3>
-    <style>{`
-      .spinner {
-        width: 50px;
-        height: 50px;
-        border: 5px solid #f3f3f3;
-        border-top: 5px solid #0072C6;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin-bottom: 20px;
-      }
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-    `}</style>
-  </div>
-);
-
 
 function App() {
   return (
-    <HelmetProvider> {/* 2. Wrap App with HelmetProvider for SEO */}
+    <HelmetProvider>
       <BrowserRouter>
-        {/* Wrap everything in Suspense to handle the lazy loading state */}
-        <Suspense fallback={<LoadingFallback />}>
+        <Suspense fallback={<div className="loading-spinner">Loading...</div>}>
           <Routes>
-            
-            {/* --- PUBLIC WEBSITE ROUTES --- */}
+            {/* --- PUBLIC ROUTES --- */}
             <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} /> 
-
-              {/* Header */}
+              <Route index element={<Home />} />
               <Route path="admission-enquiry" element={<AdmissionEnquiry />} />
+              <Route path="admissions" element={<Admissions />} />
+              <Route path="placements" element={<Placements />} />
+              <Route path="about" element={<About />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="faq" element={<Faq />} />
+
+              {/* JEC Dropdown */}
+              <Route path="jec-management" element={<Management />} />
+              <Route path="human-network" element={<HumanNetwork />} />
+              <Route path="industry-interaction-cell" element={<IIC />} />
+              <Route path="alumni" element={<Alumni />} />
+              <Route path="employment" element={<Employment />} />
+              <Route path="anti-ragging" element={<AntiRagging />} />
+              <Route path="testimonials" element={<Testimonials />} />
+
+              {/* Society Dropdown */}
+              <Route path="jaipur-college-of-engineering-and-science" element={<JCES />} />
+              <Route path="agrasen-college" element={<AgrasenCollege />} />
+
+              {/* Programs Dropdown */}
+              <Route path="courses-offered" element={<CoursesOffered />} />
+              <Route path="engineering-projects" element={<EngineeringProjects />} />
+              <Route path="academic-achievers" element={<AcademicAchievers />} />
               
-              {/* Main Pages */}
-              <Route path="jec/About-JEC" element={<About />} />
-              <Route path="contact-us" element={<Contact />} />
-              <Route path="placement" element={<Placements />} />
-              <Route path="gallery" element={<Gallery />} />
+              {/* Admissions Dropdown */}
+              <Route path="admission-procedure" element={<AdmissionProcedure />} />
+              <Route path="fee-structure" element={<FeeStructure />} />
+              <Route path="documents-required" element={<DocumentsRequired />} />
+              <Route path="reap-2025" element={<Reap2025 />} />
+              <Route path="financial-aids" element={<FinancialAids />} />
+              <Route path="admission-open" element={<AdmissionOpen />} />
+
+              {/* Campus Dropdown */}
+              <Route path="students-corner" element={<StudentsCorner />} />
+              <Route path="campus-life" element={<CampusLife />} />
+              <Route path="video-gallery" element={<VideoGallery />} />
+              <Route path="photo-gallery" element={<Gallery />} />
+              <Route path="grievance-redressal" element={<Grievance />} />
+              <Route path="mandatory-disclosure" element={<MandatoryDisclosure />} />
+
+              {/* Research Dropdown */}
+              <Route path="research/foundation" element={<Foundation />} />
+              <Route path="research/key-teams" element={<KeyTeamsFunctions />} />
+              <Route path="research/learning-by-doing" element={<LearningByDoing />} />
+              <Route path="research/prepare-and-present" element={<PrepareAndPresent />} />
+              <Route path="research/refuel-and-relax" element={<RefuelAndRelax />} />
+              <Route path="research/vibrant-india" element={<VibrantIndia />} />
+              <Route path="research/mental-health" element={<MentalHealth />} />
+              <Route path="research/karma-courses" element={<KarmaCourses />} />
+              <Route path="research/convenience-safety" element={<ConvenienceAndSafety />} />
+
+              {/* Blog */}
               <Route path="blog" element={<Blog />} />
-              <Route path="blog/view/:id" element={<SinglePost />} />
-              
-              {/* Campus Life Routes */}
-              <Route path="/campus-life/guts-n-glory" element={<GutsNGlory />} />
-              <Route path="/campus-life/students-corner" element={<StudentsCorner />} />
-              <Route path="/campus-life/games-and-sports" element={<GamesAndSports />} />
-              <Route path="/campus-life/jec-vibrant-india" element={<VibrantIndia />} />
-              <Route path="/campus-life/committees-zone" element={<CommitteesZone />} />
-              <Route path="/campus-life/mental-health" element={<MentalHealth />} />
-              <Route path="/campus-life/academic-achievers" element={<AcademicAchievers />} />
-              <Route path="/campus-life/engineering-projects" element={<EngineeringProjects />} />
-              <Route path="/campus-life/video-gallery" element={<VideoGallery />} />
+              <Route path="blog/:id" element={<SinglePost />} />
 
-              {/* Admission Routes */}
-              <Route path="admissions" element={<Admissions />} /> 
-              <Route path="admission/REAP-2025" element={<Reap2025 />} />
-              <Route path="admission/Mandatory-Disclosure" element={<MandatoryDisclosure />} />
-              <Route path="admission/Karma-Courses-JEC" element={<KarmaCourses />} />
-              <Route path="admission/Financial-Aids-Bank-Loans" element={<FinancialAids />} />
-              <Route path="admission/Fee-Structure" element={<FeeStructure />} />
-              <Route path="admission/Documents-Required" element={<DocumentsRequired />} />
-              <Route path="admission/Courses-Offered" element={<CoursesOffered />} />
-              <Route path="admission/btech-admissions" element={<AdmissionOpen />} />
-              <Route path="admission/Admission-Procedure" element={<AdmissionProcedure />} />
-
-              {/* Infrastructure Dropdown Routes */}
-              <Route path="Infrastructure/Refuel-and-Relax" element={<RefuelAndRelax />} />
-              <Route path="Infrastructure/Prepare-and-Present" element={<PrepareAndPresent />} />
-              <Route path="Infrastructure/Learning-By-Doing" element={<LearningByDoing />} />
-              <Route path="Infrastructure/Convenience-and-Safety" element={<ConvenienceAndSafety />} />
-
-              {/* JEC Dropdown Routes */}
-              <Route path="jec/JEC-FAQ" element={<Faq />} />
-              <Route path="jec/Management" element={<Management />} />
-              <Route path="jec/network" element={<HumanNetwork />} />
-              <Route path="jec/Institution-Innovation-Council-JEC" element={<IIC />} />
-              <Route path="jec/Alumni" element={<Alumni />} />
-              <Route path="jec/Employment-JEC" element={<Employment />} />
-              <Route path="jec/Anti-Ragging-Committee" element={<AntiRagging />} />
-              <Route path="jec/Students-Testimonials" element={<Testimonials />} />
-
-              {/* Our Society Dropdown Routes */}
-              <Route path="Our-Society/Foundation-for-Better-Tomorrow" element={<Foundation />} />
-              <Route path="Our-Society/Other-Institutes-Agrasen-College" element={<AgrasenCollege />} />
-              <Route path="Our-Society/Other-Institutes-Jaipur-College-of-Education-and-Science" element={<JCES />} />
-              <Route path="Our-Society/Key-Teams-Functions" element={<KeyTeamsFunctions />} />
-
-              {/* Department Routes - Note: These all use the same 'Department' template */}
-              <Route path="JEC-engineering/Computer-Science-Engineering-AI" element={<Department />} />
-              <Route path="JEC-engineering/Computer-Science-Engineering" element={<Department />} />
-              <Route path="JEC-engineering/Information-Technology" element={<Department />} />
-              <Route path="JEC-engineering/Civil-Engineering" element={<Department />} />
-              <Route path="JEC-engineering/Electronics-Communication-Engineering" element={<Department />} />
-              <Route path="JEC-engineering/Electrical-Engineering" element={<Department />} />
-              <Route path="JEC-engineering/Mechanical-Engineering" element={<Department />} />
-              <Route path="JEC-engineering/Applied-Sciences-Humanities" element={<Department />} />
-              <Route path="JEC-engineering/Centre-Of-Excellence-COE" element={<Department />} />
-              <Route path="JEC-engineering/JEC-Research-Cell" element={<Department />} />
-              <Route path="JEC-engineering/Engineering-JEC" element={<Department />} />
-              <Route path="JEC-engineering/MOOCS-NPTEL-SWAYAM" element={<Department />} />
+              {/* Dynamic Department Route */}
+              <Route path="JEC-engineering/:departmentId" element={<Department />} />
             </Route>
 
             {/* Login Route */}
@@ -216,6 +172,7 @@ function App() {
                 <Route path="manage-departments" element={<EditDepartment />} />
                 <Route path="manage-videos" element={<EditVideoGallery />} />
                 <Route path="manage-gallery" element={<EditGallery />} />
+                <Route path="manage-placements" element={<EditPlacements />} /> {/* <--- NEW ROUTE */}
 
                 {/* Admin Only */}
                 <Route 

@@ -48,7 +48,7 @@ function Employment() {
           </div>
           <div className="philosophy-img">
             {/* Make sure 'faculty-team.jpg' is in your /public/images/ folder */}
-            <img src="/jechome.png" alt="Our Mission" />
+            <img src="https://firebasestorage.googleapis.com/v0/b/jec-website-55397.firebasestorage.app/o/hardcode%20images%2FUntitled%20(Instagram%20Post).png?alt=media&token=627013a7-9295-431b-8cf3-917588dcf875" alt="Our Mission" />
           </div>
         </div>
       </section>
