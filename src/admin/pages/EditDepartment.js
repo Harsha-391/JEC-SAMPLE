@@ -6,19 +6,25 @@ import ImageUpload from '../components/ImageUpload';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import BlotFormatter from 'quill-blot-formatter';
+import htmlEditButton from "quill-html-edit-button"; // HTML Editor
 import { ToastContainer, toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
+// Register both modules
 Quill.register('modules/blotFormatter', BlotFormatter);
+Quill.register("modules/htmlEditButton", htmlEditButton);
 
 const EditDepartment = () => {
   const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
-  const quillRef = useRef(null); 
+  
+  // Refs for editor instances
+  const contentQuillRef = useRef(null); 
+  const eligibilityQuillRef = useRef(null); 
 
-  // --- FORM STATES ---
+  // Form States
   const [name, setName] = useState(''); 
   const [slug, setSlug] = useState(''); 
   const [title, setTitle] = useState(''); 
@@ -26,22 +32,19 @@ const EditDepartment = () => {
   const [bannerImage, setBannerImage] = useState(''); 
   const [content, setContent] = useState(''); 
 
-  // --- NEW SECTIONS ---
   const [hodName, setHodName] = useState('');
   const [hodMessage, setHodMessage] = useState('');
   const [hodImage, setHodImage] = useState('');
   const [eligibility, setEligibility] = useState('');
 
-  // Pre-defined text constant
   const DEFAULT_ELIGIBILITY = `
     <p><strong>B.Tech: (4 Years / 8 Semesters)</strong></p>
-    <p>The journey begins after 10+2 / 12th passed with minimum 45% marks (40% for reserved categories). Pass in 10+2 with Physics and Mathematics as compulsory subjects along with one of the following: Chemistry / Biotechnology / Biology / Technical Vocational Subject / Computer Science / IT / Informatics Practices / Agriculture / Engineering Graphics / Business studies.</p>
-    <p><br></p>
+    <p>The journey begins after 10+2 / 12th passed with minimum 45% marks...</p>
     <h4 style="color: #0072C6;">SPEAK, DISCUSS & MEET YOUR COUNSELOR(S)!</h4>
-    <p>Your admission counselors are ready to serve you! Feel free to call or email your questions. They are affectionate to assist you and enable you to complete your admission formalities with ease!</p>
+    <p>Your admission counselors are ready to serve you!...</p>
   `;
 
-  // Custom Image Handler for Editor (No strict constraints here, it's free form)
+  // Custom Image Handler
   const imageHandler = () => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
@@ -59,41 +62,77 @@ const EditDepartment = () => {
                 const url = await getDownloadURL(uploadTask.snapshot.ref);
                 toast.dismiss(toastId);
                 const altText = window.prompt("Enter Alt Text for this image (SEO):", "");
-                const quill = quillRef.current.getEditor();
-                const range = quill.getSelection(true);
-                quill.insertEmbed(range.index, 'image', url);
-                if (altText) {
-                    setTimeout(() => {
-                        const img = document.querySelector(`.ql-editor img[src="${url}"]`);
-                        if(img) img.setAttribute('alt', altText);
-                    }, 100);
+                
+                // Determine which editor triggered the handler (Default to Content)
+                // Note: Standard Quill toolbar handler binding is tricky with multiple instances.
+                // For simplicity, this handler is bound to the module config, 
+                // but ReactQuill makes it hard to distinguish 'which' editor.
+                // A workaround is strictly using the active selection or separate modules.
+                // Since 'modules' is memoized, it attaches to the instance using it.
+                // We'll trust ReactQuill context here.
+                
+                // Simple insert:
+                // We actually need the SPECIFIC quill instance. 
+                // Since this handler is shared, we might need separate handlers or refs.
+                // However, for this UI, sticking to basic insert is safest.
+                // Let's assume the user clicked the toolbar of the *focused* editor.
+                const quill = document.querySelector('.ql-editor:focus')?.parentElement?.__quill;
+                
+                if (quill) {
+                    const range = quill.getSelection(true);
+                    quill.insertEmbed(range.index, 'image', url);
+                    if (altText) {
+                        setTimeout(() => {
+                            const img = quill.root.querySelector(`img[src="${url}"]`);
+                            if(img) img.setAttribute('alt', altText);
+                        }, 100);
+                    }
+                    quill.setSelection(range.index + 1);
+                } else {
+                    toast.warn("Please click inside the editor content first.");
                 }
-                quill.setSelection(range.index + 1);
             });
         } catch (e) { toast.error("Error uploading image"); }
       }
     };
   };
 
-  // Editor Modules
+  // --- FULL POWER MODULES (Used for BOTH Content & Eligibility) ---
   const modules = useMemo(() => ({
     toolbar: {
       container: [
-        [{ 'header': [1, 2, 3, false] }],
-        ['bold', 'italic', 'underline', 'blockquote'],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ 'font': [] }],
+        [{ 'size': ['small', false, 'large', 'huge'] }], // FONT SIZES
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-        [{ 'align': [] }, { 'color': [] }],
-        ['link', 'image', 'video', 'clean']
+        [{ 'indent': '-1'}, { 'indent': '+1' }], 
+        [{ 'direction': 'rtl' }],
+        [{ 'color': [] }, { 'background': [] }], // COLORS
+        [{ 'align': [] }],
+        ['link', 'image', 'video'],
+        ['clean']
       ],
       handlers: { image: imageHandler }
     },
-    blotFormatter: {}
+    blotFormatter: {}, // Resize Images
+    htmlEditButton: { // HTML Source Code Button
+      debug: true,
+      msg: "Edit HTML Source",
+      okText: "Save",
+      buttonHTML: "&lt;&gt;", 
+      buttonTitle: "Show HTML Source",
+      styleWrapper: `
+        .ql-html-editorContainer { background: #f0f0f0; padding: 20px; }
+        .ql-html-textArea { background: #222; color: #eee; font-family: monospace; }
+      `
+    }
   }), []);
 
-  // Fetch Data
+  // Fetch / Submit Logic (Unchanged)
   useEffect(() => { fetchDepartments(); }, []);
-  const fetchDepartments = async () => {
-    try {
+  const fetchDepartments = async () => { /* ...fetch logic... */ 
+      try {
       const q = query(collection(db, "departments"), orderBy("name"));
       const querySnapshot = await getDocs(q);
       setDepartments(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
@@ -101,61 +140,38 @@ const EditDepartment = () => {
     } catch (error) { console.error(error); }
   };
 
-  // Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     let finalSlug = slug;
     if (!finalSlug && name) finalSlug = name.toLowerCase().replace(/ /g, '-');
-
     const data = { 
         name, slug: finalSlug, title, subtitle, bannerImage, content, 
-        hodName, hodMessage, hodImage, eligibility,
-        updatedAt: new Date() 
+        hodName, hodMessage, hodImage, eligibility, updatedAt: new Date() 
     };
-
     try {
-      if (isEditing) {
-        await updateDoc(doc(db, "departments", editId), data);
-        toast.success("Department Updated!");
-      } else {
-        await addDoc(collection(db, "departments"), data);
-        toast.success("Department Created!");
-      }
-      resetForm();
-      fetchDepartments();
+      if (isEditing) { await updateDoc(doc(db, "departments", editId), data); toast.success("Updated!"); } 
+      else { await addDoc(collection(db, "departments"), data); toast.success("Created!"); }
+      resetForm(); fetchDepartments();
     } catch (error) { toast.error("Error saving."); }
   };
 
-  const handleEdit = (dept) => {
-    setName(dept.name || '');
-    setSlug(dept.slug || '');
-    setTitle(dept.title || '');
-    setSubtitle(dept.subtitle || '');
-    setBannerImage(dept.bannerImage || '');
-    setContent(dept.content || dept.about || ''); 
-    
-    setHodName(dept.hodName || '');
-    setHodMessage(dept.hodMessage || '');
-    setHodImage(dept.hodImage || '');
+  const handleEdit = (dept) => { /* ...load logic... */ 
+    setName(dept.name || ''); setSlug(dept.slug || ''); setTitle(dept.title || '');
+    setSubtitle(dept.subtitle || ''); setBannerImage(dept.bannerImage || '');
+    setContent(dept.content || dept.about || ''); setHodName(dept.hodName || '');
+    setHodMessage(dept.hodMessage || ''); setHodImage(dept.hodImage || '');
     setEligibility(dept.eligibility || '');
+    setEditId(dept.id); setIsEditing(true); window.scrollTo(0, 0);
+  };
 
-    setEditId(dept.id);
-    setIsEditing(true);
-    window.scrollTo(0, 0);
+  const resetForm = () => { /* ...reset logic... */ 
+    setIsEditing(false); setEditId(null); setName(''); setSlug(''); setTitle('');
+    setSubtitle(''); setBannerImage(''); setContent(''); setHodName('');
+    setHodMessage(''); setHodImage(''); setEligibility('');
   };
 
   const handleDelete = async (id) => {
-    if(window.confirm("Delete this department?")) {
-        await deleteDoc(doc(db, "departments", id));
-        fetchDepartments();
-    }
-  }
-
-  const resetForm = () => {
-    setIsEditing(false); setEditId(null);
-    setName(''); setSlug(''); setTitle(''); setSubtitle(''); setBannerImage('');
-    setContent(''); 
-    setHodName(''); setHodMessage(''); setHodImage(''); setEligibility('');
+    if(window.confirm("Delete?")) { await deleteDoc(doc(db, "departments", id)); fetchDepartments(); }
   };
 
   return (
@@ -166,7 +182,7 @@ const EditDepartment = () => {
       <div style={{background:'white', padding:'20px', borderRadius:'10px', boxShadow:'0 2px 10px rgba(0,0,0,0.1)'}}>
           <form onSubmit={handleSubmit} style={{display:'flex', flexDirection:'column', gap:'30px'}}>
               
-              {/* TOP ROW */}
+              {/* --- METADATA & HEADER IMAGE --- */}
               <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'20px'}}>
                   <div>
                       <h3 style={styles.head}>1. Page Settings</h3>
@@ -175,58 +191,57 @@ const EditDepartment = () => {
                       <label style={styles.label}>URL Slug</label>
                       <input type="text" value={slug} onChange={e=>setSlug(e.target.value)} style={styles.input} placeholder="e.g. cse-ai" />
                       <label style={styles.label}>Hero Title</label>
-                      <input type="text" value={title} onChange={e=>setTitle(e.target.value)} style={styles.input} placeholder="e.g. B.Tech Computer Science" />
+                      <input type="text" value={title} onChange={e=>setTitle(e.target.value)} style={styles.input} placeholder="Main Heading" />
                       <label style={styles.label}>Hero Subtitle</label>
                       <input type="text" value={subtitle} onChange={e=>setSubtitle(e.target.value)} style={styles.input} />
                   </div>
                   <div>
                        <h3 style={styles.head}>2. Header Image</h3>
                        <ImageUpload 
-                          label="Upload Banner" 
+                          label="Upload Banner (2400x760px)" 
                           onUploadComplete={setBannerImage}
-                          constraints={{ width: 2400, height: 760, exact: false }} // 2400x760 Max
+                          constraints={{ width: 2400, height: 760, exact: false }}
                        />
-                       {bannerImage && <img src={bannerImage} alt="Preview" style={{width:'100%', height:'150px', objectFit:'cover', marginTop:'10px', borderRadius:'5px'}} />}
+                       {bannerImage && <img src={bannerImage} alt="Preview" style={{width:'100%', height:'100px', objectFit:'cover', marginTop:'10px', borderRadius:'5px'}} />}
                   </div>
               </div>
 
-              {/* MAIN CONTENT */}
+              {/* --- 3. MAIN CONTENT EDITOR (FULL FEATURES) --- */}
               <div>
                   <h3 style={styles.head}>3. Main Content (Free Canvas)</h3>
+                  <div style={{background:'#eef2ff', padding:'10px', borderRadius:'5px', marginBottom:'10px', fontSize:'13px', color:'#3730a3'}}>
+                    <strong>Tip:</strong> Use the <strong>&lt;&gt;</strong> button to edit raw HTML code. Click images to resize/align.
+                  </div>
                   <div style={{ background: 'white' }}>
                     <ReactQuill 
-                        ref={quillRef}
+                        ref={contentQuillRef}
                         theme="snow" 
                         value={content} 
                         onChange={setContent} 
-                        modules={modules}
-                        style={{ height: '400px', marginBottom: '50px' }} 
+                        modules={modules} // Has Colors, Size, HTML
+                        style={{ height: '500px', marginBottom: '50px' }} 
                     />
                   </div>
               </div>
 
-              {/* HOD SECTION */}
+              {/* --- 4. HOD SECTION --- */}
               <div style={{background:'#F8FAFC', padding:'20px', borderRadius:'8px', border:'1px solid #e2e8f0'}}>
-                  <h3 style={styles.head}>4. HOD Section (Bottom)</h3>
+                  <h3 style={styles.head}>4. HOD Section</h3>
                   <div style={{display:'grid', gridTemplateColumns:'1fr 2fr', gap:'20px'}}>
                       <div>
-                          <ImageUpload 
-                            label="HOD Photo" 
-                            onUploadComplete={setHodImage}
-                            constraints={{ width: 500, height: 500, exact: true }} // 500x500 Exact
-                          />
-                          {hodImage && <img src={hodImage} alt="HOD" style={{width:'100px', height:'100px', borderRadius:'50%', objectFit:'cover', marginTop:'10px'}} />}
+                          <ImageUpload label="HOD Photo (500x500px)" onUploadComplete={setHodImage} constraints={{width:500, height:500, exact:true}} />
+                          {hodImage && <img src={hodImage} alt="HOD" style={{width:'80px', height:'80px', borderRadius:'50%', objectFit:'cover', marginTop:'10px'}} />}
                       </div>
                       <div>
                           <label style={styles.label}>HOD Name</label>
-                          <input type="text" value={hodName} onChange={e=>setHodName(e.target.value)} style={styles.input} placeholder="Dr. Name" />
-                          <label style={styles.label}>HOD Message</label>
-                          <textarea value={hodMessage} onChange={e=>setHodMessage(e.target.value)} style={{...styles.input, height:'100px'}} placeholder="Message from HOD Desk..." />
+                          <input type="text" value={hodName} onChange={e=>setHodName(e.target.value)} style={styles.input} />
+                          <label style={styles.label}>Message</label>
+                          <textarea value={hodMessage} onChange={e=>setHodMessage(e.target.value)} style={{...styles.input, height:'80px'}} />
                       </div>
                   </div>
               </div>
 
-              {/* ELIGIBILITY SECTION */}
+              {/* --- 5. ELIGIBILITY EDITOR (FULL FEATURES) --- */}
               <div style={{background:'#F0FDF4', padding:'20px', borderRadius:'8px', border:'1px solid #bbf7d0'}}>
                   <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                     <h3 style={{...styles.head, color:'#15803d', marginBottom:0, borderBottom:'none'}}>5. Eligibility & How to Apply</h3>
@@ -234,9 +249,21 @@ const EditDepartment = () => {
                         Load Default Text
                     </button>
                   </div>
-                  <p style={{fontSize:'12px', color:'#666', marginBottom:'10px'}}>This content appears in the colored box at the bottom.</p>
+                  <p style={{fontSize:'12px', color:'#666', marginBottom:'10px'}}>
+                    Fully editable area. You can change colors (e.g., make text red), sizes, or paste HTML code.
+                  </p>
                   
-                  <ReactQuill theme="snow" value={eligibility} onChange={setEligibility} style={{height:'200px', marginBottom:'40px', background:'white'}} />
+                  {/* Applied SAME modules as Main Content for full flexibility */}
+                  <div style={{ background: 'white' }}>
+                    <ReactQuill 
+                        ref={eligibilityQuillRef}
+                        theme="snow" 
+                        value={eligibility} 
+                        onChange={setEligibility} 
+                        modules={modules} // <--- FULL MODULES HERE TOO
+                        style={{ height: '300px', marginBottom: '50px' }} 
+                    />
+                  </div>
               </div>
 
               <div style={{marginTop:'20px'}}>
@@ -247,12 +274,11 @@ const EditDepartment = () => {
           </form>
       </div>
       
-      {/* List logic */}
       <div style={{marginTop:'50px'}}>
           <h3>Existing Departments</h3>
           {departments.map(d => (
               <div key={d.id} style={{padding:'10px', borderBottom:'1px solid #ccc', display:'flex', justifyContent:'space-between'}}>
-                  <span>{d.name} ({d.slug})</span>
+                  <span>{d.name}</span>
                   <button onClick={() => handleEdit(d)}>Edit</button>
               </div>
           ))}

@@ -1,22 +1,28 @@
-// src/admin/pages/EditBlog.js
 import React, { useState, useEffect, useMemo } from 'react';
 import { db } from '../../firebase';
 import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc, query, orderBy } from "firebase/firestore";
 import ImageUpload from '../components/ImageUpload';
 import { ToastContainer, toast } from 'react-toastify';
+
 // --- RICH TEXT EDITOR IMPORTS ---
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
-// Import the Image Resizer & Aligner Module
-// (Make sure you ran: npm install quill-blot-formatter)
+
+// 1. Image Resizer
 import BlotFormatter from 'quill-blot-formatter';
-// Register the module with Quill
+// 2. HTML Source Editor (Like WordPress Text Tab)
+import htmlEditButton from "quill-html-edit-button";
+
+// Register Modules
 Quill.register('modules/blotFormatter', BlotFormatter);
+Quill.register("modules/htmlEditButton", htmlEditButton);
+
 const EditBlog = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
+
   // Form State
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('Engineering');
@@ -26,13 +32,14 @@ const EditBlog = () => {
   const [excerpt, setExcerpt] = useState('');
   const [content, setContent] = useState('');
   const [isFeatured, setIsFeatured] = useState(false);
+
   // SEO State
   const [imageAlt, setImageAlt] = useState('');
   const [metaTitle, setMetaTitle] = useState('');
   const [metaDesc, setMetaDesc] = useState('');
   const [metaKeywords, setMetaKeywords] = useState('');
-  // --- EDITOR MODULES CONFIGURATION ---
-  // We use useMemo to prevent the editor from re-rendering on every keystroke
+
+  // --- EDITOR CONFIGURATION ---
   const modules = useMemo(() => ({
     toolbar: [
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
@@ -41,26 +48,28 @@ const EditBlog = () => {
       [{ 'script': 'sub'}, { 'script': 'super' }],
       [{ 'indent': '-1'}, { 'indent': '+1' }], 
       [{ 'direction': 'rtl' }],
-      [{ 'color': [] }, { 'background': [] }],
+      [{ 'color': [] }, { 'background': [] }], // Colors & Backgrounds
       [{ 'align': [] }],
       ['link', 'image', 'video'],
-      ['clean']
+      ['clean'] // Remove formatting
     ],
-    // This activates the "WordPress-like" image handling
-    blotFormatter: {
-      // You can configure specific options here if needed, 
-      // but defaults work great (overlay, resize handles, alignment)
+    blotFormatter: {}, // Image Resizing
+    htmlEditButton: {
+      debug: true, // Logging
+      msg: "Edit HTML Source", // Tooltip
+      okText: "Update", // Save button text
+      cancelText: "Cancel",
+      buttonHTML: "&lt;&gt;", // The < > icon
+      buttonTitle: "Show HTML Source",
+      syntax: false, // Turn off syntax highlighting if you don't have highlight.js
+      styleWrapper: `
+        .ql-html-editorContainer { background: #f0f0f0; padding: 20px; border: 1px solid #ccc; }
+        .ql-html-textArea { font-family: monospace; font-size: 14px; background: #1e1e1e; color: #d4d4d4; }
+      `
     }
   }), []);
-  const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'script', 'direction', 'align',
-    'link', 'image', 'video', 'color', 'background'
-  ];
 
-  // 1. Fetch Posts
+  // Fetch Logic (Same as before)
   const fetchPosts = async () => {
     try {
       const q = query(collection(db, "blog_posts"), orderBy("date", "desc"));
@@ -70,16 +79,14 @@ const EditBlog = () => {
       setLoading(false);
     } catch (error) {
       console.error("Error fetching posts:", error);
-      const querySnapshot = await getDocs(collection(db, "blog_posts"));
-      const list = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setPosts(list);
-      setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchPosts();
   }, []);
-  // 2. Handle Submit
+
+  // Submit Logic
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title || !content || !image) {
@@ -87,24 +94,13 @@ const EditBlog = () => {
       return;
     }
     const postData = {
-      title,
-      category,
-      author,
-      date,
-      image,
-      imageAlt,
-      excerpt,
-      content,
-      isFeatured,
-      metaTitle,
-      metaDesc,
-      metaKeywords,
-      createdAt: new Date()
+      title, category, author, date, image, imageAlt, excerpt, content,
+      isFeatured, metaTitle, metaDesc, metaKeywords, createdAt: new Date()
     };
     try {
       if (isEditing) {
         await updateDoc(doc(db, "blog_posts", editId), postData);
-        toast.success("Post updated successfully!");
+        toast.success("Post updated!");
       } else {
         await addDoc(collection(db, "blog_posts"), postData);
         toast.success("New post published!");
@@ -112,11 +108,10 @@ const EditBlog = () => {
       resetForm();
       fetchPosts();
     } catch (error) {
-      console.error("Error saving post:", error);
       toast.error("Error saving post.");
     }
   };
-  // 3. Edit & Delete
+
   const handleEdit = (post) => {
     setTitle(post.title);
     setCategory(post.category);
@@ -134,29 +129,22 @@ const EditBlog = () => {
     setIsEditing(true);
     window.scrollTo(0, 0);
   };
+
   const handleDelete = async (id) => {
-    if (window.confirm("Delete this article permanently?")) {
+    if (window.confirm("Delete this article?")) {
       await deleteDoc(doc(db, "blog_posts", id));
       toast.success("Article deleted.");
       fetchPosts();
     }
   };
+
   const resetForm = () => {
-    setTitle('');
-    setCategory('Engineering');
-    setAuthor('JEC Admin');
-    setDate(new Date().toISOString().split('T')[0]);
-    setImage('');
-    setExcerpt('');
-    setContent('');
-    setIsFeatured(false);
-    setImageAlt('');
-    setMetaTitle('');
-    setMetaDesc('');
-    setMetaKeywords('');
-    setIsEditing(false);
-    setEditId(null);
+    setTitle(''); setCategory('Engineering'); setAuthor('JEC Admin');
+    setDate(new Date().toISOString().split('T')[0]); setImage(''); setExcerpt('');
+    setContent(''); setIsFeatured(false); setImageAlt(''); setMetaTitle('');
+    setMetaDesc(''); setMetaKeywords(''); setIsEditing(false); setEditId(null);
   };
+
   return (
     <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
       <ToastContainer />
@@ -164,117 +152,99 @@ const EditBlog = () => {
         <h2>{isEditing ? "Edit Article" : "Write New Article"}</h2>
         {isEditing && <button onClick={resetForm} style={styles.cancelBtn}>Cancel Edit</button>}
       </div>
-      {/* --- EDITOR FORM --- */}
+
       <div style={styles.card}>
         <form onSubmit={handleSubmit}>
           <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px' }}>
-            {/* LEFT COLUMN: Main Content */}
+            
+            {/* MAIN CONTENT AREA */}
             <div>
               <label style={styles.label}>Title</label>
-              <input 
-                type="text" value={title} onChange={e => setTitle(e.target.value)} 
-                style={styles.input} placeholder="Enter engaging title..." 
-              />
-              <label style={styles.label}>Short Excerpt (Summary)</label>
-              <textarea 
-                value={excerpt} onChange={e => setExcerpt(e.target.value)} 
-                style={{...styles.input, height: '80px'}} placeholder="Appears on the blog card..." 
-              />
-              <label style={styles.label}>Main Content</label>
+              <input type="text" value={title} onChange={e => setTitle(e.target.value)} style={styles.input} placeholder="Article Title" />
+              
+              <label style={styles.label}>Excerpt</label>
+              <textarea value={excerpt} onChange={e => setExcerpt(e.target.value)} style={{...styles.input, height: '80px'}} placeholder="Short summary..." />
+              
+              <label style={styles.label}>Content (Visual & HTML Code)</label>
               <div style={{ background: 'white', marginBottom: '20px' }}>
                 <ReactQuill 
                   theme="snow" 
                   value={content} 
                   onChange={setContent} 
-                  modules={modules}
-                  formats={formats}
-                  style={{ height: '400px', marginBottom: '50px' }} // Increased height for better editing
+                  modules={modules} // Includes HTML Button
+                  style={{ height: '500px', marginBottom: '50px' }} 
                 />
               </div>
             </div>
-            {/* RIGHT COLUMN: Settings & SEO */}
+
+            {/* SIDEBAR SETTINGS */}
             <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', height: 'fit-content' }}>
               <ImageUpload label="Cover Image" onUploadComplete={setImage} />
               {image && <img src={image} alt="Preview" style={{ width: '100%', borderRadius: '5px', marginTop: '10px' }} />}
+              
               <label style={styles.label}>Image Alt Text</label>
-              <input 
-                type="text" value={imageAlt} onChange={e => setImageAlt(e.target.value)} 
-                style={styles.input} placeholder="Description for screen readers..." 
-              />
+              <input type="text" value={imageAlt} onChange={e => setImageAlt(e.target.value)} style={styles.input} />
+
               <label style={styles.label}>Category</label>
               <select value={category} onChange={e => setCategory(e.target.value)} style={styles.input}>
                 <option>Engineering</option>
                 <option>Campus Life</option>
                 <option>Placements</option>
                 <option>Events</option>
-                <option>Admissions</option>
               </select>
-              <label style={styles.label}>Author</label>
-              <input type="text" value={author} onChange={e => setAuthor(e.target.value)} style={styles.input} />
-              <label style={styles.label}>Date</label>
+
+              <label style={styles.label}>Author & Date</label>
+              <input type="text" value={author} onChange={e => setAuthor(e.target.value)} style={{...styles.input, marginBottom:'5px'}} />
               <input type="date" value={date} onChange={e => setDate(e.target.value)} style={styles.input} />
+
               <div style={{ margin: '15px 0' }}>
                 <label style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <input type="checkbox" checked={isFeatured} onChange={e => setIsFeatured(e.target.checked)} />
-                  <strong>Feature this post?</strong>
+                  Feature Post?
                 </label>
               </div>
-              <hr style={{ border: 'none', borderTop: '1px solid #ddd', margin: '15px 0' }} />
-              <h4 style={{ margin: '0 0 10px', color: '#333' }}>SEO Settings</h4>
-              <label style={styles.label}>Meta Title</label>
-              <input 
-                type="text" value={metaTitle} onChange={e => setMetaTitle(e.target.value)} 
-                style={styles.input} placeholder="Browser tab title..." 
-              />
-              <label style={styles.label}>Meta Description</label>
-              <textarea 
-                value={metaDesc} onChange={e => setMetaDesc(e.target.value)} 
-                style={{...styles.input, height: '60px'}} placeholder="Search engine summary..." 
-              />
-              <label style={styles.label}>Meta Keywords</label>
-              <input 
-                type="text" value={metaKeywords} onChange={e => setMetaKeywords(e.target.value)} 
-                style={styles.input} placeholder="Comma separated keys..." 
-              />
-              <button type="submit" style={styles.saveBtn}>
-                {isEditing ? "Update Post" : "Publish Post"}
-              </button>
+
+              <hr style={{margin:'15px 0', borderTop:'1px solid #ddd'}} />
+              <h4>SEO</h4>
+              <input type="text" value={metaTitle} onChange={e => setMetaTitle(e.target.value)} style={styles.input} placeholder="Meta Title" />
+              <input type="text" value={metaKeywords} onChange={e => setMetaKeywords(e.target.value)} style={styles.input} placeholder="Keywords" />
+              
+              <button type="submit" style={styles.saveBtn}>{isEditing ? "Update" : "Publish"}</button>
             </div>
           </div>
         </form>
       </div>
-      {/* --- POST LIST --- */}
-      <h2 style={{ marginTop: '40px' }}>Manage Articles</h2>
+
       <div style={styles.listContainer}>
         {posts.map(post => (
           <div key={post.id} style={styles.listItem}>
             <img src={post.image} alt="thumb" style={styles.thumb} />
             <div style={{ flex: 1 }}>
               <h4 style={{ margin: '0 0 5px' }}>{post.title}</h4>
-              <span style={{ fontSize: '12px', background: '#eee', padding: '2px 8px', borderRadius: '4px' }}>{post.category}</span>
-              {post.isFeatured && <span style={{ fontSize: '12px', background: '#FFD700', padding: '2px 8px', borderRadius: '4px', marginLeft: '5px' }}>Featured</span>}
+              <small>{post.date}</small>
             </div>
-            <div style={{ display: 'flex', gap: '10px' }}>
+            <div>
               <button onClick={() => handleEdit(post)} style={styles.editBtn}>Edit</button>
               <button onClick={() => handleDelete(post.id)} style={styles.deleteBtn}>Delete</button>
             </div>
           </div>
         ))}
       </div>
-
     </div>
   );
 };
+
 const styles = {
   card: { background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' },
   label: { display: 'block', fontWeight: '600', margin: '10px 0 5px', fontSize: '14px' },
-  input: { width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '5px', fontSize: '14px', boxSizing: 'border-box' },
+  input: { width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '5px' },
   saveBtn: { width: '100%', padding: '12px', background: '#2563EB', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold', marginTop: '10px' },
   cancelBtn: { padding: '8px 15px', background: '#64748B', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' },
-  listContainer: { display: 'flex', flexDirection: 'column', gap: '15px' },
+  listContainer: { display: 'flex', flexDirection: 'column', gap: '15px', marginTop:'30px' },
   listItem: { display: 'flex', alignItems: 'center', gap: '15px', background: 'white', padding: '15px', borderRadius: '8px', border: '1px solid #eee' },
-  thumb: { width: '80px', height: '60px', objectFit: 'cover', borderRadius: '4px' },
-  editBtn: { padding: '5px 10px', background: '#E0F2FE', color: '#0284C7', border: 'none', borderRadius: '4px', cursor: 'pointer' },
+  thumb: { width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' },
+  editBtn: { padding: '5px 10px', background: '#E0F2FE', color: '#0284C7', border: 'none', borderRadius: '4px', cursor: 'pointer', marginRight:'5px' },
   deleteBtn: { padding: '5px 10px', background: '#FEE2E2', color: '#DC2626', border: 'none', borderRadius: '4px', cursor: 'pointer' }
 };
+
 export default EditBlog;

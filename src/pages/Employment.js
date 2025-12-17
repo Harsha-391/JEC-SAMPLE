@@ -48,7 +48,7 @@ function Employment() {
           </div>
           <div className="philosophy-img">
             {/* Make sure 'faculty-team.jpg' is in your /public/images/ folder */}
-            <img src="public/images/management.png" alt="Faculty at JEC" />
+            <img src="/jechome.png" alt="Our Mission" />
           </div>
         </div>
       </section>
