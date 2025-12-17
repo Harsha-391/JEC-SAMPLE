@@ -41,7 +41,7 @@ const EditDepartment = () => {
     <p>Your admission counselors are ready to serve you! Feel free to call or email your questions. They are affectionate to assist you and enable you to complete your admission formalities with ease!</p>
   `;
 
-  // Custom Image Handler (Same as before)
+  // Custom Image Handler for Editor (No strict constraints here, it's free form)
   const imageHandler = () => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
@@ -134,7 +134,6 @@ const EditDepartment = () => {
     setBannerImage(dept.bannerImage || '');
     setContent(dept.content || dept.about || ''); 
     
-    // Load new fields
     setHodName(dept.hodName || '');
     setHodMessage(dept.hodMessage || '');
     setHodImage(dept.hodImage || '');
@@ -182,7 +181,11 @@ const EditDepartment = () => {
                   </div>
                   <div>
                        <h3 style={styles.head}>2. Header Image</h3>
-                       <ImageUpload label="Upload Banner" onUploadComplete={setBannerImage} />
+                       <ImageUpload 
+                          label="Upload Banner" 
+                          onUploadComplete={setBannerImage}
+                          constraints={{ width: 2400, height: 760, exact: false }} // 2400x760 Max
+                       />
                        {bannerImage && <img src={bannerImage} alt="Preview" style={{width:'100%', height:'150px', objectFit:'cover', marginTop:'10px', borderRadius:'5px'}} />}
                   </div>
               </div>
@@ -207,7 +210,11 @@ const EditDepartment = () => {
                   <h3 style={styles.head}>4. HOD Section (Bottom)</h3>
                   <div style={{display:'grid', gridTemplateColumns:'1fr 2fr', gap:'20px'}}>
                       <div>
-                          <ImageUpload label="HOD Photo" onUploadComplete={setHodImage} />
+                          <ImageUpload 
+                            label="HOD Photo" 
+                            onUploadComplete={setHodImage}
+                            constraints={{ width: 500, height: 500, exact: true }} // 500x500 Exact
+                          />
                           {hodImage && <img src={hodImage} alt="HOD" style={{width:'100px', height:'100px', borderRadius:'50%', objectFit:'cover', marginTop:'10px'}} />}
                       </div>
                       <div>
@@ -240,7 +247,7 @@ const EditDepartment = () => {
           </form>
       </div>
       
-      {/* List logic (same as before) */}
+      {/* List logic */}
       <div style={{marginTop:'50px'}}>
           <h3>Existing Departments</h3>
           {departments.map(d => (
