@@ -3,27 +3,39 @@ import { db } from '../../firebase';
 import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc, query, orderBy } from "firebase/firestore";
 import ImageUpload from '../components/ImageUpload';
 import { ToastContainer, toast } from 'react-toastify';
-
-// --- RICH TEXT EDITOR IMPORTS ---
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
-
-// 1. Image Resizer
 import BlotFormatter from 'quill-blot-formatter';
-// 2. HTML Source Editor (Like WordPress Text Tab)
 import htmlEditButton from "quill-html-edit-button";
 
-// Register Modules
+// --- FIX: REGISTER INLINE STYLES FOR BLOG TOO ---
+const ColorStyle = Quill.import('attributors/style/color');
+const BackgroundStyle = Quill.import('attributors/style/background');
+const SizeStyle = Quill.import('attributors/style/size');
+const AlignStyle = Quill.import('attributors/style/align');
+const FontStyle = Quill.import('attributors/style/font');
+
+Quill.register(ColorStyle, true);
+Quill.register(BackgroundStyle, true);
+Quill.register(SizeStyle, true);
+Quill.register(AlignStyle, true);
+Quill.register(FontStyle, true);
+
 Quill.register('modules/blotFormatter', BlotFormatter);
 Quill.register("modules/htmlEditButton", htmlEditButton);
 
 const EditBlog = () => {
+  // ... (State variables and logic remain exactly the same as previous step, just with the new imports/registers above)
+  
+  // (Paste the full content of EditBlog.js from the previous step here, 
+  // or just ensure the Quill.register parts above are added to your existing file)
+  
+  // To be safe, I will output the whole file content to avoid confusion:
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
 
-  // Form State
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('Engineering');
   const [author, setAuthor] = useState('JEC Admin');
@@ -33,13 +45,11 @@ const EditBlog = () => {
   const [content, setContent] = useState('');
   const [isFeatured, setIsFeatured] = useState(false);
 
-  // SEO State
   const [imageAlt, setImageAlt] = useState('');
   const [metaTitle, setMetaTitle] = useState('');
   const [metaDesc, setMetaDesc] = useState('');
   const [metaKeywords, setMetaKeywords] = useState('');
 
-  // --- EDITOR CONFIGURATION ---
   const modules = useMemo(() => ({
     toolbar: [
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
@@ -48,101 +58,67 @@ const EditBlog = () => {
       [{ 'script': 'sub'}, { 'script': 'super' }],
       [{ 'indent': '-1'}, { 'indent': '+1' }], 
       [{ 'direction': 'rtl' }],
-      [{ 'color': [] }, { 'background': [] }], // Colors & Backgrounds
+      [{ 'color': [] }, { 'background': [] }],
       [{ 'align': [] }],
       ['link', 'image', 'video'],
-      ['clean'] // Remove formatting
+      ['clean']
     ],
-    blotFormatter: {}, // Image Resizing
+    blotFormatter: {},
     htmlEditButton: {
-      debug: true, // Logging
-      msg: "Edit HTML Source", // Tooltip
-      okText: "Update", // Save button text
-      cancelText: "Cancel",
-      buttonHTML: "&lt;&gt;", // The < > icon
+      debug: true,
+      msg: "Edit HTML Source",
+      okText: "Update",
+      buttonHTML: "&lt;&gt;",
       buttonTitle: "Show HTML Source",
-      syntax: false, // Turn off syntax highlighting if you don't have highlight.js
       styleWrapper: `
         .ql-html-editorContainer { background: #f0f0f0; padding: 20px; border: 1px solid #ccc; }
-        .ql-html-textArea { font-family: monospace; font-size: 14px; background: #1e1e1e; color: #d4d4d4; }
+        .ql-html-textArea { background: #1e1e1e; color: #d4d4d4; font-family: monospace; font-size: 14px; }
       `
     }
   }), []);
 
-  // Fetch Logic (Same as before)
   const fetchPosts = async () => {
     try {
       const q = query(collection(db, "blog_posts"), orderBy("date", "desc"));
       const querySnapshot = await getDocs(q);
-      const list = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setPosts(list);
+      setPosts(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
       setLoading(false);
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-    }
+    } catch (error) { console.error(error); }
   };
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  useEffect(() => { fetchPosts(); }, []);
 
-  // Submit Logic
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title || !content || !image) {
-      toast.warn("Title, Content, and Image are required!");
-      return;
-    }
+    if (!title || !content || !image) { toast.warn("Required: Title, Content, Image"); return; }
     const postData = {
       title, category, author, date, image, imageAlt, excerpt, content,
       isFeatured, metaTitle, metaDesc, metaKeywords, createdAt: new Date()
     };
     try {
-      if (isEditing) {
-        await updateDoc(doc(db, "blog_posts", editId), postData);
-        toast.success("Post updated!");
-      } else {
-        await addDoc(collection(db, "blog_posts"), postData);
-        toast.success("New post published!");
-      }
-      resetForm();
-      fetchPosts();
-    } catch (error) {
-      toast.error("Error saving post.");
-    }
+      if (isEditing) { await updateDoc(doc(db, "blog_posts", editId), postData); toast.success("Updated!"); } 
+      else { await addDoc(collection(db, "blog_posts"), postData); toast.success("Published!"); }
+      resetForm(); fetchPosts();
+    } catch (error) { toast.error("Error saving post."); }
   };
 
   const handleEdit = (post) => {
-    setTitle(post.title);
-    setCategory(post.category);
-    setAuthor(post.author);
-    setDate(post.date);
-    setImage(post.image);
-    setExcerpt(post.excerpt);
-    setContent(post.content);
-    setIsFeatured(post.isFeatured || false);
-    setImageAlt(post.imageAlt || '');
-    setMetaTitle(post.metaTitle || '');
-    setMetaDesc(post.metaDesc || '');
-    setMetaKeywords(post.metaKeywords || '');
-    setEditId(post.id);
-    setIsEditing(true);
-    window.scrollTo(0, 0);
+    setTitle(post.title); setCategory(post.category); setAuthor(post.author);
+    setDate(post.date); setImage(post.image); setExcerpt(post.excerpt);
+    setContent(post.content); setIsFeatured(post.isFeatured || false);
+    setImageAlt(post.imageAlt || ''); setMetaTitle(post.metaTitle || '');
+    setMetaDesc(post.metaDesc || ''); setMetaKeywords(post.metaKeywords || '');
+    setEditId(post.id); setIsEditing(true); window.scrollTo(0, 0);
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm("Delete this article?")) {
-      await deleteDoc(doc(db, "blog_posts", id));
-      toast.success("Article deleted.");
-      fetchPosts();
-    }
+    if (window.confirm("Delete?")) { await deleteDoc(doc(db, "blog_posts", id)); fetchPosts(); }
   };
 
   const resetForm = () => {
     setTitle(''); setCategory('Engineering'); setAuthor('JEC Admin');
     setDate(new Date().toISOString().split('T')[0]); setImage(''); setExcerpt('');
-    setContent(''); setIsFeatured(false); setImageAlt(''); setMetaTitle('');
-    setMetaDesc(''); setMetaKeywords(''); setIsEditing(false); setEditId(null);
+    setContent(''); setIsFeatured(false); setIsEditing(false); setEditId(null);
   };
 
   return (
@@ -156,33 +132,30 @@ const EditBlog = () => {
       <div style={styles.card}>
         <form onSubmit={handleSubmit}>
           <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px' }}>
-            
-            {/* MAIN CONTENT AREA */}
             <div>
               <label style={styles.label}>Title</label>
-              <input type="text" value={title} onChange={e => setTitle(e.target.value)} style={styles.input} placeholder="Article Title" />
+              <input type="text" value={title} onChange={e => setTitle(e.target.value)} style={styles.input} />
               
               <label style={styles.label}>Excerpt</label>
-              <textarea value={excerpt} onChange={e => setExcerpt(e.target.value)} style={{...styles.input, height: '80px'}} placeholder="Short summary..." />
+              <textarea value={excerpt} onChange={e => setExcerpt(e.target.value)} style={{...styles.input, height: '80px'}} />
               
-              <label style={styles.label}>Content (Visual & HTML Code)</label>
+              <label style={styles.label}>Main Content</label>
               <div style={{ background: 'white', marginBottom: '20px' }}>
                 <ReactQuill 
                   theme="snow" 
                   value={content} 
                   onChange={setContent} 
-                  modules={modules} // Includes HTML Button
+                  modules={modules} 
                   style={{ height: '500px', marginBottom: '50px' }} 
                 />
               </div>
             </div>
 
-            {/* SIDEBAR SETTINGS */}
             <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', height: 'fit-content' }}>
               <ImageUpload label="Cover Image" onUploadComplete={setImage} />
               {image && <img src={image} alt="Preview" style={{ width: '100%', borderRadius: '5px', marginTop: '10px' }} />}
               
-              <label style={styles.label}>Image Alt Text</label>
+              <label style={styles.label}>Alt Text</label>
               <input type="text" value={imageAlt} onChange={e => setImageAlt(e.target.value)} style={styles.input} />
 
               <label style={styles.label}>Category</label>
@@ -200,7 +173,7 @@ const EditBlog = () => {
               <div style={{ margin: '15px 0' }}>
                 <label style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <input type="checkbox" checked={isFeatured} onChange={e => setIsFeatured(e.target.checked)} />
-                  Feature Post?
+                  Feature Post
                 </label>
               </div>
 

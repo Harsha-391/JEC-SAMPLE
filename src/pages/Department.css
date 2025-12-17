@@ -19,7 +19,7 @@
     line-height: 1.8;
 }
 
-/* HERO */
+/* HERO SECTION */
 .dept-hero {
     position: relative;
     background-size: cover;
@@ -55,11 +55,19 @@
 
 /* --- DYNAMIC CONTENT STYLES --- */
 .dynamic-content { font-size: 1.1rem; color: var(--text-main); }
-.dynamic-content h1, .dynamic-content h2, .dynamic-content h3 { font-family: var(--font-head); color: var(--jec-blue); margin-top: 2rem; margin-bottom: 1rem; }
+
+/* Remove default color enforcement so inline styles win easily */
+.dynamic-content h1, .dynamic-content h2, .dynamic-content h3 { 
+    font-family: var(--font-head); 
+    /* color: var(--jec-blue);  <-- Removed strict color default to let inline styles shine */
+    margin-top: 2rem; margin-bottom: 1rem; 
+}
 .dynamic-content h2 { font-size: 2.2rem; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+
+/* Images */
 .dynamic-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 1rem 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-/* Float Logic */
+/* Floating */
 .dynamic-content img[style*="float: left"] { float: left; margin-right: 2rem; margin-bottom: 1rem; }
 .dynamic-content img[style*="float: right"] { float: right; margin-left: 2rem; margin-bottom: 1rem; }
 .dynamic-content::after { content: ""; display: table; clear: both; }
@@ -95,6 +103,7 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     overflow: hidden;
     margin-bottom: 3rem;
+    border: 1px solid #e2e8f0;
 }
 .eligibility-header {
     background: var(--jec-blue);
@@ -104,10 +113,12 @@
 .eligibility-header h3 { margin: 0; font-family: var(--font-head); font-size: 1.3rem; }
 .eligibility-body { padding: 2rem; }
 
-.eligibility-content { color: var(--text-muted); margin-bottom: 2rem; }
+/* Ensure rich text colors work here too */
 .eligibility-content h4 { color: var(--jec-blue); margin-top: 1.5rem; font-family: var(--font-head); }
+.eligibility-content p { color: var(--text-muted); }
 
 .eligibility-action { text-align: center; margin-top: 2rem; border-top: 1px solid #eee; padding-top: 2rem; }
+
 .dept-apply-btn {
     display: inline-block;
     background: var(--jec-red);

@@ -6,11 +6,25 @@ import ImageUpload from '../components/ImageUpload';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import BlotFormatter from 'quill-blot-formatter';
-import htmlEditButton from "quill-html-edit-button"; // HTML Editor
+import htmlEditButton from "quill-html-edit-button"; 
 import { ToastContainer, toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
-// Register both modules
+// --- KEY FIX: REGISTER INLINE STYLES ---
+// This forces Quill to use style="color: red" instead of classes
+const ColorStyle = Quill.import('attributors/style/color');
+const BackgroundStyle = Quill.import('attributors/style/background');
+const SizeStyle = Quill.import('attributors/style/size');
+const AlignStyle = Quill.import('attributors/style/align');
+const FontStyle = Quill.import('attributors/style/font');
+
+Quill.register(ColorStyle, true);
+Quill.register(BackgroundStyle, true);
+Quill.register(SizeStyle, true);
+Quill.register(AlignStyle, true);
+Quill.register(FontStyle, true);
+
+// Register Modules
 Quill.register('modules/blotFormatter', BlotFormatter);
 Quill.register("modules/htmlEditButton", htmlEditButton);
 
@@ -20,7 +34,6 @@ const EditDepartment = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
   
-  // Refs for editor instances
   const contentQuillRef = useRef(null); 
   const eligibilityQuillRef = useRef(null); 
 
@@ -44,7 +57,6 @@ const EditDepartment = () => {
     <p>Your admission counselors are ready to serve you!...</p>
   `;
 
-  // Custom Image Handler
   const imageHandler = () => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
@@ -63,21 +75,7 @@ const EditDepartment = () => {
                 toast.dismiss(toastId);
                 const altText = window.prompt("Enter Alt Text for this image (SEO):", "");
                 
-                // Determine which editor triggered the handler (Default to Content)
-                // Note: Standard Quill toolbar handler binding is tricky with multiple instances.
-                // For simplicity, this handler is bound to the module config, 
-                // but ReactQuill makes it hard to distinguish 'which' editor.
-                // A workaround is strictly using the active selection or separate modules.
-                // Since 'modules' is memoized, it attaches to the instance using it.
-                // We'll trust ReactQuill context here.
-                
-                // Simple insert:
-                // We actually need the SPECIFIC quill instance. 
-                // Since this handler is shared, we might need separate handlers or refs.
-                // However, for this UI, sticking to basic insert is safest.
-                // Let's assume the user clicked the toolbar of the *focused* editor.
                 const quill = document.querySelector('.ql-editor:focus')?.parentElement?.__quill;
-                
                 if (quill) {
                     const range = quill.getSelection(true);
                     quill.insertEmbed(range.index, 'image', url);
@@ -97,42 +95,40 @@ const EditDepartment = () => {
     };
   };
 
-  // --- FULL POWER MODULES (Used for BOTH Content & Eligibility) ---
   const modules = useMemo(() => ({
     toolbar: {
       container: [
         [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
         [{ 'font': [] }],
-        [{ 'size': ['small', false, 'large', 'huge'] }], // FONT SIZES
+        [{ 'size': ['small', false, 'large', 'huge'] }],
         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
         [{ 'indent': '-1'}, { 'indent': '+1' }], 
         [{ 'direction': 'rtl' }],
-        [{ 'color': [] }, { 'background': [] }], // COLORS
+        [{ 'color': [] }, { 'background': [] }],
         [{ 'align': [] }],
         ['link', 'image', 'video'],
         ['clean']
       ],
       handlers: { image: imageHandler }
     },
-    blotFormatter: {}, // Resize Images
-    htmlEditButton: { // HTML Source Code Button
+    blotFormatter: {},
+    htmlEditButton: {
       debug: true,
       msg: "Edit HTML Source",
-      okText: "Save",
+      okText: "Update",
       buttonHTML: "&lt;&gt;", 
       buttonTitle: "Show HTML Source",
       styleWrapper: `
-        .ql-html-editorContainer { background: #f0f0f0; padding: 20px; }
-        .ql-html-textArea { background: #222; color: #eee; font-family: monospace; }
+        .ql-html-editorContainer { background: #f0f0f0; padding: 20px; border: 1px solid #ccc; }
+        .ql-html-textArea { background: #1e1e1e; color: #d4d4d4; font-family: monospace; font-size: 14px; padding: 10px; border-radius: 5px; }
       `
     }
   }), []);
 
-  // Fetch / Submit Logic (Unchanged)
   useEffect(() => { fetchDepartments(); }, []);
-  const fetchDepartments = async () => { /* ...fetch logic... */ 
-      try {
+  const fetchDepartments = async () => {
+    try {
       const q = query(collection(db, "departments"), orderBy("name"));
       const querySnapshot = await getDocs(q);
       setDepartments(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
@@ -155,7 +151,7 @@ const EditDepartment = () => {
     } catch (error) { toast.error("Error saving."); }
   };
 
-  const handleEdit = (dept) => { /* ...load logic... */ 
+  const handleEdit = (dept) => {
     setName(dept.name || ''); setSlug(dept.slug || ''); setTitle(dept.title || '');
     setSubtitle(dept.subtitle || ''); setBannerImage(dept.bannerImage || '');
     setContent(dept.content || dept.about || ''); setHodName(dept.hodName || '');
@@ -164,7 +160,7 @@ const EditDepartment = () => {
     setEditId(dept.id); setIsEditing(true); window.scrollTo(0, 0);
   };
 
-  const resetForm = () => { /* ...reset logic... */ 
+  const resetForm = () => {
     setIsEditing(false); setEditId(null); setName(''); setSlug(''); setTitle('');
     setSubtitle(''); setBannerImage(''); setContent(''); setHodName('');
     setHodMessage(''); setHodImage(''); setEligibility('');
@@ -182,7 +178,6 @@ const EditDepartment = () => {
       <div style={{background:'white', padding:'20px', borderRadius:'10px', boxShadow:'0 2px 10px rgba(0,0,0,0.1)'}}>
           <form onSubmit={handleSubmit} style={{display:'flex', flexDirection:'column', gap:'30px'}}>
               
-              {/* --- METADATA & HEADER IMAGE --- */}
               <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'20px'}}>
                   <div>
                       <h3 style={styles.head}>1. Page Settings</h3>
@@ -206,25 +201,20 @@ const EditDepartment = () => {
                   </div>
               </div>
 
-              {/* --- 3. MAIN CONTENT EDITOR (FULL FEATURES) --- */}
               <div>
                   <h3 style={styles.head}>3. Main Content (Free Canvas)</h3>
-                  <div style={{background:'#eef2ff', padding:'10px', borderRadius:'5px', marginBottom:'10px', fontSize:'13px', color:'#3730a3'}}>
-                    <strong>Tip:</strong> Use the <strong>&lt;&gt;</strong> button to edit raw HTML code. Click images to resize/align.
-                  </div>
                   <div style={{ background: 'white' }}>
                     <ReactQuill 
                         ref={contentQuillRef}
                         theme="snow" 
                         value={content} 
                         onChange={setContent} 
-                        modules={modules} // Has Colors, Size, HTML
+                        modules={modules} 
                         style={{ height: '500px', marginBottom: '50px' }} 
                     />
                   </div>
               </div>
 
-              {/* --- 4. HOD SECTION --- */}
               <div style={{background:'#F8FAFC', padding:'20px', borderRadius:'8px', border:'1px solid #e2e8f0'}}>
                   <h3 style={styles.head}>4. HOD Section</h3>
                   <div style={{display:'grid', gridTemplateColumns:'1fr 2fr', gap:'20px'}}>
@@ -241,7 +231,7 @@ const EditDepartment = () => {
                   </div>
               </div>
 
-              {/* --- 5. ELIGIBILITY EDITOR (FULL FEATURES) --- */}
+              {/* ELIGIBILITY EDITOR */}
               <div style={{background:'#F0FDF4', padding:'20px', borderRadius:'8px', border:'1px solid #bbf7d0'}}>
                   <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                     <h3 style={{...styles.head, color:'#15803d', marginBottom:0, borderBottom:'none'}}>5. Eligibility & How to Apply</h3>
@@ -249,18 +239,14 @@ const EditDepartment = () => {
                         Load Default Text
                     </button>
                   </div>
-                  <p style={{fontSize:'12px', color:'#666', marginBottom:'10px'}}>
-                    Fully editable area. You can change colors (e.g., make text red), sizes, or paste HTML code.
-                  </p>
                   
-                  {/* Applied SAME modules as Main Content for full flexibility */}
                   <div style={{ background: 'white' }}>
                     <ReactQuill 
                         ref={eligibilityQuillRef}
                         theme="snow" 
                         value={eligibility} 
                         onChange={setEligibility} 
-                        modules={modules} // <--- FULL MODULES HERE TOO
+                        modules={modules} 
                         style={{ height: '300px', marginBottom: '50px' }} 
                     />
                   </div>
