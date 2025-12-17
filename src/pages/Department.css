@@ -6,13 +6,8 @@
     --jec-red: #D62828;        
     --jec-gold: #FCA311;       
     --bg-body: #F8FAFC;
-    --bg-surface: #FFFFFF;
     --text-main: #0F172A;
     --text-muted: #475569;
-    --border: #E2E8F0;
-    --radius-lg: 20px;
-    --shadow-card: 0 4px 6px -1px rgba(0,0,0,0.05);
-    --shadow-hover: 0 20px 25px -5px rgba(0, 114, 198, 0.15);
     --font-head: 'Poppins', sans-serif;
     --font-body: 'Inter', sans-serif;
 }
@@ -22,7 +17,6 @@
     background-color: var(--bg-body);
     color: var(--text-main);
     line-height: 1.8;
-    overflow-x: hidden;
 }
 
 /* HERO SECTION */
@@ -31,170 +25,167 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    padding: 9rem 1rem 12rem 1rem;
+    padding: 8rem 1rem;
     text-align: center;
     color: white;
+}
+.dept-hero-content {
+    position: relative;
+    z-index: 2;
 }
 .dept-hero h1 {
     font-family: var(--font-head);
     font-size: 3.5rem;
     margin-bottom: 0.5rem;
-    letter-spacing: -1px;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    text-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
-.dept-hero p { font-size: 1.3rem; color: var(--jec-gold); font-weight: 600; margin: 1rem auto; max-width: 800px; }
+.dept-hero p { 
+    font-size: 1.3rem; 
+    color: var(--jec-gold); 
+    font-weight: 600; 
+    margin: 1rem auto; 
+    max-width: 800px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5); 
+}
 .dept-hero .badge { background:var(--jec-gold); color:black; font-weight:700; padding: 8px 20px; border-radius: 30px; display: inline-block; }
 
-/* STATS BAR */
-.dept-stats-container {
+/* MAIN CONTENT CONTAINER */
+.dept-container {
     max-width: 1200px;
-    margin: -6rem auto 5rem auto;
+    margin: -3rem auto 3rem auto;
     padding: 0 1.5rem;
     position: relative;
     z-index: 10;
 }
-.dept-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-}
-.dept-stat-card {
-    background: var(--bg-surface);
-    padding: 2rem 1.5rem;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    text-align: center;
-    transition: transform 0.3s;
-    border-bottom: 4px solid var(--jec-red);
-}
-.dept-stat-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-.dept-stat-icon { font-size: 2.2rem; color: var(--jec-blue); margin-bottom: 12px; }
-.dept-stat-label { font-size: 0.95rem; font-weight: 700; color: var(--text-main); line-height: 1.4; }
 
-/* CONTENT SECTIONS */
-.dept-container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 5rem 1.5rem; }
-
-.dept-animated-section {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.dept-animated-section.is-visible { opacity: 1; transform: translateY(0); }
-
-.dept-section-header { text-align: center; margin-bottom: 3rem; margin-top: 5rem; }
-.dept-section-header h2 { font-family: var(--font-head); font-size: 2.5rem; color: var(--text-main); margin-bottom: 0.5rem; }
-.dept-section-header span { color: var(--jec-blue); font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
-
-/* Split Layout */
-.dept-section-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    margin-bottom: 6rem;
-}
-.dept-text-block h3 { font-family: var(--font-head); font-size: 1.8rem; color: var(--text-main); margin-bottom: 1rem; border-left: 4px solid var(--jec-gold); padding-left: 1rem; }
-.dept-img-block {
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-hover);
+.dept-content-wrapper {
     background: white;
-    padding: 1rem;
-    border: 1px solid var(--border);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-top: 5px solid var(--jec-blue);
+    min-height: 600px;
 }
-.dept-img-block img { width: 100%; height: auto; display: block; border-radius: 8px; }
 
-/* PARALLAX SECTION */
-.dept-parallax-section {
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    padding: 6rem 2rem;
-    color: white;
-    margin: 6rem 0;
-    position: relative;
+/* --- WORDPRESS-STYLE DYNAMIC CONTENT --- */
+.dynamic-content {
+    font-size: 1.1rem;
+    color: var(--text-main);
 }
-/* Overlay for readability */
-.dept-parallax-overlay {
-    position: absolute; inset: 0; background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.8)); z-index: 0;
-}
-.dept-parallax-content {
-    max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;
-}
-.dept-parallax-content h3 { font-family: var(--font-head); font-size: 2.2rem; color: var(--jec-gold); margin-bottom: 1.5rem; }
-.dept-parallax-content p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 1rem; }
 
-/* TABS */
-.dept-tabs-container {
-    background: var(--bg-surface);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    border: 1px solid var(--border);
-    overflow: hidden;
-    margin-bottom: 5rem;
-}
-.dept-tabs-nav { display: flex; background: #F1F5F9; border-bottom: 1px solid var(--border); }
-.dept-tab-btn {
-    padding: 1rem 1.5rem;
+/* 1. Headings */
+.dynamic-content h1, 
+.dynamic-content h2, 
+.dynamic-content h3, 
+.dynamic-content h4 {
     font-family: var(--font-head);
-    font-size: 1rem;
+    color: var(--jec-blue);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+.dynamic-content h2 { 
+    font-size: 2.2rem; 
+    border-bottom: 2px solid #eee; 
+    padding-bottom: 10px; 
+}
+.dynamic-content h3 { 
+    font-size: 1.6rem; 
+    border-left: 5px solid var(--jec-gold); 
+    padding-left: 15px; 
+}
+
+/* 2. Text */
+.dynamic-content p {
+    margin-bottom: 1.5rem;
+    text-align: justify; /* Common in academic sites */
+}
+
+/* 3. Lists */
+.dynamic-content ul, 
+.dynamic-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+}
+.dynamic-content li {
+    margin-bottom: 0.5rem;
+}
+
+/* 4. Blockquotes */
+.dynamic-content blockquote {
+    background: #f9f9f9;
+    border-left: 5px solid var(--jec-red);
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    font-style: italic;
+    color: #555;
+    border-radius: 0 10px 10px 0;
+}
+
+/* 5. IMAGES & FLOATS (The "Free" Aspect) */
+.dynamic-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1rem 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Float Left */
+.dynamic-content img[style*="float: left"],
+.dynamic-content img[align="left"] {
+    float: left;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* Float Right */
+.dynamic-content img[style*="float: right"],
+.dynamic-content img[align="right"] {
+    float: right;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* Center Align */
+.dynamic-content img[style*="display: block"][style*="margin: auto"],
+.dynamic-content .ql-align-center img {
+    display: block;
+    margin: 2rem auto;
+}
+
+/* Clearfix */
+.dynamic-content::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* 6. Links */
+.dynamic-content a {
+    color: var(--jec-blue);
     font-weight: 600;
-    color: var(--text-muted);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
-    border-bottom: 4px solid transparent;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: 0.2s;
 }
-.dept-tab-btn:hover { color: var(--jec-blue); }
-.dept-tab-btn.active { color: var(--jec-blue); border-bottom-color: var(--jec-blue); background: var(--bg-surface); }
-.dept-tab-content { padding: 2rem; display: none; }
-.dept-tab-content.active { display: block; animation: fadeUp 0.5s; }
-
-/* BANNERS & AUDIENCE */
-.dept-banner-img-block {
-    margin: 4rem 0;
-    box-shadow: var(--shadow-hover);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    border: 1px solid var(--border);
-    background: white;
-}
-.dept-banner-img-block img { width: 100%; display: block; }
-
-.dept-audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 4rem 0; }
-.dept-audience-card {
-    background: var(--bg-surface);
-    padding: 2rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-card);
-}
-.dept-audience-card h4 { font-family: var(--font-head); font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
-
-/* PILLS */
-.dept-pill-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1rem; }
-.dept-pill {
-    background: #EFF6FF; color: var(--jec-blue); padding: 8px 18px; border-radius: 30px; font-weight: 600; font-size: 0.9rem; border: 1px solid #BFDBFE;
-}
-.dept-pill-hot { background: #FEF2F2; color: var(--jec-red); border-color: #FECACA; }
-
-/* CTA */
-.dept-cta-box {
-    background: white; border-top: 5px solid var(--jec-blue); border-radius: var(--radius-lg); padding: 3rem; box-shadow: var(--shadow-card); margin-top: 5rem;
-}
-.dept-cta-split { display: grid; grid-template-columns: 2fr 1.2fr; gap: 3rem; align-items: center; }
-.dept-cta-split h3 { font-family: var(--font-head); font-size: 1.8rem; color: var(--jec-blue); }
-.dept-cta-action { text-align: center; }
-.dept-cta-action img { width: 100%; max-width: 300px; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid var(--border); }
-.dept-cta-btn {
-    display: inline-block; background: var(--jec-red); color: white; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 700; text-decoration: none; transition: 0.3s;
+.dynamic-content a:hover {
+    border-bottom-color: var(--jec-blue);
 }
 
-@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-@media (max-width: 900px) {
-    .dept-section-split, .dept-cta-split, .dept-audience-grid { grid-template-columns: 1fr; }
-    .dept-stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .dept-img-block { order: -1; }
+/* Responsive */
+@media (max-width: 768px) {
+    .dept-hero h1 { font-size: 2.2rem; }
+    .dept-content-wrapper { padding: 1.5rem; }
+    
+    /* Disable floats on mobile */
+    .dynamic-content img[style*="float: left"],
+    .dynamic-content img[style*="float: right"] {
+        float: none !important;
+        display: block;
+        margin: 1.5rem auto;
+        width: 100%;
+    }
 }
