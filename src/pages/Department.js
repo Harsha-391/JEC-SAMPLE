@@ -53,7 +53,7 @@ function Department() {
       </Helmet>
 
       {/* 1. HERO SECTION */}
-      <header className="dept-hero" style={{backgroundImage: `linear-gradient(rgba(0, 114, 198, 0.9), rgba(0, 50, 100, 0.8)), url(${data.bannerImage || '/images/hero.jpg'})`}}>
+      <header className="dept-hero" style={{backgroundImage: `url(${data.bannerImage || '/images/hero.jpg'})`}}>
           <div className="dept-hero-content">
             <h1 className="dept-animated-section">{data.title || data.name}</h1>
             <p className="dept-animated-section" style={{animationDelay: '0.1s'}}>
