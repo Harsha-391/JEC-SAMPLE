@@ -22,8 +22,7 @@ const Blog = () => {
           ...doc.data()
         }));
 
-        // --- NEW: Sort by Date manually in JavaScript ---
-        // This ensures the newest dates (descending) come first
+        // Sort by Date manually (newest first)
         postsData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         setPosts(postsData);
@@ -38,7 +37,6 @@ const Blog = () => {
   }, []);
 
   // Helper: Separate Featured Post from Regular Feed
-  // Note: Since 'posts' is now sorted, the find() will naturally look at the newest ones first
   const featuredPost = posts.find(post => post.isFeatured === true);
   const regularPosts = posts.filter(post => post.id !== featuredPost?.id);
 
@@ -65,7 +63,7 @@ const Blog = () => {
         {/* Main Feed */}
         <main className="blog-feed">
 
-          {/* 1. Featured Post (Dynamic) */}
+          {/* 1. Featured Post (Updated Paths) */}
           {featuredPost && (
             <article className="blog-card featured">
               <div className="blog-img-wrapper">
@@ -77,16 +75,18 @@ const Blog = () => {
                   <span><i className="fas fa-user"></i> {featuredPost.author}</span>
                   <span><i className="fas fa-tag"></i> {featuredPost.category}</span>
                 </div>
-                <Link to={`/blog/view/${featuredPost.id}`}>
+                {/* REMOVED '/view' FROM PATH */}
+                <Link to={`/blog/${featuredPost.id}`}>
                   <h2 className="blog-title">{featuredPost.title}</h2>
                 </Link>
                 <p className="blog-excerpt">{featuredPost.excerpt}</p>
-                <Link to={`/blog/view/${featuredPost.id}`} className="read-more">Read Full Article <i className="fas fa-arrow-right"></i></Link>
+                {/* REMOVED '/view' FROM PATH */}
+                <Link to={`/blog/${featuredPost.id}`} className="read-more">Read Full Article <i className="fas fa-arrow-right"></i></Link>
               </div>
             </article>
           )}
 
-          {/* 2. Regular Feed (Dynamic Map) */}
+          {/* 2. Regular Feed (Updated Paths) */}
           {filteredPosts.length > 0 ? (
             filteredPosts.map((post) => (
               <article className="blog-card" key={post.id}>
@@ -99,9 +99,11 @@ const Blog = () => {
                     <span><i className="fas fa-user"></i> {post.author}</span>
                     <span><i className="fas fa-tag"></i> {post.category}</span>
                   </div>
-                  <Link to={`/blog/view/${post.id}`}><h2 className="blog-title">{post.title}</h2></Link>
+                  {/* REMOVED '/view' FROM PATH */}
+                  <Link to={`/blog/${post.id}`}><h2 className="blog-title">{post.title}</h2></Link>
                   <p className="blog-excerpt">{post.excerpt}</p>
-                  <Link to={`/blog/view/${post.id}`} className="read-more">Read Full Article <i className="fas fa-arrow-right"></i></Link>
+                  {/* REMOVED '/view' FROM PATH */}
+                  <Link to={`/blog/${post.id}`} className="read-more">Read Full Article <i className="fas fa-arrow-right"></i></Link>
                 </div>
               </article>
             ))
@@ -109,7 +111,7 @@ const Blog = () => {
             <p>No articles found matching your search.</p>
           )}
 
-          {/* Pagination (Static for now) */}
+          {/* Pagination */}
           <div className="pagination">
             <span className="page-link active">1</span>
             <span className="page-link"><i className="fas fa-chevron-right"></i></span>
@@ -137,10 +139,10 @@ const Blog = () => {
           <div className="widget">
             <h3 className="widget-title">Recent Posts</h3>
             <ul className="recent-list">
-              {/* Show top 3 posts in sidebar */}
               {posts.slice(0, 3).map(post => (
                 <li key={post.id}>
-                  <Link to={`/blog/view/${post.id}`} className="recent-link">
+                  {/* REMOVED '/view' FROM PATH */}
+                  <Link to={`/blog/${post.id}`} className="recent-link">
                     <img src={post.image} className="recent-thumb" alt="thumb" />
                     <div>
                       <div className="recent-text">{post.title}</div>

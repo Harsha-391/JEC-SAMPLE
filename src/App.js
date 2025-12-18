@@ -147,7 +147,7 @@ function App() {
 
               {/* Blog */}
               <Route path="blog" element={<Blog />} />
-              <Route path="blog/:id" element={<SinglePost />} />
+<Route path="blog/view/:id" element={<SinglePost />} />
 
               {/* Dynamic Department Route */}
               <Route path="JEC-engineering/:departmentId" element={<Department />} />
