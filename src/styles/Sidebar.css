@@ -1,0 +1,66 @@
+/* Sidebar.css - Fixed Pro Version */
+
+.college-side-bar {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  z-index: 10005;
+  border-radius: 15px 0 0 15px;
+  overflow: hidden;
+  box-shadow: -4px 0 15px rgba(0,0,0,0.2);
+}
+
+.college-side-bar a {
+  display: flex !important;
+  align-items: center;
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+  width: 50px;
+  height: 50px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.college-side-bar a:hover {
+  width: 160px; /* Expands smoothly */
+}
+
+.college-side-bar a i {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px; /* Bigger, clearer icons */
+  flex-shrink: 0;
+}
+
+.college-side-bar a span {
+  opacity: 0;
+  white-space: nowrap;
+  font-weight: 700;
+  font-size: 14px;
+  margin-left: 10px;
+  transition: opacity 0.2s;
+}
+
+.college-side-bar a:hover span {
+  opacity: 1;
+}
+
+/* Colors - Matched to your screenshot */
+.college-side-bar a.helpline { background-color: #008080 !important; }
+.college-side-bar a.brochure { background-color: #FF8C00 !important; }
+.college-side-bar a.admissions { background-color: #0056b3 !important; }
+.college-side-bar a.events { background-color: #c2185b !important; }
+.college-side-bar a.whatsapp { background-color: #25D366 !important; }
+
+/* Mobile Sidebar Fix */
+@media (max-width: 768px) {
+  .college-side-bar a { width: 45px; height: 45px; }
+  .college-side-bar a i { width: 45px; height: 45px; font-size: 18px; }
+  .college-side-bar a:hover { width: 45px; } /* Don't expand on small touch screens */
+}

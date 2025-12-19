@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
+import '../styles/Navigation.css';
+
 
 // ... (Keep your existing menu items arrays: jecMenuItems, admissionMenuItems, etc. unchanged) ...
 const jecMenuItems = [

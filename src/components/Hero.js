@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from '../firebase';
 import { Link } from 'react-router-dom';
+import '../styles/HeroSlider.css';
 
 function Hero() {
   const [banners, setBanners] = useState([]);

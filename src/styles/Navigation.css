@@ -1,0 +1,264 @@
+/* Navigation.css - Master Authority for JEC Project */
+
+/* ==========================================================
+   1. GLOBAL STICKY WRAPPER
+   ========================================================== */
+.main-header-section {
+  background: #FFFFFF !important;
+  padding: 5px 0 !important;
+  border-bottom: 1px solid #eeeeee;
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Common Container for 80px Side Padding */
+.top-bar-container, .main-header-container {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  max-width: 1600px; /* Room for 80px padding on 1920px screens */
+  margin: 0 auto;
+  padding: 0 80px !important; /* Forces strict side padding */
+}
+
+/* ==========================================================
+   2. TOP HEADER (The Black Contact Bar)
+   ========================================================== */
+.top-bar-section {
+  background: #1D1D1D !important;
+  padding: 8px 0 !important;
+  color: #FFFFFF !important;
+  width: 100% !important;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.top-bar-container {
+  justify-content: space-between !important;
+}
+
+.top-bar-left, .top-bar-right {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 20px;
+}
+
+.top-bar-container a {
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+  font-size: 11px !important; 
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap; /* Prevents text from breaking into blocks */
+  flex-shrink: 0;
+}
+
+.top-bar-container a i {
+  color: #FFB400; /* Gold Icons */
+  font-size: 12px;
+}
+
+/* ==========================================================
+   3. MAIN HEADER LOGO & ALIGNMENT
+   ========================================================== */
+.main-header-container {
+  justify-content: flex-start !important;
+}
+
+.brand-logo-link {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.brand-logo-link img { 
+  height: 55px !important; 
+  width: auto;
+  margin-right: 40px;
+}
+
+/* ==========================================================
+   4. DESKTOP NAVIGATION (993px and up)
+   ========================================================== */
+@media (min-width: 993px) {
+  .mobile-menu-toggle { display: none !important; }
+
+  .main-nav-menu {
+    display: flex !important;
+    margin-left: auto; /* Pushes links to the far right edge */
+    align-items: center !important;
+    gap: 8px; /* Tight gap to fit all items horizontally */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px; /* Hover bridge area */
+    margin-bottom: -15px;
+  }
+
+  .menu-link {
+    text-decoration: none !important;
+    color: #1D1D1D !important;
+    font-weight: 600;
+    font-size: 12px; /* Small font size to prevent wrapping */
+    padding: 12px 8px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.3s;
+  }
+
+  .menu-link:hover { color: #0072C6 !important; }
+
+  /* --- PROFESSIONAL DROPDOWN & ANTI-BLEED --- */
+  .submenu-container {
+    position: absolute;
+    top: 100%;
+    background: #ffffff !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    display: none;
+    padding: 30px;
+    z-index: 1000;
+    border-radius: 12px !important;
+    border-top: 5px solid #0072C6 !important;
+    
+    /* ANTI-BLEED: Prevents menu from going off screen edges */
+    max-width: 95vw;
+    width: max-content;
+  }
+
+  /* Center alignment for standard items */
+  .submenu-container.align-center {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    min-width: 850px !important;
+  }
+
+  /* Right edge alignment for "Our Society" or "Contact Us" */
+  .submenu-container.align-right {
+    right: 0 !important;
+    left: auto !important;
+    transform: none !important;
+    min-width: 300px !important;
+  }
+
+  .menu-item:hover .submenu-container { display: block !important; }
+
+  /* Hover Bridge */
+  .submenu-container::before {
+    content: "";
+    position: absolute;
+    top: -20px; left: 0; width: 100%; height: 20px;
+    background: transparent;
+  }
+
+  /* 3-Column Grid Logic */
+  .submenu-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 15px 30px !important;
+    width: 100% !important;
+  }
+
+  .submenu-link {
+    font-size: 12.5px;
+    color: #555 !important;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+  .submenu-link:hover { 
+    background: #f0f7ff; 
+    color: #0072C6 !important; 
+    padding-left: 15px; 
+  }
+}
+
+/* ==========================================================
+   5. MOBILE VIEW (992px and below)
+   ========================================================== */
+/* Navigation.css - Optimized Spacing & Alignment */
+
+@media (min-width: 993px) {
+  /* --- SUBMENU CONTAINER RESET --- */
+  .submenu-container {
+    position: absolute;
+    top: 100%;
+    background: #ffffff !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    display: none;
+    padding: 30px !important; /* Managed spacing inside the box */
+    z-index: 1000;
+    border-radius: 12px !important;
+    border-top: 5px solid #0072C6 !important;
+    
+    /* Dynamic width control to prevent bleeding */
+    width: max-content !important;
+    max-width: 90vw !important;
+  }
+
+  /* --- ALIGNMENT FIXES --- */
+  
+  /* Standard items (Center them) */
+  .submenu-container.align-center {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    min-width: 800px !important;
+  }
+
+  /* Right-side items (Prevents shifting too far left) */
+  .submenu-container.align-right {
+    right: 0 !important;
+    left: auto !important; /* Disables left centering */
+    transform: none !important;
+    min-width: 350px !important; /* Specific width for 'Our Society' */
+  }
+
+  /* --- GRID SPACING --- */
+  .submenu-grid {
+    display: grid !important;
+    /* Automatically handles 3 columns or drops to 2 if narrow */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+    gap: 15px 40px !important; /* Vertical and Horizontal spacing */
+    width: 100% !important;
+  }
+
+  /* --- LINK BEAUTIFICATION --- */
+  .submenu-link {
+    font-size: 13.5px !important;
+    color: #444 !important;
+    padding: 12px 15px !important; /* Managed link spacing */
+    display: block;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    line-height: 1.4;
+  }
+
+  .submenu-link:hover {
+    background: #f0f7ff !important;
+    color: #0072C6 !important;
+    padding-left: 20px !important; /* Smooth indent on hover */
+  }
+}
+
+/* --- MOBILE SPACING FIX --- */
+@media (max-width: 992px) {
+  .submenu-link {
+    padding: 12px 25px 12px 50px !important; /* Consistent vertical spacing for touch */
+    font-size: 14px !important;
+  }
+}

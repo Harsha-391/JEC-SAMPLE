@@ -1,27 +1,28 @@
 // src/components/Header.js
 import React from 'react';
-import AdmissionEnquiry from '../pages/AdmissionEnquiry';
 import { Link } from 'react-router-dom';
+import '../styles/Navigation.css';
 
 function Header() {
   return (
     <header className="top-bar-section">
-      <div className="top-bar-container max-width-container">
-        {/* Contact Info on the Left */}
-        <div className="top-bar-contact">
+      <div className="top-bar-container">
+        
+        {/* LEFT SIDE: Contact Info */}
+        <div className="top-bar-left">
           <a href="tel:+918875071333">
-            <i className="fas fa-phone"></i> +91-8875071333 (30 lines)
+            <i className="fas fa-phone-alt"></i> +91-8875071333 (30 lines)
           </a>
           <a href="mailto:admission@jeckukas.org.in">
             <i className="fas fa-envelope"></i> admission@jeckukas.org.in
           </a>
         </div>
         
-        {/* Links on the Right */}
-        <nav className="top-bar-links">
+        {/* RIGHT SIDE: Action Links */}
+        <nav className="top-bar-right">
           <Link to="/admission-enquiry">
             <i className="fas fa-edit"></i> Admission Enquiry Open 2025
-         </Link>
+          </Link>
           <Link to="/admissions">
             <i className="fas fa-user-graduate"></i> Apply for Admission
           </Link>
@@ -32,6 +33,7 @@ function Header() {
             <i className="fas fa-bullhorn"></i> Grievance Redressal Form
           </a>
         </nav>
+
       </div>
     </header>
   );
