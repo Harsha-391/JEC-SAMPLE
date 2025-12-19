@@ -1,5 +1,6 @@
 // src/components/VirtualTour.js
 import React from 'react';
+import '../styles/VirtualTour.css';
 
 function VirtualTour() {
   return (

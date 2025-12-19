@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from '../firebase';
+import '../styles/CampusLife.css';
 
 function CampusLife() {
   const [galleryItems, setGalleryItems] = useState([]);

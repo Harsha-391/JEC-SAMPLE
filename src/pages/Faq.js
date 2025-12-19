@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import '../styles/Faq.css';
 
 // Reusable Accordion Item Component
 function AccordionItem({ title, children }) {

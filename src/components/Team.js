@@ -2,6 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { collection, getDocs } from "firebase/firestore"; 
 import { db } from '../firebase'; // Import database connection
+import '../styles/Team.css';
 
 function Team() {
   const [teamMembers, setTeamMembers] = useState([]);

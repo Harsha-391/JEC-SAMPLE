@@ -1,38 +1,49 @@
-/* Navigation.css - Master Authority for JEC Project */
-
-/* ==========================================================
-   1. GLOBAL STICKY WRAPPER
-   ========================================================== */
+/* ==========================================================================
+   1. GLOBAL WRAPPER & STICKY LOGIC
+   ========================================================================== */
+:root {
+  /* Color palette */
+  --brand-50: #f5f9ff;
+  --brand-100: #e6f0ff;
+  --logo-blue: #0b63c6; /* existing variable used elsewhere */
+  --brand-600: #0859a6;
+  --accent: #ffb400;
+  --muted: #6b7280;
+  --surface: #ffffff;
+  --glass: rgba(11,99,198,0.06);
+  --shadow-soft: 0 8px 24px rgba(9,30,66,0.08);
+  --shadow-subtle: 0 4px 12px rgba(9,30,66,0.06);
+}
 .main-header-section {
-  background: #FFFFFF !important;
+  background: var(--surface) !important;
   padding: 5px 0 !important;
   border-bottom: 1px solid #eeeeee;
   position: sticky;
   top: 0;
   z-index: 10000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: var(--shadow-subtle);
 }
 
-/* Common Container for 80px Side Padding */
-.top-bar-container, .main-header-container {
+/* Consistent Side Padding (80px Desktop / 20px Mobile) */
+.top-bar-container, 
+.main-header-container {
   display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
   align-items: center !important;
-  max-width: 1600px; /* Room for 80px padding on 1920px screens */
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 80px !important; /* Forces strict side padding */
+  padding: 0 80px !important;
 }
 
-/* ==========================================================
+/* ==========================================================================
    2. TOP HEADER (The Black Contact Bar)
-   ========================================================== */
+   ========================================================================== */
 .top-bar-section {
-  background: #1D1D1D !important;
+  background: linear-gradient(90deg, #0f1724 0%, #071428 100%); /* deep subtle gradient */
   padding: 8px 0 !important;
-  color: #FFFFFF !important;
+  color: var(--logo-white) !important;
   width: 100% !important;
   border-bottom: 1px solid rgba(255,255,255,0.1);
+  overflow: hidden;
 }
 
 .top-bar-container {
@@ -41,224 +52,304 @@
 
 .top-bar-left, .top-bar-right {
   display: flex !important;
-  flex-wrap: nowrap !important;
   align-items: center !important;
   gap: 20px;
 }
 
 .top-bar-container a {
-  color: #FFFFFF !important;
+  color: var(--logo-white) !important;
   text-decoration: none !important;
   font-size: 11px !important; 
   font-weight: 500;
   display: flex;
   align-items: center;
   gap: 6px;
-  white-space: nowrap; /* Prevents text from breaking into blocks */
-  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .top-bar-container a i {
-  color: #FFB400; /* Gold Icons */
+  color: var(--logo-gold);
   font-size: 12px;
 }
 
-/* ==========================================================
-   3. MAIN HEADER LOGO & ALIGNMENT
-   ========================================================== */
+/* ==========================================================================
+   3. MAIN HEADER LOGO & NAV ALIGNMENT
+   ========================================================================== */
 .main-header-container {
-  justify-content: flex-start !important;
+  justify-content: space-between !important;
 }
 
 .brand-logo-link {
   display: flex;
   align-items: center;
-  flex-shrink: 0;
 }
 
 .brand-logo-link img { 
   height: 55px !important; 
   width: auto;
-  margin-right: 40px;
 }
 
-/* ==========================================================
+/* ==========================================================================
    4. DESKTOP NAVIGATION (993px and up)
-   ========================================================== */
+   ========================================================================== */
 @media (min-width: 993px) {
   .mobile-menu-toggle { display: none !important; }
 
   .main-nav-menu {
     display: flex !important;
-    margin-left: auto; /* Pushes links to the far right edge */
     align-items: center !important;
-    gap: 8px; /* Tight gap to fit all items horizontally */
+    gap: 5px; 
     list-style: none;
-    padding: 0;
-    margin: 0;
+    padding: 0; margin: 0;
   }
 
   .menu-item {
     position: relative;
-    display: flex;
-    align-items: center;
-    padding-bottom: 15px; /* Hover bridge area */
+    padding-bottom: 15px;
     margin-bottom: -15px;
   }
 
   .menu-link {
     text-decoration: none !important;
-    color: #1D1D1D !important;
-    font-weight: 600;
-    font-size: 12px; /* Small font size to prevent wrapping */
-    padding: 12px 8px;
+    color: var(--brand-600) !important;
+    font-weight: 700;
+    font-size: 12.5px;
+    padding: 15px 10px;
     white-space: nowrap;
     display: flex;
     align-items: center;
     gap: 4px;
-    transition: color 0.3s;
+    transition: color 240ms ease, transform 240ms ease;
   }
 
-  .menu-link:hover { color: #0072C6 !important; }
+  .menu-link:hover {
+    color: var(--logo-blue) !important;
+    transform: translateY(-2px);
+  }
 
-  /* --- PROFESSIONAL DROPDOWN & ANTI-BLEED --- */
+  .menu-link:focus {
+    outline: 3px solid rgba(11,99,198,0.12);
+    outline-offset: 4px;
+    border-radius: 6px;
+  }
+
+  /* --- 3-COLUMN DROPDOWN --- */
   .submenu-container {
     position: absolute;
     top: 100%;
-    background: #ffffff !important;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-    display: none;
-    padding: 30px;
+    background: linear-gradient(180deg, var(--surface) 0%, var(--brand-50) 100%) !important;
+    box-shadow: var(--shadow-soft);
+    padding: 35px !important;
     z-index: 1000;
     border-radius: 12px !important;
-    border-top: 5px solid #0072C6 !important;
-    
-    /* ANTI-BLEED: Prevents menu from going off screen edges */
-    max-width: 95vw;
-    width: max-content;
-  }
-
-  /* Center alignment for standard items */
-  .submenu-container.align-center {
+    border-top: 5px solid var(--logo-blue) !important;
     left: 50% !important;
-    transform: translateX(-50%) !important;
     min-width: 850px !important;
+    width: max-content;
+    /* start hidden but ready to animate */
+    visibility: hidden;
+    opacity: 0;
+    transform-origin: top center;
+    transform: translateX(-50%) translateY(-8px) scaleY(0.98);
+    transition: opacity 220ms cubic-bezier(.2,.9,.2,1), transform 220ms cubic-bezier(.2,.9,.2,1), visibility 220ms;
+    pointer-events: none;
   }
 
-  /* Right edge alignment for "Our Society" or "Contact Us" */
-  .submenu-container.align-right {
-    right: 0 !important;
+  /* Anti-bleed for right-most items */
+  .menu-item:nth-last-child(-n+2) .submenu-container {
     left: auto !important;
-    transform: none !important;
-    min-width: 300px !important;
-  }
-
-  .menu-item:hover .submenu-container { display: block !important; }
-
-  /* Hover Bridge */
-  .submenu-container::before {
-    content: "";
-    position: absolute;
-    top: -20px; left: 0; width: 100%; height: 20px;
-    background: transparent;
-  }
-
-  /* 3-Column Grid Logic */
-  .submenu-grid {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
-    gap: 15px 30px !important;
-    width: 100% !important;
-  }
-
-  .submenu-link {
-    font-size: 12.5px;
-    color: #555 !important;
-    padding: 10px;
-    display: block;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-  }
-  .submenu-link:hover { 
-    background: #f0f7ff; 
-    color: #0072C6 !important; 
-    padding-left: 15px; 
-  }
-}
-
-/* ==========================================================
-   5. MOBILE VIEW (992px and below)
-   ========================================================== */
-/* Navigation.css - Optimized Spacing & Alignment */
-
-@media (min-width: 993px) {
-  /* --- SUBMENU CONTAINER RESET --- */
-  .submenu-container {
-    position: absolute;
-    top: 100%;
-    background: #ffffff !important;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-    display: none;
-    padding: 30px !important; /* Managed spacing inside the box */
-    z-index: 1000;
-    border-radius: 12px !important;
-    border-top: 5px solid #0072C6 !important;
-    
-    /* Dynamic width control to prevent bleeding */
-    width: max-content !important;
-    max-width: 90vw !important;
-  }
-
-  /* --- ALIGNMENT FIXES --- */
-  
-  /* Standard items (Center them) */
-  .submenu-container.align-center {
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    min-width: 800px !important;
-  }
-
-  /* Right-side items (Prevents shifting too far left) */
-  .submenu-container.align-right {
     right: 0 !important;
-    left: auto !important; /* Disables left centering */
-    transform: none !important;
-    min-width: 350px !important; /* Specific width for 'Our Society' */
+    transform-origin: top right;
+    transform: translateY(-8px) scaleY(0.98) !important;
   }
 
-  /* --- GRID SPACING --- */
+  /* show on hover (desktop) */
+  .menu-item:hover .submenu-container {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateX(-50%) translateY(0) scaleY(1) !important;
+    pointer-events: auto !important;
+  }
+
+  /* JS-driven open/close via `.open` on the menu-item */
+  .menu-item.open .submenu-container {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scaleY(1);
+    pointer-events: auto;
+  }
+
+  /* Also support the React classes used in NavDropdown: `.dropdown-active` and `.show` */
+  .menu-item.dropdown-active .submenu-container,
+  .submenu-container.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scaleY(1);
+    pointer-events: auto;
+  }
+
+  .menu-item.open:nth-last-child(-n+2) .submenu-container {
+    transform: translateY(0) scaleY(1) !important;
+  }
+
   .submenu-grid {
     display: grid !important;
-    /* Automatically handles 3 columns or drops to 2 if narrow */
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
-    gap: 15px 40px !important; /* Vertical and Horizontal spacing */
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 15px 40px !important;
     width: 100% !important;
   }
 
-  /* --- LINK BEAUTIFICATION --- */
   .submenu-link {
-    font-size: 13.5px !important;
-    color: #444 !important;
-    padding: 12px 15px !important; /* Managed link spacing */
+    font-size: 13px;
+    color: #222 !important;
+    padding: 10px 12px;
     display: block;
     text-decoration: none;
     border-radius: 8px;
-    transition: all 0.2s ease;
+    transition: background 200ms ease, color 200ms ease, padding-left 180ms ease;
     line-height: 1.4;
   }
 
   .submenu-link:hover {
-    background: #f0f7ff !important;
-    color: #0072C6 !important;
-    padding-left: 20px !important; /* Smooth indent on hover */
+    background: linear-gradient(90deg, var(--brand-100), transparent);
+    color: var(--logo-blue) !important;
+    padding-left: 20px;
+  }
+
+  /* chevron icon rotation */
+  .menu-arrow-icon {
+    transition: transform 260ms ease;
+    transform-origin: center;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .menu-item.dropdown-active .menu-arrow-icon,
+  .menu-item.open .menu-arrow-icon {
+    transform: rotate(-180deg);
+    color: var(--logo-blue);
   }
 }
 
-/* --- MOBILE SPACING FIX --- */
+/* ==========================================================================
+   5. MOBILE VIEW (992px and below)
+   ========================================================================== */
 @media (max-width: 992px) {
+  /* HIDE THE BLACK TOP BAR ON MOBILE */
+  .top-bar-section {
+    display: none !important;
+  }
+
+  .main-header-container {
+    padding: 0 20px !important;
+  }
+
+  /* MOBILE MENU TOGGLE (The 3 Dots Button) */
+  .mobile-menu-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--brand-600);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
+    z-index: 10005; /* Keeps button on top of the drawer */
+  }
+
+  /* MOBILE NAV DRAWER */
+  .main-nav-menu {
+    position: fixed;
+    top: 0; 
+    right: -100%; /* Hidden off-screen to the right */
+    width: 85%; 
+    height: 100vh;
+    background: linear-gradient(180deg, var(--surface), var(--brand-50));
+    flex-direction: column;
+    padding: 80px 20px;
+    transition: right 360ms cubic-bezier(.16,.84,.24,1), transform 360ms cubic-bezier(.16,.84,.24,1), box-shadow 360ms;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    overflow-y: auto;
+    z-index: 10001; /* Behind the toggle button but above page content */
+    display: flex !important;
+  }
+
+  /* Slide in effect: Targets the 'active' class used in Subheader.js */
+  .main-nav-menu.active {
+    right: 0 !important;
+    box-shadow: -20px 0 44px rgba(9,30,66,0.14);
+    transform: translateX(0);
+  }
+
+  .menu-item {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+  }
+
+  .menu-link {
+    font-size: 15px;
+    padding: 15px 0;
+    width: 100%;
+    color: var(--logo-black) !important;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    white-space: normal;
+  }
+
+  /* STACKED SUBMENUS ON MOBILE */
+  .submenu-container {
+    position: static !important;
+    transform: none !important;
+    box-shadow: none !important;
+    padding: 0 0 0 15px !important;
+    border: none !important;
+    min-width: 100% !important;
+    display: block !important;
+    /* Collapsible on mobile: start closed */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 320ms ease, padding 320ms ease, opacity 320ms ease;
+    opacity: 0;
+  }
+
+  /* Mobile: `.open` on the menu-item expands the submenu */
+  .menu-item.open .submenu-container {
+    max-height: 2000px; /* large value to allow content expansion */
+    padding: 5px 0 20px 15px !important;
+    opacity: 1;
+  }
+
+  /* Also support the React classes used in NavDropdown on mobile */
+  .menu-item.dropdown-active .submenu-container,
+  .submenu-container.show {
+    max-height: 2000px;
+    padding: 5px 0 20px 15px !important;
+    opacity: 1;
+  }
+
+  .submenu-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+  }
+
   .submenu-link {
-    padding: 12px 25px 12px 50px !important; /* Consistent vertical spacing for touch */
     font-size: 14px !important;
+    padding: 10px 0 !important;
+    color: var(--muted) !important;
+    border-bottom: 1px solid #f9f9f9;
+  }
+
+  /* subtle scrollbar styling for drawer */
+  .main-nav-menu::-webkit-scrollbar { width: 8px; }
+  .main-nav-menu::-webkit-scrollbar-thumb { background: rgba(11,99,198,0.12); border-radius: 8px; }
+}
+
+/* EXTRA SMALL DEVICES */
+@media (max-width: 480px) {
+  .brand-logo-link img {
+    height: 45px !important;
   }
 }

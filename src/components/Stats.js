@@ -1,5 +1,6 @@
 // src/components/Stats.js
 import React, { useEffect, useRef, useState } from 'react';
+import '../styles/Stats.css';
 
 // A reusable child component for the individual stat box
 function StatBox({ number, label, isText = false, dataCount = null }) {

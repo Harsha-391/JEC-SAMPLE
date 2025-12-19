@@ -1,5 +1,6 @@
 // src/components/Programs.js
 import React from 'react';
+import '../styles/Programs.css'
 
 // Data for programs
 const programs = [

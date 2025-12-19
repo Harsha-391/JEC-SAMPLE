@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { collection, query, getDocs, orderBy } from "firebase/firestore";
+import '../styles/Placements.css';
 
 // CSS is imported globally in App.js via App.css
 

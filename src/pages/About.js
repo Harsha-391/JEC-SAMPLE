@@ -1,7 +1,8 @@
 // src/pages/About.js
 import React from 'react';
 import { Helmet } from 'react-helmet-async'; // Import Helmet
-
+import '../styles/About.css';
+import campusIntro from '../assets/campus-intro.jpeg';
 function About() {
   return (
     // This new wrapper class will scope all the new styles
@@ -60,7 +61,7 @@ function About() {
             
             {/* UPDATED ALT TEXT HERE */}
             <img 
-              src="../images/campus-intro.jpeg" 
+              src={ campusIntro }
               alt="Panoramic view of Jaipur Engineering College (JEC) campus lush green infrastructure in Kukas, Jaipur" 
               className="intro-image" 
             />

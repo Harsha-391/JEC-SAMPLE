@@ -1,5 +1,6 @@
 // src/components/WhyJEC.js
 import React from 'react';
+import '../styles/WhyJEC.css'
 
 function WhyJEC() {
   return (

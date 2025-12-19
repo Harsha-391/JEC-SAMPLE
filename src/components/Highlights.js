@@ -1,5 +1,6 @@
 // src/components/Highlights.js
 import React from 'react';
+import '../styles/Highlights.css';
 
 function Highlights() {
   return (

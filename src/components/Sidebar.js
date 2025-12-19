@@ -5,7 +5,6 @@ import '../styles/Sidebar.css';
 function Sidebar() {
   return (
     <div className="college-side-bar">
-      {/* Added specific classes: helpline, brochure, admissions, events, whatsapp */}
       <a href="#" className="helpline">
         <i className="fas fa-phone"></i><span>Helpline</span>
       </a>

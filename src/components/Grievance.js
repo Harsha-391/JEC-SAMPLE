@@ -1,5 +1,6 @@
 // src/components/Grievance.js
 import React from 'react';
+import '../styles/Grievance.css';
 
 function Grievance() {
   return (

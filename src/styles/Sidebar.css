@@ -1,4 +1,6 @@
-/* Sidebar.css - Fixed Pro Version */
+/* ==========================================================================
+   SIDEBAR COMPONENT STYLES
+   ========================================================================== */
 
 .college-side-bar {
   position: fixed;
@@ -7,10 +9,10 @@
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  z-index: 10005;
+  z-index: 10005; /* High z-index to stay above other content */
   border-radius: 15px 0 0 15px;
   overflow: hidden;
-  box-shadow: -4px 0 15px rgba(0,0,0,0.2);
+  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .college-side-bar a {
@@ -18,49 +20,68 @@
   align-items: center;
   color: #FFFFFF !important;
   text-decoration: none !important;
-  width: 50px;
+  width: 50px; /* Collapsed width */
   height: 50px;
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
+  white-space: nowrap;
 }
 
+/* Expand on hover */
 .college-side-bar a:hover {
-  width: 160px; /* Expands smoothly */
+  width: 160px; 
 }
 
+/* Icon Styling */
 .college-side-bar a i {
   width: 50px;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px; /* Bigger, clearer icons */
+  font-size: 22px;
   flex-shrink: 0;
 }
 
+/* Text Styling */
 .college-side-bar a span {
   opacity: 0;
-  white-space: nowrap;
   font-weight: 700;
   font-size: 14px;
   margin-left: 10px;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s ease-in;
 }
 
 .college-side-bar a:hover span {
   opacity: 1;
 }
 
-/* Colors - Matched to your screenshot */
-.college-side-bar a.helpline { background-color: #008080 !important; }
-.college-side-bar a.brochure { background-color: #FF8C00 !important; }
-.college-side-bar a.admissions { background-color: #0056b3 !important; }
-.college-side-bar a.events { background-color: #c2185b !important; }
-.college-side-bar a.whatsapp { background-color: #25D366 !important; }
+/* --- Brand Colors --- */
+.college-side-bar a.helpline { background-color: #008080 !important; }   /* Teal */
+.college-side-bar a.brochure { background-color: #FF8C00 !important; }   /* Orange */
+.college-side-bar a.admissions { background-color: #0056b3 !important; } /* Blue */
+.college-side-bar a.events { background-color: #c2185b !important; }     /* Pink */
+.college-side-bar a.whatsapp { background-color: #25D366 !important; }   /* WhatsApp Green */
 
-/* Mobile Sidebar Fix */
+/* --- Mobile Responsiveness --- */
 @media (max-width: 768px) {
-  .college-side-bar a { width: 45px; height: 45px; }
-  .college-side-bar a i { width: 45px; height: 45px; font-size: 18px; }
-  .college-side-bar a:hover { width: 45px; } /* Don't expand on small touch screens */
+  .college-side-bar a { 
+    width: 45px; 
+    height: 45px; 
+  }
+  
+  .college-side-bar a i { 
+    width: 45px; 
+    height: 45px; 
+    font-size: 18px; 
+  }
+  
+  /* Disable expansion on touch devices to prevent layout issues */
+  .college-side-bar a:hover { 
+    width: 45px; 
+  }
+  
+  .college-side-bar a span {
+    display: none;
+  }
 }

@@ -1,0 +1,104 @@
+/* ==========================================================================
+   CAMPUS LIFE SECTION
+   ========================================================================== */
+
+.campus-life {
+  padding: 80px 0;
+  background: var(--color-background-medium);
+}
+
+.campus-life-content {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.campus-life-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--logo-blue);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 15px;
+}
+
+.campus-life-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: var(--logo-red);
+  border-radius: 2px;
+}
+
+.campus-life-desc {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  margin-bottom: 50px;
+  max-width: 800px;
+}
+
+/* --- Gallery Grid --- */
+.campus-gallery {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 250px 250px;
+  gap: 20px;
+  grid-template-areas:
+      "large small1 small2"
+      "large small3 small4";
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+.gallery-item.large { grid-area: large; }
+
+.gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  color: var(--logo-white);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  transform: translateY(0);
+}
+
+@media (max-width: 992px) {
+  .campus-gallery {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: none;
+  }
+  .gallery-item.large { height: 300px; }
+}
+
+@media (max-width: 768px) {
+  .campus-life-content { padding: 0 20px; }
+  .campus-gallery { grid-template-columns: 1fr; }
+  .campus-life-title { font-size: 32px; }
+}

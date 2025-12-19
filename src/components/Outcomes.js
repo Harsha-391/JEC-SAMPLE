@@ -1,6 +1,6 @@
 // src/components/Outcomes.js
 import React from 'react';
-
+import '../styles/Outcomes.css'
 function Outcomes() {
   return (
     <section className="outcomes">
