@@ -74,19 +74,6 @@ body {
    2. HEADER & SUBHEADER SHARED STYLES
    ========================================================================== */
 
-/* Shared Flex Layout *//* ==========================================================================
-   1. STICKY HEADER WRAPPER
-   ========================================================================== */
-/* This wraps both the Top Bar and Main Nav to make them stick together *//* ==========================================================================
-   2. HEADER & SUBHEADER (CONSOLIDATED & FIXED)
-   ========================================================================== */
-
-/* --- 1. Sticky Wrapper --- */
-/* ==========================================================================
-   2. HEADER & SUBHEADER (STRICT SEPARATION)
-   ========================================================================== */
-
-/* --- 1. Base Styles (Shared) --- */
 .sticky-header {
   position: sticky;
   top: 0;
@@ -133,13 +120,13 @@ body {
 /* Main Nav (White) */
 .main-header-section {
   background: var(--logo-white);
-  padding: 15px 0;
+  padding:  2px 0;
   border-bottom: 1px solid var(--color-border);
   position: relative;
   z-index: 1000;
 }
 
-.brand-logo-link img { height: 60px; width: auto; }
+.brand-logo-link img { height: 80px; width: auto; }
 
 .mobile-menu-toggle {
   display: none; /* Hidden by default */
@@ -153,157 +140,271 @@ body {
 
 /* ==========================================================================
    DESKTOP ONLY STYLES (Min-Width: 993px)
+   ========================================================================== *//* ==========================================================================
+   STRICT MOBILE NAVIGATION: NO HORIZONTAL EXPANSION (Max-Width: 992px)
    ========================================================================== */
-@media (min-width: 993px) {
+@media (max-width: 992px) {
   
-  .top-bar-container, .main-header-container {
-    padding: 0 40px;
+  /* 1. Hide the black contact bar (Header.js) */
+  .top-bar-section {
+    display: none !important;
   }
 
+  /* 2. Show the white logo bar (Subheader.js) */
+  .main-header-section {
+    display: block !important;
+    position: relative !important;
+    background-color: #ffffff !important;
+    min-height: 65px;
+  }
+
+  /* 3. Ensure white bar is at the top */
+  .sticky-header {
+    top: 0 !important;
+  }
+
+  /* 4. RESTORE & FIX MENU BUTTON */
+  .mobile-menu-toggle {
+    display: flex !important;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10001;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: #333;
+  }
+
+  /* 5. THE MAIN DRAWER */
   .main-nav-menu {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    margin-left: auto;
-  }
-
-  .menu-item { position: relative; }
-
-  .menu-link {
-    color: var(--logo-black);
-    font-weight: 600;
-    font-size: 14px;
-    text-decoration: none;
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-
-  .menu-link:hover {
-    background-color: var(--color-background-medium);
-    color: var(--logo-blue);
-  }
-
-  /* Desktop Dropdown Container */
-  .submenu-container {
+    display: none; 
     position: absolute;
     top: 100%;
     left: 0;
-    min-width: 260px; /* Base width */
-    background: var(--logo-white);
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    padding: 15px;
-    border-top: 3px solid var(--logo-blue);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-    z-index: 1100;
+    width: 100% !important;
+    background-color: #ffffff;
+    flex-direction: column;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden !important; /* PREVENTS SIDE-SWIPING */
+    z-index: 10000;
+    padding: 0;
+    margin: 0;
   }
 
-  /* Show on Hover (Desktop) */
-  .menu-item:hover .submenu-container {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+  .main-nav-menu.active {
+    display: flex !important;
   }
 
-  /* Alignment Modifiers (Desktop Only) */
-  .submenu-container.align-right { left: auto; right: 0; }
-  
-  /* Center Align Logic */
-  .submenu-container.align-center {
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    min-width: 600px; /* Wide dropdown for desktop */
-  }
-  .menu-item:hover .submenu-container.align-center {
-    transform: translateX(-50%) translateY(0);
+  /* 6. FORCE EVERY DROPDOWN TO BE VERTICAL (ACCORDION)
+     This kills the 'align-center' and 'align-right' logic on mobile */
+  .submenu-container,
+  .submenu-container.align-right,
+  .submenu-container.align-center,
+  .dropdown-menu {
+    position: static !important; /* CRITICAL: removes them from floating */
+    transform: none !important;  /* CRITICAL: kills centering/offsets */
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;      /* Forces full screen width */
+    min-width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    
+    display: none; /* Controlled by .show class */
+    opacity: 1 !important;
+    visibility: visible !important;
+    background-color: #f9f9f9 !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 5px 0 !important;
   }
 
-  /* Grid for Wide Menus (Desktop) */
+  /* Show when open */
+  .submenu-container.show {
+    display: block !important;
+  }
+
+  /* 7. Force Grid into Single Column */
   .submenu-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 0 !important;
+  }
+
+  /* 8. Links and Indentation */
+  .menu-link {
+    padding: 15px 20px !important;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    width: 100% !important;
+    box-sizing: border-box;
   }
 
   .submenu-link {
-    display: block;
+    display: block !important;
+    padding: 12px 20px 12px 45px !important; /* Left indent for hierarchy */
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+    color: #555 !important;
     text-decoration: none;
-    color: var(--color-text-primary);
-    padding: 8px 12px;
-    font-size: 14px;
-    border-radius: 4px;
-    transition: 0.2s;
-  }
-  .submenu-link:hover {
-    background: var(--color-background-medium);
-    color: var(--logo-blue);
-    transform: translateX(5px);
+    width: 100% !important;
+    box-sizing: border-box;
   }
 }
 
 /* ==========================================================================
-   MOBILE ONLY STYLES (Max-Width: 992px)
+   DESKTOP ONLY ALIGNMENT: 993px and Above
+   Put all your 'Center' and 'Right' logic HERE ONLY.
    ========================================================================== */
-@media (max-width: 992px) {
+@media (min-width: 993px) {
+  /* This centers the Department/Infrastructure wide menus on PC only */
+  .submenu-container.align-center {
+    left: 50% !important;
+    transform: translateX(-50%) translateY(10px) !important;
+    min-width: 600px !important;
+    transition: all 0.3s ease;
+  }
+
+  /* Right-align 'Our Society' on PC only */
+  .submenu-container.align-right {
+    right: 0 !important;
+    left: auto !important;
+    transform: translateY(10px) !important;
+  }
   
-  .top-bar-container, .main-header-container {
-    padding: 10px 20px;
+  /* Hover effects for PC only */
+  .menu-item:hover .submenu-container.align-center {
+    transform: translateX(-50%) translateY(0) !important;
+  }
+}
+  
+  /* 1. Hide Top Contact Bar */
+  .top-bar-section {
+    display: none !important;
   }
 
+  /* 2. Nav Bar Container */
+  .main-header-section {
+    display: block !important;
+    position: relative !important;
+    background-color: #ffffff !important;
+    min-height: 60px;
+  }
+
+  /* 3. Ensure no gap at top */
+  .sticky-header {
+    top: 0 !important;
+  }
+
+  /* 4. Menu Toggle Button */
   .mobile-menu-toggle {
-    display: block; /* Show hamburger/dots */
+    display: flex !important;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10001;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #333;
   }
 
-  /* Main Drawer */
+  /* 5. Main Navigation Drawer */
   .main-nav-menu {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: var(--logo-white);
+    background-color: #ffffff;
     flex-direction: column;
     box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-    border-top: 1px solid var(--color-border);
-    max-height: 80vh;
+    max-height: 85vh;
     overflow-y: auto;
-    z-index: 1101;
+    overflow-x: hidden; /* STOPS HORIZONTAL SWIPING */
+    z-index: 10000;
     padding: 0;
     margin: 0;
   }
 
   .main-nav-menu.active {
-    display: flex;
+    display: flex !important;
   }
 
-  /* Mobile Links */
-  .menu-item {
-    width: 100%;
-    border-bottom: 1px solid #f0f0f0;
-    display: block; /* Strict block layout */
+  /* 6. RESET ALL DROPDOWNS TO VERTICAL ACCORDIONS */
+  .submenu-container,
+  .submenu-container.align-right,
+  .submenu-container.align-center,
+  .dropdown-menu {
+    /* Critical: Force into the normal document flow */
+    position: static !important; 
+    
+    /* Critical: Kill all horizontal shifts and desktop widths */
+    transform: none !important;
+    left: 0 !important;
+    right: auto !important;
+    margin: 0 !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    
+    /* Visuals */
+    display: none; /* Hidden until .show is added */
+    opacity: 1 !important;
+    visibility: visible !important;
+    background-color: #fcfcfc !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 5px 0 !important;
   }
 
+  /* Show when toggled */
+  .submenu-container.show,
+  .dropdown-menu.show {
+    display: block !important;
+  }
+
+  /* 7. Force Grid into Single Column */
+  .submenu-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 0 !important;
+  }
+
+  /* 8. Links Styling */
   .menu-link {
-    width: 100%;
-    justify-content: space-between;
-    padding: 15px 20px;
-    font-size: 16px;
-    color: var(--logo-black);
+    padding: 15px 20px !important;
+    border-bottom: 1px solid #f0f0f0;
     text-decoration: none;
+    color: #333;
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     box-sizing: border-box;
   }
 
-  /* Arrow Rotation */
+  .submenu-link, .dropdown-item {
+    display: block !important;
+    padding: 12px 20px 12px 45px !important; /* Significant indent to show hierarchy */
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 15px;
+    color: #555 !important;
+    text-decoration: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* 9. Arrow Rotation */
   .menu-arrow-icon {
     transition: transform 0.3s;
   }
@@ -311,67 +412,16 @@ body {
     transform: rotate(180deg);
   }
 
-  /* --- NUCLEAR OPTION for Dropdowns: Reset EVERYTHING --- */
-  .submenu-container,
-  .submenu-container.align-right,
-  .submenu-container.align-center {
-    /* Force Static Positioning (In-Flow) */
-    position: static !important;
-    transform: none !important;
-    left: auto !important;
-    right: auto !important;
-    margin: 0 !important;
-    
-    /* Force Full Width */
-    width: 100% !important;
-    min-width: 0 !important; /* Kill the 600px desktop rule */
-    max-width: 100% !important;
-    
-    /* Reset Styles */
-    box-shadow: none !important;
-    border: none !important;
-    border-radius: 0 !important;
-    background-color: #f9f9f9 !important;
-    padding: 0 !important;
-    
-    /* Display Logic */
-    display: none;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-
-  /* Show only when class is added */
-  .submenu-container.show {
-    display: block !important;
-  }
-
-  /* Force Single Column Grid */
-  .submenu-grid {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 0;
-  }
-
-  /* Submenu Links */
-  .submenu-link {
-    display: block;
-    width: 100%;
-    padding: 12px 20px 12px 40px; /* Indent */
-    border-bottom: 1px solid #e6e6e6;
-    color: #555;
-    text-decoration: none;
-    font-size: 15px;
-    box-sizing: border-box;
-  }
-}
+/* Scaling for small screens */
 @media (max-width: 600px) {
   .brand-logo-link img {
-    height: 45px;
+    height: 38px;
   }
-  .brand-logo-link .brand-text {
-    font-size: 16px;
-  }
+}
+
+/* Ensure sidebar icons don't create layout issues */
+.college-side-bar {
+  z-index: 9998 !important;
 }
 /* --- NEW DROPDOWN STYLES END HERE --- *//* ==========================================================================
    SIDEBAR (Side Icon Bar)
@@ -389,7 +439,7 @@ body {
   flex-direction: column;
   gap: 4px;
   /* CHANGE: Increased z-index significantly to sit above Header/Mobile Menu */
-  z-index: 9999; 
+  z-index: 9998; 
   border-radius: 12px 0 0 12px;
   padding: 8px;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
@@ -10462,46 +10512,6 @@ footer {
 
 /* 1. Center Alignment Logic for the Infrastructure Menu */
 /* This assumes you pass the prop: align="center" to NavDropdown */
-.dropdown-menu.align-center {
-  left: 50% !important;
-  right: auto !important;
-  transform: translateX(-50%) translateY(10px); /* Centers it horizontally */
-  min-width: 600px; /* Standard width */
-}
-
-/* Fix hover state for centered menu so it doesn't jump */
-.nav-item:hover .dropdown-menu.align-center {
-  transform: translateX(-50%) translateY(0);
-}
-
-/* 2. Responsive / Mobile Adjustments */
-@media (max-width: 992px) {
-  .dropdown-menu,
-  .dropdown-menu.align-right,
-  .dropdown-menu.align-center {
-    /* On mobile, force all menus to center relative to the parent container */
-    position: absolute;
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%) translateY(10px);
-    
-    /* Make it fit the screen width */
-    width: 90vw;
-    min-width: unset;
-    box-sizing: border-box;
-  }
-
-  .nav-item:hover .dropdown-menu,
-  .nav-item:hover .dropdown-menu.align-right,
-  .nav-item:hover .dropdown-menu.align-center {
-     transform: translateX(-50%) translateY(0);
-  }
-
-  /* Ensure the grid inside is single column on small screens */
-  .dropdown-grid {
-    grid-template-columns: 1fr !important;
-  }
-}
 /* ========================================
    REFUEL & RELAX PAGE STYLES
    ========================================
@@ -11788,4 +11798,291 @@ footer {
     .cs-stats-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+
+/* ==========================================================================
+   FINAL CONSOLIDATED MOBILE NAVIGATION (Max-Width: 992px)
+   ========================================================================== */
+@media (max-width: 992px) {
+  
+  /* 1. Hide Top Contact Bar */
+  .top-bar-section {
+    display: none !important;
+  }
+
+  /* 2. Nav Bar Container (Subheader) */
+  .main-header-section {
+    display: block !important;
+    position: relative !important;
+    background-color: #ffffff !important;
+    min-height: 60px;
+  }
+
+  /* 3. Ensure no gap at top */
+  .sticky-header {
+    top: 0 !important;
+  }
+
+  /* 4. Menu Toggle Button */
+  .mobile-menu-toggle {
+    display: flex !important;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10001; /* Stays above the menu drawer */
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #333;
+  }
+
+  /* 5. Main Navigation Drawer */
+  .main-nav-menu {
+    display: none; 
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    flex-direction: column;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal swiping */
+    z-index: 10000;
+    padding: 0;
+    margin: 0;
+  }
+
+  .main-nav-menu.active {
+    display: flex !important;
+  }
+
+  /* 6. FORCE DROPDOWNS TO BE VERTICAL ACCORDIONS */
+  /* This targets both .submenu-container (NavDropdown.js) and potential .dropdown-menu classes */
+  .submenu-container,
+  .submenu-container.align-right,
+  .submenu-container.align-center,
+  .dropdown-menu,
+  .dropdown-menu.align-center {
+    position: static !important; /* Forces vertical flow */
+    transform: none !important;  /* Kills horizontal translations */
+    left: 0 !important;
+    right: auto !important;
+    margin: 0 !important;
+    width: 100% !important;      /* Forces full width of the drawer */
+    min-width: 100% !important;
+    max-width: 100% !important;
+    display: none; 
+    opacity: 1 !important;
+    visibility: visible !important;
+    background-color: #fcfcfc !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 5px 0 !important;
+  }
+
+  /* Show when open */
+  .submenu-container.show,
+  .dropdown-menu.show {
+    display: block !important;
+  }
+
+  /* 7. Grid Alignment */
+  .submenu-grid, .dropdown-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 0 !important;
+  }
+
+  /* 8. Link Styling for Easy Tapping */
+  .menu-link {
+    padding: 15px 20px !important;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .submenu-link, .dropdown-item {
+    display: block !important;
+    padding: 12px 20px 12px 45px !important; /* Left indent shows hierarchy */
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 15px;
+    color: #555 !important;
+    text-decoration: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* ==========================================================================
+   DESKTOP ONLY ALIGNMENT (Min-Width: 993px)
+   ========================================================================== */
+/* ==========================================================================
+   STRICT VERTICAL MOBILE MENU (Max-Width: 992px)
+   ========================================================================== */
+@media (max-width: 992px) {
+  
+  /* 1. The Main Menu Drawer */
+  .main-nav-menu {
+    display: none; 
+    flex-direction: column !important; /* Force items to stack vertically */
+    flex-wrap: nowrap !important;     /* Prevent horizontal wrapping */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100% !important;
+    background-color: #ffffff;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    max-height: 80vh;      /* Keep height limit for scrolling */
+    overflow-y: auto;      /* Vertical scroll ONLY */
+    overflow-x: hidden;    /* Kill horizontal scroll */
+    z-index: 10000;
+  }
+
+  .main-nav-menu.active {
+    display: flex !important;
+  }
+
+  /* 2. Individual Menu Items */
+  .menu-item {
+    width: 100% !important;
+    display: block !important; /* Forces each button into its own line */
+    clear: both;
+  }
+
+  /* 3. Force ALL Dropdowns to be Vertical Accordions */
+  /* This kills the "align-center" and "align-right" logic on phones */
+  .submenu-container, 
+  .submenu-container.align-right, 
+  .submenu-container.align-center,
+  .dropdown-menu,
+  .dropdown-menu.align-center {
+    position: static !important; /* Removes them from floating "over" the menu */
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;  /* Kills horizontal shifting (The "Department" fix) */
+    left: 0 !important;
+    right: auto !important;
+    margin: 0 !important;
+    display: none;
+    background-color: #f9f9f9 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* Show when toggled open */
+  .submenu-container.show,
+  .dropdown-menu.show {
+    display: block !important;
+  }
+
+  /* 4. Link Alignment and Width */
+  .menu-link, .submenu-link {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px !important;
+  }
+
+  .submenu-link {
+    padding-left: 45px !important; /* Visual indent for dropdown items */
+    border-bottom: 1px solid #eee;
+  }
+}
+/* ==========================================================================
+   FIX: STRICT VERTICAL MOBILE NAVIGATION (Max-Width: 992px)
+   ========================================================================== */
+@media (max-width: 992px) {
+  
+  /* 1. Force the Main Menu to never wrap horizontally */
+  .main-nav-menu {
+    display: none; 
+    flex-direction: column !important; /* Stack items vertically */
+    flex-wrap: nowrap !important;     /* STOPS items from shifting to the right */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100% !important;
+    background-color: #ffffff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    max-height: 80vh;      /* Limit height so it's scrollable */
+    overflow-y: auto;      /* Enable vertical scroll */
+    overflow-x: hidden;    /* DISABLE all horizontal movement */
+    z-index: 10000;
+  }
+
+  .main-nav-menu.active {
+    display: flex !important;
+  }
+
+  /* 2. Individual Menu Items must be full width */
+  .menu-item {
+    width: 100% !important;
+    display: block !important;
+  }
+
+  /* 3. ACCORDION FIX: This stops Department/Society from flying right */
+  .submenu-container, 
+  .submenu-container.align-right, 
+  .submenu-container.align-center,
+  .dropdown-menu,
+  .dropdown-menu.align-center {
+    position: static !important; /* Removes them from floating "over" the menu */
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;  /* KILLS the horizontal shift/centering */
+    left: 0 !important;
+    right: auto !important;
+    margin: 0 !important;
+    display: none; /* Controlled by .show class */
+    background-color: #fcfcfc !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .submenu-container.show,
+  .dropdown-menu.show {
+    display: block !important;
+  }
+
+  /* 4. Link Alignment */
+  .menu-link, .submenu-link {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    justify-content: space-between;
+    padding: 15px 20px !important;
+  }
+
+  .submenu-link {
+    padding-left: 45px !important; /* Indent to show it's a sub-item */
+    border-bottom: 1px solid #eee;
+  }
+}
+
+/* ==========================================================================
+   DESKTOP ONLY: Centering logic for wide screens only
+   ========================================================================== */
+@media (min-width: 993px) {
+  /* Center align the wide menus ONLY on desktop */
+  .submenu-container.align-center,
+  .dropdown-menu.align-center {
+    left: 50% !important;
+    transform: translateX(-50%) translateY(10px) !important;
+    min-width: 600px !important;
+  }
+
+  .menu-item:hover .submenu-container.align-center,
+  .nav-item:hover .dropdown-menu.align-center {
+    transform: translateX(-50%) translateY(0) !important;
+  }
 }
