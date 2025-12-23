@@ -7,7 +7,7 @@ function Header() {
         <div className="jec-top-bar">
             <div className="jec-top-container">
 
-                {/* LEFT SIDE: 2-Line Contact Info */}
+                {/* LEFT SIDE: Single Line Contact Info */}
                 <div className="jec-top-left">
                     <div className="jec-contact-column">
                         <a href="tel:+918875071333">
@@ -22,14 +22,18 @@ function Header() {
                 {/* RIGHT SIDE: Action Links */}
                 <div className="jec-top-right">
                     <Link to="/admission-enquiry">
-                        <i className="fas fa-edit"></i> Admission Enquiry Open 2025
+                        <i className="fas fa-edit"></i> Admission Enquiry 2025
                     </Link>
                     <Link to="/admissions">
-                        <i className="fas fa-user-graduate"></i> Apply for Admission
+                        <i className="fas fa-user-graduate"></i> Apply Now
                     </Link>
                     <a href="#!">
-                        <i className="fas fa-map-marked-alt"></i> JEC 360 Virtual Tour
+                        <i className="fas fa-map-marked-alt"></i> Virtual Tour
                     </a>
+                    {/* NEW: Grievance Form Link */}
+                    <Link to="/grievance">
+                        <i className="fas fa-clipboard-list"></i> Grievance Form
+                    </Link>
                 </div>
 
             </div>

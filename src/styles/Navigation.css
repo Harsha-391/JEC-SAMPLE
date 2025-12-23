@@ -1,7 +1,8 @@
-﻿:root {
+﻿/* --- 1. VARIABLES & DESIGN TOKENS --- */
+:root {
     --jec-blue: #0072C6;
     --jec-red: #D62828;
-    --jec-gold: #FCA311; /* ORANGE HOVER */
+    --jec-gold: #FCA311; /* Premium Gold/Orange */
     --jec-dark: #1e293b;
     --jec-light: #64748b;
     --jec-white: #ffffff;
@@ -10,18 +11,22 @@
     --jec-top-bar-height: 48px;
 }
 
-/* RESET */
-ul {
+/* --- 2. GLOBAL RESET --- */
+.jec-nav-wrapper * {
+    box-sizing: border-box;
+}
+
+.jec-nav-wrapper ul {
     list-style: none !important;
     padding: 0;
     margin: 0;
 }
 
-a {
+.jec-nav-wrapper a {
     text-decoration: none !important;
 }
 
-/* --- 1. TOP BAR (STICKY DESKTOP, HIDDEN MOBILE) --- */
+/* --- 3. TOP BAR (STICKY AT 0) --- */
 .jec-top-bar {
     position: sticky;
     top: 0;
@@ -46,12 +51,15 @@ a {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
+/* UPDATED: Contact Info on a single line */
 .jec-contact-column {
     display: flex;
-    flex-direction: column; /* 2 LINES */
-    gap: 2px;
+    flex-direction: row;
+    gap: 25px;
+    align-items: center;
 }
 
 .jec-top-bar a {
@@ -62,9 +70,9 @@ a {
     display: flex;
     align-items: center;
     gap: 8px;
+    white-space: nowrap;
 }
 
-    /* ORANGE HOVER */
     .jec-top-bar a:hover {
         color: var(--jec-gold) !important;
     }
@@ -75,11 +83,21 @@ a {
     align-items: center;
 }
 
-/* --- 2. MAIN HEADER (STICKY BELOW TOP BAR) --- */
-.jec-header {
+/* --- 4. MAIN HEADER (STICKY BELOW TOP BAR) --- */
+.jec-nav-wrapper {
+    width: 100%;
     position: sticky;
     top: var(--jec-top-bar-height);
     z-index: 10000;
+}
+
+@media (max-width: 1024px) {
+    .jec-nav-wrapper {
+        top: 0;
+    }
+}
+
+.jec-header {
     background: var(--jec-white);
     height: var(--jec-height);
     width: 100%;
@@ -87,12 +105,6 @@ a {
     align-items: center;
     box-shadow: 0 4px 20px rgba(0,0,0,0.06);
     border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-
-@media (max-width: 1024px) {
-    .jec-header {
-        top: 0;
-    }
 }
 
 .jec-container {
@@ -103,6 +115,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 .jec-logo-img {
@@ -111,7 +124,7 @@ a {
     transition: opacity 0.3s;
 }
 
-/* --- 3. DESKTOP MENU & ANIMATIONS --- */
+/* --- 5. DESKTOP MENU & MEGA DROPDOWNS --- */
 .jec-menu-list {
     display: flex;
     align-items: center;
@@ -138,26 +151,31 @@ a {
     cursor: pointer;
 }
 
-    /* ORANGE HOVER ON MAIN NAV */
     .jec-nav-link:hover {
         color: var(--jec-gold) !important;
     }
 
-/* DROPDOWN ANIMATION */
+    .jec-nav-link i {
+        font-size: 0.7rem;
+        color: var(--jec-light);
+        transition: transform 0.3s;
+    }
+
+/* PREMIUM DROPDOWN UI */
 @media (min-width: 1025px) {
     .jec-dropdown {
         position: absolute;
         top: calc(var(--jec-height) + 5px);
         left: 50%;
+        /* Centering Logic */
         transform: translateX(-50%) translateY(15px);
         background: white;
-        min-width: 260px;
         box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         border-top: 4px solid var(--jec-gold);
         border-radius: 8px;
         opacity: 0;
         visibility: hidden;
-        /* COLORFUL & BOUNCY ANIMATION */
+        /* Bouncy Animation */
         transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s ease;
         padding: 20px;
         z-index: 10000;
@@ -165,13 +183,31 @@ a {
         gap: 12px;
     }
 
+        /* Tooltip Arrow */
+        .jec-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 8px 8px 8px;
+            border-style: solid;
+            border-color: transparent transparent var(--jec-gold) transparent;
+        }
+
     .jec-menu-item:hover .jec-dropdown {
         opacity: 1;
         visibility: visible;
         transform: translateX(-50%) translateY(0);
     }
+
+    .jec-menu-item:hover .jec-nav-link i {
+        transform: rotate(180deg);
+        color: var(--jec-gold);
+    }
 }
 
+/* Mega Menu Columns */
 .jec-dropdown.jec-mega.jec-cols-3 {
     grid-template-columns: repeat(3, 1fr);
     min-width: 750px;
@@ -190,6 +226,7 @@ a {
     font-weight: 600;
     transition: 0.2s;
     border-radius: 6px;
+    white-space: nowrap;
 }
 
     .jec-dropdown-link:hover {
@@ -201,14 +238,21 @@ a {
 .jec-highlight {
     color: var(--jec-red) !important;
     font-weight: 800;
+    background: rgba(214, 40, 40, 0.05);
 }
 
-/* --- 4. MOBILE DRAWER & ACCORDION --- */
+/* --- 6. MOBILE DRAWER & ACCORDION --- */
 .jec-hamburger {
     display: none;
     font-size: 24px;
     color: var(--jec-blue);
     cursor: pointer;
+    z-index: 10001;
+}
+
+/* Hide mobile contact on desktop */
+.jec-mobile-contact {
+    display: none;
 }
 
 @media (max-width: 1024px) {
@@ -221,13 +265,14 @@ a {
         top: var(--jec-height);
         left: -100%;
         width: 300px;
-        height: 100vh;
+        height: calc(100vh - var(--jec-height));
         background: white;
         flex-direction: column;
         transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         box-shadow: 5px 0 20px rgba(0,0,0,0.1);
         overflow-y: auto;
         align-items: flex-start;
+        padding-bottom: 60px;
     }
 
         .jec-menu-list.jec-active {
@@ -237,6 +282,7 @@ a {
     .jec-menu-item {
         width: 100%;
         border-bottom: 1px solid #f1f5f9;
+        display: block;
     }
 
     .jec-nav-link {
@@ -245,7 +291,7 @@ a {
         justify-content: space-between;
     }
 
-    /* MOBILE ACCORDION OPENING */
+    /* Mobile Accordion Logic */
     .jec-dropdown {
         position: static !important;
         display: none;
@@ -255,25 +301,80 @@ a {
         transform: none !important;
         opacity: 1 !important;
         visibility: visible !important;
-        transition: max-height 0.4s ease-out;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
     }
+
+        .jec-dropdown::before {
+            display: none;
+        }
 
         .jec-dropdown.jec-show {
             display: block !important;
-            padding: 10px 0;
+            padding: 10px 0 !important;
+        }
+
+    .jec-dropdown-link {
+        padding: 12px 25px 12px 40px;
+        white-space: normal;
+    }
+
+    /* Mobile Contact Section */
+    .jec-mobile-contact {
+        display: block;
+        width: 100%;
+        padding: 25px;
+        background: #f1f5f9;
+        margin-top: 10px;
+        border-top: 1px solid #e2e8f0;
+    }
+
+        .jec-mobile-contact h4 {
+            color: var(--jec-blue);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+    .jec-contact-row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+        color: var(--jec-dark);
+        align-items: flex-start;
+    }
+
+        .jec-contact-row i {
+            color: var(--jec-gold);
+            margin-top: 4px;
+            width: 16px;
         }
 }
 
-/* CTA BUTTON */
+/* --- 7. CTA BUTTON --- */
 .jec-btn-cta {
     background: var(--jec-red) !important;
     color: white !important;
     border-radius: 5px !important;
     padding: 10px 22px !important;
     box-shadow: 0 4px 10px rgba(214, 40, 40, 0.25);
+    transition: all 0.3s ease;
 }
 
     .jec-btn-cta:hover {
         background: var(--jec-gold) !important;
         transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(252, 163, 17, 0.4);
     }
+
+@media (max-width: 1024px) {
+    .jec-btn-cta {
+        margin: 25px 20px !important;
+        width: calc(100% - 40px) !important;
+        display: block !important;
+        text-align: center;
+    }
+}
