@@ -1,0 +1,212 @@
+/* ==========================================================================
+   ABOUT US PAGE STYLES (Modular & Scoped)
+   ========================================================================== */
+
+.about-page-new {
+  background-color: var(--logo-white);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+/* --- Hero Section --- */
+.about-page-new .hero {
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--logo-white);
+  text-align: center;
+  position: relative;
+  /* FIXED: Changed path to absolute for public folder reference */
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+              url("../assets/campus-intro.jpeg") center/cover no-repeat;
+}
+
+.about-page-new .hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 15px;
+  letter-spacing: -1px;
+}
+
+.about-page-new .hero p {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  max-width: 800px;
+  margin: 0 auto 25px;
+  font-weight: 300;
+}
+
+.about-page-new .hero-underline {
+  width: 100px;
+  height: 5px;
+  background: var(--logo-gold);
+  margin: 0 auto;
+}
+
+/* --- Milestones Section --- */
+.about-page-new .milestones {
+  padding: 60px 0;
+  background: var(--color-background-medium);
+}
+
+.about-page-new .milestone-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.about-page-new .milestone-item {
+  text-align: center;
+  padding: 30px;
+  background: var(--logo-white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.about-page-new .milestone-item h3 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--logo-red);
+  margin-bottom: 5px;
+}
+
+.about-page-new .milestone-item p {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+/* --- Mission Banner --- */
+.about-page-new .mission-banner {
+  background: var(--logo-blue);
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.about-page-new .mission-banner h2 {
+  font-size: 2.2rem;
+  color: var(--logo-gold);
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+/* --- Introduction Section --- */
+.about-page-new .introduction {
+  padding: 100px 0;
+}
+
+.about-page-new .intro-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.about-page-new .intro-image {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: var(--shadow-medium);
+  margin-top: 40px;
+}
+
+/* --- Card Sections & Core Values --- */
+.about-page-new .card-section {
+  padding: 100px 0;
+}
+
+.about-page-new .alt-background {
+  background-color: var(--color-background-medium);
+}
+
+.about-page-new h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 50px;
+  color: var(--logo-blue);
+  font-weight: 800;
+}
+
+.about-page-new .card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.about-page-new .core-card {
+  background: var(--logo-white);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-subtle);
+  border-top: 6px solid var(--logo-gold);
+  transition: transform 0.3s ease;
+}
+
+.about-page-new .core-card:hover {
+  transform: translateY(-10px);
+}
+
+.about-page-new .core-card i {
+  font-size: 2rem;
+  color: var(--logo-blue);
+  margin-bottom: 20px;
+}
+
+.about-page-new .core-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: var(--logo-black);
+}
+
+.about-page-new .core-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.about-page-new .core-card li {
+  padding-left: 25px;
+  position: relative;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.about-page-new .core-card li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--logo-red);
+  font-weight: bold;
+}
+
+/* --- Salient Features --- */
+.about-page-new .features-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.about-page-new .feature-item {
+  background: var(--logo-white);
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 4px solid var(--logo-blue);
+  box-shadow: var(--shadow-subtle);
+}
+
+.about-page-new .feature-item p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* --- Responsive --- */
+@media (max-width: 992px) {
+  .about-page-new .hero { height: 400px; }
+  .about-page-new .intro-image { height: 300px; }
+}
+
+@media (max-width: 768px) {
+  .about-page-new h2 { font-size: 1.8rem; }
+  .about-page-new .milestone-grid { grid-template-columns: 1fr 1fr; }
+}

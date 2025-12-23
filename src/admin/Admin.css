@@ -58,3 +58,29 @@
   border-radius: 6px;
   cursor: pointer;
 }
+/* Fix for invisible Table button in Quill Toolbar */
+.ql-snow.ql-toolbar button.ql-table {
+    width: 50px !important;
+    font-weight: bold;
+}
+
+    .ql-snow.ql-toolbar button.ql-table::after {
+        content: "Table"; /* Adds a text label since the SVG icon is missing */
+        font-size: 11px;
+        color: #444;
+        position: absolute;
+        left: 5px;
+        top: 4px;
+    }
+
+/* Optional: styling for tables inside the editor */
+.ql-editor table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.ql-editor td {
+    border: 1px solid #ccc;
+    padding: 5px;
+}

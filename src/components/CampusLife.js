@@ -4,81 +4,75 @@ import { db } from '../firebase';
 import '../styles/CampusLife.css';
 
 function CampusLife() {
-  const [galleryItems, setGalleryItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState('all');
+    const [galleryItems, setGalleryItems] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchGallery = async () => {
-      try {
-        const galleryRef = collection(db, "campus_gallery");
-        const q = query(galleryRef, orderBy("order")); 
-        const querySnapshot = await getDocs(q);
-        
-        const data = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
+    useEffect(() => {
+        const fetchGallery = async () => {
+            try {
+                const galleryRef = collection(db, "campus_gallery");
+                const q = query(galleryRef, orderBy("order"));
+                const querySnapshot = await getDocs(q);
 
-        setGalleryItems(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching campus gallery:", error);
-        setLoading(false);
-      }
-    };
+                const data = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
 
-    fetchGallery();
-  }, []);
+                setGalleryItems(data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching campus gallery:", error);
+                setLoading(false);
+            }
+        };
 
-  // Filter Logic
-  const filteredItems = activeCategory === 'all' 
-    ? galleryItems 
-    : galleryItems.filter(item => item.category === activeCategory);
+        fetchGallery();
+    }, []);
 
-  return (
-    <section className="campus-life">
-      <div className="campus-life-content">
-        <h2 className="campus-life-title">Campus Life at JEC</h2>
-        <p className="campus-life-desc">
-          Experience the vibrant life at JEC, from our cozy hostels and hygienic mess 
-          to electrifying fests and academic infrastructure.
-        </p>
+    return (
+        <section className="campus-life">
+            <div className="campus-life-content">
+                <div className="header-group">
+                    <h2 className="campus-life-title">Campus Life at JEC</h2>
+                    <p className="campus-life-desc">
+                        Experience the vibrant life at JEC, from our cozy hostels and hygienic mess
+                        to electrifying fests and academic infrastructure.
+                    </p>
+                </div>
 
-        {/* Category Filter Buttons */}
- 
+                {loading ? (
+                    <div className="loader-container"><p>Loading Vibrant Gallery...</p></div>
+                ) : (
+                    <div className="campus-gallery">
+                        {galleryItems.map((item) => (
+                            <div
+                                key={item.id}
+                                className={`gallery-card ${item.isLarge ? 'card-wide' : ''}`}
+                            >
+                                <div className="image-wrapper">
+                                    <img src={item.imageUrl} alt={item.alt || "Campus Life"} loading="lazy" />
 
-        {loading ? (
-           <p style={{textAlign:'center', color: 'white'}}>Loading Gallery...</p>
-        ) : (
-          <div className="campus-gallery">
-            {filteredItems.map((item) => (
-              <div 
-                key={item.id} 
-                className={`gallery-item ${item.isLarge ? 'large' : ''}`}
-              >
-                <img src={item.imageUrl} alt={item.alt || "Campus Life"} />
-                
-                {item.overlayText && (
-                  <div className="gallery-overlay">
-                    <h3>{item.overlayText}</h3>
-                  </div>
+                                    <div className="gallery-overlay">
+                                        <div className="overlay-content">
+                                            {item.category && <span className="item-category">{item.category}</span>}
+                                            <h3>{item.overlayText || "Experience JEC"}</h3>
+                                        </div>
+                                    </div>
+
+                                    {item.showPlayButton && (
+                                        <div className="play-button-overlay">
+                                            <span className="pulse-icon">▶</span>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 )}
-
-                {item.showPlayButton && (
-                  <div className="play-button">▶</div>
-                )}
-              </div>
-            ))}
-
-            {!loading && filteredItems.length === 0 && (
-               <p style={{color:'white', width: '100%', textAlign: 'center'}}>No images found in this category.</p>
-            )}
-          </div>
-        )}
-      </div>
-    </section>
-  );
+            </div>
+        </section>
+    );
 }
 
 export default CampusLife;

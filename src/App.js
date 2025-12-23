@@ -84,6 +84,7 @@ const EditVideoGallery = lazy(() => import('./admin/pages/EditVideoGallery'));
 const EditGallery = lazy(() => import('./admin/pages/EditGallery'));
 const EditPlacements = lazy(() => import('./admin/pages/EditPlacements'));
 const UserManagement = lazy(() => import('./admin/pages/UserManagement'));
+const ManageCampusLife = lazy(() => import('./admin/pages/ManageCampusLife'));
 
 function App() {
   return (
@@ -173,7 +174,8 @@ function App() {
                 <Route path="manage-departments" element={<EditDepartment />} />
                 <Route path="manage-videos" element={<EditVideoGallery />} />
                 <Route path="manage-gallery" element={<EditGallery />} />
-                <Route path="manage-placements" element={<EditPlacements />} />
+                          <Route path="manage-placements" element={<EditPlacements />} />
+                          <Route path="manage-campus-life" element={<ManageCampusLife />} />
 
                 <Route 
                   path="users" 

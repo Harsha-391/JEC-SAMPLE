@@ -30,7 +30,8 @@ const AdminLayout = () => {
           <Link to="/admin/manage-testimonials" className="nav-item">Testimonials</Link>
           <Link to="/admin/manage-departments" className="nav-item">Departments</Link>
           <Link to="/admin/manage-videos" className="nav-item">Video Gallery</Link>
-          <Link to="/admin/manage-placements" className="nav-item">Placements</Link> {/* <-- ADDED */}
+                  <Link to="/admin/manage-placements" className="nav-item">Placements</Link> {/* <-- ADDED */}
+                  <Link to="/admin/manage-campus-life" className="nav-item">Campus Life</Link> {/* <-- ADDED */}
 
           <p className="menu-label">Settings</p>
           <Link to="/admin/users" className="nav-item">User Management</Link>

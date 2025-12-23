@@ -1,0 +1,65 @@
+/* ==========================================================================
+   VIRTUAL TOUR CTA SECTION
+   ========================================================================== */
+
+.take-a-tour {
+  padding: 100px 20px;
+  /* Optimized Gradient Overlay */
+  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.65)), 
+              url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+  color: var(--logo-white);
+  text-align: center;
+  position: relative;
+}
+
+.take-a-tour-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.take-a-tour-title {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: var(--logo-white);
+  text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.take-a-tour-subtitle {
+  font-size: 20px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.tour-btn {
+  display: inline-block;
+  padding: 16px 45px;
+  background: transparent;
+  border: 2px solid var(--logo-gold);
+  color: var(--logo-gold);
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tour-btn:hover {
+  background: var(--logo-gold);
+  color: var(--logo-black);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(252, 163, 17, 0.3);
+}
+
+@media (max-width: 768px) {
+  .take-a-tour { padding: 80px 20px; }
+  .take-a-tour-title { font-size: 32px; }
+  .take-a-tour-subtitle { font-size: 16px; }
+  .tour-btn { padding: 12px 30px; font-size: 14px; }
+}
