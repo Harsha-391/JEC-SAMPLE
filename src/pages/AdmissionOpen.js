@@ -145,7 +145,7 @@ function AdmissionOpen() {
 
             <div className="admissions-expert-card">
                 <div className="admissions-expert-img-wrapper">
-                    <img src="/images/DrBharatBhushan_.jpg" alt="Dr. Bharat Bhushan Jain" />
+                          <img src="https://firebasestorage.googleapis.com/v0/b/jec-website-55397.firebasestorage.app/o/images%2FDr.%20Bharat%20Bhushan%20jain%20electr%20eng%20professor%20and%20principal%20phd.JPG?alt=media&token=5a3893e8-fcb6-4501-b0f0-5104ff574abb" alt="Dr. Bharat Bhushan Jain" />
                 </div>
                 <div className="admissions-expert-content">
                     <div className="admissions-expert-name">Dr. Bharat Bhushan Jain</div>
@@ -156,7 +156,7 @@ function AdmissionOpen() {
 
             <div className="admissions-expert-card">
                 <div className="admissions-expert-img-wrapper">
-                    <img src="/images/sunitagoyal.jpg" alt="Prof. (Dr.) Sunita Goyal Rawat" />
+                          <img src="https://firebasestorage.googleapis.com/v0/b/jec-website-55397.firebasestorage.app/o/images%2F(Dr.)%20Sunita%20Goyal%20Rawat.JPG?alt=media&token=6c8a6b74-1888-465f-a19a-576e420cf876" alt="Prof. (Dr.) Sunita Goyal Rawat" />
                 </div>
                 <div className="admissions-expert-content">
                     <div className="admissions-expert-name">Prof. (Dr.) Sunita Goyal Rawat</div>

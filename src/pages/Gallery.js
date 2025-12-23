@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './Gallery.css';
-import { db } from '../firebase'; 
+import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 
 function Gallery() {
     const [galleryData, setGalleryData] = useState([]);
     const [selectedAlbum, setSelectedAlbum] = useState(null);
-    const [albumImages, setAlbumImages] = useState([]); // Array of objects {url, alt}
+    const [albumImages, setAlbumImages] = useState([]);
     const [viewerIndex, setViewerIndex] = useState(null);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
 
@@ -27,18 +27,14 @@ function Gallery() {
     }, []);
 
     const openModal = (album) => {
-        const sourceImages = album.images || []; 
-        
-        // Normalize images to objects {url, alt} to support legacy string data
+        const sourceImages = album.images || [];
         const normalizedImages = sourceImages.map(img => {
             if (typeof img === 'string') {
                 return { url: img, alt: album.title + " Photo" };
             }
-            return img; // Already an object {url, alt}
+            return img;
         });
 
-        // Loop logic for "Simulated" feel if few images (from original code)
-        // Or just map them directly. Let's map directly for cleaner data.
         setAlbumImages(normalizedImages);
         setSelectedAlbum(album);
         document.body.style.overflow = 'hidden';
@@ -68,13 +64,40 @@ function Gallery() {
         setViewerIndex(newIndex);
     }, [isViewerOpen, viewerIndex, albumImages.length]);
 
-    // Keyboard & Touch logic omitted for brevity (same as original)
-    // ...
-
     return (
         <div className="gallery-page">
+            {/* --- FIXED HERO SECTION --- */}
             <header className="modern-hero">
-                {/* ... Hero Content ... */}
+                <div className="hero-content">
+                    <div className="hero-badge">
+                        <i className="fas fa-camera"></i> JEC MEMORIES
+                    </div>
+                    <h1>Capturing<br /><span>Excellence</span> & Life</h1>
+                    <p>Explore our visual journey. From vibrant cultural fests to state-of-the-art labs, experience the JEC spirit through our lens.</p>
+                    <div className="scroll-indicator">
+                        <i className="fas fa-arrow-down"></i> Scroll to Albums
+                    </div>
+                </div>
+
+                <div className="hero-collage">
+                    <div className="blob blob-1"></div>
+                    <div className="blob blob-2"></div>
+                    <img
+                        src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=600"
+                        className="collage-img img-main"
+                        alt="Campus Life"
+                    />
+                    <img
+                        src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=400"
+                        className="collage-img img-sub-1"
+                        alt="Labs"
+                    />
+                    <img
+                        src="https://cdn.pixabay.com/photo/2023/08/18/07/04/business-8197902_1280.jpg?q=80&w=400"
+                        className="collage-img img-sub-2"
+                        alt="Culture"
+                    />
+                </div>
             </header>
 
             <div className="container">
@@ -86,7 +109,6 @@ function Gallery() {
                     {galleryData.map((item) => (
                         <div className="album-card" key={item.id} onClick={() => openModal(item)}>
                             <div className="album-cover">
-                                {/* Use coverAlt */}
                                 <img src={item.cover} alt={item.coverAlt || item.title} />
                                 <div className="album-overlay">
                                     <div className="view-btn">View Album</div>
@@ -123,9 +145,9 @@ function Gallery() {
                 <div className="image-viewer">
                     <span className="viewer-close" onClick={closeImageViewer}>&times;</span>
                     <div className="viewer-nav viewer-prev" onClick={() => changeImage(-1)}>&#10094;</div>
-                    
+
                     <img className="viewer-img" src={albumImages[viewerIndex].url} alt={albumImages[viewerIndex].alt} />
-                    
+
                     <div className="viewer-nav viewer-next" onClick={() => changeImage(1)}>&#10095;</div>
                     <div className="image-counter">{viewerIndex + 1} / {albumImages.length}</div>
                     <div className="viewer-caption">{albumImages[viewerIndex].alt}</div>

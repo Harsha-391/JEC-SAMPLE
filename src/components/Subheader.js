@@ -1,153 +1,151 @@
-// src/components/Subheader.js
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import NavDropdown from './NavDropdown';
+import { Link, useLocation } from 'react-router-dom';
 import '../styles/Navigation.css';
-
-const jecMenuItems = [
-    { title: 'JEC FAQ', path: '/jec/JEC-FAQ' },
-    { title: 'Employment @JEC', path: '/jec/Employment-JEC' },
-    { title: 'About JEC', path: '/jec/About-JEC' },
-    { title: 'Students Testimonials', path: '/jec/Students-Testimonials' },
-    { title: 'Alumni', path: '/jec/Alumni' },
-    { title: 'Human Network', path: '/jec/network' },
-    { title: 'Anti-Ragging Committee', path: '/jec/Anti-Ragging-Committee' },
-    { title: 'Institution Innovation Council', path: '/jec/Institution-Innovation-Council-JEC' },
-    { title: 'Management', path: '/jec/Management' },
-];
-
-const admissionMenuItems = [
-    { title: 'Documents Required', path: '/admission/Documents-Required' },
-    { title: 'Courses Offered', path: '/admission/Courses-Offered' },
-    { title: 'Fee Structure', path: '/admission/Fee-Structure' },
-    { title: 'Mandatory Disclosure', path: '/admission/Mandatory-Disclosure' },
-    { title: 'Financial Aids & Bank Loans', path: '/admission/Financial-Aids-Bank-Loans' },
-    { title: 'REAP-2025', path: '/admission/REAP-2025' },
-    { title: 'Admission Open 2025', path: '/admission/btech-admissions' },
-    { title: 'Karma Courses @JEC', path: '/admission/Karma-Courses-JEC' },
-    { title: 'Admission Procedure', path: '/admission/Admission-Procedure' },
-];
-
-const departmentMenuItems = [
-    { title: 'Computer Science & Engineering (AI)', path: '/JEC-engineering/Computer-Science-Engineering-AI' },
-    { title: 'Civil Engineering', path: '/JEC-engineering/Civil-Engineering' },
-    { title: 'Information Technology', path: '/JEC-engineering/Information-Technology' },
-    { title: 'Applied Sciences & Humanities', path: '/JEC-engineering/Applied-Sciences-Humanities' },
-    { title: 'MOOCS: NPTEL SWAYAM', path: '/JEC-engineering/MOOCS-NPTEL-SWAYAM' },
-    { title: 'Computer Science Engineering', path: '/JEC-engineering/Computer-Science-Engineering' },
-    { title: 'Electronics & Communication', path: '/JEC-engineering/Electronics-Communication-Engineering' },
-    { title: 'Mechanical Engineering', path: '/JEC-engineering/Mechanical-Engineering' },
-    { title: 'Centre Of Excellence (COE)', path: '/JEC-engineering/Centre-Of-Excellence-COE' },
-    { title: 'JEC Research Cell', path: '/JEC-engineering/JEC-Research-Cell' },
-    { title: 'Engineering @ JEC', path: '/JEC-engineering/Engineering-JEC' },
-    { title: 'Electrical Engineering', path: '/JEC-engineering/Electrical-Engineering' },
-];
-
-const societyMenuItems = [
-    { title: 'Foundation for Better Tomorrow', path: '/Our-Society/Foundation-for-Better-Tomorrow' },
-    { title: 'Agrasen College', path: '/Our-Society/Other-Institutes-Agrasen-College' },
-    { title: 'Jaipur College of Education & Science', path: '/Our-Society/Other-Institutes-Jaipur-College-of-Education-and-Science' },
-    { title: 'Key Teams & Functions', path: '/Our-Society/Key-Teams-Functions' },
-];
-
-const infraMenuItems = [
-    { title: 'Convenience and Safety', path: '/Infrastructure/Convenience-and-Safety' },
-    { title: 'Learning By Doing', path: '/Infrastructure/Learning-By-Doing' },
-    { title: 'Prepare and Present', path: '/Infrastructure/Prepare-and-Present' },
-    { title: 'Refuel and Relax', path: '/Infrastructure/Refuel-and-Relax' },
-];
-
-const campusLifeItems = [
-    { title: 'Image Gallery', path: '/Gallery' },
-    { title: 'JEC: Vibrant India', path: '/campus-life/jec-vibrant-india' },
-    { title: 'Committees Zone', path: '/campus-life/committees-zone' },
-    { title: 'Video Gallery', path: '/campus-life/video-gallery' },
-    { title: 'Engineering Projects', path: '/campus-life/engineering-projects' },
-    { title: 'Academic Achievers', path: '/campus-life/academic-achievers' },
-    { title: 'Student Mental Health & Wellbeing', path: '/campus-life/mental-health' },
-    { title: 'JEC Students Corner', path: '/campus-life/students-corner' },
-    { title: 'Games and Sports', path: '/campus-life/games-and-sports' },
-    { title: 'Guts n Glory', path: '/campus-life/guts-n-glory' },
-];
 
 function Subheader() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
+    const location = useLocation();
 
-    // Lock scroll when menu is open - IMPROVED
     useEffect(() => {
-        if (isMobileMenuOpen) {
-            // Save current scroll position
-            const scrollY = window.scrollY;
-            document.body.style.position = 'fixed';
-            document.body.style.top = `-${scrollY}px`;
-            document.body.style.width = '100%';
-            document.body.style.overflow = 'hidden';
-        } else {
-            // Restore scroll position
-            const scrollY = document.body.style.top;
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.width = '';
-            document.body.style.overflow = '';
-            window.scrollTo(0, parseInt(scrollY || '0') * -1);
-        }
-
-        return () => {
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.width = '';
-            document.body.style.overflow = '';
-        };
-    }, [isMobileMenuOpen]);
-
-    const toggleMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-        setActiveDropdown(null);
-    };
-
-    const closeMenu = () => {
         setIsMobileMenuOpen(false);
         setActiveDropdown(null);
-    };
+    }, [location]);
 
-    const handleDropdownToggle = (title) => {
-        setActiveDropdown(prev => prev === title ? null : title);
+    const toggleDropdown = (e, menuName) => {
+        if (window.innerWidth <= 1024) {
+            e.preventDefault();
+            setActiveDropdown(activeDropdown === menuName ? null : menuName);
+        }
     };
 
     return (
-        <div className="main-header-section">
-            <div className="main-header-container max-width-container">
+        <header className="jec-header">
+            <div className="jec-container">
 
-                <Link to="/" className="brand-logo-link" onClick={closeMenu}>
-                    <img src="/images/logo.png" alt="Jaipur Engineering College Logo" />
+                <Link to="/" className="jec-logo-link">
+                    <img src="https://jec-sample.vercel.app/images/logo.png" alt="JEC Logo" className="jec-logo-img" />
                 </Link>
 
-                {/* Toggle Button stays fixed in corner via CSS */}
-                <button
-                    className="mobile-menu-toggle"
-                    onClick={toggleMenu}
-                    aria-label="Toggle navigation"
-                >
-                    <i className={isMobileMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>
-                </button>
+                <div className="jec-hamburger" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                    <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+                </div>
 
-                <nav className={`main-nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
-                    <Link to="/" className="menu-link" onClick={closeMenu}>Home</Link>
+                <ul className={`jec-menu-list ${isMobileMenuOpen ? 'jec-active' : ''}`}>
+                    <li className="jec-menu-item"><Link to="/" className="jec-nav-link">Home</Link></li>
 
-                    <NavDropdown title="JEC" items={jecMenuItems} baseLink="/#!" isOpen={activeDropdown === 'JEC'} onToggle={() => handleDropdownToggle('JEC')} closeMenu={closeMenu} />
-                    <NavDropdown title="Admission" items={admissionMenuItems} baseLink="/#!" isOpen={activeDropdown === 'Admission'} onToggle={() => handleDropdownToggle('Admission')} closeMenu={closeMenu} />
-                    <Link to="/placement" className="menu-link" onClick={closeMenu}>Placement</Link>
-                    <NavDropdown title="Departments" items={departmentMenuItems} baseLink="/#!" isOpen={activeDropdown === 'Departments'} onToggle={() => handleDropdownToggle('Departments')} closeMenu={closeMenu} />
-                    <NavDropdown title="Infrastructure" items={infraMenuItems} baseLink="/#!" isOpen={activeDropdown === 'Infrastructure'} onToggle={() => handleDropdownToggle('Infrastructure')} closeMenu={closeMenu} />
-                    <NavDropdown title="Campus Life" items={campusLifeItems} baseLink="/#!" isOpen={activeDropdown === 'Campus Life'} onToggle={() => handleDropdownToggle('Campus Life')} closeMenu={closeMenu} />
-                    <Link to="/blog" className="menu-link" onClick={closeMenu}>Blog</Link>
-                    <NavDropdown title="Our Society" items={societyMenuItems} baseLink="/#!" isOpen={activeDropdown === 'Our Society'} onToggle={() => handleDropdownToggle('Our Society')} closeMenu={closeMenu} />
-                    <Link to="/contact-us" className="menu-link" onClick={closeMenu}>Contact Us</Link>
-                </nav>
+                    {/* JEC DROPDOWN */}
+                    <li className={`jec-menu-item ${activeDropdown === 'jec' ? 'jec-open' : ''}`}>
+                        <a href="#!" className="jec-nav-link jec-toggle-btn" onClick={(e) => toggleDropdown(e, 'jec')}>
+                            JEC <i className="fas fa-chevron-down"></i>
+                        </a>
+                        <ul className={`jec-dropdown jec-mega jec-cols-3 ${activeDropdown === 'jec' ? 'jec-show' : ''}`}>
+                            <li><Link to="/jec/About-JEC" className="jec-dropdown-link">About JEC</Link></li>
+                            <li><Link to="/jec/Employment-JEC" className="jec-dropdown-link">Employment @JEC</Link></li>
+                            <li><Link to="/jec/Management" className="jec-dropdown-link">Management</Link></li>
+                            <li><Link to="/jec/Institution-Innovation-Council-JEC" className="jec-dropdown-link">Institution Innovation Council</Link></li>
+                            <li><Link to="/jec/Anti-Ragging-Committee" className="jec-dropdown-link">Anti-Ragging Committee</Link></li>
+                            <li><Link to="/jec/network" className="jec-dropdown-link">Human Network</Link></li>
+                            <li><Link to="/jec/Alumni" className="jec-dropdown-link">Alumni</Link></li>
+                            <li><Link to="/jec/Students-Testimonials" className="jec-dropdown-link">Students Testimonials</Link></li>
+                            <li><Link to="/jec/JEC-FAQ" className="jec-dropdown-link">JEC FAQ</Link></li>
+                        </ul>
+                    </li>
 
+                    {/* ADMISSION DROPDOWN */}
+                    <li className={`jec-menu-item ${activeDropdown === 'admission' ? 'jec-open' : ''}`}>
+                        <a href="#!" className="jec-nav-link jec-toggle-btn" onClick={(e) => toggleDropdown(e, 'admission')}>
+                            Admission <i className="fas fa-chevron-down"></i>
+                        </a>
+                        <ul className={`jec-dropdown jec-mega jec-cols-3 ${activeDropdown === 'admission' ? 'jec-show' : ''}`}>
+                            <li><Link to="/admission/btech-admissions" className="jec-dropdown-link jec-highlight">Admission Open 2025</Link></li>
+                            <li><Link to="/admission/Admission-Procedure" className="jec-dropdown-link">Admission Procedure</Link></li>
+                            <li><Link to="/admission/Courses-Offered" className="jec-dropdown-link">Courses Offered</Link></li>
+                            <li><Link to="/admission/Fee-Structure" className="jec-dropdown-link">Fee Structure</Link></li>
+                            <li><Link to="/admission/Documents-Required" className="jec-dropdown-link">Documents Required</Link></li>
+                            <li><Link to="/admission/REAP-2025" className="jec-dropdown-link">REAP-2025</Link></li>
+                            <li><Link to="/admission/Financial-Aids-Bank-Loans" className="jec-dropdown-link">Financial Aids & Loans</Link></li>
+                            <li><Link to="/admission/Mandatory-Disclosure" className="jec-dropdown-link">Mandatory Disclosure</Link></li>
+                            <li><Link to="/admission/Karma-Courses-JEC" className="jec-dropdown-link">Karma Courses @JEC</Link></li>
+                        </ul>
+                    </li>
+
+                    {/* DEPARTMENTS DROPDOWN */}
+                    <li className={`jec-menu-item ${activeDropdown === 'dept' ? 'jec-open' : ''}`}>
+                        <a href="#!" className="jec-nav-link jec-toggle-btn" onClick={(e) => toggleDropdown(e, 'dept')}>
+                            Departments <i className="fas fa-chevron-down"></i>
+                        </a>
+                        <ul className={`jec-dropdown jec-mega jec-cols-3 ${activeDropdown === 'dept' ? 'jec-show' : ''}`}>
+                            <li><Link to="/JEC-engineering/Computer-Science-Engineering-AI" className="jec-dropdown-link">Computer Science & Eng. (AI)</Link></li>
+                            <li><Link to="/JEC-engineering/Computer-Science-Engineering" className="jec-dropdown-link">Computer Science Engineering</Link></li>
+                            <li><Link to="/JEC-engineering/Information-Technology" className="jec-dropdown-link">Information Technology</Link></li>
+                            <li><Link to="/JEC-engineering/Electronics-Communication-Engineering" className="jec-dropdown-link">Electronics & Communication</Link></li>
+                            <li><Link to="/JEC-engineering/Civil-Engineering" className="jec-dropdown-link">Civil Engineering</Link></li>
+                            <li><Link to="/JEC-engineering/Mechanical-Engineering" className="jec-dropdown-link">Mechanical Engineering</Link></li>
+                            <li><Link to="/JEC-engineering/Electrical-Engineering" className="jec-dropdown-link">Electrical Engineering</Link></li>
+                            <li><Link to="/JEC-engineering/Applied-Sciences-Humanities" className="jec-dropdown-link">Applied Sciences & Humanities</Link></li>
+                            <li><Link to="/JEC-engineering/Centre-Of-Excellence-COE" className="jec-dropdown-link">Centre Of Excellence (COE)</Link></li>
+                            <li><Link to="/JEC-engineering/JEC-Research-Cell" className="jec-dropdown-link">JEC Research Cell</Link></li>
+                            <li><Link to="/JEC-engineering/Engineering-JEC" className="jec-dropdown-link">Engineering @ JEC</Link></li>
+                            <li><Link to="/JEC-engineering/MOOCS-NPTEL-SWAYAM" className="jec-dropdown-link">MOOCS: NPTEL SWAYAM</Link></li>
+                        </ul>
+                    </li>
+
+                    <li className="jec-menu-item"><Link to="/placement" className="jec-nav-link">Placement</Link></li>
+
+                    {/* INFRASTRUCTURE DROPDOWN */}
+                    <li className={`jec-menu-item ${activeDropdown === 'infra' ? 'jec-open' : ''}`}>
+                        <a href="#!" className="jec-nav-link jec-toggle-btn" onClick={(e) => toggleDropdown(e, 'infra')}>
+                            Infrastructure <i className="fas fa-chevron-down"></i>
+                        </a>
+                        <ul className={`jec-dropdown jec-mega jec-cols-2 ${activeDropdown === 'infra' ? 'jec-show' : ''}`}>
+                            <li><Link to="/Infrastructure/Learning-By-Doing" className="jec-dropdown-link">Learning By Doing</Link></li>
+                            <li><Link to="/Infrastructure/Prepare-and-Present" className="jec-dropdown-link">Prepare and Present</Link></li>
+                            <li><Link to="/Infrastructure/Refuel-and-Relax" className="jec-dropdown-link">Refuel and Relax</Link></li>
+                            <li><Link to="/Infrastructure/Convenience-and-Safety" className="jec-dropdown-link">Convenience and Safety</Link></li>
+                        </ul>
+                    </li>
+
+                    {/* CAMPUS LIFE DROPDOWN */}
+                    <li className={`jec-menu-item ${activeDropdown === 'campus' ? 'jec-open' : ''}`}>
+                        <a href="#!" className="jec-nav-link jec-toggle-btn" onClick={(e) => toggleDropdown(e, 'campus')}>
+                            Campus Life <i className="fas fa-chevron-down"></i>
+                        </a>
+                        <ul className={`jec-dropdown jec-mega jec-cols-3 ${activeDropdown === 'campus' ? 'jec-show' : ''}`}>
+                            <li><Link to="/campus-life/jec-vibrant-india" className="jec-dropdown-link">JEC: Vibrant India</Link></li>
+                            <li><Link to="/campus-life/academic-achievers" className="jec-dropdown-link">Academic Achievers</Link></li>
+                            <li><Link to="/campus-life/engineering-projects" className="jec-dropdown-link">Engineering Projects</Link></li>
+                            <li><Link to="/campus-life/games-and-sports" className="jec-dropdown-link">Games and Sports</Link></li>
+                            <li><Link to="/campus-life/guts-n-glory" className="jec-dropdown-link">Guts n Glory</Link></li>
+                            <li><Link to="/campus-life/committees-zone" className="jec-dropdown-link">Committees Zone</Link></li>
+                            <li><Link to="/campus-life/mental-health" className="jec-dropdown-link">Student Mental Health</Link></li>
+                            <li><Link to="/campus-life/students-corner" className="jec-dropdown-link">JEC Students Corner</Link></li>
+                            <li><Link to="/Gallery" className="jec-dropdown-link">Image Gallery</Link></li>
+                            <li><Link to="/campus-life/video-gallery" className="jec-dropdown-link">Video Gallery</Link></li>
+                        </ul>
+                    </li>
+
+                    <li className="jec-menu-item"><Link to="/blog" className="jec-nav-link">Blog</Link></li>
+
+                    {/* SOCIETY DROPDOWN */}
+                    <li className={`jec-menu-item ${activeDropdown === 'society' ? 'jec-open' : ''}`}>
+                        <a href="#!" className="jec-nav-link jec-toggle-btn" onClick={(e) => toggleDropdown(e, 'society')}>
+                            Society <i className="fas fa-chevron-down"></i>
+                        </a>
+                        <ul className={`jec-dropdown jec-mega jec-cols-2 ${activeDropdown === 'society' ? 'jec-show' : ''}`}>
+                            <li><Link to="/Our-Society/Foundation-for-Better-Tomorrow" className="jec-dropdown-link">Foundation for Better Tomorrow</Link></li>
+                            <li><Link to="/Our-Society/Key-Teams-Functions" className="jec-dropdown-link">Key Teams & Functions</Link></li>
+                            <li><Link to="/Our-Society/Other-Institutes-Agrasen-College" className="jec-dropdown-link">Agrasen College</Link></li>
+                            <li><Link to="/Our-Society/Other-Institutes-Jaipur-College-of-Education-and-Science" className="jec-dropdown-link">Jaipur College of Ed & Sci</Link></li>
+                        </ul>
+                    </li>
+
+                    <li className="jec-menu-item">
+                        <Link to="/contact-us" className="jec-nav-link jec-btn-cta">Contact Us</Link>
+                    </li>
+                </ul>
             </div>
-        </div>
+        </header>
     );
 }
 

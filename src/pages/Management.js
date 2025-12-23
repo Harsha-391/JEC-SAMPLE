@@ -25,7 +25,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               <img
-                src="/images/Lalitsaraogi.png"
+                              src="https://firebasestorage.googleapis.com/v0/b/jec-website-55397.firebasestorage.app/o/images%2FDummy.jpg?alt=media&token=22df053c-0dcc-4c11-8671-2671d82a9abf"
                 alt="Shri L.C. Saraogi"
                 className="leader-img"
               />
@@ -43,7 +43,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               <img
-                src="/images/lakshaysaraogi.jpg"
+                              src="/images/Lalitsaraogi.png"
                 alt="Lalit K. Saraogi"
                 className="leader-img"
               />
@@ -61,7 +61,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               <img
-                src="/images/1574843605_Harish saraogi.png"
+                              src="https://firebasestorage.googleapis.com/v0/b/jec-website-55397.firebasestorage.app/o/images%2FShri.%20Harish%20Saraogi.JPG?alt=media&token=9fb1d405-346e-4f0c-a036-c564bcf8a8f9"
                 alt="Shri Harish Saraogi"
                 className="leader-img"
               />
@@ -79,7 +79,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               <img
-                src="/images/DrBharatBhushan_.jpg"
+                              src="https://firebasestorage.googleapis.com/v0/b/jec-website-55397.firebasestorage.app/o/images%2FDr.%20Bharat%20Bhushan%20jain%20electr%20eng%20professor%20and%20principal%20phd.JPG?alt=media&token=5a3893e8-fcb6-4501-b0f0-5104ff574abb"
                 alt="Prof. Dr. Bharat Bhushan Jain"
                 className="leader-img"
               />
@@ -97,7 +97,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               <img
-                src="/images/sunitagoyal.jpg"
+                              src="https://firebasestorage.googleapis.com/v0/b/jec-website-55397.firebasestorage.app/o/images%2F(Dr.)%20Sunita%20Goyal%20Rawat.JPG?alt=media&token=6c8a6b74-1888-465f-a19a-576e420cf876"
                 alt="Prof. Dr. Sunita Goyal Rawat"
                 className="leader-img"
               />
@@ -151,7 +151,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               <img
-                src="/images/ineshsaraogi.jpg"
+                              src="https://firebasestorage.googleapis.com/v0/b/jec-website-55397.firebasestorage.app/o/images%2FMr.%20Inesh%20Saraogi.jpg?alt=media&token=98163b9e-f2c1-4d50-ac11-37672d34c98d"
                 alt="Mr. Inesh Saraogi"
                 className="leader-img"
               />
