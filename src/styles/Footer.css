@@ -108,7 +108,7 @@ h3.widget-title {
     }
 
 .about-text {
-    color: var(--text-muted);
+    color: white;
     font-size: 0.9rem;
     margin-bottom: 1.5rem;
     text-align: justify;

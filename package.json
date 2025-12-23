@@ -7,7 +7,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.5.4",
-    "firebase": "^12.6.0",
+    "firebase": "^12.7.0",
     "prettier": "^3.6.2",
     "quill-blot-formatter": "^1.0.5",
     "quill-html-edit-button": "^2.2.15",
