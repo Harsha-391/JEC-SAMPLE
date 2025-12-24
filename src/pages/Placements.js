@@ -186,9 +186,6 @@ function Placements() {
 
       </div>
 
-      <footer className="pg-footer">
-          <p>&copy; 2025 Jaipur Engineering College (JEC). All Rights Reserved.</p>
-      </footer>
 
     </div>
   );

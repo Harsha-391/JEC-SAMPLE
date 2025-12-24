@@ -1,16 +1,24 @@
 import React from 'react';
+import building from '../assets/document-required.jpeg'; // 1. Import the image
+import '../styles/DocumentsRequired.css'; // Ensure CSS is linked
 
 function DocumentsRequired() {
   return (
     <div className="docs-page-container">
       
-      {/* Hero Section */}
+      {/* Updated Hero Section with Image */}
       <section className="docs-hero-section">
-        {/* Using docs-container-layout to match Header alignment exactly */}
-        <div className="docs-container-layout">
-            <div className="docs-hero-content">
-                <h1>Documents Required for Admission</h1>
-                <p>Essential checklist for B.Tech and M.Tech reporting candidates for Session 2025-26.</p>
+        {/* Background Image */}
+        <img src={building} alt="Campus Building" className="hero-bg-img" />
+        
+        {/* Content Wrapper (Overlay) */}
+        <div className="hero-overlay">
+            {/* Using docs-container-layout to match Header alignment exactly */}
+            <div className="docs-container-layout">
+                <div className="docs-hero-content">
+                    <h1>Documents Required for Admission</h1>
+                    <p>Essential checklist for B.Tech and M.Tech reporting candidates for Session 2025-26.</p>
+                </div>
             </div>
         </div>
       </section>
