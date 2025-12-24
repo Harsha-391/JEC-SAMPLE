@@ -1,6 +1,5 @@
 /* src/components/Footer.js */
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
 
 const Footer = () => {
@@ -39,13 +38,13 @@ const Footer = () => {
                 <div>
                     <h3 className="widget-title">Academic & Org</h3>
                     <ul className="footer-list">
-                        <li><Link to="/admission/Courses-Offered">Courses Offered</Link></li>
-                        <li><Link to="/jec/About-JEC">Our College</Link></li>
-                        <li><Link to="/Our-Society/Key-Teams-Functions">Our Society</Link></li>
-                        <li><Link to="/jec/Alumni">JEC: Proud Alumni</Link></li>
-                        <li><Link to="/jec/Employment-JEC">Career at JEC</Link></li>
-                        <li><Link to="/blog">Blog & News</Link></li>
-                        <li><Link to="/campus-life/engineering-projects">Engineering Projects</Link></li>
+                        <li><a href="/admission/Courses-Offered">Courses Offered</a></li>
+                        <li><a href="/jec/About-JEC">Our College</a></li>
+                        <li><a href="/Our-Society/Key-Teams-Functions">Our Society</a></li>
+                        <li><a href="/jec/Alumni">JEC: Proud Alumni</a></li>
+                        <li><a href="/jec/Employment-JEC">Career at JEC</a></li>
+                        <li><a href="/blog">Blog & News</a></li>
+                        <li><a href="/campus-life/engineering-projects">Engineering Projects</a></li>
                     </ul>
                 </div>
 
@@ -53,13 +52,13 @@ const Footer = () => {
                 <div>
                     <h3 className="widget-title">Quick Links</h3>
                     <ul className="footer-list">
-                        <li><Link to="/admission/btech-admissions" style={{ color: 'var(--jec-gold)', fontWeight: '600' }}>Apply Now</Link></li>
-                        <li><Link to="/Gallery">Campus Life</Link></li>
-                        <li><Link to="/Infrastructure/Learning-By-Doing">Infrastructure</Link></li>
-                        <li><Link to="/placement">Training & Placements</Link></li>
-                        <li><Link to="/virtual-tour">JEC 360 Virtual Campus</Link></li>
-                        <li><Link to="/grievance">Grievance Redressal</Link></li>
-                        <li><Link to="/terms">Terms & Conditions</Link></li>
+                        <li><a href="/admission/btech-admissions" style={{ color: 'var(--jec-gold)', fontWeight: '600' }}>Apply Now</a></li>
+                        <li><a href="/Gallery">Campus Life</a></li>
+                        <li><a href="/Infrastructure/Learning-By-Doing">Infrastructure</a></li>
+                        <li><a href="/placement">Training & Placements</a></li>
+                        <li><a href="/virtual-tour">JEC 360 Virtual Campus</a></li>
+                        <li><a href="/grievance">Grievance Redressal</a></li>
+                        <li><a href="/terms">Terms & Conditions</a></li>
                     </ul>
                 </div>
 
@@ -122,8 +121,8 @@ const Footer = () => {
                         &copy; 2025 Jaipur Engineering College. All Rights Reserved.
                     </div>
                     <div style={{ display: 'flex', gap: '20px' }}>
-                        <Link to="/privacy-policy" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.85rem' }}>Privacy Policy</Link>
-                        <Link to="/disclaimer" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.85rem' }}>Disclaimer</Link>
+                        <a href="/privacy-policy" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.85rem' }}>Privacy Policy</a>
+                        <a href="/disclaimer" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.85rem' }}>Disclaimer</a>
                     </div>
                 </div>
             </div>
