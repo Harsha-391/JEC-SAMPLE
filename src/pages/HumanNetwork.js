@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from '../firebase';
 
+// 1. IMPORT THE IMAGE HERE
+import building from '../assets/jec-building.jpeg'; 
+import '../styles/HumanNetwork.css';
+
+import ImageUpload from './../admin/pages/ImageUpload';
+
 // Helper Component for a single card
 const FacultyCard = ({ member }) => (
   <div className="faculty-card">
@@ -81,8 +87,12 @@ function HumanNetwork() {
     return (
       <div className="human-network-page">
         <section className="faculty-hero">
-          <div className="max-width-container">
-            <h1>Loading Network...</h1>
+           {/* Added Image here for loading state too (optional, or keep plain) */}
+           <img src={building} alt="Campus Building" className="hero-bg-img" />
+           <div className="hero-overlay">
+            <div className="max-width-container">
+                <h1>Loading Network...</h1>
+            </div>
           </div>
         </section>
       </div>
@@ -92,10 +102,17 @@ function HumanNetwork() {
   return (
     <div className="human-network-page">
       
+      {/* 2. UPDATED HERO SECTION WITH IMAGE */}
       <section className="faculty-hero">
-        <div className="max-width-container">
-          <h1>Human Network @ JEC</h1>
-          <p>Meet the dedicated minds shaping the future of engineering.</p>
+        {/* Background Image */}
+        <img src={building} alt="Campus Building" className="hero-bg-img" />
+        
+        {/* Overlay Content */}
+        <div className="hero-overlay">
+            <div className="max-width-container">
+                <h1>Human Network @ JEC</h1>
+                <p>Meet the dedicated minds shaping the future of engineering.</p>
+            </div>
         </div>
       </section>
 

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import '../styles/Faq.css';
+import building from '../assets/jec-building.jpeg'; // Import the image
 
 // Reusable Accordion Item Component
 function AccordionItem({ title, children }) {
@@ -35,10 +36,18 @@ function AccordionItem({ title, children }) {
 function Faq() {
   return (
     <div className="faq-page">
+      
+      {/* Updated Hero Section with Image */}
       <section className="faq-hero">
-        <div className="max-width-container">
-          <h1>Frequently Asked Questions</h1>
-          <p>Find answers to common questions about Admissions, Academics, Placements, and Campus Life at JEC.</p>
+        {/* Background Image */}
+        <img src={building} alt="Campus Building" className="hero-bg-img" />
+        
+        {/* Overlay Content */}
+        <div className="hero-overlay">
+            <div className="max-width-container">
+                <h1>Frequently Asked Questions</h1>
+                <p>Find answers to common questions about Admissions, Academics, Placements, and Campus Life at JEC.</p>
+            </div>
         </div>
       </section>
 

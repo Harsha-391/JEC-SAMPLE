@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from '../firebase';
-
+import '../styles/Testimonials.css';
+import building from '../assets/jec-building.jpeg';
 // Sub-component for individual cards
 const TestimonialCard = ({ item }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -124,12 +125,22 @@ function Testimonials() {
   return (
     <div className="testimonials-page">
 
-      <section className="testimonial-hero">
-        <div className="max-width-container">
-          <h1>Student Testimonials</h1>
-          <p>Hear from our students and alumni about their journey at JEC.</p>
-        </div>
-      </section>
+  
+
+       {/* 2. UPDATED HERO SECTION WITH IMAGE */}
+            <section className="testimonial-hero">
+              {/* Background Image */}
+              <img src={building} alt="Campus Building" className="hero-bg-img" />
+              
+              {/* Overlay Content */}
+              <div className="hero-overlay">
+                  <div className="max-width-container">
+                      <h1>Student Testimonials</h1>
+                      <p>Hear from our students and alumni about their journey at JEC.</p>
+                  </div>
+              </div>
+            </section>
+      
 
       <section className="testimonial-grid-section">
         <div className="max-width-container">
