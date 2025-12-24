@@ -2,7 +2,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async'; // Import Helmet
 import '../styles/About.css';
-import campusIntro from '../assets/campus-intro.jpeg';
+import campusIntro from '../assets/campus-intro1.jpeg';
 function About() {
   return (
     // This new wrapper class will scope all the new styles

@@ -102,7 +102,7 @@ function Employment() {
         </div>
       </section>
 
-      <section className="apply-cta">
+      {/* <section className="apply-cta">
         <div className="max-width-container">
           <h2>Ready to Make an Impact?</h2>
           <p>Join a community of innovative thinkers who are making an impact every day. It would be a genuine contentment to discuss with you soon in person. JEC endeavors to provide job satisfaction, benefits, and opportunities you'd expect from a respected employer.</p>
@@ -112,7 +112,7 @@ function Employment() {
           </div>
           <p style={{ fontSize: '14px', marginTop: '20px', opacity: 0.8 }}>Send resume to: jeckukas@yahoo.com</p>
         </div>
-      </section>
+      </section> */}
 
     </div>
   );

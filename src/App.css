@@ -309,7 +309,7 @@ body {
   text-align: center;
   background: var(--logo-white);
   border-bottom: 1px solid #eee;
-  position: sticky;
+  /* position: sticky; */
   top: 139px; /* Adjust based on your header's height */
   z-index: 900;
   overflow-x: auto; /* Allow horizontal scroll on mobile */
