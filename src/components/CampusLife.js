@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from '../firebase';
 import '../styles/CampusLife.css';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 function CampusLife() {
     const [galleryItems, setGalleryItems] = useState([]);
     const [loading, setLoading] = useState(true);
-const navigate = useNavigate();
+// const navigate = useNavigate();
     useEffect(() => {
         const fetchGallery = async () => {
             try {
@@ -31,10 +31,10 @@ const navigate = useNavigate();
         fetchGallery();
     }, []);
 
-    const handleViewMore = () => {
-    // Navigate to your image gallery route
-    navigate('/Gallery'); 
-  };
+//     const handleViewMore = () => {
+//     // Navigate to your image gallery route
+//     navigate('/Gallery'); 
+//   };
 
     return (
         <section className="campus-life">
@@ -77,9 +77,9 @@ const navigate = useNavigate();
                     </div>
                 )}
                 <div className="button-container">
-        <button className="view-more-btn" onClick={handleViewMore}>
+        <a href="/Gallery" className="view-more-btn" >
           View More
-        </button>
+        </a>
       </div>
             </div>
         </section>
