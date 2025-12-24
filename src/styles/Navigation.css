@@ -1,4 +1,6 @@
-﻿/* --- 1. VARIABLES & DESIGN TOKENS --- */
+﻿/* src/styles/Navigation.css */
+
+/* --- 1. VARIABLES & DESIGN TOKENS --- */
 :root {
     --jec-blue: #0072C6;
     --jec-red: #D62828;
@@ -165,7 +167,8 @@
 @media (min-width: 1025px) {
     .jec-dropdown {
         position: absolute;
-        top: calc(var(--jec-height) + 5px);
+        /* UPDATED: Changed from calc(var(--jec-height) + 5px) to 100% to remove gap */
+        top: 100%;
         left: 50%;
         /* Centering Logic */
         transform: translateX(-50%) translateY(15px);
