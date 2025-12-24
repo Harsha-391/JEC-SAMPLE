@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { collection, getDocs } from "firebase/firestore"; 
 import { db } from '../firebase'; // Import database connection
 import '../styles/Team.css';
+import { Link } from 'react-router-dom';
 
 function Team() {
   const [teamMembers, setTeamMembers] = useState([]);
@@ -76,7 +77,9 @@ function Team() {
             
           </div>
         </div>
-        <a href="#" className="view-all-btn">View All Members</a>
+        <Link to="/jec/management" className="view-all-btn">
+  View All
+</Link>
       </div>
     </section>
   );

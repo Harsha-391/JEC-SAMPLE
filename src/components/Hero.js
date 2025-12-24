@@ -5,8 +5,21 @@ import { db } from '../firebase';
 import { Link } from 'react-router-dom';
 import '../styles/HeroSlider.css';
 
+// --- IMPORT LOCAL ASSET ---
+// Ensure the extension (.png, .jpg, etc.) matches your actual file in src/assets/
+import heroBannerImg from '../assets/jec-banner-home.png';
+
+// Define the Default Banner using the imported local image
+const DEFAULT_BANNER = {
+  imageUrl: heroBannerImg, 
+  heading: "Jaipur’s best engineering college for your bright future.",
+  subheading: "Empowering young minds through innovation.",
+  altText: "Jaipur Engineering College (JEC) Main Campus Building"
+};
+
 function Hero() {
-  const [banners, setBanners] = useState([]);
+  // Initialize state with the local asset so it renders instantly (No black screen)
+  const [banners, setBanners] = useState([DEFAULT_BANNER]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // 1. Fetch Banners from Firebase
@@ -23,24 +36,17 @@ function Hero() {
         }));
 
         if (bannerList.length > 0) {
+          // --- THE FIX ---
+          // We force the FIRST banner from the database to use our local asset image.
+          // This prevents the "double image" flicker because the image URL never changes 
+          // for the active slide (index 0), even though the text updates to the DB content.
+          bannerList[0].imageUrl = DEFAULT_BANNER.imageUrl;
+
           setBanners(bannerList);
-        } else {
-          // Fallback if DB is empty - Added altText here
-          setBanners([{ 
-            imageUrl: '/images/hero.png', 
-            heading: "Jaipur’s best engineering college for your bright future.",
-            subheading: "Empowering young minds through innovation.",
-            altText: "Jaipur Engineering College (JEC) Main Campus Building and Student Activity Center"
-          }]);
         }
       } catch (error) {
         console.error("Error fetching banners:", error);
-        setBanners([{ 
-            imageUrl: '/images/hero.png', 
-            heading: "Jaipur’s best engineering college for your bright future.",
-            subheading: "Empowering young minds through innovation.",
-            altText: "Jaipur Engineering College (JEC) Main Campus Building"
-          }]);
+        // On error, we safely stay with the default local banner
       }
     };
 
@@ -78,14 +84,15 @@ function Hero() {
     <section className="hero-slider" style={{ position: 'relative', overflow: 'hidden' }}>
       {banners.map((banner, index) => (
         <div 
-          key={banner.id || index}
+          // CRITICAL: Using 'index' as key keeps the DOM element alive during the data update,
+          // preventing the "fade-out/fade-in" transition that causes flickering.
+          key={index}
           className={`hero-slide ${index === currentIndex ? 'active' : ''}`}
-          // REMOVED style={{ backgroundImage: ... }} to use real <img> tag below
         >
-          {/* NEW: Image Tag for SEO and Accessibility */}
+          {/* Main Hero Image */}
           <img 
             src={banner.imageUrl} 
-            alt={banner.altText || "Jaipur Engineering College (JEC) Campus Life and Events"} 
+            alt={banner.altText || "Jaipur Engineering College (JEC)"} 
             className="hero-bg-image"
             style={{
               position: 'absolute',
@@ -98,9 +105,10 @@ function Hero() {
             }}
           />
 
-          {/* Overlay to make text readable */}
+          {/* Overlay */}
           <div className="hero-overlay"></div>
 
+          {/* Text Content */}
           <div className="hero-content">
             <h1>{banner.heading}</h1>
             <div className="hero-underline"></div>
