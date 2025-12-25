@@ -11,7 +11,7 @@ function VideoTestimonials() {
     const [isApiReady, setIsApiReady] = useState(false);
     const players = useRef({});
 
-    // 1. Fetch videos from Firebase
+    // 1. Fetch data from Firestore
     useEffect(() => {
         const fetchVideos = async () => {
             try {
@@ -24,14 +24,14 @@ function VideoTestimonials() {
                 data.forEach(v => initialMute[v.id] = true);
                 setMutedStates(initialMute);
             } catch (error) {
-                console.error("Error loading testimonials:", error);
+                console.error("Firestore Error:", error);
             }
             setLoading(false);
         };
         fetchVideos();
     }, []);
 
-    // 2. Load and Manage YouTube API
+    // 2. Load YouTube API and handle 'Origin' security
     useEffect(() => {
         window.onYouTubeIframeAPIReady = () => {
             setIsApiReady(true);
@@ -47,12 +47,13 @@ function VideoTestimonials() {
         }
     }, []);
 
-    // 3. Initialize players
+    // 3. Initialize players with Origin parameter
     useEffect(() => {
         if (isApiReady && videos.length > 0) {
             videos.forEach((video) => {
-                if (players.current[video.id]) return;
+                if (players.current[video.id] || !video.videoId) return;
 
+                // FIX: Pass the 'origin' to satisfy YouTube's security policy
                 new window.YT.Player(`player-${video.id}`, {
                     videoId: video.videoId,
                     playerVars: {
@@ -62,9 +63,10 @@ function VideoTestimonials() {
                         playlist: video.videoId,
                         controls: 0,
                         modestbranding: 1,
-                        playsinline: 1, // Crucial for mobile autoplay
+                        playsinline: 1,
                         rel: 0,
-                        enablejsapi: 1
+                        enablejsapi: 1,
+                        origin: window.location.origin // FIXES the 'postMessage' error
                     },
                     events: {
                         onReady: (event) => {
@@ -83,9 +85,7 @@ function VideoTestimonials() {
         }
     }, [isApiReady, videos]);
 
-    // FIXED: Toggle Mute using a more reliable touch-friendly handler
     const handleMuteToggle = (e, id) => {
-        // Prevent event bubbling which often causes mobile clicks to fail
         e.preventDefault();
         e.stopPropagation();
 
@@ -93,7 +93,7 @@ function VideoTestimonials() {
         if (player && typeof player.unMute === 'function') {
             if (mutedStates[id]) {
                 player.unMute();
-                player.setVolume(100); // Ensure volume is up
+                player.setVolume(100);
                 setMutedStates(prev => ({ ...prev, [id]: false }));
             } else {
                 player.mute();
@@ -117,8 +117,6 @@ function VideoTestimonials() {
                         <div key={video.id} className="vt-card">
                             <div className="vt-video-wrapper">
                                 <div id={`player-${video.id}`}></div>
-
-                                {/* FIXED: Using onPointerDown for better mobile response */}
                                 <button
                                     className={`vt-mute-btn ${!mutedStates[video.id] ? 'unmuted' : ''}`}
                                     onPointerDown={(e) => handleMuteToggle(e, video.id)}
@@ -128,9 +126,7 @@ function VideoTestimonials() {
                                     {mutedStates[video.id] ? ' Unmute' : ' Mute'}
                                 </button>
                             </div>
-                            <div className="vt-info">
-                                {video.title}
-                            </div>
+                            <div className="vt-info">{video.title}</div>
                         </div>
                     ))}
                 </div>
