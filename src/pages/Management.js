@@ -97,7 +97,8 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               <img
-                              src="https://firebasestorage.googleapis.com/v0/b/jec-website-55397.firebasestorage.app/o/images%2F(Dr.)%20Sunita%20Goyal%20Rawat.JPG?alt=media&token=6c8a6b74-1888-465f-a19a-576e420cf876"
+                              src="https://firebasestorage.googleapis.com/v0/b/jec-website-55397.firebasestorage.app/o/images%2F(Dr.)%20Sunita%20Goyal%20Rawat.jpg?alt=media&token=4c2571f6-5711-4c1a-95f8-3885907e22bc"
+
                 alt="Prof. Dr. Sunita Goyal Rawat"
                 className="leader-img"
               />

@@ -26,11 +26,10 @@ const Footer = () => {
                         We are committed to advance knowledge and educate students in engineering to serve the nation in the 21st century.
                     </div>
                     <div className="social-links">
-                        <a href="https://facebook.com" className="social-btn" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
-                        <a href="https://twitter.com" className="social-btn" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
-                        <a href="https://linkedin.com" className="social-btn" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
-                        <a href="https://instagram.com" className="social-btn" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com" className="social-btn" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube"></i></a>
+                        <a href="https://www.facebook.com/jaipurengineeringcollege/" className="social-btn" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
+                        <a href="https://in.linkedin.com/school/jec-kukas/" className="social-btn" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/jec_kukas/?hl=en" className="social-btn" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@JECKukasOfficial" className="social-btn" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube"></i></a>
                     </div>
                 </div>
 
@@ -119,6 +118,7 @@ const Footer = () => {
                 <div className="bottom-content">
                     <div className="copyright">
                         &copy; 2025 Jaipur Engineering College. All Rights Reserved.
+                        Designed by Amazing IT Solutions.
                     </div>
                     <div style={{ display: 'flex', gap: '20px' }}>
                         <a href="/privacy-policy" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.85rem' }}>Privacy Policy</a>
