@@ -138,5 +138,5 @@ function VideoTestimonials() {
         </section>
     );
 }
-//hello//
+
 export default VideoTestimonials;
