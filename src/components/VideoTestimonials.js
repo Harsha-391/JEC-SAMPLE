@@ -1,108 +1,142 @@
-// src/components/VirtualTour.js
+// src/components/VideoTestimonials.js
 import React, { useState, useEffect, useRef } from 'react';
-import '../styles/VirtualTour.css';
+import { db } from '../firebase';
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import '../styles/VideoTestimonials.css';
 
-function VirtualTour() {
-    const [isMuted, setIsMuted] = useState(true);
-    const [isApiReady, setIsApiReady] = useState(false);
-    const playerRef = useRef(null);
+function VideoTestimonials() {
+    const [videos, setVideos] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [mutedStates, setMutedStates] = useState({});
+    const players = useRef({});
 
-    // Your Campus Tour Video ID
-    const videoId = '3JjaFQSvtZU';
-
+    // 1. Fetch data from Firestore
     useEffect(() => {
-        // Handle YouTube API loading and global callback
-        window.onYouTubeIframeAPIReady = () => {
-            setIsApiReady(true);
-        };
+        const fetchVideos = async () => {
+            try {
+                const q = query(collection(db, "video_testimonials"), orderBy("order"));
+                const querySnapshot = await getDocs(q);
+                const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setVideos(data);
 
-        if (window.YT && window.YT.Player) {
-            setIsApiReady(true);
-        } else {
+                const initialMute = {};
+                data.forEach(v => initialMute[v.id] = true);
+                setMutedStates(initialMute);
+            } catch (error) {
+                console.error("Firestore Error:", error);
+            }
+            setLoading(false);
+        };
+        fetchVideos();
+    }, []);
+
+    // 2. Robust API Initialization (Works on Localhost & Vercel)
+    useEffect(() => {
+        // Only load the script if it's not already there
+        if (!window.YT) {
             const tag = document.createElement('script');
             tag.src = "https://www.youtube.com/iframe_api";
             const firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         }
-    }, []);
 
-    useEffect(() => {
-        // Safety check to prevent crashing if videoId is missing
-        const isValidId = videoId && videoId !== 'YOUR_360_VIDEO_ID';
+        // Use an interval to check for API readiness instead of a global callback
+        // This prevents conflicts with the VirtualTour component
+        const checkYTReady = setInterval(() => {
+            if (window.YT && window.YT.Player && videos.length > 0) {
+                videos.forEach((video) => {
+                    // Skip if player already exists or videoId is missing
+                    if (players.current[video.id] || !video.videoId) return;
 
-        if (isApiReady && isValidId && !playerRef.current) {
-            playerRef.current = new window.YT.Player('virtual-tour-player', {
-                videoId: videoId,
-                host: 'https://www.youtube.com', // Explicitly set host for security
-                playerVars: {
-                    autoplay: 1,
-                    mute: 1,
-                    loop: 1,
-                    playlist: videoId,
-                    controls: 0,
-                    modestbranding: 1,
-                    playsinline: 1,
-                    rel: 0,
-                    enablejsapi: 1,
-                    // FIX: This origin tells YouTube your Vercel URL is safe
-                    origin: window.location.origin
-                },
-                events: {
-                    onReady: (event) => {
-                        event.target.mute();
-                        event.target.playVideo();
-                    },
-                    onStateChange: (event) => {
-                        if (event.data === window.YT.PlayerState.ENDED) {
-                            event.target.playVideo();
-                        }
+                    try {
+                        players.current[video.id] = new window.YT.Player(`player-${video.id}`, {
+                            videoId: video.videoId,
+                            host: 'https://www.youtube.com',
+                            playerVars: {
+                                autoplay: 1,
+                                mute: 1,
+                                loop: 1,
+                                playlist: video.videoId,
+                                controls: 0,
+                                modestbranding: 1,
+                                playsinline: 1,
+                                rel: 0,
+                                enablejsapi: 1,
+                                origin: window.location.origin
+                            },
+                            events: {
+                                onReady: (event) => {
+                                    event.target.mute();
+                                    event.target.playVideo();
+                                },
+                                onStateChange: (event) => {
+                                    if (event.data === window.YT.PlayerState.ENDED) {
+                                        event.target.playVideo();
+                                    }
+                                }
+                            }
+                        });
+                    } catch (e) {
+                        console.error("Player Init Error:", e);
                     }
-                },
-            });
-        }
-    }, [isApiReady, videoId]);
+                });
 
-    const handleToggleMute = (e) => {
-        // Robust touch/click handler for mobile and desktop
+                // Once all current videos are processed, clear the interval
+                clearInterval(checkYTReady);
+            }
+        }, 500); // Check every 500ms
+
+        return () => clearInterval(checkYTReady);
+    }, [videos]);
+
+    const handleMuteToggle = (e, id) => {
         e.preventDefault();
         e.stopPropagation();
 
-        if (playerRef.current && typeof playerRef.current.unMute === 'function') {
-            if (isMuted) {
-                playerRef.current.unMute();
-                playerRef.current.setVolume(100);
-                setIsMuted(false);
+        const player = players.current[id];
+        if (player && typeof player.unMute === 'function') {
+            if (mutedStates[id]) {
+                player.unMute();
+                player.setVolume(100);
+                setMutedStates(prev => ({ ...prev, [id]: false }));
             } else {
-                playerRef.current.mute();
-                setIsMuted(true);
+                player.mute();
+                setMutedStates(prev => ({ ...prev, [id]: true }));
             }
         }
     };
 
+    if (loading || videos.length === 0) return null;
+
     return (
-        <section className="take-a-tour">
-            <div className="tour-video-container">
-                <div id="virtual-tour-player"></div>
-                <div className="tour-overlay"></div>
-            </div>
+        <section className="video-testimonials-section">
+            <div className="vt-container">
+                <div className="vt-header">
+                    <h2 className="vt-title">Student Stories</h2>
+                    <p className="vt-subtitle">Real experiences from JECians</p>
+                </div>
 
-            <div className="take-a-tour-content">
-                <h2 className="take-a-tour-title">JEC Campus Experience</h2>
-                <p className="take-a-tour-subtitle">Take an immersive look at our world-class infrastructure and vibrant campus life.</p>
-
-                <div className="tour-actions">
-                    <button
-                        className={`tour-mute-btn ${!isMuted ? 'active' : ''}`}
-                        onPointerDown={handleToggleMute}
-                        type="button"
-                    >
-                        <i className={`fas ${isMuted ? 'fa-volume-mute' : 'fa-volume-up'}`}></i>
-                        {isMuted ? ' Unmute Tour' : ' Mute Tour'}
-                    </button>
+                <div className="vt-grid">
+                    {videos.slice(0, 3).map((video) => (
+                        <div key={video.id} className="vt-card">
+                            <div className="vt-video-wrapper">
+                                <div id={`player-${video.id}`}></div>
+                                <button
+                                    className={`vt-mute-btn ${!mutedStates[video.id] ? 'unmuted' : ''}`}
+                                    onPointerDown={(e) => handleMuteToggle(e, video.id)}
+                                    type="button"
+                                >
+                                    <i className={`fas ${mutedStates[video.id] ? 'fa-volume-mute' : 'fa-volume-up'}`}></i>
+                                    {mutedStates[video.id] ? ' Unmute' : ' Mute'}
+                                </button>
+                            </div>
+                            <div className="vt-info">{video.title}</div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>
     );
 }
 
-export default VirtualTour;
+export default VideoTestimonials;
