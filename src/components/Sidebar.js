@@ -1,27 +1,49 @@
 // src/components/Sidebar.js
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/Sidebar.css';
 
 function Sidebar() {
-  return (
-    <div className="college-side-bar">
-      <a href="#" className="helpline">
-        <i className="fas fa-phone"></i><span>Helpline</span>
-      </a>
-      <a href="#" className="brochure">
-        <i className="fas fa-book-open"></i><span>Brochure</span>
-      </a>
-      <a href="#" className="admissions">
-        <i className="fas fa-user-graduate"></i><span>Admissions</span>
-      </a>
-      <a href="#" className="events">
-        <i className="fas fa-calendar-alt"></i><span>Events</span>
-      </a>
-      <a href="#" className="whatsapp">
-        <i className="fab fa-whatsapp"></i><span>WhatsApp</span>
-      </a>
-    </div>
-  );
+    // Logic to track which item is hovered so only one expands at a time
+    const [hoveredItem, setHoveredItem] = useState(null);
+
+    const menuLinks = [
+        {
+            id: 'helpline',
+            icon: 'fas fa-phone',
+            label: 'Helpline',
+            path: 'tel:+918875071333' // Triggers a standard phone call
+        },
+        { id: 'brochure', icon: 'fas fa-book-open', label: 'Brochure', path: '#' },
+        { id: 'admissions', icon: 'fas fa-user-graduate', label: 'Admissions', path: 'admission/btech-admissions' },
+        { id: 'events', icon: 'fas fa-calendar-alt', label: 'Events', path: '#' },
+        {
+            id: 'whatsapp',
+            icon: 'fab fa-whatsapp',
+            label: 'WhatsApp',
+            path: 'https://wa.me/918875071333' // Opens a WhatsApp chat window
+        },
+    ];
+
+    return (
+        <div className="college-side-bar">
+            {menuLinks.map((link) => (
+                <a
+                    key={link.id}
+                    href={link.path}
+                    // Only the item in state gets the 'active' class to expand
+                    className={`${link.id} ${hoveredItem === link.id ? 'active' : ''}`}
+                    onMouseEnter={() => setHoveredItem(link.id)}
+                    onMouseLeave={() => setHoveredItem(null)}
+                    // Ensures WhatsApp opens in a new tab
+                    target={link.id === 'whatsapp' ? '_blank' : '_self'}
+                    rel={link.id === 'whatsapp' ? 'noopener noreferrer' : ''}
+                >
+                    <i className={link.icon}></i>
+                    <span>{link.label}</span>
+                </a>
+            ))}
+        </div>
+    );
 }
 
 export default Sidebar;

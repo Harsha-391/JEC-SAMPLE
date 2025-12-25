@@ -60,7 +60,6 @@ const StudentsCorner = lazy(() => import('./pages/StudentsCorner'));
 const CampusLife = lazy(() => import('./components/CampusLife')); 
 const VideoGallery = lazy(() => import('./pages/VideoGallery'));
 const Gallery = lazy(() => import('./pages/Gallery'));
-const Grievance = lazy(() => import('./components/Grievance'));
 const MandatoryDisclosure = lazy(() => import('./pages/MandatoryDisclosure'));
 
 // --- ADDED MISSING IMPORTS ---
@@ -85,6 +84,7 @@ const EditGallery = lazy(() => import('./admin/pages/EditGallery'));
 const EditPlacements = lazy(() => import('./admin/pages/EditPlacements'));
 const UserManagement = lazy(() => import('./admin/pages/UserManagement'));
 const ManageCampusLife = lazy(() => import('./admin/pages/ManageCampusLife'));
+const ManageVideoTestimonials = lazy(() => import('./admin/pages/ManageVideoTestimonials'));
 
 function App() {
   return (
@@ -176,6 +176,7 @@ function App() {
                 <Route path="manage-gallery" element={<EditGallery />} />
                           <Route path="manage-placements" element={<EditPlacements />} />
                           <Route path="manage-campus-life" element={<ManageCampusLife />} />
+                          <Route path="manage-video-testimonials" element={<ManageVideoTestimonials />} />
 
                 <Route 
                   path="users" 
