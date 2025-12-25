@@ -1,38 +1,17 @@
-// src/components/VideoTestimonials.js
+// src/components/VirtualTour.js
 import React, { useState, useEffect, useRef } from 'react';
-import { db } from '../firebase';
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
-import '../styles/VideoTestimonials.css';
+import '../styles/VirtualTour.css';
 
-function VideoTestimonials() {
-    const [videos, setVideos] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [mutedStates, setMutedStates] = useState({});
+function VirtualTour() {
+    const [isMuted, setIsMuted] = useState(true);
     const [isApiReady, setIsApiReady] = useState(false);
-    const players = useRef({});
+    const playerRef = useRef(null);
 
-    // 1. Fetch data from Firestore
+    // Your Campus Tour Video ID
+    const videoId = '3JjaFQSvtZU';
+
     useEffect(() => {
-        const fetchVideos = async () => {
-            try {
-                const q = query(collection(db, "video_testimonials"), orderBy("order"));
-                const querySnapshot = await getDocs(q);
-                const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                setVideos(data);
-
-                const initialMute = {};
-                data.forEach(v => initialMute[v.id] = true);
-                setMutedStates(initialMute);
-            } catch (error) {
-                console.error("Firestore Error:", error);
-            }
-            setLoading(false);
-        };
-        fetchVideos();
-    }, []);
-
-    // 2. Load YouTube API and handle 'Origin' security
-    useEffect(() => {
+        // Handle YouTube API loading and global callback
         window.onYouTubeIframeAPIReady = () => {
             setIsApiReady(true);
         };
@@ -47,92 +26,83 @@ function VideoTestimonials() {
         }
     }, []);
 
-    // 3. Initialize players with Origin parameter
     useEffect(() => {
-        if (isApiReady && videos.length > 0) {
-            videos.forEach((video) => {
-                if (players.current[video.id] || !video.videoId) return;
+        // Safety check to prevent crashing if videoId is missing
+        const isValidId = videoId && videoId !== 'YOUR_360_VIDEO_ID';
 
-                // FIX: Pass the 'origin' to satisfy YouTube's security policy
-                new window.YT.Player(`player-${video.id}`, {
-                    videoId: video.videoId,
-                    playerVars: {
-                        autoplay: 1,
-                        mute: 1,
-                        loop: 1,
-                        playlist: video.videoId,
-                        controls: 0,
-                        modestbranding: 1,
-                        playsinline: 1,
-                        rel: 0,
-                        enablejsapi: 1,
-                        origin: window.location.origin // FIXES the 'postMessage' error
+        if (isApiReady && isValidId && !playerRef.current) {
+            playerRef.current = new window.YT.Player('virtual-tour-player', {
+                videoId: videoId,
+                host: 'https://www.youtube.com', // Explicitly set host for security
+                playerVars: {
+                    autoplay: 1,
+                    mute: 1,
+                    loop: 1,
+                    playlist: videoId,
+                    controls: 0,
+                    modestbranding: 1,
+                    playsinline: 1,
+                    rel: 0,
+                    enablejsapi: 1,
+                    // FIX: This origin tells YouTube your Vercel URL is safe
+                    origin: window.location.origin
+                },
+                events: {
+                    onReady: (event) => {
+                        event.target.mute();
+                        event.target.playVideo();
                     },
-                    events: {
-                        onReady: (event) => {
-                            event.target.mute();
+                    onStateChange: (event) => {
+                        if (event.data === window.YT.PlayerState.ENDED) {
                             event.target.playVideo();
-                            players.current[video.id] = event.target;
-                        },
-                        onStateChange: (event) => {
-                            if (event.data === window.YT.PlayerState.ENDED) {
-                                event.target.playVideo();
-                            }
                         }
-                    },
-                });
+                    }
+                },
             });
         }
-    }, [isApiReady, videos]);
+    }, [isApiReady, videoId]);
 
-    const handleMuteToggle = (e, id) => {
+    const handleToggleMute = (e) => {
+        // Robust touch/click handler for mobile and desktop
         e.preventDefault();
         e.stopPropagation();
 
-        const player = players.current[id];
-        if (player && typeof player.unMute === 'function') {
-            if (mutedStates[id]) {
-                player.unMute();
-                player.setVolume(100);
-                setMutedStates(prev => ({ ...prev, [id]: false }));
+        if (playerRef.current && typeof playerRef.current.unMute === 'function') {
+            if (isMuted) {
+                playerRef.current.unMute();
+                playerRef.current.setVolume(100);
+                setIsMuted(false);
             } else {
-                player.mute();
-                setMutedStates(prev => ({ ...prev, [id]: true }));
+                playerRef.current.mute();
+                setIsMuted(true);
             }
         }
     };
 
-    if (loading || videos.length === 0) return null;
-
     return (
-        <section className="video-testimonials-section">
-            <div className="vt-container">
-                <div className="vt-header">
-                    <h2 className="vt-title">Student Stories</h2>
-                    <p className="vt-subtitle">Real experiences from JECians</p>
-                </div>
+        <section className="take-a-tour">
+            <div className="tour-video-container">
+                <div id="virtual-tour-player"></div>
+                <div className="tour-overlay"></div>
+            </div>
 
-                <div className="vt-grid">
-                    {videos.slice(0, 3).map((video) => (
-                        <div key={video.id} className="vt-card">
-                            <div className="vt-video-wrapper">
-                                <div id={`player-${video.id}`}></div>
-                                <button
-                                    className={`vt-mute-btn ${!mutedStates[video.id] ? 'unmuted' : ''}`}
-                                    onPointerDown={(e) => handleMuteToggle(e, video.id)}
-                                    type="button"
-                                >
-                                    <i className={`fas ${mutedStates[video.id] ? 'fa-volume-mute' : 'fa-volume-up'}`}></i>
-                                    {mutedStates[video.id] ? ' Unmute' : ' Mute'}
-                                </button>
-                            </div>
-                            <div className="vt-info">{video.title}</div>
-                        </div>
-                    ))}
+            <div className="take-a-tour-content">
+                <h2 className="take-a-tour-title">JEC Campus Experience</h2>
+                <p className="take-a-tour-subtitle">Take an immersive look at our world-class infrastructure and vibrant campus life.</p>
+
+                <div className="tour-actions">
+                    <button
+                        className={`tour-mute-btn ${!isMuted ? 'active' : ''}`}
+                        onPointerDown={handleToggleMute}
+                        type="button"
+                    >
+                        <i className={`fas ${isMuted ? 'fa-volume-mute' : 'fa-volume-up'}`}></i>
+                        {isMuted ? ' Unmute Tour' : ' Mute Tour'}
+                    </button>
                 </div>
             </div>
         </section>
     );
 }
 
-export default VideoTestimonials;
+export default VirtualTour;
