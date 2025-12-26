@@ -25,7 +25,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               <img
-                              src="https://firebasestorage.googleapis.com/v0/b/jec-website-55397.firebasestorage.app/o/images%2FDummy.jpg?alt=media&token=22df053c-0dcc-4c11-8671-2671d82a9abf"
+                              src="https://firebasestorage.googleapis.com/v0/b/jec-website-55397.firebasestorage.app/o/images%2FIMG_9600.JPG?alt=media&token=f47c7559-9076-4f05-8d86-a49ce2efce6f"
                 alt="Shri L.C. Saraogi"
                 className="leader-img"
               />
@@ -43,7 +43,7 @@ function Management() {
           <div className="leader-card">
             <div className="leader-img-container">
               <img
-                              src="/images/Lalitsaraogi.png"
+                              src="https://firebasestorage.googleapis.com/v0/b/jec-website-55397.firebasestorage.app/o/images%2F1225%20(3)%20(1).png?alt=media&token=fc063e5b-4d0a-48ea-be1e-7ae1da0d3d2a"
                 alt="Lalit K. Saraogi"
                 className="leader-img"
               />

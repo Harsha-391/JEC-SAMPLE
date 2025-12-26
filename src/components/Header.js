@@ -30,9 +30,13 @@ function Header() {
                     <a href="#!">
                         <i className="fas fa-map-marked-alt"></i> Virtual Tour
                     </a>
-                    {/* NEW: Grievance Form Link */}
                     <Link to="/grievance">
                         <i className="fas fa-clipboard-list"></i> Grievance Form
+                    </Link>
+                    <Link to="/blog" className="jec-nav-link"> <i className="ri-blogger-fill"> </i>Blog </Link>
+                    {/* MOVED FROM SUBHEADER */}
+                    <Link to="/contact-us" className="jec-top-cta">
+                        Contact Us
                     </Link>
                 </div>
 

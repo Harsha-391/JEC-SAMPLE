@@ -14,7 +14,7 @@ function Highlights() {
           {/* Card 1: Flexible Learning -> Fallback to '/' */}
           <div 
             className="highlight-card" 
-            onClick={() => navigate('/')}
+                      onClick={() => navigate('/admission/btech-admissions')}
             style={{ cursor: 'pointer' }}
           >
             <div className="card-graphic-top-blue"></div>
@@ -51,10 +51,10 @@ function Highlights() {
           </div>
 
         </div>
-        <div className="carousel-nav">
+        
           <span className="nav-dot active"></span>
           <span className="nav-dot"></span>
-        </div>
+       
       </div>
     </section>
   );

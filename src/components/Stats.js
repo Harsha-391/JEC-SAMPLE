@@ -65,7 +65,7 @@ function Stats() {
   return (
     <section className="stats">
       <div className="stats-content">
-        <StatBox number="24+" label="Years of academic excellence" dataCount="24" />
+        <StatBox number="25+" label="Years of academic excellence" dataCount="25" />
         <StatBox number="AICTE" label="Approved and affiliated with RTU, Kota" isText />
         <StatBox number="100%" label="Placement support" dataCount="100" />
         <StatBox number="Active" label="Industry collaborations and MOUs" isText />
