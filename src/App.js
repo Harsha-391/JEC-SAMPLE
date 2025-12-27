@@ -9,6 +9,7 @@ import AdminLayout from './admin/AdminLayout';
 
 // Auth Components
 import ProtectedRoute from './admin/components/ProtectedRoute';
+import MoocsNptel from './pages/MoocsNptel';
 
 // --- LAZY IMPORT PAGES ---
 const Home = lazy(() => import('./pages/Home'));
@@ -145,6 +146,8 @@ function App() {
               <Route path="campus-life/students-corner" element={<StudentsCorner />} />
               <Route path="campus-life/games-and-sports" element={<GamesAndSports />} />
               <Route path="campus-life/guts-n-glory" element={<GutsNGlory />} />
+
+              <Route path="JEC-engineering/MOOCS-NPTEL-SWAYAM" element={<MoocsNptel />} />
 
               {/* Blog */}
               <Route path="blog" element={<Blog />} />

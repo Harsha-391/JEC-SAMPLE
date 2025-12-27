@@ -45,6 +45,21 @@ const programs = [
     name: 'Computer Science Engineering (18 seats)', 
     path: '/JEC-engineering/Computer-Science-Engineering' 
   },
+   { 
+    type: 'M.Tech', 
+    name: 'Digital communication (18 seats)', 
+    path: '/JEC-engineering/Digital-Communication' 
+  },
+   { 
+    type: 'M.Tech', 
+    name: 'Power system (18 seats)', 
+    path: '/JEC-engineering/Power-System' 
+  },
+   { 
+    type: 'M.Tech', 
+    name: 'Production engineering (18 seats)', 
+    path: '/JEC-engineering/Production-Engineering' 
+  },
 ];
 
 function Programs() {

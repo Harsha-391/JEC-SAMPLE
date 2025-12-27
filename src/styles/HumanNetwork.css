@@ -43,6 +43,7 @@
   position: relative;
   z-index: 3; /* Places text above the image and overlay */
   width: 100%;
+  height: fit-content
 }
 
 .hero-overlay h1 {

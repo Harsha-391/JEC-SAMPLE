@@ -132,7 +132,7 @@ function AdmissionProcedure() {
                 
                 <div className="ap-contact-details">
                     <p><i className="fas fa-phone-alt"></i> 8875071333 (30 Lines)</p>
-                    <p style={{ marginTop: '10px' }}><i className="fas fa-envelope"></i> <a href="mailto:admissions.jec@gmail.com">admissions.jec@gmail.com</a></p>
+                    <p style={{ marginTop: '10px' }}><i className="fas fa-envelope"></i> <a href="mailto:director@jeckukas.org.in">director@jeckukas.org.in</a></p>
                 </div>
             </div>
         </div>

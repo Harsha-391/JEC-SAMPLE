@@ -148,14 +148,14 @@ function Subheader() {
                             <a href="#!" className="jec-nav-link jec-toggle-btn" onClick={(e) => toggleDropdown(e, 'jec')}>JEC <i className="fas fa-chevron-down"></i></a>
                             <ul className={`jec-dropdown jec-mega jec-cols-3 ${activeDropdown === 'jec' ? 'jec-show' : ''}`}>
                                 <li><Link to="/jec/About-JEC" className="jec-dropdown-link">About JEC</Link></li>
-                                <li><Link to="/jec/Employment-JEC" className="jec-dropdown-link">Employment @JEC</Link></li>
                                 <li><Link to="/jec/Management" className="jec-dropdown-link">Management</Link></li>
-                                <li><Link to="/jec/Institution-Innovation-Council-JEC" className="jec-dropdown-link">Institution Innovation Council</Link></li>
-                                <li><Link to="/jec/Anti-Ragging-Committee" className="jec-dropdown-link">Anti-Ragging Committee</Link></li>
                                 <li><Link to="/jec/network" className="jec-dropdown-link">Human Network</Link></li>
-                                <li><Link to="/jec/Alumni" className="jec-dropdown-link">Alumni</Link></li>
+                               <li><Link to="/jec/Alumni" className="jec-dropdown-link">Alumni</Link></li>
                                 <li><Link to="/jec/Students-Testimonials" className="jec-dropdown-link">Students Testimonials</Link></li>
-                                <li><Link to="/jec/JEC-FAQ" className="jec-dropdown-link">JEC FAQ</Link></li>
+                                 <li><Link to="/jec/Anti-Ragging-Committee" className="jec-dropdown-link">Anti-Ragging Committee</Link></li>
+                                <li><Link to="/jec/Institution-Innovation-Council-JEC" className="jec-dropdown-link">Institution Innovation Council</Link></li>
+                                 <li><Link to="/jec/JEC-FAQ" className="jec-dropdown-link">JEC FAQ</Link></li>
+                                <li><Link to="/jec/Employment-JEC" className="jec-dropdown-link">Employment @JEC</Link></li>                      
                             </ul>
                         </li>
 
@@ -165,9 +165,9 @@ function Subheader() {
                             <ul className={`jec-dropdown jec-mega jec-cols-3 ${activeDropdown === 'admission' ? 'jec-show' : ''}`}>
                                 <li><Link to="/admission/btech-admissions" className="jec-dropdown-link jec-highlight">Admission Open 2025</Link></li>
                                 <li><Link to="/admission/Admission-Procedure" className="jec-dropdown-link">Admission Procedure</Link></li>
-                                <li><Link to="/admission/Courses-Offered" className="jec-dropdown-link">Courses Offered</Link></li>
                                 <li><Link to="/admission/Fee-Structure" className="jec-dropdown-link">Fee Structure</Link></li>
                                 <li><Link to="/admission/Documents-Required" className="jec-dropdown-link">Documents Required</Link></li>
+                                <li><Link to="/admission/Courses-Offered" className="jec-dropdown-link">Courses Offered</Link></li>
                                 <li><Link to="/admission/REAP-2025" className="jec-dropdown-link">REAP-2025</Link></li>
                                 <li><Link to="/admission/Financial-Aids-Bank-Loans" className="jec-dropdown-link">Financial Aids & Loans</Link></li>
                                 <li><Link to="/admission/Mandatory-Disclosure" className="jec-dropdown-link">Mandatory Disclosure</Link></li>
