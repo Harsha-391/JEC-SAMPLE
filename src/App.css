@@ -386,7 +386,7 @@ body {
 .human-network-page .avatar {
   width: 100px;
   height: 100px;
-  border-radius: 50%;
+  border-radius: 25%;
   background: #ddd;
   margin: 0 auto 15px;
   object-fit: fill;
