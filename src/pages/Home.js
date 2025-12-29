@@ -10,22 +10,20 @@ import Programs from '../components/Programs';
 import Team from '../components/Team';
 import WhyJEC from '../components/WhyJEC';
 import Outcomes from '../components/Outcomes';
-import VideoTestimonials from '../components/VideoTestimonials'; // NEW IMPORT
+import VideoTestimonials from '../components/VideoTestimonials';
 import CampusLife from '../components/CampusLife';
 import VirtualTour from '../components/VirtualTour';
+import SEO from '../components/SEO';
 
 function Home() {
     return (
         <>
-            <Helmet>
-                <title>Jaipur Engineering College (JEC) | Top Engineering College in Jaipur, Rajasthan</title>
-                <meta
-                    name="description"
-                    content="JEC Jaipur is a premier AICTE-approved engineering institute affiliated with RTU. Offering B.Tech in CSE, AI, Civil, Electrical & Mechanical. Highest package ₹69 Lakh. Apply for 2025 Admissions!"
-                />
-                <meta name="keywords" content="JEC Jaipur, Best Engineering College in Jaipur, B.Tech Admission 2025, RTU Affiliated Colleges, Top Placement Engineering College Rajasthan" />
-                <link rel="canonical" href="https://jeckukas.org.in/" />
-            </Helmet>
+            <SEO
+                title="Jaipur Engineering College | Best Engineering College in Jaipur with High Placements"
+                description="The JEC is known for offering top-quality education in various engineering & technology courses since 2000, and for its top placement results."
+                keywords="JEC is one of the Best Engineering Colleges of Rajasthan in Jaipur city, Offering Top Quality education in various disciplines of Engineering & Technology. Since 2000, Jaipur Engineering College (JEC) has been known to enable students to develop a strong personality."
+                canonical="https://jeckukas.org.in/"
+            />
 
             <Hero />
             <Highlights />
@@ -34,9 +32,8 @@ function Home() {
             <Team />
             <WhyJEC />
             <Outcomes />
-            <VideoTestimonials /> {/* NEW SECTION ADDED HERE */}
+            <VideoTestimonials />
             <CampusLife />
-           
             <VirtualTour />
         </>
     );
