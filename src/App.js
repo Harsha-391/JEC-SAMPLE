@@ -137,6 +137,7 @@ function App() {
 
               {/* Campus Life Dropdown (Updated paths) */}
               <Route path="Gallery" element={<Gallery />} />
+              <Route path="Gallery/:albumId?" element={<Gallery />} />
               <Route path="campus-life/jec-vibrant-india" element={<VibrantIndia />} />
               <Route path="campus-life/committees-zone" element={<CommitteesZone />} />
               <Route path="campus-life/video-gallery" element={<VideoGallery />} />

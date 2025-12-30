@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for routing
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from '../firebase';
 import '../styles/CampusLife.css';
-// import { useNavigate } from 'react-router-dom';
 
 function CampusLife() {
     const [galleryItems, setGalleryItems] = useState([]);
     const [loading, setLoading] = useState(true);
-// const navigate = useNavigate();
+    const navigate = useNavigate(); // Initialize the navigate hook
+
     useEffect(() => {
         const fetchGallery = async () => {
             try {
@@ -31,10 +32,16 @@ function CampusLife() {
         fetchGallery();
     }, []);
 
-//     const handleViewMore = () => {
-//     // Navigate to your image gallery route
-//     navigate('/Gallery'); 
-//   };
+    // Function to handle clicking a specific category card
+    const handleCardClick = (item) => {
+        if (item.linkedAlbumId) {
+            // Navigates to /Gallery/album-id (e.g., /Gallery/library)
+            navigate(`/Gallery/${item.linkedAlbumId}`);
+        } else {
+            // Fallback to general gallery if no specific ID is linked
+            navigate('/Gallery');
+        }
+    };
 
     return (
         <section className="campus-life">
@@ -55,6 +62,8 @@ function CampusLife() {
                             <div
                                 key={item.id}
                                 className={`gallery-card ${item.isLarge ? 'card-wide' : ''}`}
+                                onClick={() => handleCardClick(item)} // Trigger navigation on click
+                                style={{ cursor: 'pointer' }} // Visual cue that card is clickable
                             >
                                 <div className="image-wrapper">
                                     <img src={item.imageUrl} alt={item.alt || "Campus Life"} loading="lazy" />
@@ -76,11 +85,16 @@ function CampusLife() {
                         ))}
                     </div>
                 )}
+
                 <div className="button-container">
-        <a href="/Gallery" className="view-more-btn" >
-          View More
-        </a>
-      </div>
+                    <button
+                        onClick={() => navigate('/Gallery')}
+                        className="view-more-btn"
+                        style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                    >
+                        View More
+                    </button>
+                </div>
             </div>
         </section>
     );
