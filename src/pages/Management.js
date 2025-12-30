@@ -44,7 +44,7 @@ function Management() {
             <div className="leader-img-container">
               <img
                               src="https://firebasestorage.googleapis.com/v0/b/jec-website-55397.firebasestorage.app/o/images%2F1225%20(3)%20(1).png?alt=media&token=fc063e5b-4d0a-48ea-be1e-7ae1da0d3d2a"
-                alt="Lalit K. Saraogi"
+                alt="Shri Lalit K. Saraogi"
                 className="leader-img"
               />
             </div>
