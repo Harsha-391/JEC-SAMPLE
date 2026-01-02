@@ -77,11 +77,11 @@ const Blog = () => {
                   <span><i className="fas fa-user"></i> {featuredPost.author}</span>
                   <span><i className="fas fa-tag"></i> {featuredPost.category}</span>
                 </div>
-                <Link to={`/blog/view/${featuredPost.id}`}>
+                <Link to={`/blog/view/${featuredPost.slug}`}>
                   <h2 className="blog-title">{featuredPost.title}</h2>
                 </Link>
                 <p className="blog-excerpt">{featuredPost.excerpt}</p>
-                <Link to={`/blog/view/${featuredPost.id}`} className="read-more">Read Full Article <i className="fas fa-arrow-right"></i></Link>
+                <Link to={`/blog/view/${featuredPost.slug}`} className="read-more">Read Full Article <i className="fas fa-arrow-right"></i></Link>
               </div>
             </article>
           )}
