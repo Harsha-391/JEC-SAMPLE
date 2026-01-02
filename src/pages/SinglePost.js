@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { db } from '../firebase';
-// IMPORT 'query', 'collection', 'where', 'getDocs' instead of 'doc', 'getDoc'
-import { collection, query, where, getDocs } from 'firebase/firestore';
+// IMPORT both query/where (for slugs) AND doc/getDoc (for IDs)
+import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
 import { Helmet } from 'react-helmet-async';
 import './Blog.css';
 
 const SinglePost = () => {
-    // 1. Grab 'slug' instead of 'id' from the URL
+    // 'slug' here captures whatever is after /blog/, whether it's a real slug or an ID
     const { slug } = useParams();
     const [post, setPost] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -18,17 +18,24 @@ const SinglePost = () => {
         const fetchPost = async () => {
             setLoading(true);
             try {
-                // 2. Query the 'blog_posts' collection where the 'slug' field matches the URL param
+                // STRATEGY 1: Try to find by "slug" field first (The Pretty URL way)
                 const q = query(collection(db, "blog_posts"), where("slug", "==", slug));
                 const querySnapshot = await getDocs(q);
 
                 if (!querySnapshot.empty) {
-                    // 3. Since queries return an array (even if 1 result), grab the first one
                     const docData = querySnapshot.docs[0];
                     setPost({ id: docData.id, ...docData.data() });
                 } else {
-                    console.log("No such document found with that slug!");
-                    setPost(null);
+                    // STRATEGY 2: If no slug matched, try to find by Document ID (The Old way)
+                    // This fixes the "Not Found" error for posts that still have ID URLs
+                    const docRef = doc(db, "blog_posts", slug);
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        setPost({ id: docSnap.id, ...docSnap.data() });
+                    } else {
+                        setPost(null);
+                    }
                 }
             } catch (error) {
                 console.error("Error fetching post:", error);
@@ -68,7 +75,7 @@ const SinglePost = () => {
                     <title>Loading Article... | JEC Jaipur</title>
                     <meta name="robots" content="noindex" />
                 </Helmet>
-                <div>Loading Article...</div>
+                <div className="loading-spinner">Loading...</div>
             </div>
         );
     }
@@ -96,21 +103,11 @@ const SinglePost = () => {
             <Helmet>
                 <title>{pageTitle} | JEC Jaipur</title>
                 <meta name="description" content={pageDesc} />
-                <meta name="keywords" content={post.metaKeywords || "Engineering, JEC, College"} />
                 <link rel="canonical" href={currentUrl} />
-
-                {/* Open Graph / Facebook */}
-                <meta property="og:type" content="article" />
                 <meta property="og:title" content={pageTitle} />
                 <meta property="og:description" content={pageDesc} />
                 <meta property="og:image" content={pageImage} />
                 <meta property="og:url" content={currentUrl} />
-
-                {/* Twitter Card */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content={pageTitle} />
-                <meta name="twitter:description" content={pageDesc} />
-                <meta name="twitter:image" content={pageImage} />
             </Helmet>
 
             {/* Navigation */}
@@ -131,7 +128,6 @@ const SinglePost = () => {
 
             <div className="single-post-container">
                 <article className="article-body">
-
                     <img
                         src={post.image}
                         alt={post.imageAlt || post.title}
@@ -143,45 +139,12 @@ const SinglePost = () => {
                             boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
                         }}
                     />
-
                     <div
                         ref={contentRef}
                         className="dynamic-content"
                         dangerouslySetInnerHTML={{ __html: post.content }}
                     />
-
-                    <div className="post-tags">
-                        <strong>Tags:</strong>
-                        <div className="tag-cloud">
-                            <span className="tag">{post.category}</span>
-                            {post.metaKeywords && post.metaKeywords.split(',').map((k, i) => (
-                                <span key={i} className="tag">{k.trim()}</span>
-                            ))}
-                        </div>
-                    </div>
                 </article>
-
-                <aside className="blog-sidebar">
-                    <div className="widget">
-                        <h3 className="widget-title">About the Author</h3>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                            <div style={{ width: '50px', height: '50px', background: '#eee', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <i className="fas fa-user" style={{ color: '#888' }}></i>
-                            </div>
-                            <div>
-                                <strong style={{ display: 'block', color: 'var(--text-main)' }}>{post.author}</strong>
-                                <span style={{ fontSize: '12px', color: '#666' }}>Content Creator</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="cta-box">
-                        <h3>Admission Open 2025</h3>
-                        <p>Join the league of successful engineers.</p>
-                        <Link to="/admission-enquiry" className="btn-apply">Apply Now</Link>
-                    </div>
-                </aside>
-
             </div>
         </div>
     );
