@@ -9,8 +9,8 @@
     --jec-light: #64748b;
     --jec-white: #ffffff;
     --jec-bg-hover: #f1f8fc;
-    --jec-height: 76px;
-    --jec-top-bar-height: 48px;
+    --jec-height: 76px; /* Header Height */
+    --jec-top-bar-height: 48px; /* Top Bar Height */
 }
 
 /* --- 2. GLOBAL RESET --- */
@@ -28,10 +28,12 @@
     text-decoration: none !important;
 }
 
-/* --- 3. TOP BAR (STICKY AT 0) --- */
+/* --- 3. TOP BAR (FIXED AT 0) --- */
 .jec-top-bar {
-    position: sticky;
+    position: fixed; /* Changed from sticky to fixed */
     top: 0;
+    left: 0;
+    width: 100%; /* Ensure full width */
     z-index: 10001;
     background: #0f1724;
     color: white;
@@ -102,16 +104,17 @@
 
 .jec-top-bar .jec-top-cta:hover {
     background: var(--jec-gold) !important;
-    color: white !important; /* Fixed visibility on hover */
+    color: white !important;
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(252, 163, 17, 0.3);
 }
 
-/* --- 4. MAIN HEADER (STICKY BELOW TOP BAR) --- */
+/* --- 4. MAIN HEADER (FIXED BELOW TOP BAR) --- */
 .jec-nav-wrapper {
     width: 100%;
-    position: sticky;
+    position: fixed; /* Changed from sticky to fixed */
     top: var(--jec-top-bar-height);
+    left: 0;
     z-index: 10000;
 }
 
@@ -302,8 +305,7 @@
         color: var(--jec-gold);
     }
 
-    /* --- FIXED: INCREASED RANGE TO 5 ITEMS --- */
-    /* This ensures 'Campus Life' (and others) align to the RIGHT edge so they don't overflow screen */
+    /* RIGHT ALIGNMENT FIX FOR LAST ITEMS (Increased to last 5 items) */
     .jec-menu-item:nth-last-child(-n+5) .jec-dropdown {
         left: auto;
         right: 0;
@@ -486,9 +488,21 @@
         }
 }
 
-/* Global Horizontal Scroll Preventer */
+/* --- GLOBAL SCROLL & PADDING FIX ---
+   1. Prevent horizontal scroll.
+   2. Add Top Padding to Body so content isn't hidden behind the fixed header. 
+*/
 body {
     overflow-x: hidden;
+    /* 48px Top Bar + 76px Header = 124px total spacing needed */
+    padding-top: calc(var(--jec-top-bar-height) + var(--jec-height));
+}
+
+/* On Mobile, Top Bar is hidden (0px), so only need Header height (76px) */
+@media (max-width: 1024px) {
+    body {
+        padding-top: var(--jec-height);
+    }
 }
 
 /* --- SEARCH BAR UI (ICON AFTER SOCIETY) --- */
