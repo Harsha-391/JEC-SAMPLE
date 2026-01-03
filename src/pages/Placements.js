@@ -4,36 +4,60 @@ import { collection, query, getDocs, orderBy } from "firebase/firestore";
 import '../styles/Placements.css';
 
 function Placements() {
-    const [activeTab, setActiveTab] = useState(''); // Will set to latest year after fetch
+    const [activeTab, setActiveTab] = useState('');
     const [loading, setLoading] = useState(true);
 
     // --- DYNAMIC DATA STATE ---
-    const [years, setYears] = useState([]); // Stores the list of years
+    const [years, setYears] = useState([]);
     const [starAchievers, setStarAchievers] = useState([]);
     const [gallery, setGallery] = useState([]);
     const [drives, setDrives] = useState([]);
 
+    // --- VIEW MORE STATE ---
+    const [galleryLimit, setGalleryLimit] = useState(12); // Start with 12 items
+
+    // --- HELPER: Parse Package for Sorting ---
+    // Converts strings like "1.56 Cr" or "12 LPA" into a comparable number (LPA)
+    const parsePackageValue = (pkgStr) => {
+        if (!pkgStr) return 0;
+        const str = pkgStr.toLowerCase().replace(/,/g, '');
+        const match = str.match(/[\d\.]+/);
+        if (!match) return 0;
+
+        let value = parseFloat(match[0]);
+
+        if (str.includes('cr') || str.includes('crore')) {
+            value = value * 100; // Convert Crore to roughly LPA scale (1 Cr = 100 Lakhs)
+        }
+        // If it says LPA or just a number, we assume it's already in the correct scale relative to Cr * 100
+        return value;
+    };
+
     useEffect(() => {
         const fetchPlacementData = async () => {
             try {
-                // 1. Fetch Years (Dynamic)
-                // Ensure you have "placement_years" collection in Firestore
+                // 1. Fetch Years
                 const yearsSnap = await getDocs(query(collection(db, "placement_years"), orderBy("year", "desc")));
                 const yearList = yearsSnap.docs.map(doc => doc.data());
                 setYears(yearList);
 
-                // Set default active tab to the most recent year
                 if (yearList.length > 0) {
                     setActiveTab(yearList[0].year);
                 }
 
                 // 2. Fetch Star Achievers
                 const starsSnap = await getDocs(query(collection(db, "placement_stars")));
-                setStarAchievers(starsSnap.docs.map(doc => doc.data()));
+                const rawStars = starsSnap.docs.map(doc => doc.data());
+                // Sort DESC by package
+                const sortedStars = rawStars.sort((a, b) => parsePackageValue(b.package) - parsePackageValue(a.package));
+                setStarAchievers(sortedStars);
 
                 // 3. Fetch Gallery
                 const gallerySnap = await getDocs(query(collection(db, "placement_gallery")));
-                setGallery(gallerySnap.docs.map(doc => doc.data()));
+                const rawGallery = gallerySnap.docs.map(doc => doc.data());
+                // Sort DESC by package
+                const sortedGallery = rawGallery.sort((a, b) => parsePackageValue(b.package) - parsePackageValue(a.package));
+                setGallery(sortedGallery);
 
                 // 4. Fetch Drives
                 const drivesSnap = await getDocs(query(collection(db, "placement_drives"), orderBy("date", "desc")));
@@ -49,21 +73,24 @@ function Placements() {
         fetchPlacementData();
     }, []);
 
-    // Filter drives based on the active year string (e.g., "2024-25")
     const getDrivesForTab = (selectedYear) => {
         return drives.filter(d => d.year === selectedYear);
+    };
+
+    const handleViewMore = () => {
+        setGalleryLimit(prev => prev + 12); // Load 12 more on each click
     };
 
     return (
         <div className="placement-page-wrapper">
 
-            {/* Hero (Static) */}
+            {/* Hero */}
             <header className="pg-hero">
                 <h1>Placement Glory</h1>
                 <p>Catapulting Careers • Life After JEC</p>
             </header>
 
-            {/* Stats (Static) */}
+            {/* Stats */}
             <div className="pg-stats-container">
                 <div className="pg-stats-grid">
                     <div className="pg-stat-card">
@@ -86,7 +113,8 @@ function Placements() {
             </div>
 
             <div className="pg-container">
-                {/* Narrative (Static) */}
+
+                {/* Narrative */}
                 <div className="pg-content-grid">
                     <div className="pg-narrative-text">
                         <h2>Catapulting Careers</h2>
@@ -107,7 +135,7 @@ function Placements() {
                     </div>
                 </div>
 
-                {/* --- SECTION 1: STAR ACHIEVERS --- */}
+                {/* --- SECTION 1: STAR ACHIEVERS (Sorted) --- */}
                 <div className="pg-section-header">
                     <h2>Star <span>Achievers</span></h2>
                     <p style={{ color: 'var(--pg-text-muted)' }}>Breaking Barriers & Setting New Benchmarks</p>
@@ -124,14 +152,14 @@ function Placements() {
                     )) : <p style={{ textAlign: 'center', width: '100%' }}>Loading Stars...</p>}
                 </div>
 
-                {/* --- SECTION 2: PLACEMENT GALLERY --- */}
+                {/* --- SECTION 2: PLACEMENT GALLERY (Sorted + View More) --- */}
                 <div className="pg-section-header" style={{ marginTop: '0' }}>
                     <h2>Placement <span>Gallery</span></h2>
                     <p style={{ color: 'var(--pg-text-muted)' }}>Celebrating our placed students</p>
                 </div>
 
                 <div className="pg-achievers-grid" id="studentGrid">
-                    {gallery.length > 0 ? gallery.map((item, index) => (
+                    {gallery.length > 0 ? gallery.slice(0, galleryLimit).map((item, index) => (
                         <div className={`pg-achiever-card ${item.isPremium ? 'pg-premium' : ''}`} key={index}>
                             <img src={item.image} className="pg-student-img" alt={item.name} />
                             <div className="pg-ac-name">{item.name}</div>
@@ -141,6 +169,28 @@ function Placements() {
                     )) : <p>Loading Gallery...</p>}
                 </div>
 
+                {/* View More Button */}
+                {gallery.length > galleryLimit && (
+                    <div style={{ textAlign: 'center', marginTop: '30px' }}>
+                        <button
+                            onClick={handleViewMore}
+                            style={{
+                                padding: '12px 30px',
+                                background: 'var(--pg-primary)', // Uses your CSS variable or falls back to blue
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '50px',
+                                cursor: 'pointer',
+                                fontSize: '1rem',
+                                fontWeight: '600',
+                                boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
+                            }}
+                        >
+                            View More
+                        </button>
+                    </div>
+                )}
+
                 {/* --- SECTION 3: PLACEMENT DRIVES --- */}
                 <div className="pg-section-header">
                     <h2>Placement Drives</h2>
@@ -148,7 +198,6 @@ function Placements() {
                 </div>
 
                 <div className="pg-tabs-wrapper">
-                    {/* Dynamic Tabs */}
                     <div className="pg-tabs-nav">
                         {years.length > 0 ? (
                             years.map((yItem, i) => (
