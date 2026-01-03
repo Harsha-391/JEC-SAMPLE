@@ -3,192 +3,197 @@ import { db } from '../firebase';
 import { collection, query, getDocs, orderBy } from "firebase/firestore";
 import '../styles/Placements.css';
 
-// CSS is imported globally in App.js via App.css
-
 function Placements() {
-  const [activeTab, setActiveTab] = useState('y24-25');
-  const [loading, setLoading] = useState(true);
+    const [activeTab, setActiveTab] = useState(''); // Will set to latest year after fetch
+    const [loading, setLoading] = useState(true);
 
-  // --- DYNAMIC DATA STATE ---
-  const [starAchievers, setStarAchievers] = useState([]);
-  const [gallery, setGallery] = useState([]);
-  const [drives, setDrives] = useState([]);
+    // --- DYNAMIC DATA STATE ---
+    const [years, setYears] = useState([]); // Stores the list of years
+    const [starAchievers, setStarAchievers] = useState([]);
+    const [gallery, setGallery] = useState([]);
+    const [drives, setDrives] = useState([]);
 
-  useEffect(() => {
-    const fetchPlacementData = async () => {
-      try {
-        // 1. Fetch Star Achievers
-        const starsSnap = await getDocs(query(collection(db, "placement_stars")));
-        setStarAchievers(starsSnap.docs.map(doc => doc.data()));
+    useEffect(() => {
+        const fetchPlacementData = async () => {
+            try {
+                // 1. Fetch Years (Dynamic)
+                // Ensure you have "placement_years" collection in Firestore
+                const yearsSnap = await getDocs(query(collection(db, "placement_years"), orderBy("year", "desc")));
+                const yearList = yearsSnap.docs.map(doc => doc.data());
+                setYears(yearList);
 
-        // 2. Fetch Gallery
-        const gallerySnap = await getDocs(query(collection(db, "placement_gallery")));
-        setGallery(gallerySnap.docs.map(doc => doc.data()));
+                // Set default active tab to the most recent year
+                if (yearList.length > 0) {
+                    setActiveTab(yearList[0].year);
+                }
 
-        // 3. Fetch Drives (Ordered by date desc)
-        const drivesSnap = await getDocs(query(collection(db, "placement_drives"), orderBy("date", "desc")));
-        setDrives(drivesSnap.docs.map(doc => doc.data()));
+                // 2. Fetch Star Achievers
+                const starsSnap = await getDocs(query(collection(db, "placement_stars")));
+                setStarAchievers(starsSnap.docs.map(doc => doc.data()));
 
-      } catch (error) {
-        console.error("Error fetching placement data:", error);
-      } finally {
-        setLoading(false);
-      }
+                // 3. Fetch Gallery
+                const gallerySnap = await getDocs(query(collection(db, "placement_gallery")));
+                setGallery(gallerySnap.docs.map(doc => doc.data()));
+
+                // 4. Fetch Drives
+                const drivesSnap = await getDocs(query(collection(db, "placement_drives"), orderBy("date", "desc")));
+                setDrives(drivesSnap.docs.map(doc => doc.data()));
+
+            } catch (error) {
+                console.error("Error fetching placement data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPlacementData();
+    }, []);
+
+    // Filter drives based on the active year string (e.g., "2024-25")
+    const getDrivesForTab = (selectedYear) => {
+        return drives.filter(d => d.year === selectedYear);
     };
 
-    fetchPlacementData();
-  }, []);
+    return (
+        <div className="placement-page-wrapper">
 
-  const openYear = (yearName) => {
-    setActiveTab(yearName);
-  };
+            {/* Hero (Static) */}
+            <header className="pg-hero">
+                <h1>Placement Glory</h1>
+                <p>Catapulting Careers • Life After JEC</p>
+            </header>
 
-  // Helper to filter drives by year string in DB (e.g., '2024-25') matching tab ID ('y24-25')
-  const getDrivesForTab = (tabId) => {
-    // Map tab ID 'y24-25' -> DB value '2024-25'
-    const dbYear = "20" + tabId.substring(1); 
-    return drives.filter(d => d.year === dbYear);
-  };
-
-  return (
-    <div className="placement-page-wrapper">
-
-      {/* Hero (Static) */}
-      <header className="pg-hero">
-        <h1>Placement Glory</h1>
-        <p>Catapulting Careers • Life After JEC</p>
-      </header>
-
-      {/* Stats (Static) */}
-      <div className="pg-stats-container">
-        <div className="pg-stats-grid">
-          <div className="pg-stat-card">
-            <div className="pg-stat-value">94%+</div>
-            <div className="pg-stat-label">Placement Rate</div>
-          </div>
-          <div className="pg-stat-card">
-            <div className="pg-stat-value">1.56 Cr</div>
-            <div className="pg-stat-label">Highest Package</div>
-          </div>
-          <div className="pg-stat-card">
-            <div className="pg-stat-value">4300+</div>
-            <div className="pg-stat-label">Total Placements</div>
-          </div>
-          <div className="pg-stat-card">
-            <div className="pg-stat-value">550+</div>
-            <div className="pg-stat-label">Active Recruiters</div>
-          </div>
-        </div>
-      </div>
-
-      <div className="pg-container">
-
-        {/* Narrative (Static) */}
-        <div className="pg-content-grid">
-          <div className="pg-narrative-text">
-            <h2>Catapulting Careers</h2>
-            <p>As hard as it might be to imagine sometimes, there is life after JEC, as shown by the <strong>~10,000+ JEC alumni</strong> living around the world...</p>
-            <p>For the last three years, JEC has set the highest placement record...</p>
-            <div className="pg-chairman-quote">
-              <i className="fas fa-quote-left" style={{fontSize:'1.5rem', marginBottom:'10px', display:'block'}}></i>
-              "We know that great universities world over are known by their successful alumni..."
-              <div style={{marginTop:'10px', fontWeight:'700'}}>— Shri L C Saraogi, Chairman</div>
+            {/* Stats (Static) */}
+            <div className="pg-stats-container">
+                <div className="pg-stats-grid">
+                    <div className="pg-stat-card">
+                        <div className="pg-stat-value">94%+</div>
+                        <div className="pg-stat-label">Placement Rate</div>
+                    </div>
+                    <div className="pg-stat-card">
+                        <div className="pg-stat-value">1.56 Cr</div>
+                        <div className="pg-stat-label">Highest Package</div>
+                    </div>
+                    <div className="pg-stat-card">
+                        <div className="pg-stat-value">4300+</div>
+                        <div className="pg-stat-label">Total Placements</div>
+                    </div>
+                    <div className="pg-stat-card">
+                        <div className="pg-stat-value">550+</div>
+                        <div className="pg-stat-label">Active Recruiters</div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div>
-            <h3 style={{marginBottom:'1.5rem'}}>Top Placements, Recruiters & Outreach</h3>
-            <p style={{fontSize:'0.95rem', color:'var(--pg-text-muted)', marginBottom:'1rem'}}>
-              Presently, 300+ JEC students are also working on ‘Live Projects’...
-            </p>
-            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" style={{width:'100%', borderRadius:'12px', boxShadow:'0 4px 20px rgba(0,0,0,0.05)'}} alt="Corporate Meeting" />
-          </div>
-        </div>
 
-        {/* --- DYNAMIC SECTION 1: STAR ACHIEVERS --- */}
-        <div className="pg-section-header">
-          <h2>Star <span>Achievers</span></h2>
-          <p style={{color:'var(--pg-text-muted)'}}>Breaking Barriers & Setting New Benchmarks</p>
-        </div>
+            <div className="pg-container">
+                {/* Narrative (Static) */}
+                <div className="pg-content-grid">
+                    <div className="pg-narrative-text">
+                        <h2>Catapulting Careers</h2>
+                        <p>As hard as it might be to imagine sometimes, there is life after JEC, as shown by the <strong>~10,000+ JEC alumni</strong> living around the world...</p>
+                        <p>For the last three years, JEC has set the highest placement record...</p>
+                        <div className="pg-chairman-quote">
+                            <i className="fas fa-quote-left" style={{ fontSize: '1.5rem', marginBottom: '10px', display: 'block' }}></i>
+                            "We know that great universities world over are known by their successful alumni..."
+                            <div style={{ marginTop: '10px', fontWeight: '700' }}>— Shri L C Saraogi, Chairman</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style={{ marginBottom: '1.5rem' }}>Top Placements, Recruiters & Outreach</h3>
+                        <p style={{ fontSize: '0.95rem', color: 'var(--pg-text-muted)', marginBottom: '1rem' }}>
+                            Presently, 300+ JEC students are also working on ‘Live Projects’...
+                        </p>
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" style={{ width: '100%', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }} alt="Corporate Meeting" />
+                    </div>
+                </div>
 
-        <div className="pg-gold-grid">
-          {starAchievers.length > 0 ? starAchievers.map((item, index) => (
-            <div className="pg-gold-card" key={index}>
-              <img src={item.image} className="pg-student-img-lg" alt={item.name} />
-              <div className="pg-gold-name">{item.name}</div>
-              <div className="pg-gold-company">{item.company}</div>
-              <div className="pg-gold-package">{item.package}</div>
+                {/* --- SECTION 1: STAR ACHIEVERS --- */}
+                <div className="pg-section-header">
+                    <h2>Star <span>Achievers</span></h2>
+                    <p style={{ color: 'var(--pg-text-muted)' }}>Breaking Barriers & Setting New Benchmarks</p>
+                </div>
+
+                <div className="pg-gold-grid">
+                    {starAchievers.length > 0 ? starAchievers.map((item, index) => (
+                        <div className="pg-gold-card" key={index}>
+                            <img src={item.image} className="pg-student-img-lg" alt={item.name} />
+                            <div className="pg-gold-name">{item.name}</div>
+                            <div className="pg-gold-company">{item.company}</div>
+                            <div className="pg-gold-package">{item.package}</div>
+                        </div>
+                    )) : <p style={{ textAlign: 'center', width: '100%' }}>Loading Stars...</p>}
+                </div>
+
+                {/* --- SECTION 2: PLACEMENT GALLERY --- */}
+                <div className="pg-section-header" style={{ marginTop: '0' }}>
+                    <h2>Placement <span>Gallery</span></h2>
+                    <p style={{ color: 'var(--pg-text-muted)' }}>Celebrating our placed students</p>
+                </div>
+
+                <div className="pg-achievers-grid" id="studentGrid">
+                    {gallery.length > 0 ? gallery.map((item, index) => (
+                        <div className={`pg-achiever-card ${item.isPremium ? 'pg-premium' : ''}`} key={index}>
+                            <img src={item.image} className="pg-student-img" alt={item.name} />
+                            <div className="pg-ac-name">{item.name}</div>
+                            <div className="pg-ac-comp">{item.company}</div>
+                            <div className="pg-ac-pkg">{item.package}</div>
+                        </div>
+                    )) : <p>Loading Gallery...</p>}
+                </div>
+
+                {/* --- SECTION 3: PLACEMENT DRIVES --- */}
+                <div className="pg-section-header">
+                    <h2>Placement Drives</h2>
+                    <div className="pg-section-line" style={{ maxWidth: '200px', margin: '10px auto', height: '4px', background: 'var(--pg-gold)' }}></div>
+                </div>
+
+                <div className="pg-tabs-wrapper">
+                    {/* Dynamic Tabs */}
+                    <div className="pg-tabs-nav">
+                        {years.length > 0 ? (
+                            years.map((yItem, i) => (
+                                <button
+                                    key={i}
+                                    className={`pg-tab-btn ${activeTab === yItem.year ? 'active' : ''}`}
+                                    onClick={() => setActiveTab(yItem.year)}
+                                >
+                                    {yItem.year}
+                                </button>
+                            ))
+                        ) : (
+                            <p style={{ padding: '10px' }}>No years found.</p>
+                        )}
+                    </div>
+
+                    {/* Active Tab Content */}
+                    <div className="pg-tab-content active">
+                        <div style={{ overflowX: 'auto' }}>
+                            <table>
+                                <thead>
+                                    <tr><th>Date</th><th>Company Name</th><th>CTC (LPA)</th><th>Branch</th></tr>
+                                </thead>
+                                <tbody>
+                                    {getDrivesForTab(activeTab).length > 0 ? (
+                                        getDrivesForTab(activeTab).map((drive, i) => (
+                                            <tr key={i}>
+                                                <td>{drive.date}</td>
+                                                <td>{drive.company}</td>
+                                                <td>{drive.ctc}</td>
+                                                <td>{drive.branch}</td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr><td colSpan="4" style={{ textAlign: 'center' }}>No data available for {activeTab}.</td></tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          )) : <p style={{textAlign:'center', width:'100%'}}>Loading Stars...</p>}
         </div>
-
-        {/* --- DYNAMIC SECTION 2: PLACEMENT GALLERY --- */}
-        <div className="pg-section-header" style={{marginTop:'0'}}>
-          <h2>Placement <span>Gallery</span></h2>
-          <p style={{color:'var(--pg-text-muted)'}}>Celebrating our placed students</p>
-        </div>
-
-        <div className="pg-achievers-grid" id="studentGrid">
-          {gallery.length > 0 ? gallery.map((item, index) => (
-            <div className={`pg-achiever-card ${item.isPremium ? 'pg-premium' : ''}`} key={index}>
-                <img src={item.image} className="pg-student-img" alt={item.name} />
-                <div className="pg-ac-name">{item.name}</div>
-                <div className="pg-ac-comp">{item.company}</div>
-                <div className="pg-ac-pkg">{item.package}</div>
-            </div>
-          )) : <p>Loading Gallery...</p>}
-        </div>
-
-        {/* --- DYNAMIC SECTION 3: PLACEMENT DRIVES --- */}
-        <div className="pg-section-header">
-          <h2>Placement Drives</h2>
-          <div className="pg-section-line" style={{maxWidth:'200px', margin:'10px auto', height:'4px', background:'var(--pg-gold)'}}></div>
-        </div>
-
-        <div className="pg-tabs-wrapper">
-          <div className="pg-tabs-nav">
-            {['y24-25', 'y23-24', 'y22-23', 'y21-22'].map(tab => (
-               <button 
-                key={tab}
-                className={`pg-tab-btn ${activeTab === tab ? 'active' : ''}`} 
-                onClick={() => openYear(tab)}
-              >
-                20{tab.substring(1)}
-              </button>
-            ))}
-          </div>
-
-          {/* Render Active Tab Content Dynamically */}
-          <div className="pg-tab-content active">
-            <div style={{overflowX:'auto'}}>
-              <table>
-                <thead>
-                  <tr><th>Date</th><th>Company Name</th><th>CTC (LPA)</th><th>Branch</th></tr>
-                </thead>
-                <tbody>
-                  {getDrivesForTab(activeTab).length > 0 ? (
-                    getDrivesForTab(activeTab).map((drive, i) => (
-                      <tr key={i}>
-                        <td>{drive.date}</td>
-                        <td>{drive.company}</td>
-                        <td>{drive.ctc}</td>
-                        <td>{drive.branch}</td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr><td colSpan="4" style={{textAlign:'center'}}>No data available for this year.</td></tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-
-    </div>
-  );
+    );
 }
 
 export default Placements;
