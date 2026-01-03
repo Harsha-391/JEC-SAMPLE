@@ -51,7 +51,7 @@ const TestimonialCard = ({ item }) => {
           )}
           
           {item.salary && (
-             <div className="salary-badge">CTC: {item.salary}</div>
+             <div className="salary-badge"> {item.salary}</div>
           )}
         </div>
       </div>
