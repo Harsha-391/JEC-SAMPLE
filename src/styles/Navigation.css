@@ -302,18 +302,19 @@
         color: var(--jec-gold);
     }
 
-    /* FIX: RIGHT ALIGNMENT FOR LAST ITEMS TO PREVENT SCREEN OVERFLOW */
-    .jec-menu-item:nth-last-child(-n+3) .jec-dropdown {
+    /* --- FIXED: INCREASED RANGE TO 5 ITEMS --- */
+    /* This ensures 'Campus Life' (and others) align to the RIGHT edge so they don't overflow screen */
+    .jec-menu-item:nth-last-child(-n+5) .jec-dropdown {
         left: auto;
         right: 0;
         transform: translateX(0) translateY(15px);
     }
 
-    .jec-menu-item:nth-last-child(-n+3):hover .jec-dropdown {
+    .jec-menu-item:nth-last-child(-n+5):hover .jec-dropdown {
         transform: translateX(0) translateY(0);
     }
 
-    .jec-menu-item:nth-last-child(-n+3) .jec-dropdown::before {
+    .jec-menu-item:nth-last-child(-n+5) .jec-dropdown::before {
         left: auto;
         right: 30px;
         transform: none;
@@ -489,8 +490,8 @@
 body {
     overflow-x: hidden;
 }
-/* --- SEARCH BAR UI (ICON AFTER SOCIETY) --- */
 
+/* --- SEARCH BAR UI (ICON AFTER SOCIETY) --- */
 .jec-desktop-search {
     margin-left: 10px;
 }
@@ -505,7 +506,6 @@ body {
     transition: all 0.4s ease;
 }
 
-    /* When search is active, show background and border */
     .jec-search-inline.active {
         background: #f1f5f9;
         border: 1px solid #e2e8f0;
@@ -546,7 +546,6 @@ body {
             color: var(--jec-blue);
         }
 
-    /* Suggestion Dropdown Positioning for Inline Search */
     .jec-search-inline .jec-search-suggestions {
         position: absolute;
         top: 100%;
@@ -563,7 +562,6 @@ body {
         padding: 0;
     }
 
-/* Mobile search remains visible as a bar in the drawer */
 @media (max-width: 1024px) {
     .jec-desktop-search {
         display: none;
