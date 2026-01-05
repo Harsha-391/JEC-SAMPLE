@@ -165,6 +165,14 @@ const EditBlog = () => {
                                 <option>Campus Life</option>
                                 <option>Placements</option>
                                 <option>Events</option>
+                                <option>Career</option>
+                                <option>Why JEC</option>
+                                <option>Business</option>
+                                <option>Motivational</option>
+                                <option>Admissions</option>
+                                <option>Science & Technology</option>
+                                <option>Others</option>
+
                             </select>
 
                             <label style={styles.label}>Author & Date</label>
