@@ -166,6 +166,12 @@ const Blog = () => {
                             <span className="tag">Admissions</span>
                             <span className="tag">Campus Life</span>
                             <span className="tag">Placements</span>
+                            <span className="tag">Career</span>
+                            <span className="tag">Science and Technology</span>
+
+                            <span className="tag">Why JEC</span>
+                            <span className="tag">Business</span>
+                            <span className="tag">Motivation</span>
                         </div>
                     </div>
                 </aside>
