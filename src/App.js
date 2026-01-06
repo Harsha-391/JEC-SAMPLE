@@ -11,7 +11,8 @@ import AdminLayout from './admin/AdminLayout';
 import ProtectedRoute from './admin/components/ProtectedRoute';
 import MoocsNptel from './pages/MoocsNptel';
 import MTech from './pages/MTech';
-import GrievanceForm from './pages/GrievanceForm';
+
+import GrievanceRedressal from './pages/GrievanceRedressal';
 
 
 // --- LAZY IMPORT PAGES ---
@@ -103,7 +104,7 @@ function App() {
               <Route path="admissions" element={<Admissions />} />
               <Route path="placement" element={<Placements />} /> {/* Matches Subheader */}
                           <Route path="contact-us" element={<Contact />} /> {/* Matches Subheader */}
-                          <Route path="/grievance" element={<GrievanceForm />} />
+                          <Route path="/grievance" element={<GrievanceRedressal />} />
 
               {/* JEC Dropdown (Updated paths to match Subheader.js) */}
               <Route path="jec/JEC-FAQ" element={<Faq />} />
