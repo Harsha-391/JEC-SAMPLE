@@ -72,3 +72,32 @@
   background-color: #f4f7f6;
   min-height: 100vh;
 }
+
+/* Add to src/styles/HumanNetwork.css */
+
+.faculty-card {
+    position: relative; /* Needed for the absolute badge */
+    overflow: hidden; /* Ensures the badge doesn't spill out */
+}
+
+    /* Optional: Slight gold border for HOD card */
+    .faculty-card.hod-card {
+        border: 2px solid #FCA311;
+        box-shadow: 0 5px 15px rgba(252, 163, 17, 0.15);
+    }
+
+.hod-badge {
+    position: absolute;
+    top: 15px;
+    right: -30px;
+    background-color: #FCA311; /* JEC Gold */
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 5px 30px;
+    transform: rotate(45deg); /* Diagonal Badge */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 10;
+    letter-spacing: 1px;
+}

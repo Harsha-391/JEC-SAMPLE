@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import '../styles/GrievanceRedressal.css'; // Import the CSS we just made
+import '../styles/GrievanceRedressal.css';
 
 const GrievanceRedressal = () => {
     const formRef = useRef();
@@ -12,7 +12,6 @@ const GrievanceRedressal = () => {
 
     const handleSubjectChange = (e) => {
         setSubject(e.target.value);
-        // If they change away from "Other", clear the otherSubject field
         if (e.target.value !== 'Other') {
             setOtherSubject('');
         }
@@ -22,18 +21,11 @@ const GrievanceRedressal = () => {
         e.preventDefault();
         setLoading(true);
 
-        // Prepare the data to be sent
-        // We combine Subject + Other Subject if "Other" is selected
-        const finalSubject = subject === 'Other' ? `Other: ${otherSubject}` : subject;
-
-        // (Optional) You can inject 'finalSubject' into a hidden field if your EmailJS template needs it specifically
-        // But usually, formRef.current captures the inputs as they are.
-
         emailjs.sendForm(
-            'YOUR_SERVICE_ID',   // Replace with your Service ID
-            'YOUR_TEMPLATE_ID',  // Replace with your Template ID
+            'service_f0m31fc',   // Your Service ID
+            'template_tgh4b19',  // Your Template ID
             formRef.current,
-            'YOUR_PUBLIC_KEY'    // Replace with your Public Key
+            'CDeGu_vdhNgI9k8fB'  // Your Public Key
         )
             .then(() => {
                 alert("Grievance Submitted Successfully!");
@@ -56,6 +48,13 @@ const GrievanceRedressal = () => {
 
                 <form ref={formRef} onSubmit={handleSubmit}>
                     <div className="form-section">
+
+                        {/* Hidden Input for Final Subject Logic */}
+                        <input
+                            type="hidden"
+                            name="final_subject"
+                            value={subject === 'Other' ? `Other: ${otherSubject}` : subject}
+                        />
 
                         {/* Row 1: Name & Father's Name */}
                         <div className="form-row">
@@ -91,32 +90,39 @@ const GrievanceRedressal = () => {
                             </div>
                         </div>
 
-                        {/* Row 3: Contact & Subject */}
+                        {/* Row 3: Contact & Email (UPDATED) */}
                         <div className="form-row">
                             <div className="form-group">
                                 <label htmlFor="contact" className="required">Contact Number</label>
                                 <input type="tel" id="contact" name="contact" placeholder="10-digit mobile number" pattern="[0-9]{10}" required />
                             </div>
+                            {/* NEW EMAIL FIELD */}
                             <div className="form-group">
-                                <label htmlFor="subject" className="required">Subject of Grievance/Query</label>
-                                <select
-                                    id="subject"
-                                    name="subject"
-                                    value={subject}
-                                    onChange={handleSubjectChange}
-                                    required
-                                >
-                                    <option value="" disabled>Select Subject</option>
-                                    <option value="Academics">Academics</option>
-                                    <option value="Fees">Fees Related</option>
-                                    <option value="Anti-Ragging">Anti-Ragging</option>
-                                    <option value="Sports">Sports</option>
-                                    <option value="Other">Other</option>
-                                </select>
+                                <label htmlFor="user_email" className="required">Email Address</label>
+                                <input type="email" id="user_email" name="user_email" placeholder="Enter your email" required />
                             </div>
                         </div>
 
-                        {/* Conditional "Other" Input - Only shows if 'Other' is selected */}
+                        {/* Row 4: Subject Selection */}
+                        <div className="form-group">
+                            <label htmlFor="subject" className="required">Subject of Grievance/Query</label>
+                            <select
+                                id="subject"
+                                name="subject"
+                                value={subject}
+                                onChange={handleSubjectChange}
+                                required
+                            >
+                                <option value="" disabled>Select Subject</option>
+                                <option value="Academics">Academics</option>
+                                <option value="Fees">Fees Related</option>
+                                <option value="Anti-Ragging">Anti-Ragging</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        {/* Conditional "Other" Input */}
                         {subject === 'Other' && (
                             <div className="form-group">
                                 <label htmlFor="otherSubject" className="required">Specify Subject</label>
@@ -151,7 +157,6 @@ const GrievanceRedressal = () => {
                     </div>
                 </form>
 
-                {/* Notes Section */}
                 <div className="note-section">
                     <strong><i className="fas fa-info-circle"></i> Note:</strong>
                     <ul>

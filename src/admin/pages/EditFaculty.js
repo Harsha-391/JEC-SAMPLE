@@ -9,7 +9,6 @@ const departments = [
     { id: 'ai', title: 'Artificial Intelligence' },
     { id: 'ee', title: 'Electrical Engineering' },
     { id: 'ece', title: 'Electronics & Comm. Engg.' },
-  
     { id: 'me', title: 'Mechanical Engineering' },
     { id: 'civil', title: 'Civil Engineering' },
     { id: 'ash', title: 'Applied Sciences & Humanities' }
@@ -27,12 +26,13 @@ const EditFaculty = () => {
     // Form State
     const [name, setName] = useState('');
     const [role, setRole] = useState('');
+    const [isHod, setIsHod] = useState(false); // HOD Toggle
     const [qualification, setQualification] = useState('');
     const [experience, setExperience] = useState('');
     const [researchArea, setResearchArea] = useState('');
     const [email, setEmail] = useState('');
 
-    // CHANGED: State is now an array for multiple departments
+    // Multi-select Departments
     const [selectedDepartments, setSelectedDepartments] = useState(['cse']);
 
     const [image, setImage] = useState('');
@@ -64,10 +64,8 @@ const EditFaculty = () => {
     const handleDeptChange = (deptId) => {
         setSelectedDepartments(prev => {
             if (prev.includes(deptId)) {
-                // Remove if already selected (prevent removing if it's the last one, optional)
                 return prev.filter(id => id !== deptId);
             } else {
-                // Add if not selected
                 return [...prev, deptId];
             }
         });
@@ -77,7 +75,6 @@ const EditFaculty = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validation: Ensure at least one department is selected
         if (!name || !role || selectedDepartments.length === 0) {
             toast.warn("Name, Designation, and at least one Department are required!");
             return;
@@ -86,11 +83,12 @@ const EditFaculty = () => {
         const facultyData = {
             name,
             role,
+            isHod,
             qualification,
             experience,
             researchArea,
             email,
-            department: selectedDepartments, // Save as Array
+            department: selectedDepartments, // Saved as Array
             image,
             imageAlt,
             order: Number(order)
@@ -129,16 +127,17 @@ const EditFaculty = () => {
     const handleEdit = (member) => {
         setName(member.name);
         setRole(member.role);
+        setIsHod(member.isHod || false);
         setQualification(member.qualification);
         setExperience(member.experience);
         setResearchArea(member.researchArea);
         setEmail(member.email);
 
-        // Handle Legacy Data (String) vs New Data (Array)
+        // Robust check for array vs string
         if (Array.isArray(member.department)) {
             setSelectedDepartments(member.department);
         } else if (member.department) {
-            setSelectedDepartments([member.department]); // Convert string to array
+            setSelectedDepartments([member.department]);
         } else {
             setSelectedDepartments([]);
         }
@@ -155,6 +154,7 @@ const EditFaculty = () => {
     const resetForm = () => {
         setName('');
         setRole('');
+        setIsHod(false);
         setQualification('');
         setExperience('');
         setResearchArea('');
@@ -169,7 +169,6 @@ const EditFaculty = () => {
 
     // 5. Search Filtering
     const filteredMembers = members.filter(member => {
-        // Convert department to string for searching (handles both array and string)
         const deptString = Array.isArray(member.department)
             ? member.department.join(' ')
             : member.department || '';
@@ -221,12 +220,23 @@ const EditFaculty = () => {
                             <label style={styles.label}>Full Name</label>
                             <input type="text" value={name} onChange={e => setName(e.target.value)} style={styles.input} placeholder="Dr. John Doe" />
                         </div>
+
                         <div style={{ gridColumn: '1 / -1' }}>
-                            <label style={styles.label}>Designation (Role)</label>
-                            <input type="text" value={role} onChange={e => setRole(e.target.value)} style={styles.input} placeholder="Assistant Professor" />
+                            <label style={styles.label}>Designation</label>
+                            <input type="text" value={role} onChange={e => setRole(e.target.value)} style={styles.input} placeholder="e.g. Assistant Professor" />
+
+                            {/* HOD Checkbox */}
+                            <label style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '10px', cursor: 'pointer', background: '#fff8e1', padding: '10px', borderRadius: '5px', border: '1px solid #ffe0b2' }}>
+                                <input
+                                    type="checkbox"
+                                    checked={isHod}
+                                    onChange={e => setIsHod(e.target.checked)}
+                                    style={{ width: '20px', height: '20px' }}
+                                />
+                                <span style={{ color: '#d35400', fontWeight: 'bold' }}>Is Head of Department (HOD)?</span>
+                            </label>
                         </div>
 
-                        {/* CHANGED: Multi-Select Checkboxes */}
                         <div style={{ gridColumn: '1 / -1' }}>
                             <label style={styles.label}>Departments (Select one or more)</label>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '10px', background: '#f9f9f9', padding: '10px', borderRadius: '6px', border: '1px solid #ddd' }}>
@@ -260,7 +270,7 @@ const EditFaculty = () => {
                             <input type="email" value={email} onChange={e => setEmail(e.target.value)} style={styles.input} />
                         </div>
                         <div>
-                            <label style={styles.label}>Order</label>
+                            <label style={styles.label}>Order (Sort Priority)</label>
                             <input type="number" value={order} onChange={e => setOrder(e.target.value)} style={styles.input} />
                         </div>
                         <div style={{ gridColumn: '1 / -1' }}>
@@ -294,8 +304,8 @@ const EditFaculty = () => {
                                 <tr>
                                     <th style={styles.th}>Order</th>
                                     <th style={styles.th}>Name</th>
-                                    <th style={styles.th}>Department</th>
-                                    <th style={styles.th}>Role</th>
+                                    <th style={styles.th}>Departments</th>
+                                    <th style={styles.th}>Role / Designation</th>
                                     <th style={styles.th}>Actions</th>
                                 </tr>
                             </thead>
@@ -310,11 +320,27 @@ const EditFaculty = () => {
                                                     alt={member.name}
                                                     style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }}
                                                 />
-                                                {member.name}
+                                                <div>
+                                                    {member.name}
+                                                    {member.isHod && (
+                                                        <span style={{
+                                                            display: 'block',
+                                                            fontSize: '10px',
+                                                            background: '#FCA311',
+                                                            color: 'white',
+                                                            padding: '2px 6px',
+                                                            borderRadius: '4px',
+                                                            width: 'fit-content',
+                                                            fontWeight: 'bold',
+                                                            marginTop: '2px'
+                                                        }}>
+                                                            HOD
+                                                        </span>
+                                                    )}
+                                                </div>
                                             </div>
                                         </td>
                                         <td style={styles.td}>
-                                            {/* Handle display of Array or String */}
                                             {Array.isArray(member.department) ? (
                                                 <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
                                                     {member.department.map(d => (
@@ -338,9 +364,6 @@ const EditFaculty = () => {
                                 ))}
                             </tbody>
                         </table>
-                        {filteredMembers.length === 0 && (
-                            <p style={{ textAlign: 'center', padding: '20px', color: '#666' }}>No faculty members found.</p>
-                        )}
                     </div>
                 )}
             </div>

@@ -9,16 +9,18 @@
     --bg-light: #f4f6f9;
 }
 
+/* Main Container - Centered with top padding for fixed header */
 .grievance-container {
-    padding: 80px 20px; /* Adjusted top padding for fixed header */
+    padding: 100px 20px 40px;
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Align to top so it doesn't cut off on small screens */
     background: var(--bg-light);
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
+/* Card Styling */
 .grievance-card {
     background: var(--jec-white);
     padding: 40px;
@@ -28,11 +30,14 @@
     max-width: 800px;
     border-top: 5px solid var(--jec-blue);
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
+    /* Heading */
     .grievance-card h2 {
         color: var(--jec-blue);
-        margin-bottom: 10px;
+        margin: 0 0 10px 0;
         text-align: center;
         font-size: 1.8rem;
         font-weight: 700;
@@ -40,6 +45,7 @@
         letter-spacing: 1px;
     }
 
+/* Subtitle */
 .grievance-subtitle {
     text-align: center;
     color: #666;
@@ -49,6 +55,7 @@
     padding-bottom: 20px;
 }
 
+/* Form Layout */
 .form-section {
     display: flex;
     flex-direction: column;
@@ -66,7 +73,7 @@
     flex-direction: column;
 }
 
-/* Scoped Inputs to prevent conflicts with other pages */
+/* Labels */
 .grievance-card label {
     margin-bottom: 8px;
     font-weight: 600;
@@ -79,8 +86,10 @@
         color: var(--jec-red);
     }
 
+/* Inputs & Selects */
 .grievance-card input[type="text"],
 .grievance-card input[type="tel"],
+.grievance-card input[type="email"],
 .grievance-card select,
 .grievance-card textarea {
     padding: 12px 16px;
@@ -92,6 +101,7 @@
     transition: all 0.3s ease;
     width: 100%;
     font-family: inherit;
+    box-sizing: border-box; /* Ensures padding is included in width */
 }
 
     .grievance-card input:focus,
@@ -103,12 +113,13 @@
         background-color: #fff;
     }
 
+/* Textarea specific */
 .grievance-card textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 120px;
 }
 
-/* Disclaimer Styling */
+/* Disclaimer Checkbox Group */
 .disclaimer-group {
     background: #fdfdfd;
     border: 1px solid #eee;
@@ -125,6 +136,7 @@
         height: 20px;
         margin-top: 2px;
         cursor: pointer;
+        accent-color: var(--jec-blue); /* Colors the checkbox blue */
     }
 
     .disclaimer-group label {
@@ -163,9 +175,10 @@
         background: #ccc;
         cursor: not-allowed;
         transform: none;
+        box-shadow: none;
     }
 
-/* Note Section */
+/* Notes Section at the bottom */
 .note-section {
     margin-top: 40px;
     padding: 20px;
@@ -201,7 +214,8 @@
 
     .grievance-container {
         padding: 30px 15px;
-        padding-top: 90px; /* Extra padding for mobile header */
+        padding-top: 90px;
+        align-items: flex-start;
     }
 
     .grievance-card {

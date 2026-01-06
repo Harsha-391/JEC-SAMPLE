@@ -150,7 +150,7 @@ function Subheader() {
                             <ul className={`jec-dropdown jec-mega jec-cols-3 ${activeDropdown === 'jec' ? 'jec-show' : ''}`}>
                                 <li><a href="/jec/About-JEC" className="jec-dropdown-link">About JEC</a></li>
                                 <li><a href="/jec/Management" className="jec-dropdown-link">Management</a></li>
-                                <li><a href="/jec/network" className="jec-dropdown-link">Human Network</a></li>
+                                <li><a href="/jec/network" className="jec-dropdown-link">Faculty</a></li>
                                 <li><a href="/jec/Alumni" className="jec-dropdown-link">Alumni</a></li>
                                 <li><a href="/jec/Students-Testimonials" className="jec-dropdown-link">Students Testimonials</a></li>
                                 <li><a href="/jec/Anti-Ragging-Committee" className="jec-dropdown-link">Anti-Ragging Committee</a></li>
