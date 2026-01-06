@@ -49,7 +49,7 @@ function HumanNetwork() {
     { id: 'cse', title: 'Computer Science Engineering' },
     { id: 'ee', title: 'Electrical Engineering' },
     { id: 'ece', title: 'Electronics & Comm. Engg.' },
-    { id: 'it', title: 'Information Technology' },
+    
     { id: 'me', title: 'Mechanical Engineering' },
     { id: 'ash', title: 'Applied Sciences & Humanities' },
     { id: 'civil', title: 'Civil Engineering' }
@@ -122,7 +122,7 @@ function HumanNetwork() {
         <button className={`filter-btn ${activeFilter === 'cse' ? 'active' : ''}`} onClick={() => filterFaculty('cse')}>Computer Science</button>
         <button className={`filter-btn ${activeFilter === 'ee' ? 'active' : ''}`} onClick={() => filterFaculty('ee')}>Electrical Engg.</button>
         <button className={`filter-btn ${activeFilter === 'ece' ? 'active' : ''}`} onClick={() => filterFaculty('ece')}>Electronics & Comm.</button>
-        <button className={`filter-btn ${activeFilter === 'it' ? 'active' : ''}`} onClick={() => filterFaculty('it')}>Information Tech</button>
+       
         <button className={`filter-btn ${activeFilter === 'me' ? 'active' : ''}`} onClick={() => filterFaculty('me')}>Mechanical Engg.</button>
         <button className={`filter-btn ${activeFilter === 'ash' ? 'active' : ''}`} onClick={() => filterFaculty('ash')}>Applied Sciences</button>
         <button className={`filter-btn ${activeFilter === 'civil' ? 'active' : ''}`} onClick={() => filterFaculty('civil')}>Civil Engg.</button>

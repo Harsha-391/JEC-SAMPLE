@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../styles/Navigation.css';
 
 function Header() {
@@ -21,23 +20,24 @@ function Header() {
 
                 {/* RIGHT SIDE: Action Links */}
                 <div className="jec-top-right">
-                    <Link to="/admission-enquiry">
-                        <i className="fas fa-edit"></i> Admission Enquiry 2025
-                    </Link>
-                    <Link to="/admissions">
-                        <i className="fas fa-user-graduate"></i> Apply Now
-                    </Link>
+                    <a href="/admission-enquiry">
+                        <i className="fas fa-edit"></i> Admission Enquiry 2026
+                    </a>
+                  
                     <a href="#!">
                         <i className="fas fa-map-marked-alt"></i> Virtual Tour
                     </a>
-                    <Link to="/grievance">
+                    <a href="/grievance">
                         <i className="fas fa-clipboard-list"></i> Grievance Form
-                    </Link>
-                    <Link to="/blog" className="jec-nav-link"> <i className="ri-blogger-fill"> </i>Blog </Link>
+                    </a>
+                    {/* Replaced 'ri-blogger-fill' with 'fas fa-blog' */}
+                    <a href="/blog" className="jec-nav-link">
+                        <i className="fas fa-blog"></i> Blog
+                    </a>
                     {/* MOVED FROM SUBHEADER */}
-                    <Link to="/contact-us" className="jec-top-cta">
+                    <a href="/contact-us" className="jec-top-cta">
                         Contact Us
-                    </Link>
+                    </a>
                 </div>
 
             </div>

@@ -1,4 +1,3 @@
-// src/admin/pages/EditFaculty.js
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
 import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc, query, orderBy } from "firebase/firestore";
@@ -10,7 +9,7 @@ const departments = [
     { id: 'ai', title: 'Artificial Intelligence' },
     { id: 'ee', title: 'Electrical Engineering' },
     { id: 'ece', title: 'Electronics & Comm. Engg.' },
-    { id: 'it', title: 'Information Technology' },
+  
     { id: 'me', title: 'Mechanical Engineering' },
     { id: 'civil', title: 'Civil Engineering' },
     { id: 'ash', title: 'Applied Sciences & Humanities' }
@@ -32,7 +31,10 @@ const EditFaculty = () => {
     const [experience, setExperience] = useState('');
     const [researchArea, setResearchArea] = useState('');
     const [email, setEmail] = useState('');
-    const [department, setDepartment] = useState('cse');
+
+    // CHANGED: State is now an array for multiple departments
+    const [selectedDepartments, setSelectedDepartments] = useState(['cse']);
+
     const [image, setImage] = useState('');
     const [imageAlt, setImageAlt] = useState('');
     const [order, setOrder] = useState(1);
@@ -58,11 +60,26 @@ const EditFaculty = () => {
         fetchMembers();
     }, []);
 
+    // Helper: Handle Checkbox Change
+    const handleDeptChange = (deptId) => {
+        setSelectedDepartments(prev => {
+            if (prev.includes(deptId)) {
+                // Remove if already selected (prevent removing if it's the last one, optional)
+                return prev.filter(id => id !== deptId);
+            } else {
+                // Add if not selected
+                return [...prev, deptId];
+            }
+        });
+    };
+
     // 2. Handle Submit
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!name || !role || !department) {
-            toast.warn("Name, Designation, and Department are required!");
+
+        // Validation: Ensure at least one department is selected
+        if (!name || !role || selectedDepartments.length === 0) {
+            toast.warn("Name, Designation, and at least one Department are required!");
             return;
         }
 
@@ -73,7 +90,7 @@ const EditFaculty = () => {
             experience,
             researchArea,
             email,
-            department,
+            department: selectedDepartments, // Save as Array
             image,
             imageAlt,
             order: Number(order)
@@ -116,7 +133,16 @@ const EditFaculty = () => {
         setExperience(member.experience);
         setResearchArea(member.researchArea);
         setEmail(member.email);
-        setDepartment(member.department);
+
+        // Handle Legacy Data (String) vs New Data (Array)
+        if (Array.isArray(member.department)) {
+            setSelectedDepartments(member.department);
+        } else if (member.department) {
+            setSelectedDepartments([member.department]); // Convert string to array
+        } else {
+            setSelectedDepartments([]);
+        }
+
         setImage(member.image);
         setImageAlt(member.imageAlt || '');
         setOrder(member.order || 1);
@@ -133,7 +159,7 @@ const EditFaculty = () => {
         setExperience('');
         setResearchArea('');
         setEmail('');
-        setDepartment('cse');
+        setSelectedDepartments(['cse']);
         setImage('');
         setImageAlt('');
         setOrder(1);
@@ -142,11 +168,18 @@ const EditFaculty = () => {
     };
 
     // 5. Search Filtering
-    const filteredMembers = members.filter(member =>
-        member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        member.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        member.department.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredMembers = members.filter(member => {
+        // Convert department to string for searching (handles both array and string)
+        const deptString = Array.isArray(member.department)
+            ? member.department.join(' ')
+            : member.department || '';
+
+        return (
+            member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            member.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            deptString.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    });
 
     return (
         <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
@@ -160,6 +193,7 @@ const EditFaculty = () => {
             <div style={styles.card}>
                 <form onSubmit={handleSubmit} style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '30px' }}>
 
+                    {/* Left Column: Image */}
                     <div style={{ background: '#f8f9fa', padding: '20px', borderRadius: '8px', textAlign: 'center' }}>
                         <ImageUpload label="Profile Photo" onUploadComplete={setImage} />
                         {image ? (
@@ -181,23 +215,34 @@ const EditFaculty = () => {
                         </div>
                     </div>
 
+                    {/* Right Column: Details */}
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
                         <div style={{ gridColumn: '1 / -1' }}>
                             <label style={styles.label}>Full Name</label>
                             <input type="text" value={name} onChange={e => setName(e.target.value)} style={styles.input} placeholder="Dr. John Doe" />
                         </div>
-                        <div>
+                        <div style={{ gridColumn: '1 / -1' }}>
                             <label style={styles.label}>Designation (Role)</label>
                             <input type="text" value={role} onChange={e => setRole(e.target.value)} style={styles.input} placeholder="Assistant Professor" />
                         </div>
-                        <div>
-                            <label style={styles.label}>Department</label>
-                            <select value={department} onChange={e => setDepartment(e.target.value)} style={styles.input}>
+
+                        {/* CHANGED: Multi-Select Checkboxes */}
+                        <div style={{ gridColumn: '1 / -1' }}>
+                            <label style={styles.label}>Departments (Select one or more)</label>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '10px', background: '#f9f9f9', padding: '10px', borderRadius: '6px', border: '1px solid #ddd' }}>
                                 {departments.map(dept => (
-                                    <option key={dept.id} value={dept.id}>{dept.title}</option>
+                                    <label key={dept.id} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', cursor: 'pointer' }}>
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedDepartments.includes(dept.id)}
+                                            onChange={() => handleDeptChange(dept.id)}
+                                        />
+                                        {dept.title}
+                                    </label>
                                 ))}
-                            </select>
+                            </div>
                         </div>
+
                         <div>
                             <label style={styles.label}>Qualification</label>
                             <input type="text" value={qualification} onChange={e => setQualification(e.target.value)} style={styles.input} placeholder="Ph.D" />
@@ -227,7 +272,7 @@ const EditFaculty = () => {
                 </form>
             </div>
 
-            {/* --- ADDED LIST SECTION START --- */}
+            {/* --- LIST SECTION --- */}
             <div style={{ marginTop: '50px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
                     <h3>Faculty Directory ({members.length})</h3>
@@ -269,9 +314,20 @@ const EditFaculty = () => {
                                             </div>
                                         </td>
                                         <td style={styles.td}>
-                                            <span style={{ padding: '4px 8px', background: '#e9ecef', borderRadius: '4px', fontSize: '12px', fontWeight: '600' }}>
-                                                {member.department.toUpperCase()}
-                                            </span>
+                                            {/* Handle display of Array or String */}
+                                            {Array.isArray(member.department) ? (
+                                                <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
+                                                    {member.department.map(d => (
+                                                        <span key={d} style={{ padding: '2px 6px', background: '#e9ecef', borderRadius: '4px', fontSize: '11px', fontWeight: '600' }}>
+                                                            {d.toUpperCase()}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            ) : (
+                                                <span style={{ padding: '4px 8px', background: '#e9ecef', borderRadius: '4px', fontSize: '12px', fontWeight: '600' }}>
+                                                    {(member.department || '').toUpperCase()}
+                                                </span>
+                                            )}
                                         </td>
                                         <td style={styles.td}>{member.role}</td>
                                         <td style={styles.td}>
@@ -288,7 +344,6 @@ const EditFaculty = () => {
                     </div>
                 )}
             </div>
-            {/* --- ADDED LIST SECTION END --- */}
         </div>
     );
 };

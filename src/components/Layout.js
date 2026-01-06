@@ -7,6 +7,7 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 import Subheader from './Subheader';
 import Footer from './Footer';
+import LogoCarousel from './LogoCarousel'; // IMPORT THE CAROUSEL
 
 function Layout() {
     return (
@@ -22,6 +23,9 @@ function Layout() {
                 {/* This Outlet is the placeholder for your pages */}
                 <Outlet />
             </main>
+
+            {/* Added Just Above Footer */}
+            <LogoCarousel />
 
             <Footer />
         </>

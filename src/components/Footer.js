@@ -12,7 +12,7 @@ const Footer = () => {
                     <span className="association-label">JEC Activities Associated With</span>
                     <span className="assoc-badge">AICTE Approved</span>
                     <span className="assoc-badge">RTU Kota Affiliated</span>
-                    <span className="assoc-badge">NBA Accredited</span>
+                    <span className="assoc-badge">NBA Accredited*</span>
                 </div>
             </div>
 

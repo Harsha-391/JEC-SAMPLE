@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import '../styles/Navigation.css';
 
 // Full list of menu items for the search logic
@@ -35,6 +35,10 @@ const menuData = [
     { name: "JEC Research Cell", link: "/JEC-engineering/JEC-Research-Cell" },
     { name: "Engineering @ JEC", link: "/JEC-engineering/Engineering-JEC" },
     { name: "MOOCS: NPTEL SWAYAM", link: "/JEC-engineering/MOOCS-NPTEL-SWAYAM" },
+
+    // M.Tech Link
+    { name: "M.Tech Programs", link: "/JEC-engineering/MTech" },
+
     { name: "Placement", link: "/placement" },
     { name: "Learning By Doing", link: "/Infrastructure/Learning-By-Doing" },
     { name: "Prepare and Present", link: "/Infrastructure/Prepare-and-Present" },
@@ -67,7 +71,6 @@ function Subheader() {
     const [showSuggestions, setShowSuggestions] = useState(false);
 
     const location = useLocation();
-    const navigate = useNavigate();
     const searchRef = useRef(null);
 
     // Filter logic
@@ -114,7 +117,8 @@ function Subheader() {
     const handleSearchSubmit = (e) => {
         e.preventDefault();
         if (searchResults.length > 0) {
-            navigate(searchResults[0].link);
+            // Updated to use window.location.href instead of navigate
+            window.location.href = searchResults[0].link;
             setSearchQuery('');
             setIsSearchOpen(false);
         }
@@ -126,9 +130,9 @@ function Subheader() {
                 <div className="jec-container">
 
                     {/* LOGO */}
-                    <Link to="/" className="jec-logo-link">
+                    <a href="/" className="jec-logo-link">
                         <img src="https://jec-sample.vercel.app/images/logo.png" alt="Logo" className="jec-logo-img" />
-                    </Link>
+                    </a>
 
                     {/* HAMBURGER */}
                     <div className="jec-hamburger" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
@@ -138,24 +142,21 @@ function Subheader() {
                     {/* MENU LIST */}
                     <ul className={`jec-menu-list ${isMobileMenuOpen ? 'jec-active' : ''}`}>
 
-                        {/* MOBILE SEARCH BAR */}
-                      
-
-                        <li className="jec-menu-item"><Link to="/" className="jec-nav-link">Home</Link></li>
+                        <li className="jec-menu-item"><a href="/" className="jec-nav-link">Home</a></li>
 
                         {/* JEC DROPDOWN */}
                         <li className={`jec-menu-item ${activeDropdown === 'jec' ? 'jec-open' : ''}`}>
                             <a href="#!" className="jec-nav-link jec-toggle-btn" onClick={(e) => toggleDropdown(e, 'jec')}>JEC <i className="fas fa-chevron-down"></i></a>
                             <ul className={`jec-dropdown jec-mega jec-cols-3 ${activeDropdown === 'jec' ? 'jec-show' : ''}`}>
-                                <li><Link to="/jec/About-JEC" className="jec-dropdown-link">About JEC</Link></li>
-                                <li><Link to="/jec/Management" className="jec-dropdown-link">Management</Link></li>
-                                <li><Link to="/jec/network" className="jec-dropdown-link">Human Network</Link></li>
-                               <li><Link to="/jec/Alumni" className="jec-dropdown-link">Alumni</Link></li>
-                                <li><Link to="/jec/Students-Testimonials" className="jec-dropdown-link">Students Testimonials</Link></li>
-                                 <li><Link to="/jec/Anti-Ragging-Committee" className="jec-dropdown-link">Anti-Ragging Committee</Link></li>
-                                <li><Link to="/jec/Institution-Innovation-Council-JEC" className="jec-dropdown-link">Institution Innovation Council</Link></li>
-                                 <li><Link to="/jec/JEC-FAQ" className="jec-dropdown-link">JEC FAQ</Link></li>
-                                <li><Link to="/jec/Employment-JEC" className="jec-dropdown-link">Employment @JEC</Link></li>                      
+                                <li><a href="/jec/About-JEC" className="jec-dropdown-link">About JEC</a></li>
+                                <li><a href="/jec/Management" className="jec-dropdown-link">Management</a></li>
+                                <li><a href="/jec/network" className="jec-dropdown-link">Human Network</a></li>
+                                <li><a href="/jec/Alumni" className="jec-dropdown-link">Alumni</a></li>
+                                <li><a href="/jec/Students-Testimonials" className="jec-dropdown-link">Students Testimonials</a></li>
+                                <li><a href="/jec/Anti-Ragging-Committee" className="jec-dropdown-link">Anti-Ragging Committee</a></li>
+                                <li><a href="/jec/Institution-Innovation-Council-JEC" className="jec-dropdown-link">Institution Innovation Council</a></li>
+                                <li><a href="/jec/JEC-FAQ" className="jec-dropdown-link">JEC FAQ</a></li>
+                                <li><a href="/jec/Employment-JEC" className="jec-dropdown-link">Employment @JEC</a></li>
                             </ul>
                         </li>
 
@@ -163,15 +164,15 @@ function Subheader() {
                         <li className={`jec-menu-item ${activeDropdown === 'admission' ? 'jec-open' : ''}`}>
                             <a href="#!" className="jec-nav-link jec-toggle-btn" onClick={(e) => toggleDropdown(e, 'admission')}>Admission <i className="fas fa-chevron-down"></i></a>
                             <ul className={`jec-dropdown jec-mega jec-cols-3 ${activeDropdown === 'admission' ? 'jec-show' : ''}`}>
-                                <li><Link to="/admission/btech-admissions" className="jec-dropdown-link jec-highlight">Admission Open 2025</Link></li>
-                                <li><Link to="/admission/Admission-Procedure" className="jec-dropdown-link">Admission Procedure</Link></li>
-                                <li><Link to="/admission/Fee-Structure" className="jec-dropdown-link">Fee Structure</Link></li>
-                                <li><Link to="/admission/Documents-Required" className="jec-dropdown-link">Documents Required</Link></li>
-                                <li><Link to="/admission/Courses-Offered" className="jec-dropdown-link">Courses Offered</Link></li>
-                                <li><Link to="/admission/REAP-2025" className="jec-dropdown-link">REAP-2025</Link></li>
-                                <li><Link to="/admission/Financial-Aids-Bank-Loans" className="jec-dropdown-link">Financial Aids & Loans</Link></li>
-                                <li><Link to="/admission/Mandatory-Disclosure" className="jec-dropdown-link">Mandatory Disclosure</Link></li>
-                                <li><Link to="/admission/Karma-Courses-JEC" className="jec-dropdown-link">Karma Courses @JEC</Link></li>
+                                <li><a href="/admission/btech-admissions" className="jec-dropdown-link jec-highlight">Admission Open 2026</a></li>
+                                <li><a href="/admission/Admission-Procedure" className="jec-dropdown-link">Admission Procedure</a></li>
+                                <li><a href="/admission/Fee-Structure" className="jec-dropdown-link">Fee Structure</a></li>
+                                <li><a href="/admission/Documents-Required" className="jec-dropdown-link">Documents Required</a></li>
+                                <li><a href="/admission/Courses-Offered" className="jec-dropdown-link">Courses Offered</a></li>
+                                <li><a href="/admission/REAP-2025" className="jec-dropdown-link">REAP-2025</a></li>
+                                <li><a href="/admission/Financial-Aids-Bank-Loans" className="jec-dropdown-link">Financial Aids & Loans</a></li>
+                                <li><a href="/admission/Mandatory-Disclosure" className="jec-dropdown-link">Mandatory Disclosure</a></li>
+                                <li><a href="/admission/Karma-Courses-JEC" className="jec-dropdown-link">Karma Courses @JEC</a></li>
                             </ul>
                         </li>
 
@@ -179,31 +180,34 @@ function Subheader() {
                         <li className={`jec-menu-item ${activeDropdown === 'dept' ? 'jec-open' : ''}`}>
                             <a href="#!" className="jec-nav-link jec-toggle-btn" onClick={(e) => toggleDropdown(e, 'dept')}>Departments <i className="fas fa-chevron-down"></i></a>
                             <ul className={`jec-dropdown jec-mega jec-cols-3 ${activeDropdown === 'dept' ? 'jec-show' : ''}`}>
-                                <li><Link to="/JEC-engineering/Computer-Science-Engineering-AI" className="jec-dropdown-link">Computer Science & Eng. (AI)</Link></li>
-                                <li><Link to="/JEC-engineering/Computer-Science-Engineering" className="jec-dropdown-link">Computer Science Engineering</Link></li>
-                                <li><Link to="/JEC-engineering/Information-Technology" className="jec-dropdown-link">Information Technology</Link></li>
-                                <li><Link to="/JEC-engineering/Electronics-Communication-Engineering" className="jec-dropdown-link">Electronics & Communication</Link></li>
-                                <li><Link to="/JEC-engineering/Civil-Engineering" className="jec-dropdown-link">Civil Engineering</Link></li>
-                                <li><Link to="/JEC-engineering/Mechanical-Engineering" className="jec-dropdown-link">Mechanical Engineering</Link></li>
-                                <li><Link to="/JEC-engineering/Electrical-Engineering" className="jec-dropdown-link">Electrical Engineering</Link></li>
-                                <li><Link to="/JEC-engineering/Applied-Sciences-Humanities" className="jec-dropdown-link">Applied Sciences & Humanities</Link></li>
-                                <li><Link to="/JEC-engineering/Centre-Of-Excellence-COE" className="jec-dropdown-link">Centre Of Excellence (COE)</Link></li>
-                                <li><Link to="/JEC-engineering/JEC-Research-Cell" className="jec-dropdown-link">JEC Research Cell</Link></li>
-                                <li><Link to="/JEC-engineering/Engineering-JEC" className="jec-dropdown-link">Engineering @ JEC</Link></li>
-                                <li><Link to="/JEC-engineering/MOOCS-NPTEL-SWAYAM" className="jec-dropdown-link">MOOCS: NPTEL SWAYAM</Link></li>
+                                <li><a href="/JEC-engineering/Computer-Science-Engineering-AI" className="jec-dropdown-link">Computer Science & Eng. (AI)</a></li>
+                                <li><a href="/JEC-engineering/Computer-Science-Engineering" className="jec-dropdown-link">Computer Science Engineering</a></li>
+                               
+                                <li><a href="/JEC-engineering/Electronics-Communication-Engineering" className="jec-dropdown-link">Electronics & Communication</a></li>
+                                <li><a href="/JEC-engineering/Civil-Engineering" className="jec-dropdown-link">Civil Engineering</a></li>
+                                <li><a href="/JEC-engineering/Mechanical-Engineering" className="jec-dropdown-link">Mechanical Engineering</a></li>
+                                <li><a href="/JEC-engineering/Electrical-Engineering" className="jec-dropdown-link">Electrical Engineering</a></li>
+                                <li><a href="/JEC-engineering/Applied-Sciences-Humanities" className="jec-dropdown-link">Applied Sciences & Humanities</a></li>
+                                <li><a href="/JEC-engineering/Centre-Of-Excellence-COE" className="jec-dropdown-link">Centre Of Excellence (COE)</a></li>
+                                <li><a href="/JEC-engineering/JEC-Research-Cell" className="jec-dropdown-link">JEC Research Cell</a></li>
+                                <li><a href="/JEC-engineering/Engineering-JEC" className="jec-dropdown-link">Engineering @ JEC</a></li>
+                                <li><a href="/JEC-engineering/MOOCS-NPTEL-SWAYAM" className="jec-dropdown-link">MOOCS: NPTEL SWAYAM</a></li>
+
+                                {/* M.Tech Programs */}
+                                <li><a href="/JEC-engineering/MTech" className="jec-dropdown-link">M.Tech Programs</a></li>
                             </ul>
                         </li>
 
-                        <li className="jec-menu-item"><Link to="/placement" className="jec-nav-link">Placement</Link></li>
+                        <li className="jec-menu-item"><a href="/placement" className="jec-nav-link">Placement</a></li>
 
                         {/* INFRASTRUCTURE DROPDOWN */}
                         <li className={`jec-menu-item ${activeDropdown === 'infra' ? 'jec-open' : ''}`}>
                             <a href="#!" className="jec-nav-link jec-toggle-btn" onClick={(e) => toggleDropdown(e, 'infra')}>Infrastructure <i className="fas fa-chevron-down"></i></a>
                             <ul className={`jec-dropdown jec-mega jec-cols-2 ${activeDropdown === 'infra' ? 'jec-show' : ''}`}>
-                                <li><Link to="/Infrastructure/Learning-By-Doing" className="jec-dropdown-link">Learning By Doing</Link></li>
-                                <li><Link to="/Infrastructure/Prepare-and-Present" className="jec-dropdown-link">Prepare and Present</Link></li>
-                                <li><Link to="/Infrastructure/Refuel-and-Relax" className="jec-dropdown-link">Refuel and Relax</Link></li>
-                                <li><Link to="/Infrastructure/Convenience-and-Safety" className="jec-dropdown-link">Convenience and Safety</Link></li>
+                                <li><a href="/Infrastructure/Learning-By-Doing" className="jec-dropdown-link">Learning By Doing</a></li>
+                                <li><a href="/Infrastructure/Prepare-and-Present" className="jec-dropdown-link">Prepare and Present</a></li>
+                                <li><a href="/Infrastructure/Refuel-and-Relax" className="jec-dropdown-link">Refuel and Relax</a></li>
+                                <li><a href="/Infrastructure/Convenience-and-Safety" className="jec-dropdown-link">Convenience and Safety</a></li>
                             </ul>
                         </li>
 
@@ -211,33 +215,31 @@ function Subheader() {
                         <li className={`jec-menu-item ${activeDropdown === 'campus' ? 'jec-open' : ''}`}>
                             <a href="#!" className="jec-nav-link jec-toggle-btn" onClick={(e) => toggleDropdown(e, 'campus')}>Campus Life <i className="fas fa-chevron-down"></i></a>
                             <ul className={`jec-dropdown jec-mega jec-cols-3 ${activeDropdown === 'campus' ? 'jec-show' : ''}`}>
-                                <li><Link to="/campus-life/jec-vibrant-india" className="jec-dropdown-link">JEC: Vibrant India</Link></li>
-                                <li><Link to="/campus-life/academic-achievers" className="jec-dropdown-link">Academic Achievers</Link></li>
-                                <li><Link to="/campus-life/engineering-projects" className="jec-dropdown-link">Engineering Projects</Link></li>
-                                <li><Link to="/campus-life/games-and-sports" className="jec-dropdown-link">Games and Sports</Link></li>
-                                <li><Link to="/campus-life/guts-n-glory" className="jec-dropdown-link">Guts n Glory</Link></li>
-                                <li><Link to="/campus-life/committees-zone" className="jec-dropdown-link">Committees Zone</Link></li>
-                                <li><Link to="/campus-life/mental-health" className="jec-dropdown-link">Student Mental Health</Link></li>
-                                <li><Link to="/campus-life/students-corner" className="jec-dropdown-link">JEC Students Corner</Link></li>
-                                <li><Link to="/Gallery" className="jec-dropdown-link">Image Gallery</Link></li>
-                                <li><Link to="/campus-life/video-gallery" className="jec-dropdown-link">Video Gallery</Link></li>
+                                <li><a href="/campus-life/jec-vibrant-india" className="jec-dropdown-link">JEC: Vibrant India</a></li>
+                                <li><a href="/campus-life/academic-achievers" className="jec-dropdown-link">Academic Achievers</a></li>
+                                <li><a href="/campus-life/engineering-projects" className="jec-dropdown-link">Engineering Projects</a></li>
+                                <li><a href="/campus-life/games-and-sports" className="jec-dropdown-link">Games and Sports</a></li>
+                                <li><a href="/campus-life/guts-n-glory" className="jec-dropdown-link">Guts n Glory</a></li>
+                                <li><a href="/campus-life/committees-zone" className="jec-dropdown-link">Committees Zone</a></li>
+                                <li><a href="/campus-life/mental-health" className="jec-dropdown-link">Student Mental Health</a></li>
+                                <li><a href="/campus-life/students-corner" className="jec-dropdown-link">JEC Students Corner</a></li>
+                                <li><a href="/Gallery" className="jec-dropdown-link">Image Gallery</a></li>
+                                <li><a href="/campus-life/video-gallery" className="jec-dropdown-link">Video Gallery</a></li>
                             </ul>
                         </li>
-
-                       
 
                         {/* SOCIETY DROPDOWN */}
                         <li className={`jec-menu-item ${activeDropdown === 'society' ? 'jec-open' : ''}`}>
                             <a href="#!" className="jec-nav-link jec-toggle-btn" onClick={(e) => toggleDropdown(e, 'society')}>Society <i className="fas fa-chevron-down"></i></a>
                             <ul className={`jec-dropdown jec-mega jec-cols-2 ${activeDropdown === 'society' ? 'jec-show' : ''}`}>
-                                <li><Link to="/Our-Society/Foundation-for-Better-Tomorrow" className="jec-dropdown-link">Foundation for Better Tomorrow</Link></li>
-                                <li><Link to="/Our-Society/Key-Teams-Functions" className="jec-dropdown-link">Key Teams & Functions</Link></li>
-                                <li><Link to="/Our-Society/Other-Institutes-Agrasen-College" className="jec-dropdown-link">Agrasen College</Link></li>
-                                <li><Link to="/Our-Society/Other-Institutes-Jaipur-College-of-Education-and-Science" className="jec-dropdown-link">Jaipur College of Ed & Sci</Link></li>
+                                <li><a href="/Our-Society/Foundation-for-Better-Tomorrow" className="jec-dropdown-link">Foundation for Better Tomorrow</a></li>
+                                <li><a href="/Our-Society/Key-Teams-Functions" className="jec-dropdown-link">Key Teams & Functions</a></li>
+                                <li><a href="/Our-Society/Other-Institutes-Agrasen-College" className="jec-dropdown-link">Agrasen College</a></li>
+                                <li><a href="/Our-Society/Other-Institutes-Jaipur-College-of-Education-and-Science" className="jec-dropdown-link">Jaipur College of Ed & Sci</a></li>
                             </ul>
                         </li>
 
-                        {/* NEW: DESKTOP SEARCH ICON (Placed after Society) */}
+                        {/* SEARCH ICON */}
                         <li className="jec-menu-item jec-desktop-search" ref={searchRef}>
                             <div className={`jec-search-inline ${isSearchOpen ? 'active' : ''}`}>
                                 <input
@@ -253,14 +255,14 @@ function Subheader() {
                                 {showSuggestions && searchResults.length > 0 && isSearchOpen && (
                                     <ul className="jec-search-suggestions">
                                         {searchResults.map((res, i) => (
-                                            <li key={i}><Link to={res.link} onClick={() => setSearchQuery('')}>{res.name}</Link></li>
+                                            <li key={i}><a href={res.link} onClick={() => setSearchQuery('')}>{res.name}</a></li>
                                         ))}
                                     </ul>
                                 )}
                             </div>
                         </li>
 
-                        {/* MOBILE CONTACT SECTION */}
+                        {/* MOBILE CONTACT */}
                         <div className="jec-mobile-contact">
                             <h4>Get In Touch</h4>
                             <div className="jec-contact-row"><i className="fas fa-map-marker-alt"></i><span>SP-43, RIICO Ind. Area, Kukas,<br />Jaipur - 302028</span></div>

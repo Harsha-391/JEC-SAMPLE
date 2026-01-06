@@ -1,0 +1,166 @@
+:root {
+    /* Brand Palette */
+    --logo-red: #D62828;
+    --logo-blue: #0072C6;
+    --logo-gold: #FCA311;
+    --logo-black: #1D1D1D;
+    --logo-white: #FFFFFF;
+    /* UI Variables */
+    --input-bg: #fdfdfd;
+    --input-border: #e0e0e0;
+    --shadow-soft: 0 10px 40px rgba(0,0,0,0.08);
+}
+
+.grievance-container {
+    padding: 60px 20px;
+    background: #f8f9fa; /* Light clean background */
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grievance-card {
+    background: var(--logo-white);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    width: 100%;
+    max-width: 600px;
+    /* Brand Red top border for visibility/alert context */
+    border-top: 5px solid var(--logo-red);
+    position: relative;
+    overflow: hidden;
+}
+
+    /* Optional: Decorative watermark or gradient */
+    .grievance-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, var(--logo-red) 33%, var(--logo-blue) 33%, var(--logo-blue) 66%, var(--logo-gold) 66%);
+    }
+
+    .grievance-card h2 {
+        color: var(--logo-blue); /* Professional Heading Color */
+        margin-bottom: 10px;
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 35px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+    .form-row .form-group {
+        flex: 1;
+    }
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--logo-black);
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--logo-black);
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+    /* UX Improvement: Focus State */
+    input:focus, select:focus, textarea:focus {
+        border-color: var(--logo-blue);
+        /* Soft blue glow ring */
+        box-shadow: 0 0 0 4px rgba(0, 114, 198, 0.15);
+        outline: none;
+        background-color: #fff;
+    }
+
+textarea {
+    resize: vertical; /* User can only resize vertically */
+    min-height: 120px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--logo-blue); /* Primary Action Color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 114, 198, 0.3);
+}
+
+    .submit-btn:hover {
+        background: #005a9e; /* Darker Blue */
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 114, 198, 0.4);
+    }
+
+    .submit-btn:active {
+        transform: translateY(0);
+    }
+
+/* Success Message Styling */
+.success-msg {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 600;
+    border: 1px solid #c8e6c9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .grievance-container {
+        padding: 40px 15px;
+    }
+
+    .grievance-card {
+        padding: 25px;
+    }
+}

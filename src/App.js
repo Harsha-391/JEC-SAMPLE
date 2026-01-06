@@ -10,6 +10,9 @@ import AdminLayout from './admin/AdminLayout';
 // Auth Components
 import ProtectedRoute from './admin/components/ProtectedRoute';
 import MoocsNptel from './pages/MoocsNptel';
+import MTech from './pages/MTech';
+import GrievanceForm from './pages/GrievanceForm';
+
 
 // --- LAZY IMPORT PAGES ---
 const Home = lazy(() => import('./pages/Home'));
@@ -99,7 +102,8 @@ function App() {
               <Route path="admission-enquiry" element={<AdmissionEnquiry />} />
               <Route path="admissions" element={<Admissions />} />
               <Route path="placement" element={<Placements />} /> {/* Matches Subheader */}
-              <Route path="contact-us" element={<Contact />} /> {/* Matches Subheader */}
+                          <Route path="contact-us" element={<Contact />} /> {/* Matches Subheader */}
+                          <Route path="/grievance" element={<GrievanceForm />} />
 
               {/* JEC Dropdown (Updated paths to match Subheader.js) */}
               <Route path="jec/JEC-FAQ" element={<Faq />} />
@@ -148,7 +152,8 @@ function App() {
               <Route path="campus-life/games-and-sports" element={<GamesAndSports />} />
               <Route path="campus-life/guts-n-glory" element={<GutsNGlory />} />
 
-              <Route path="JEC-engineering/MOOCS-NPTEL-SWAYAM" element={<MoocsNptel />} />
+                          <Route path="JEC-engineering/MOOCS-NPTEL-SWAYAM" element={<MoocsNptel />} />
+                          <Route path="JEC-engineering/MTech" element={<MTech />} />
 
               {/* Blog */}
               <Route path="blog" element={<Blog />} />
