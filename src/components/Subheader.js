@@ -131,7 +131,7 @@ function Subheader() {
 
                     {/* LOGO */}
                     <a href="/" className="jec-logo-link">
-                        <img src="/JEC-Logo.png" alt="Logo" className="jec-logo-img" />
+                        <img src="/JEC-logo.png" alt="Logo" className="jec-logo-img" />
                     </a>
 
                     {/* HAMBURGER */}
