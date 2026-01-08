@@ -6,7 +6,7 @@ function LogoCarousel() {
         <section className="logo-carousel-section">
 
             <div className="carousel-header">
-                <h2>JEC Activities Associated With</h2>
+                <h2>Affiliation & Accreditation</h2>
                 <div className="carousel-divider"></div>
             </div>
 
