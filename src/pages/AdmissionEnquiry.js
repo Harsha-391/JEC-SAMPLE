@@ -5,6 +5,7 @@ import './AdmissionEnquiry.css';
 const AdmissionEnquiry = () => {
   
   useEffect(() => {
+<<<<<<< HEAD
     // 1. Create a unique ID for the script to manage it properly
     const scriptId = "npf-admission-widget-script";
     
@@ -34,6 +35,19 @@ const AdmissionEnquiry = () => {
       // Also clean up any global NPF variables if they exist to prevent conflicts on return
       if (window.npf_widget) {
           delete window.npf_widget;
+=======
+    // Dynamically load the NoPaperForms widget script when component mounts
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.async = true;
+    script.src = "https://widgets.in4.nopaperforms.com/emwgts.js";
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup: Remove the script if the user navigates away from this page
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+>>>>>>> 647bfa7efa14f898c33e8225ec9f6924be05e11f
       }
     };
   }, []);
@@ -49,20 +63,32 @@ const AdmissionEnquiry = () => {
         </div>
       </section>
 
+<<<<<<< HEAD
       {/* Form Container - Using your existing CSS card styling */}
+=======
+      {/* Form Section - The widget is placed inside the existing styled enquiry-card */}
+>>>>>>> 647bfa7efa14f898c33e8225ec9f6924be05e11f
       <div className="enquiry-form-container">
         <div className="enquiry-card">
           <h3>Enquiry Form</h3>
           
+<<<<<<< HEAD
           {/* NoPaperForms Widget 
               Note: This div must exist in the DOM before the script loads.
           */}
+=======
+          {/* NEW: NoPaperForms Admission Widget Container */}
+>>>>>>> 647bfa7efa14f898c33e8225ec9f6924be05e11f
           <div 
             className="npf_wgts" 
             data-height="400px" 
             data-w="c1073fe2350d112d90b129addc24e9ff"
           ></div>
 
+<<<<<<< HEAD
+=======
+          {/* Privacy Disclaimer - Maintaining original placement and styling */}
+>>>>>>> 647bfa7efa14f898c33e8225ec9f6924be05e11f
           <div className="privacy-note full-width" style={{ marginTop: '2rem' }}>
             By submitting this form, you consent to receive communication from JEC regarding your admission enquiry via Email/SMS/Call.
           </div>
