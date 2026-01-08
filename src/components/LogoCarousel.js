@@ -4,7 +4,7 @@ import '../styles/LogoCarousel.css';
 function LogoCarousel() {
     return (
         <section className="logo-carousel-section">
-
+{/* text change */}
             <div className="carousel-header">
                 <h2>Affiliation & Accreditation</h2>
                 <div className="carousel-divider"></div>
