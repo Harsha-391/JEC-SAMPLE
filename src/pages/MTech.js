@@ -196,6 +196,23 @@ function MTech() {
                     </div>
                 </div>
 
+                {/* NEW SCHOLARSHIP SECTION */}
+                <div className="scholarship-section">
+                    <div className="section-header">
+                        <h2>Financial Support</h2>
+                        <div className="divider"></div>
+                    </div>
+                    <div className="scholarship-highlight-box">
+                        <div className="scholarship-icon-circle">
+                            <i className="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div className="scholarship-text-content">
+                            <h3>AICTE GATE Scholarship</h3>
+                            <p>The AICTE GATE Scholarship provides <strong>₹12,400 per month</strong> for up to 24 months (2 years) to full-time M.Tech/ME/M.Arch students with a valid GATE/CEED score admitted to AICTE-approved PG programs, covering living expenses and promoting technical education, with applications handled through the institute via the AICTE PG Scholarship portal.</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="eligibility-section">
                     <div className="section-header" style={{ marginBottom: '30px' }}>
                         <h2 style={{ color: 'var(--logo-black)' }}>Common Eligibility Criteria</h2>

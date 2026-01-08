@@ -207,7 +207,7 @@
     }
 
         .focus-list li::before {
-            content: '•';
+            content: 'ï¿½';
             color: var(--logo-blue);
             font-weight: bold;
             position: absolute;
@@ -406,6 +406,66 @@
     }
 
     .eligibility-section {
+        padding: 30px 20px;
+    }
+}
+
+
+/* --- Scholarship Section Styles --- */
+.scholarship-section {
+    margin-bottom: 80px;
+}
+
+.scholarship-highlight-box {
+    background: var(--logo-white);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    border-right: 6px solid var(--logo-blue); /* Visual balance with Eligibility section */
+    transition: var(--transition);
+}
+
+.scholarship-highlight-box:hover {
+    transform: translateY(-5px);
+}
+
+.scholarship-icon-circle {
+    width: 80px;
+    height: 80px;
+    background: rgba(0, 114, 198, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--logo-blue);
+    flex-shrink: 0;
+}
+
+.scholarship-text-content h3 {
+    font-size: 1.5rem;
+    color: var(--logo-black);
+    margin-bottom: 12px;
+}
+
+.scholarship-text-content p {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+.scholarship-text-content strong {
+    color: var(--logo-red);
+}
+
+/* Responsive adjustments for scholarship box */
+@media (max-width: 768px) {
+    .scholarship-highlight-box {
+        flex-direction: column;
+        text-align: center;
         padding: 30px 20px;
     }
 }

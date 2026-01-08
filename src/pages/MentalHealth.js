@@ -31,7 +31,7 @@ const MentalHealth = () => {
             <div className="video-wrapper">
               <div className="video-container">
                 <iframe 
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" 
+                  src="https://www.youtube.com/embed/ClwEhPVGjDs?rel=0" 
                   title="JEC Mental Health Awareness" 
                   frameBorder="0" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
