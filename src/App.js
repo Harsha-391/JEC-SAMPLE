@@ -125,7 +125,7 @@ function App() {
               <Route path="admission/Financial-Aids-Bank-Loans" element={<FinancialAids />} />
               <Route path="admission/REAP-2025" element={<Reap2025 />} />
               <Route path="admission/btech-admissions" element={<AdmissionOpen />} />
-              <Route path="admission/Karma-Courses-JEC" element={<KarmaCourses />} />
+              <Route path="admission/Skill-Courses-JEC" element={<KarmaCourses />} />
               <Route path="admission/Admission-Procedure" element={<AdmissionProcedure />} />
 
               {/* Infrastructure Dropdown (Updated paths) */}

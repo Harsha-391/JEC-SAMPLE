@@ -172,7 +172,7 @@ function Subheader() {
                                 <li><a href="/admission/REAP-2025" className="jec-dropdown-link">REAP-2025</a></li>
                                 <li><a href="/admission/Financial-Aids-Bank-Loans" className="jec-dropdown-link">Financial Aids & Loans</a></li>
                                 <li><a href="/admission/Mandatory-Disclosure" className="jec-dropdown-link">Mandatory Disclosure</a></li>
-                                <li><a href="/admission/Karma-Courses-JEC" className="jec-dropdown-link">Karma Courses @JEC</a></li>
+                                <li><a href="/admission/Skill-Courses-JEC" className="jec-dropdown-link">Skill Courses @JEC</a></li>
                             </ul>
                         </li>
 
