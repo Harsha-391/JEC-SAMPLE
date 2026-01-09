@@ -84,7 +84,7 @@ const Footer = () => {
                             </div>
                             <div className="contact-row">
                                 <span className="dept-title">General Enquiry</span>
-                                <a href="tel:+919694098821" className="contact-link"><i className="fas fa-phone-alt"></i> +91-96940 98821</a>
+                               
                                 <a href="mailto:info@jeckukas.org.in" className="contact-link">info@jeckukas.org.in</a>
                             </div>
                         </div>
@@ -95,17 +95,17 @@ const Footer = () => {
                             <div className="contact-row">
                                 <span className="dept-title">Training & Placement</span>
                                 <a href="tel:+918058799027" className="contact-link">+91-80587 99027</a>
-                                <a href="mailto:trainingandplacement@jeckukas.org.in" className="contact-link">Email T&P Cell</a>
+                                <a href="mailto:training&placement@jeckukas.org.in" className="contact-link">training&placement@jeckukas.org.in</a>
                             </div>
                             <div className="contact-row">
                                 <span className="dept-title">Exam & Verification</span>
                                 <a href="tel:+918058799002" className="contact-link">+91-80587 99002</a>
-                                <a href="mailto:examinations.jec@gmail.com" className="contact-link">Email Exam Cell</a>
+                                <a href="mailto:examination@jeckukas.org.in" className="contact-link">examination@jeckukas.org.in</a>
                             </div>
                             <div className="contact-row" style={{ gridColumn: 'span 2', borderTop: '1px solid var(--footer-border)', paddingTop: '8px', marginTop: '5px' }}>
                                 <span className="dept-title">Director's Office</span>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                                    <a href="tel:+918058799013" className="contact-link">+91-80587 99013</a>
+                                    <a href="tel:+918440044825" className="contact-link">+91 84400 44825</a>
                                     <a href="mailto:principal@jeckukas.org.in" className="contact-link">principal@jeckukas.org.in</a>
                                 </div>
                             </div>
@@ -129,5 +129,4 @@ const Footer = () => {
         </footer>
     );
 };
-
 export default Footer;
